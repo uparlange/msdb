@@ -1,5 +1,5 @@
-define(["ProgressBarDirective", "TranslatePipe", "DriverComponent"], 
-function(ProgressBarDirective, TranslatePipe, DriverComponent)
+define(["ProgressBarDirective", "TranslatePipe", "HrefDirective", "DriverComponent"], 
+function(ProgressBarDirective, TranslatePipe, HrefDirective, DriverComponent)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -11,11 +11,13 @@ function(ProgressBarDirective, TranslatePipe, DriverComponent)
 		declarations:[
 			ProgressBarDirective,
 			TranslatePipe,
+			HrefDirective,
 			DriverComponent
 		],
 		exports:[
 			ProgressBarDirective,
 			TranslatePipe,
+			HrefDirective,
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
