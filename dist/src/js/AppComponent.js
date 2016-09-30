@@ -1,0 +1,1 @@
+"use strict";define(["AppProvider","AppUtils"],function(a,b){var c="app";return ng.core.Component({selector:c,templateUrl:b.getTemplateUrl(c)}).Class({constructor:[a,function(a){this.model=a}],ngOnInit:function(){this.model.init()},toggleLanguage:function(){this.model.toggleLanguage()}})});
