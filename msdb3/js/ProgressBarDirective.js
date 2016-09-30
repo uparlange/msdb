@@ -10,8 +10,8 @@ function(EventManager)
 				this._element = element;
 				this._eventManager = eventManager;
 				
-				this._httpBegintEventEmitter = new ng.core.EventEmitter();
-				this._httpEndEventEmitter = new ng.core.EventEmitter();
+				this._httpBegintEventEmitter = null;
+				this._httpEndEventEmitter = null;
 			}
 		],
 		ngOnInit : function()
@@ -19,20 +19,20 @@ function(EventManager)
 			const element = this._element.nativeElement;
 			element.style.display = "none";
 			
-			this._eventManager.on("HTTP_BEGIN", this._httpBegintEventEmitter).subscribe(() =>
+			this._httpBegintEventEmitter = this._eventManager.on("HTTP_BEGIN").subscribe(() =>
 			{
 				element.style.display = "block";
 			});
 			
-			this._eventManager.on("HTTP_END", this._httpEndEventEmitter).subscribe(() =>
+			this._httpEndEventEmitter = this._eventManager.on("HTTP_END").subscribe(() =>
 			{
 				element.style.display = "none";
 			});
 		},
 		ngOnDestroy : function()
 		{
-			this._eventManager.off("HTTP_BEGIN", this._httpBegintEventEmitter).unsubscribe();
-			this._eventManager.off("HTTP_END", this._httpEndEventEmitter).unsubscribe();
+			this._eventManager.off(this._httpBegintEventEmitter);
+			this._eventManager.off(this._httpEndEventEmitter);
 		}
 	});	
 });	

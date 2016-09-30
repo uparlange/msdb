@@ -7,9 +7,10 @@ define(function ()
 				this._eventEmitters = {};
 			}
 		],
-		on : function(name, eventEmitter)
+		on : function(name)
 		{
 			const eventEmitters = this._getEventEmitters(name);
+			const eventEmitter = new ng.core.EventEmitter();
 			eventEmitters.push(eventEmitter);
 			return eventEmitter;
 		},
@@ -21,17 +22,21 @@ define(function ()
 				element.emit(evt);
 			});
 		},
-		off : function(name, eventEmitter)
+		off : function(eventEmitter)
 		{
-			const eventEmitters = this._getEventEmitters(name);
-			eventEmitters.forEach((element, index, array) =>
+			for(const name in this._eventEmitters)
 			{
-				if(element === eventEmitter)
+				const eventEmitters = this._getEventEmitters(name);
+				eventEmitters.forEach((element, index, array) =>
 				{
-					eventEmitters.splice(index, 1);
-					return;
-				}
-			});
+					if(element === eventEmitter)
+					{
+						eventEmitters.splice(index, 1);
+						return;
+					}
+				});
+			}
+			eventEmitter.unsubscribe();
 			return eventEmitter;
 		},
 		_getEventEmitters : function(name)

@@ -6,13 +6,7 @@ function(ProgressBarDirective, TranslatePipe)
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
-			md.toolbar.MdToolbarModule,
-			md.card.MdCardModule,
-			md.progressBar.MdProgressBarModule,
-			md.input.MdInputModule,
-			md.tabs.MdTabsModule,
-			md.list.MdListModule,
-			md.button.MdButtonModule
+			ng.material.MaterialModule
 		],
 		declarations:[
 			ProgressBarDirective,
@@ -24,13 +18,7 @@ function(ProgressBarDirective, TranslatePipe)
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
-			md.toolbar.MdToolbarModule,
-			md.card.MdCardModule,
-			md.progressBar.MdProgressBarModule,
-			md.input.MdInputModule,
-			md.tabs.MdTabsModule,
-			md.list.MdListModule,
-			md.button.MdButtonModule
+			ng.material.MaterialModule
 		]
 	}).Class({
 		constructor: function ()
