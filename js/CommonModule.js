@@ -6,6 +6,7 @@ function(ProgressBarDirective, TranslatePipe, HrefDirective, DriverComponent)
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
+			ng.router.RouterModule,
 			ng.material.MaterialModule.forRoot()
 		],
 		declarations:[
@@ -15,14 +16,14 @@ function(ProgressBarDirective, TranslatePipe, HrefDirective, DriverComponent)
 			DriverComponent
 		],
 		exports:[
-			ProgressBarDirective,
-			TranslatePipe,
-			HrefDirective,
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
+			ng.router.RouterModule,
 			ng.material.MaterialModule,
-			DriverComponent
+			ProgressBarDirective,
+			TranslatePipe,
+			HrefDirective
 		],
 		entryComponents:[
 			DriverComponent

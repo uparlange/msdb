@@ -1,7 +1,17 @@
 <md-card>
 	<md-card-title>
-		{{model.data.driver.status}}
+		<md-toolbar>
+			{{'L10N_DRIVER_INFOS'|translate}}
+		</md-toolbar>
 	</md-card-title>
 	<md-card-content>
+		<ul>
+			<li>{{'L10N_SINCE_MAME'|translate}} : <a (click)="close()" routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.mameVersionAdded}">{{model.data.mameVersionAdded}}</a>
+			<li>{{'L10N_EMULATION'|translate}} : {{model.data.driver.emulation}}</li>
+			<li>{{'L10N_COLOR'|translate}} : {{model.data.driver.color}}</li>
+			<li>{{'L10N_SOUND'|translate}} : {{model.data.driver.sound}}</li>
+			<li>{{'L10N_GRAPHIC'|translate}} : {{model.data.driver.graphic}}</li>
+			<li>{{'L10N_SAVESTATE'|translate}} : {{model.data.driver.savestate}}</li>
+		</ul>
 	</md-card-content>
 </md-card>

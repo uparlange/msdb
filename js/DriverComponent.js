@@ -14,6 +14,10 @@ function(AppUtils, DetailProvider)
 				
 				this.model = model;
 			}
-		]
+		],
+		close:function()
+		{
+			this._mdDialogRef.close();
+		}
 	});	
 });
