@@ -1,0 +1,1 @@
+"use strict";define(["CommonModule","DetailComponent","DetailProvider"],function(a,b,c){var d=[{path:"",component:b}];return ng.core.NgModule({imports:[a,ng.router.RouterModule.forChild(d)],declarations:[b],providers:[c]}).Class({constructor:function(){}})});

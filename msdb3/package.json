@@ -1,0 +1,37 @@
+{
+	"name": "msdb",
+	"version": "3.0.0",
+	"dependencies": {
+		"@angular/common": "2.0.0",
+        "@angular/compiler": "2.0.0",
+        "@angular/core": "2.0.0",
+        "@angular/http": "2.0.0",
+        "@angular/platform-browser": "2.0.0",
+        "@angular/platform-browser-dynamic": "2.0.0",
+		"@angular/forms": "2.0.0",
+        "@angular/router": "3.0.0",
+		"core-js": "2.4.1",
+		"rxjs": "5.0.0-beta.12",
+		"zone.js": "0.6.21",
+		"@angular2-material/core": "latest",
+		"@angular2-material/toolbar": "latest",
+		"@angular2-material/card": "latest",
+		"@angular2-material/progress-bar": "latest",
+		"@angular2-material/input": "latest",
+		"@angular2-material/tabs": "latest",
+		"@angular2-material/list": "latest",
+		"@angular2-material/button": "latest",
+		"requirejs": "2.3.2"
+	},
+	"devDependencies": {
+		"babel-preset-es2015": "latest",
+		"grunt": "latest",
+		"grunt-babel": "latest",
+		"grunt-contrib-clean": "latest",
+		"grunt-contrib-copy": "latest",
+		"grunt-contrib-cssmin": "latest",
+		"grunt-contrib-htmlmin": "latest",
+		"grunt-contrib-jshint": "latest",
+		"grunt-contrib-uglify": "latest"
+	}
+}

@@ -1,0 +1,1 @@
+"use strict";define(["HomeProvider","AppUtils"],function(a,b){var c="home";return ng.core.Component({selector:c,templateUrl:b.getTemplateUrl(c)}).Class({constructor:[a,function(a){this.model=a}],ngOnInit:function(){this.model.init()}})});
