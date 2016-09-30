@@ -1,1 +1,0 @@
-"use strict";define(["MsdbProvider"],function(a){return ng.core.Class({constructor:[a,function(a){this._msdbProvider=a,this.data=this._getInitData()}],init:function(a){var b=this;this.data.name!==a.name&&(this.data=this._getInitData(),this._msdbProvider.getDetail(a.name).subscribe(function(a){b.data=a}))},_getInitData:function(){return{driver:{},input:{}}}})});

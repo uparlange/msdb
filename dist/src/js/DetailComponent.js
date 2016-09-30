@@ -1,1 +1,0 @@
-"use strict";define(["DetailProvider","AppUtils"],function(a,b){var c="detail";return ng.core.Component({selector:c,templateUrl:b.getTemplateUrl(c)}).Class({constructor:[a,ng.router.ActivatedRoute,function(a,b){this._activatedRoute=b,this.model=a}],ngOnInit:function(){this.model.init(this._activatedRoute.queryParams.value)}})});
