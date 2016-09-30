@@ -22,7 +22,7 @@
 			</li>
 			<li *ngIf="model.data.driver != null && model.data.driver.status != null">
 				Emulation :
-				<span (click)="openDriverPopup()">{{model.data.driver.status}}</span>
+				<a href="#" (click)="openDriverPopup()">{{model.data.driver.status}}</a>
 			</li>
 			<li *ngIf="model.data.input != null && model.data.input.players != null">
 				Nombre de joueurs :
