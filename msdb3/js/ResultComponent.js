@@ -5,7 +5,8 @@ function(ResultProvider, AppUtils)
 	
 	return ng.core.Component({
 		selector: componentName,
-		templateUrl: AppUtils.getTemplateUrl(componentName)
+		templateUrl: AppUtils.getTemplateUrl(componentName),
+		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
 		constructor: [ResultProvider, ng.router.ActivatedRoute,
 			function (model, activatedRoute)

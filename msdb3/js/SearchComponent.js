@@ -5,7 +5,8 @@ function(SearchProvider, AppUtils)
 	
 	return ng.core.Component({
 		selector: componentName,
-		templateUrl: AppUtils.getTemplateUrl(componentName)
+		templateUrl: AppUtils.getTemplateUrl(componentName),
+		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
 		constructor: [SearchProvider, ng.router.Router,
 			function (model, router)
