@@ -20,11 +20,11 @@
 				Catégorie :
 				<a routerLink="/result" [queryParams]="{type:'category',value:model.data.category}">{{model.data.category}}</a>
 			</li>
-			<li *ngIf="model.data.driver.status != null">
+			<li *ngIf="model.data.driver != null && model.data.driver.status != null">
 				Emulation :
-				{{model.data.driver.status}}
+				<span (click)="openDriverPopup()">{{model.data.driver.status}}</span>
 			</li>
-			<li *ngIf="model.data.input.players != null">
+			<li *ngIf="model.data.input != null && model.data.input.players != null">
 				Nombre de joueurs :
 				{{model.data.input.players}}
 			</li>
