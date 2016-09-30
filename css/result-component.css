@@ -1,0 +1,19 @@
+.result-container
+{
+	padding:10px;
+	background-color:white;
+}
+.result-header
+{
+	position:fixed;
+	z-index:1;
+	left:10px;
+	right:10px;
+	max-width: 984px;
+	margin: auto;
+	padding:10px;
+}
+.result-content
+{
+	padding-top: 53px;
+}
