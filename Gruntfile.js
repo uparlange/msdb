@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 		pkg:pkg,
         clean: {
             dist: ['dist'],
-			babel: ['dist/src/js/*.babel.js']
+			babel: ['dist/js/*.babel.js']
         },
 		jshint: {
 			options: {
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: 'js/',
 					src: ['*.js'],
-					dest: 'dist/src/js/',
+					dest: 'dist/js/',
 					ext: '.babel.js'
 				}]
 			}
@@ -32,9 +32,9 @@ module.exports = function (grunt) {
             js: {
 				files: [{
 					expand: true,
-					cwd: 'dist/src/js/',
+					cwd: 'dist/js/',
 					src: ['*.babel.js'],
-					dest: 'dist/src/js/',
+					dest: 'dist/js/',
 					ext: '.js'
 				}]
             }
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'html',
                     src: '**/*.html',
-                    dest: 'dist/src/html'
+                    dest: 'dist/html'
                 }]
             }
         },
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: 'css',
 					src: ['*.css'],
-					dest: 'dist/src/css',
+					dest: 'dist/css',
 					ext: '.css'
 				}]
 			}
@@ -72,13 +72,13 @@ module.exports = function (grunt) {
 			data: {
 				cwd: 'data',
                 src: '**/*',
-                dest: 'dist/src/data',
+                dest: 'dist/data',
                 expand: true
 			},
 			images: {
 				cwd: 'images',
                 src: '**/*',
-                dest: 'dist/src/images',
+                dest: 'dist/images',
                 expand: true
 			}
         }

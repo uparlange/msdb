@@ -24,18 +24,19 @@ define(function ()
 		},
 		off : function(eventEmitter)
 		{
-			for(const name in this._eventEmitters)
+			const events = Object.keys(this._eventEmitters);
+			events.forEach((eventName, index, array) =>
 			{
-				const eventEmitters = this._getEventEmitters(name);
-				eventEmitters.forEach((element, index, array) =>
+				const eventEmitters = this._getEventEmitters(eventName);
+				eventEmitters.forEach((evtEmitter, index, array) =>
 				{
-					if(element === eventEmitter)
+					if(evtEmitter === eventEmitter)
 					{
 						eventEmitters.splice(index, 1);
 						return;
 					}
 				});
-			}
+			});
 			eventEmitter.unsubscribe();
 			return eventEmitter;
 		},
