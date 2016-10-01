@@ -28,6 +28,7 @@ md-card:not(:first-child)
 md-dialog-container
 {
 	padding:0px !important;
+	min-width: 300px;
 }
 
 md-list

@@ -1,5 +1,5 @@
-define(["CommonModule", "DetailComponent", "DetailProvider"], 
-function(CommonModule, DetailComponent, DetailProvider)
+define(["CommonModule", "DetailComponent", "DetailProvider", "DriverComponent", "RomsComponent"], 
+function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsComponent)
 {
 	const routes = [
 		{path: "", component: DetailComponent}
@@ -11,10 +11,16 @@ function(CommonModule, DetailComponent, DetailProvider)
 			ng.router.RouterModule.forChild(routes)
 		],
 		declarations:[
-			DetailComponent
+			DetailComponent,
+			DriverComponent,
+			RomsComponent
 		],
 		providers:[
 			DetailProvider
+		],
+		entryComponents:[
+			DriverComponent,
+			RomsComponent
 		]
 	}).Class({
 		constructor: function ()

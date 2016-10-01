@@ -1,5 +1,5 @@
-define(["DetailProvider", "DriverComponent", "AppUtils"], 
-function(DetailProvider, DriverComponent, AppUtils) 
+define(["DetailProvider", "DriverComponent", "RomsComponent", "AppUtils"], 
+function(DetailProvider, DriverComponent, RomsComponent, AppUtils) 
 {
 	const componentName = "detail";
 	
@@ -28,6 +28,10 @@ function(DetailProvider, DriverComponent, AppUtils)
 		openDriverPopup:function()
 		{
 			this._openPopup(DriverComponent);
+		},
+		openRomsPopup:function()
+		{
+			this._openPopup(RomsComponent);
 		},
 		_openPopup:function(clazz)
 		{
