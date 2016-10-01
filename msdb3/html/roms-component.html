@@ -1,0 +1,10 @@
+<md-toolbar color="primary">
+	{{'L10N_ROM_INFOS'|translate}}
+</md-toolbar>
+<md-list>
+	<md-list-item *ngFor="let rom of model.data.roms">
+		<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
+		<span class="sep">:</span>
+		{{model.getSizeLabel(rom.size)}}
+	</md-list-item>
+</md-list>

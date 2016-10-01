@@ -34,6 +34,13 @@
 				<span class="sep">:</span>
 				{{model.data.input.players}}
 			</md-list-item>
+			<md-list-item *ngIf="model.data.roms != null">
+				{{'L10N_SIZE'|translate}}
+				<span class="sep">:</span>
+				{{model.getGameSizeLabel()}}
+				<span class="sep">-</span>
+				<a href (click)="openRomsPopup()">{{model.data.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</a>
+			</md-list-item>
 		</md-list>
 	</md-card-content>
 </md-card>

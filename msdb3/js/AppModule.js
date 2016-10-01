@@ -1,5 +1,5 @@
-define(["CommonModule", "AppComponent", "MsdbProvider", "AppProvider", "AppUtils", "EventManager", "TranslateManager"], 
-function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager) 
+define(["CommonModule", "AppComponent", "MsdbProvider", "AppProvider", "AppUtils", "EventManager", "TranslateManager", "ProgressBarDirective"], 
+function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager, ProgressBarDirective) 
 {
 	const routes = [
 		{path: "", redirectTo: "home", pathMatch: "full"},
@@ -16,7 +16,8 @@ function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventM
 			ng.router.RouterModule.forRoot(routes, {useHash:true})
 		],
 		declarations:[
-			AppComponent
+			AppComponent,
+			ProgressBarDirective
 		],
 		providers:[
 			MsdbProvider,
