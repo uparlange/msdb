@@ -7,14 +7,14 @@ function(MsdbProvider)
 			{
 				this._msdbProvider = msdbProvider;
 				
-				this.data = this._getInitData();
+				this.data = {};
 			}
 		],
 		init : function(params)
 		{
 			if(this.data.name !== params.name)
 			{
-				this.data = this._getInitData();
+				this.data = {};
 				
 				this._msdbProvider.getDetail(params.name).subscribe((data) => 
 				{
@@ -22,12 +22,13 @@ function(MsdbProvider)
 				});
 			}
 		},
-		_getInitData : function()
+		getStatusClass:function(status)
 		{
-			return {
-				driver:{},
-				input:{}
-			};
+			return "label-" + status;
+		},
+		getStatusLabel:function(status)
+		{
+			return "L10N_" + status.toUpperCase();
 		}
 	});		
 });

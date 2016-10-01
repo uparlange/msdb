@@ -18,10 +18,7 @@ body
 
 md-card
 {
-	margin-top:0px;
-	margin-left:0px;
-	margin-right:0px;
-	margin-bottom:0px;	
+	margin:0px;
 }
 md-card:not(:first-child)
 {
@@ -33,48 +30,15 @@ md-dialog-container
 	padding:0px !important;
 }
 
-md-dialog-container md-card
+md-list
 {
-	padding:0px;
-}
-
-md-dialog-container md-card md-card-title
-{
-	margin-bottom:0px;
-}
-
-md-dialog-container md-card md-card-content
-{
-	padding:20px;
+	padding:0px !important;
+	margin:0px !important;
 }
 
 [routerLink]
 {
 	cursor:pointer;
-}
-
-.md-list-item
-{
-	padding:0px !important;
-}
-
-.md-list-item [md-raised-button]
-{
-	width:100%;
-	text-align: left;
-	padding-left:10px;
-	padding-top:0px;
-	padding-right:10px;
-	padding-bottom:0px;
-}
-
-.md-list-item [md-raised-button] img
-{
-	vertical-align: middle;
-	width:32px;
-	height:32px;
-	margin-top:2px;
-	margin-bottom:2px;
 }
 
 .fill-remaining-space
@@ -85,4 +49,51 @@ md-dialog-container md-card md-card-content
 .justify
 {
 	text-align: justify;
+}
+
+.label-good
+{
+    color: green !important;
+    font-weight: bold;
+}
+
+.label-imperfect
+{
+    color: orange !important;
+    font-weight: bold;
+}
+
+.label-preliminary
+{
+    color: red !important;
+    font-weight: bold;
+}
+
+.label-baddump
+{
+	color: red;
+    font-weight: bold;
+}
+
+.label-nodump
+{
+	color: black;
+    font-weight: bold;
+	text-decoration:line-through;
+}
+
+.biosset-default
+{
+	font-weight: bold;
+}
+
+.dipvalue-default
+{
+	font-weight: bold;
+}
+
+.sep
+{
+	margin-left:5px;
+	margin-right:5px;
 }

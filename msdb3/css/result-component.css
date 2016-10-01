@@ -1,9 +1,4 @@
-.result-container
-{
-	padding:10px;
-	background-color:white;
-}
-.result-header
+md-card
 {
 	position:fixed;
 	z-index:1;
@@ -13,7 +8,8 @@
 	margin: auto;
 	padding:10px;
 }
-.result-content
+
+md-list
 {
-	padding-top: 53px;
+	padding-top: 53px !important;
 }
