@@ -10,12 +10,8 @@ function(TranslateManager)
 			{
 				this._translateManager = translateManager;
 				
-				this._needRefresh = true;
-				
 				this._onLanguageChangeSubscriber = this._translateManager.onLanguageChange.subscribe(() => 
 				{
-					this._needRefresh = true;
-					
 					this._refreshTranslation();
 				});
 				
@@ -26,10 +22,12 @@ function(TranslateManager)
 		],
 		transform:function(value, attr) 
 		{
-			this.tranlateKey = value;
-			
-			this._refreshTranslation();
-			
+			if(this.tranlateKey !== value)
+			{
+				this.tranlateKey = value;
+				
+				this._refreshTranslation();
+			}
 			return this.tranlateValue;
 		},
 		ngOnDestroy()
@@ -38,15 +36,12 @@ function(TranslateManager)
 		},
 		_refreshTranslation:function()
 		{
-			if(this._needRefresh)
+			this._translateManager.getValues([this.tranlateKey]).subscribe((translations) => 
 			{
-				this._translateManager.getValues([this.tranlateKey]).subscribe((translations) => 
-				{
-					this.tranlateValue = translations[this.tranlateKey];
-					
-					this._needRefresh = false;
-				});
-			}
+				this.tranlateValue = translations[this.tranlateKey];
+				
+				this._needRefresh = false;
+			});
 		}
 	});
 });

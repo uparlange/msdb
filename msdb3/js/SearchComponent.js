@@ -6,7 +6,10 @@ function(SearchProvider, AppUtils)
 	return ng.core.Component({
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName),
-		styleUrls: AppUtils.getStyleUrls(componentName)
+		styleUrls: AppUtils.getStyleUrls(componentName),
+		queries: {
+			tabs: new ng.core.ViewChildren(ng.material.MdTab)
+		},
 	}).Class({
 		constructor: [SearchProvider, ng.router.Router,
 			function (model, router)
@@ -61,6 +64,20 @@ function(SearchProvider, AppUtils)
 				case 3 : this.model.loadYears(); break;
 				case 4 : this.model.loadManufacturers(); break;
 			}
+		},
+		getSearchTabLabel:function(index)
+		{
+			//this.tabs
+			var key = "";
+			switch(index)
+			{
+				case 0 : key = "L10N_SEARCH_BY_DESCRIPTION"; break;
+				case 1 : key = "L10N_SEARCH_BY_SERIES"; break;
+				case 2 : key = "L10N_SEARCH_BY_CATEGORY"; break;
+				case 3 : key = "L10N_SEARCH_BY_YEAR"; break;
+				case 4 : key = "L10N_SEARCH_BY_MANUFACTURER"; break;
+			}
+			return key;
 		},
 		_showResults : function(queryParams)
 		{

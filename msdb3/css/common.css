@@ -97,3 +97,8 @@ md-list
 	margin-left:5px;
 	margin-right:5px;
 }
+
+.md-primary
+{
+	background:rgb(255,87,34) !important;
+}
