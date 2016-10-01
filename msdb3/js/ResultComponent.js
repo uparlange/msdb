@@ -19,6 +19,10 @@ function(ResultProvider, AppUtils)
 		ngOnInit : function()
 		{
 			this.model.init(this._activatedRoute.queryParams.value);
+		},
+		getSearchLabel:function(type)
+		{
+			return "L10N_SEARCH_BY_" + type.toUpperCase();
 		}
 	});		
 });

@@ -7,32 +7,27 @@ function(MsdbProvider, AppUtils)
 			{
 				this._msdbProvider = msdbProvider;
 				
-				this._params = {};
-				
-				this.data = this._getInitData();
+				this.data = {};
 			}
 		],
 		init : function(params)
 		{
-			if(this._params.type !== params.type || this._params.value !== params.value)
+			if(this.data.params === undefined || (this.data.params.type !== params.type || this.data.params.value !== params.value))
 			{
-				this.data = this._getInitData();
+				this.data = {};
 				
 				this._msdbProvider.search(params.type, params.value).subscribe((data) => 
 				{
-					this.data = data;
-					
-					this._params = params;
+					this.data = {
+						list:data,
+						params:params
+					};
 				});
 			}
 		},
 		getIconUrl : function(game)
 		{
 			return AppUtils.getIconUrl(game);
-		},
-		_getInitData : function()
-		{
-			return [];
 		}
 	});	
 });
