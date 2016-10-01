@@ -1,3 +1,8 @@
+<md-card>
+	<md-card-title>
+		{{'L10N_SEARCH_BY'|translate}} {{getSearchTabLabel(model.data.selectedIndex)|translate}}
+	</md-card-title>
+</md-card>
 <md-tab-group [(selectedIndex)]="model.data.selectedIndex" (selectChange)="tabChanged($event)">
 	<md-tab>
 		<template md-tab-label>{{'L10N_SEARCH_BY_DESCRIPTION'|translate}}</template>
