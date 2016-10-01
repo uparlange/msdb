@@ -8,10 +8,10 @@
 </md-card>
 <md-card>
 	<md-card-title>
-		{{'L10N_VERSION'|translate}} {{model.data.version}} - {{model.data.gameCount}} {{'L10N_GAMES'|translate}}
+		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.version}">{{model.data.version}}</a>
+		({{model.data.gameCount}} {{'L10N_GAMES'|translate}})
 	</md-card-title>
 	<md-card-content>
-		<a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.version}">{{'L10N_SHOW_ADDED_GAMES'|translate}}</a>
 		<ul>
 			<li>Parent : {{model.data.parentCount}}</li>
 			<li>Clone : {{model.data.cloneCount}}</li>

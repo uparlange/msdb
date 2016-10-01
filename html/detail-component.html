@@ -3,42 +3,52 @@
 		{{model.data.description}}
 	</md-card-title>
 	<md-card-content>
-		<ul>
-			<li *ngIf="model.data.year != null">
-				Année :
+		<md-list>
+			<md-list-item *ngIf="model.data.year != null">
+				{{'L10N_YEAR'|translate}}
+				<span class="sep">:</span>
 				<a routerLink="/result" [queryParams]="{type:'year',value:model.data.year}">{{model.data.year}}</a>
-			</li>
-			<li *ngIf="model.data.manufacturer != null">
-				Editeur :
+			</md-list-item>
+			<md-list-item *ngIf="model.data.manufacturer != null">
+				{{'L10N_MANUFACTURER'|translate}}
+				<span class="sep">:</span>
 				<a routerLink="/result" [queryParams]="{type:'manufacturer',value:model.data.manufacturer}">{{model.data.manufacturer}}</a>
-			</li>
-			<li *ngIf="model.data.series != null">
-				Série :
+			</md-list-item>
+			<md-list-item *ngIf="model.data.series != null">
+				{{'L10N_SERIE'|translate}}
+				<span class="sep">:</span>
 				<a routerLink="/result" [queryParams]="{type:'series',value:model.data.series}">{{model.data.series}}</a>
-			</li>
-			<li *ngIf="model.data.category != null">
-				Catégorie :
+			</md-list-item>
+			<md-list-item  *ngIf="model.data.category != null">
+				{{'L10N_CATEGORY'|translate}}
+				<span class="sep">:</span>
 				<a routerLink="/result" [queryParams]="{type:'category',value:model.data.category}">{{model.data.category}}</a>
-			</li>
-			<li *ngIf="model.data.driver != null && model.data.driver.status != null">
-				Emulation :
-				<a href="#" (click)="openDriverPopup()">{{model.data.driver.status}}</a>
-			</li>
-			<li *ngIf="model.data.input != null && model.data.input.players != null">
-				Nombre de joueurs :
+			</md-list-item>
+			<md-list-item *ngIf="model.data.driver != null && model.data.driver.status != null">
+				{{'L10N_STATUS'|translate}}
+				<span class="sep">:</span>
+				<a href (click)="openDriverPopup()" [class]="model.getStatusClass(model.data.driver.status)">{{model.getStatusLabel(model.data.driver.status)|translate}}</a>
+			</md-list-item>
+			<md-list-item *ngIf="model.data.input != null && model.data.input.players != null">
+				{{'L10N_PLAYERS_NUMBER'|translate}}
+				<span class="sep">:</span>
 				{{model.data.input.players}}
-			</li>
-		</ul>
+			</md-list-item>
+		</md-list>
 	</md-card-content>
 </md-card>
 <md-card>
 	<md-card-title>
-		Téléchargements
+		{{'L10N_DOWNLOADS'|translate}}
 	</md-card-title>
 	<md-card-content>
-		<ul>
-			<li><a target="_blank" href="http://mamedev.org/">Emulateur Mame</a></li>
-			<li><a target="_blank" href="http://www.planetemu.net/?section=recherche&recherche={{model.data.description}}&type=Phrase exacte&rubrique=roms">ROM {{model.data.description}}</a></li>
-		</ul>
+		<md-list>
+			<md-list-item>
+				<a target="_blank" href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
+			</md-list-item>
+			<md-list-item>
+				<a target="_blank" href="http://www.planetemu.net/?section=recherche&recherche={{model.data.description}}&type=Phrase exacte&rubrique=roms">ROM {{model.data.description}}</a>
+			</md-list-item>
+		</md-list>
 	</md-card-content>
 </md-card>

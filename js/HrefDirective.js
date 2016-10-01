@@ -15,7 +15,10 @@ define(function ()
 			
 			element.addEventListener("click", (e) => 
 			{
-				e.preventDefault();
+				if(window.location.href.indexOf(e.target.href) !== -1)
+				{
+					e.preventDefault();
+				}	
 			});
 		},
 		ngOnDestroy:function()
