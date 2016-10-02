@@ -22,7 +22,7 @@ function(EventManager)
 					}
 					
 					this.onEvent.emit(event);
-				}
+				};
 			}
 		],
 		ngOnInit:function()
