@@ -1,11 +1,12 @@
 <md-card>
 	<md-card-title>
-		{{'L10N_SEARCH_BY'|translate}} {{getSearchTabLabel(model.data.selectedIndex)|translate}}
+		{{getSearchTabLabel(model.data.selectedIndex)|translate}}
+		<span *ngIf="model.data.count !== 0">( {{model.data.count}} )</span>
 	</md-card-title>
 </md-card>
 <md-tab-group [(selectedIndex)]="model.data.selectedIndex" (selectChange)="tabChanged($event)">
-	<md-tab>
-		<template md-tab-label>{{'L10N_SEARCH_BY_DESCRIPTION'|translate}}</template>
+	<md-tab id="description">
+		<template md-tab-label><i class="material-icons md-24">search</i></template>
 		<template md-tab-content>
 			<form (ngSubmit)="findByDescription()">
 				<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
@@ -13,15 +14,7 @@
 		</template>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>{{'L10N_SEARCH_BY_SERIES'|translate}} <span *ngIf="model.data.series !== null">( {{model.data.series.length}} )</span></template>
-		<template md-tab-content>
-			<md-nav-list>
-				<a md-list-item *ngFor="let series of model.data.series" (click)="findBySeries(series)">{{series}}</a>
-			</md-nav-list>
-		</template>
-	</md-tab>
-	<md-tab>
-		<template md-tab-label>{{'L10N_SEARCH_BY_CATEGORY'|translate}} <span *ngIf="model.data.categories !== null">( {{model.data.categories.length}} )</span></template>
+		<template md-tab-label><i class="material-icons md-24">folder_open</i></template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let category of model.data.categories" (click)="findByCategory(category)">{{category}}</a>
@@ -29,7 +22,15 @@
 		</template>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>{{'L10N_SEARCH_BY_YEAR'|translate}} <span *ngIf="model.data.years !== null">( {{model.data.years.length}} )</span></template>
+		<template md-tab-label><i class="material-icons md-24">list</i></template>
+		<template md-tab-content>
+			<md-nav-list>
+				<a md-list-item *ngFor="let series of model.data.series" (click)="findBySeries(series)">{{series}}</a>
+			</md-nav-list>
+		</template>
+	</md-tab>	
+	<md-tab>
+		<template md-tab-label><i class="material-icons md-24">today</i></template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let year of model.data.years" (click)="findByYear(year)">{{year}}</a>
@@ -37,7 +38,7 @@
 		</template>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>{{'L10N_SEARCH_BY_MANUFACTURER'|translate}} <span *ngIf="model.data.manufacturers !== null">( {{model.data.manufacturers.length}} )</span></template>
+		<template md-tab-label><i class="material-icons md-24">business</i></template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" (click)="findByManufacturer(manufacturer)">{{manufacturer}}</a>

@@ -10,6 +10,10 @@ function(MsdbProvider)
 				this.data = this._getInitData();
 			}
 		],
+		loadDescription:function()
+		{
+			this.data.count = 0;
+		},
 		loadYears : function()
 		{
 			this._loadData("years");
@@ -28,13 +32,21 @@ function(MsdbProvider)
 		},
 		_loadData:function(dataName)
 		{
+			this.data.count = 0;
+			
 			if(this.data[dataName] === null)
 			{
 				const serviceName = "get" + dataName[0].toUpperCase() + dataName.substr(1);
 				this._msdbProvider[serviceName]().subscribe((data) => 
 				{
 					this.data[dataName] = data;
+					
+					this.data.count = this.data[dataName].length;
 				});
+			}
+			else
+			{
+				this.data.count = this.data[dataName].length;
 			}
 		},
 		_getInitData : function()
@@ -44,7 +56,8 @@ function(MsdbProvider)
 				years:null,
 				series:null,
 				categories:null,
-				manufacturers:null
+				manufacturers:null,
+				count:0
 			};
 		}
 	});		
