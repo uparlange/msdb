@@ -42,6 +42,16 @@ md-list
 	cursor:pointer;
 }
 
+.md-tab-label
+{
+	min-width:0px !important;
+}
+
+.material-icons
+{
+	vertical-align:middle;
+}
+
 .fill-remaining-space
 {
 	flex: 1 1 auto;
