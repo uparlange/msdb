@@ -14,115 +14,49 @@ function(EventManager, AppUtils)
 		],
 		getMameInfos : function()
 		{
-			const eventEmitter = new ng.core.EventEmitter();
+			const url = AppUtils.getServiceUrl("mameinfos");
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
-			this._init().subscribe(() => 
-			{
-				const url = AppUtils.getServiceUrl("mameinfos");
-				this._http.get(url).subscribe((result) => 
-				{
-					this._eventManager.emit("HTTP_END");
-					
-					eventEmitter.emit(result.json().data);
-				});
-			});
-			return eventEmitter;
+			return this._callService(url);
 		},
 		getDetail : function(name)
 		{
-			const eventEmitter = new ng.core.EventEmitter();
+			const url = AppUtils.getServiceUrl("detail") + "?name=" + name;
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
-			this._init().subscribe(() => 
-			{
-				const url = AppUtils.getServiceUrl("detail") + "?name=" + name;
-				this._http.get(url).subscribe((result) => 
-				{
-					this._eventManager.emit("HTTP_END");
-					
-					eventEmitter.emit(result.json().data);
-				});
-			});
-			return eventEmitter;
+			return this._callService(url);
 		},
 		search : function(type, value)
 		{
-			const eventEmitter = new ng.core.EventEmitter();
+			const params = {};
+			params[type] = value;
+			const url = AppUtils.getServiceUrl("search") + "?params=" + JSON.stringify(params);
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
-			this._init().subscribe(() => 
-			{
-				const params = {};
-				params[type] = value;
-				const url = AppUtils.getServiceUrl("search") + "?params=" + JSON.stringify(params);
-				this._http.get(url).subscribe((result) => 
-				{
-					this._eventManager.emit("HTTP_END");
-					
-					eventEmitter.emit(result.json().data);
-				});
-			});
-			return eventEmitter;
+			return this._callService(url);
 		},
 		getYears : function()
 		{
-			const eventEmitter = new ng.core.EventEmitter();
+			const url = AppUtils.getServiceUrl("years");
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
-			this._init().subscribe(() => 
-			{
-				const url = AppUtils.getServiceUrl("years");
-				this._http.get(url).subscribe((result) => 
-				{
-					this._eventManager.emit("HTTP_END");
-					
-					eventEmitter.emit(result.json().data);
-				});
-			});
-			return eventEmitter;
+			return this._callService(url);
 		},
 		getSeries : function()
 		{
-			const eventEmitter = new ng.core.EventEmitter();
+			const url = AppUtils.getServiceUrl("series");
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
-			this._init().subscribe(() => 
-			{
-				const url = AppUtils.getServiceUrl("series");
-				this._http.get(url).subscribe((result) => 
-				{
-					this._eventManager.emit("HTTP_END");
-					
-					eventEmitter.emit(result.json().data);
-				});
-			});
-			return eventEmitter;
+			return this._callService(url);
 		},
 		getCategories : function()
 		{
-			const eventEmitter = new ng.core.EventEmitter();
+			const url = AppUtils.getServiceUrl("categories");
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
-			this._init().subscribe(() => 
-			{
-				const url = AppUtils.getServiceUrl("categories");
-				this._http.get(url).subscribe((result) => 
-				{
-					this._eventManager.emit("HTTP_END");
-					
-					eventEmitter.emit(result.json().data);
-				});
-			});
-			return eventEmitter;
+			return this._callService(url);
 		},
 		getManufacturers : function()
+		{
+			const url = AppUtils.getServiceUrl("manufacturers");
+			
+			return this._callService(url);
+		},
+		_callService : function(url)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
@@ -130,7 +64,6 @@ function(EventManager, AppUtils)
 			
 			this._init().subscribe(() => 
 			{
-				const url = AppUtils.getServiceUrl("manufacturers");
 				this._http.get(url).subscribe((result) => 
 				{
 					this._eventManager.emit("HTTP_END");

@@ -1,45 +1,45 @@
 <md-card>
 	<md-card-title>
-		{{model.data.description}}
+		{{model.data.game.description}}
 	</md-card-title>
 	<md-card-content>
 		<md-list>
-			<md-list-item *ngIf="model.data.year != null">
+			<md-list-item *ngIf="model.data.game.year != null">
 				{{'L10N_YEAR'|translate}}
 				<span class="sep">:</span>
-				<a routerLink="/result" [queryParams]="{type:'year',value:model.data.year}">{{model.data.year}}</a>
+				<a routerLink="/result" [queryParams]="{type:'year',value:model.data.game.year}">{{model.data.game.year}}</a>
 			</md-list-item>
-			<md-list-item *ngIf="model.data.manufacturer != null">
+			<md-list-item *ngIf="model.data.game.manufacturer != null">
 				{{'L10N_MANUFACTURER'|translate}}
 				<span class="sep">:</span>
-				<a routerLink="/result" [queryParams]="{type:'manufacturer',value:model.data.manufacturer}">{{model.data.manufacturer}}</a>
+				<a routerLink="/result" [queryParams]="{type:'manufacturer',value:model.data.game.manufacturer}">{{model.data.game.manufacturer}}</a>
 			</md-list-item>
-			<md-list-item *ngIf="model.data.series != null">
+			<md-list-item *ngIf="model.data.game.series != null">
 				{{'L10N_SERIE'|translate}}
 				<span class="sep">:</span>
-				<a routerLink="/result" [queryParams]="{type:'series',value:model.data.series}">{{model.data.series}}</a>
+				<a routerLink="/result" [queryParams]="{type:'series',value:model.data.game.series}">{{model.data.game.series}}</a>
 			</md-list-item>
-			<md-list-item  *ngIf="model.data.category != null">
+			<md-list-item  *ngIf="model.data.game.category != null">
 				{{'L10N_CATEGORY'|translate}}
 				<span class="sep">:</span>
-				<a routerLink="/result" [queryParams]="{type:'category',value:model.data.category}">{{model.data.category}}</a>
+				<a routerLink="/result" [queryParams]="{type:'category',value:model.data.game.category}">{{model.data.game.category}}</a>
 			</md-list-item>
-			<md-list-item *ngIf="model.data.driver != null && model.data.driver.status != null">
+			<md-list-item *ngIf="model.data.game.driver != null && model.data.game.driver.status != null">
 				{{'L10N_STATUS'|translate}}
 				<span class="sep">:</span>
-				<a href (click)="openDriverPopup()" [class]="model.getStatusClass(model.data.driver.status)">{{model.getStatusLabel(model.data.driver.status)|translate}}</a>
+				<a href (click)="openDriverPopup()" [class]="model.getStatusClass(model.data.game.driver.status)">{{model.getStatusLabel(model.data.game.driver.status)|translate}}</a>
 			</md-list-item>
-			<md-list-item *ngIf="model.data.input != null && model.data.input.players != null">
+			<md-list-item *ngIf="model.data.game.input != null && model.data.game.input.players != null">
 				{{'L10N_PLAYERS_NUMBER'|translate}}
 				<span class="sep">:</span>
-				{{model.data.input.players}}
+				{{model.data.game.input.players}}
 			</md-list-item>
-			<md-list-item *ngIf="model.data.roms != null">
+			<md-list-item *ngIf="model.data.game.roms != null">
 				{{'L10N_SIZE'|translate}}
 				<span class="sep">:</span>
 				{{model.getGameSizeLabel()}}
 				<span class="sep">-</span>
-				<a href (click)="openRomsPopup()">{{model.data.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</a>
+				<a href (click)="openRomsPopup()">{{model.data.game.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</a>
 			</md-list-item>
 		</md-list>
 	</md-card-content>
@@ -54,8 +54,24 @@
 				<a target="_blank" href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
 			</md-list-item>
 			<md-list-item>
-				<a target="_blank" href="http://www.planetemu.net/?section=recherche&recherche={{model.data.description}}&type=Phrase exacte&rubrique=roms">ROM {{model.data.description}}</a>
+				<a target="_blank" href="http://www.planetemu.net/?section=recherche&recherche={{model.data.game.description}}&type=Phrase exacte&rubrique=roms">ROM {{model.data.game.description}}</a>
 			</md-list-item>
 		</md-list>
+	</md-card-content>
+</md-card>
+<md-card *ngIf="model.data.videoAvailable">
+	<md-card-title>
+		{{'L10N_VIDEOS'|translate}}
+	</md-card-title>
+	<md-card-content>
+		<video [source]="model.getVideoUrl()" type="video/mp4" controls (onEvent)="videoStateChange($event)"></video>
+	</md-card-content>
+</md-card>
+<md-card>
+	<md-card-title>
+		{{'L10N_IMAGES'|translate}}
+	</md-card-title>
+	<md-card-content>
+		
 	</md-card-content>
 </md-card>

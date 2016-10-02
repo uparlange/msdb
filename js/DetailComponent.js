@@ -25,6 +25,10 @@ function(DetailProvider, DriverComponent, RomsComponent, AppUtils)
 		{
 			this.model.init(this._activatedRoute.queryParams.value);
 		},
+		videoStateChange:function(event)
+		{
+			this.model.setVideoAvailable((event.type !== "error"));
+		},
 		openDriverPopup:function()
 		{
 			this._openPopup(DriverComponent);
