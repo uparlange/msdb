@@ -1,16 +1,18 @@
-<div *ngIf="model.data.list != null && model.data.list.length > 0">
-	<md-card>
-		<md-card-title>
-			{{getSearchLabel(model.data.params.type)|translate}} "{{model.data.params.value}}" : {{model.data.list.length}} {{'L10N_RESULTS'|translate}}
-		</md-card-title>
-	</md-card>
-	<md-list>
-		<md-nav-list>
-			<a md-list-item *ngFor="let game of model.data.list ; trackBy:game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
-				<img md-list-avatar [src]="model.getIconUrl(game)">
-				<span class="sep"></span>
-				{{game.description}}
-			</a>
-		</md-nav-list>
-	</md-list>
+<div *ngIf="model.data.list != null">
+	<div>
+		<md-card>
+			<md-card-title>
+				{{getSearchLabel(model.data.params.type)|translate}} "{{model.data.params.value}}" : {{model.data.list.length}} {{'L10N_RESULTS'|translate}}
+			</md-card-title>
+		</md-card>
+		<md-list >
+			<md-nav-list>
+				<a md-list-item *ngFor="let game of model.data.list ; trackBy:game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
+					<img md-list-avatar [src]="model.getIconUrl(game)">
+					<span class="sep"></span>
+					{{game.description}}
+				</a>
+			</md-nav-list>
+		</md-list>
+	</div>
 </div>

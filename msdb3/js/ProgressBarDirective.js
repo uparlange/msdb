@@ -12,6 +12,8 @@ function(EventManager)
 				
 				this._httpBegintEventEmitter = null;
 				this._httpEndEventEmitter = null;
+				
+				this._counter = 0;
 			}
 		],
 		ngOnInit : function()
@@ -21,12 +23,19 @@ function(EventManager)
 			
 			this._httpBegintEventEmitter = this._eventManager.on("HTTP_BEGIN").subscribe(() =>
 			{
+				this._counter++;
+				
 				element.style.display = "block";
 			});
 			
 			this._httpEndEventEmitter = this._eventManager.on("HTTP_END").subscribe(() =>
 			{
-				element.style.display = "none";
+				this._counter--;
+				
+				if(this._counter === 0)
+				{
+					element.style.display = "none";
+				}
 			});
 		},
 		ngOnDestroy : function()

@@ -1,5 +1,5 @@
-define(["TranslatePipe", "HrefDirective"], 
-function(TranslatePipe, HrefDirective)
+define(["TranslatePipe", "HrefDirective", "VideoDirective"], 
+function(TranslatePipe, HrefDirective, VideoDirective)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -11,7 +11,8 @@ function(TranslatePipe, HrefDirective)
 		],
 		declarations:[
 			TranslatePipe,
-			HrefDirective
+			HrefDirective,
+			VideoDirective
 		],
 		exports:[
 			ng.common.CommonModule,
@@ -20,7 +21,8 @@ function(TranslatePipe, HrefDirective)
 			ng.router.RouterModule,
 			ng.material.MaterialModule,
 			TranslatePipe,
-			HrefDirective
+			HrefDirective,
+			VideoDirective
 		]
 	}).Class({
 		constructor: function ()

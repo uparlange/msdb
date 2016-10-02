@@ -7,20 +7,35 @@ function(MsdbProvider)
 			{
 				this._msdbProvider = msdbProvider;
 				
-				this.data = {};
+				this.data = this._getInitData();
 			}
 		],
 		init : function(params)
 		{
-			if(this.data.name !== params.name)
+			if(this.data.game.name !== params.name)
 			{
-				this.data = {};
+				this.data = this._getInitData();
 				
 				this._msdbProvider.getDetail(params.name).subscribe((data) => 
 				{
-					this.data = data;
+					if(data === null)
+					{
+						data = {
+							name:params.name,
+							description:"?"
+						};
+					}
+					this.data.game = data;
 				});
 			}
+		},
+		setVideoAvailable:function(b)
+		{
+			this.data.videoAvailable = b;
+		},
+		getVideoUrl:function()
+		{
+			return (this.data.game.name !== undefined) ? "http://adb.arcadeitalia.net/download_file.php?tipo=mame_current&codice=" + this.data.game.name + "&entity=shortplay&oper=streaming&filler=" + this.data.game.name + ".mp4" : null;
 		},
 		getStatusClass:function(status)
 		{
@@ -33,10 +48,10 @@ function(MsdbProvider)
 		getGameSizeLabel:function()
 		{
 			var sizeLabel = "?";
-			if(this.data.roms !== undefined)
+			if(this.data.game.roms !== undefined)
 			{
 				var size = 0;
-				this.data.roms.forEach((element, index, array) =>
+				this.data.game.roms.forEach((element, index, array) =>
 				{
 					size += parseInt(element.size);
 				});
@@ -73,6 +88,13 @@ function(MsdbProvider)
 				lbl = (Math.round(value / 1048576 * 100) / 100) + " MHz";
 			}
 			return lbl;
+		},
+		_getInitData:function()
+		{
+			return {
+				game:{},
+				videoAvailable:true
+			};
 		}
 	});		
 });

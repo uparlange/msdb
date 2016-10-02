@@ -7,14 +7,14 @@ function(MsdbProvider, AppUtils)
 			{
 				this._msdbProvider = msdbProvider;
 				
-				this.data = {};
+				this.data = this._getInitData();
 			}
 		],
 		init : function(params)
 		{
-			if(this.data.params === undefined || (this.data.params.type !== params.type || this.data.params.value !== params.value))
+			if(this.data.params.type !== params.type || this.data.params.value !== params.value)
 			{
-				this.data = {};
+				this.data = this._getInitData();
 				
 				this._msdbProvider.search(params.type, params.value).subscribe((data) => 
 				{
@@ -28,6 +28,13 @@ function(MsdbProvider, AppUtils)
 		getIconUrl : function(game)
 		{
 			return AppUtils.getIconUrl(game);
+		},
+		_getInitData:function()
+		{
+			return {
+				list:null,
+				params:{}
+			};
 		}
 	});	
 });
