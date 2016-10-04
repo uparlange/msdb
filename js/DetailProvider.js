@@ -1,5 +1,5 @@
-define(["MsdbProvider"], 
-function(MsdbProvider) 
+define(["MsdbProvider", "AppUtils"], 
+function(MsdbProvider, AppUtils) 
 {
 	return ng.core.Class({
 		constructor: [MsdbProvider,
@@ -45,13 +45,9 @@ function(MsdbProvider)
 		{
 			return "L10N_" + status.toUpperCase();
 		},
-		getImagesFolder:function()
+		getGameFolder:function()
 		{
-			return "../msdb2/dist/games/" + this.data.game.name;
-		},
-		getImageUrl:function(image)
-		{
-			return this.getImagesFolder() + "/" + image.name;
+			return AppUtils.getGameFolder(this.data.game);
 		},
 		getGameSizeLabel:function()
 		{
