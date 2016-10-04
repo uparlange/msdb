@@ -45,6 +45,14 @@ function(MsdbProvider)
 		{
 			return "L10N_" + status.toUpperCase();
 		},
+		getImagesFolder:function()
+		{
+			return "../msdb2/dist/games/" + this.data.game.name;
+		},
+		getImageUrl:function(image)
+		{
+			return this.getImagesFolder() + "/" + image.name;
+		},
 		getGameSizeLabel:function()
 		{
 			var sizeLabel = "?";
