@@ -15,9 +15,13 @@ define(function ()
 		},
 		getIconUrl:function(game)
 		{
-			return (game.icon !== null ? "../msdb2/dist/games/" + game.name + "/" + game.icon.name : "images/mame_joy_32px.png");
+			return (game.icon !== null ? this.getGameFolder(game) + "/" + game.icon.name : "images/mame_joy_32px.png");
 		},
-		getServiceUrl : function(serviceName)
+		getGameFolder:function(game)
+		{
+			return "../msdb2/dist/games/" + game.name;
+		},
+		getServiceUrl:function(serviceName)
 		{
 			return "../msdb2/dist/php/services/" + serviceName + ".php";
 		},

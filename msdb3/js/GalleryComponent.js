@@ -6,7 +6,6 @@ function(AppUtils)
 	return ng.core.Component({
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName),
-		styleUrls:["node_modules/photoswipe/dist/photoswipe.css","node_modules/photoswipe/dist/default-skin/default-skin.css"],
 		inputs:["folder", "provider", "colcount", "gap"]
 	}).Class({
 		constructor: [ng.core.ElementRef,
@@ -149,7 +148,9 @@ function(AppUtils)
 				});
 
 				const options = {
-					index: index 
+					index: index,
+					clickToCloseNonZoomable:false,
+					shareEl:false
 				};
 
 				this._gallery = new PhotoSwipe(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, items, options);
