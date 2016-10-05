@@ -4,7 +4,7 @@
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	max-width: 1024px;
+	max-width: 800px;
 	margin: auto;
 	z-index:1;
 }
@@ -15,7 +15,7 @@
 }
 .app-container
 {
-	max-width: 1024px;
+	max-width: 800px;
 	margin: auto;
 	height:100%;
 	background:white;

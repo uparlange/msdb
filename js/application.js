@@ -2,7 +2,10 @@
 	
 	requirejs.config(
 	{
-		baseUrl:"js"
+		baseUrl:"js",
+		paths: {
+			npm: '../node_modules'
+		}
 	});
 
 	requirejs(["AppModule"]);
