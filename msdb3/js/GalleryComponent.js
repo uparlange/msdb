@@ -1,5 +1,5 @@
-define(["AppUtils"], 
-function(AppUtils) 
+define(["AppUtils", "npm/photoswipe/dist/photoswipe.min", "npm/photoswipe/dist/photoswipe-ui-default.min", "npm/masonry-layout/dist/masonry.pkgd"], 
+function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry) 
 {
 	const componentName = "gallery";
 	
@@ -93,17 +93,14 @@ function(AppUtils)
 					this._masonry.destroy();
 				}
 				
-				requirejs(["node_modules/masonry-layout/dist/masonry.pkgd.min.js"], (Masonry) => 
-				{
-					this._masonry = new Masonry(".grid", {
-						itemSelector: ".grid-item",
-						columnWidth: this._getColWidth(),
-						gutter:this.gap,
-						resize:false
-					});
-					
-					this._lastGalleryContainerWidth = currentGalleryContainerWidth;
+				this._masonry = new Masonry(".grid", {
+					itemSelector: ".grid-item",
+					columnWidth: this._getColWidth(),
+					gutter:this.gap,
+					resize:false
 				});
+				
+				this._lastGalleryContainerWidth = currentGalleryContainerWidth;
 			}
 		},
 		_windowResizeHandler:function()
@@ -133,29 +130,27 @@ function(AppUtils)
 				this._gallery.close();
 			}
 			
-			requirejs(["node_modules/photoswipe/dist/photoswipe.min.js", "node_modules/photoswipe/dist/photoswipe-ui-default.min.js"], (PhotoSwipe, PhotoSwipeUI_Default) => 
-			{
-				const element = this._element.nativeElement;
+			const element = this._element.nativeElement;
 			
-				const items = [];
-				this.provider.forEach((image, index, array) =>
-				{
-					items.push({
-						src:this.getImageUrl(image),
-						w:image.width,
-						h:image.height
-					});
+			const items = [];
+			this.provider.forEach((image, index, array) =>
+			{
+				items.push({
+					src:this.getImageUrl(image),
+					w:image.width,
+					h:image.height
 				});
-
-				const options = {
-					index: index,
-					clickToCloseNonZoomable:false,
-					shareEl:false
-				};
-
-				this._gallery = new PhotoSwipe(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, items, options);
-				this._gallery.init();
 			});
+
+			const options = {
+				index: index,
+				clickToCloseNonZoomable:false,
+				shareEl:false,
+				history:false
+			};
+
+			this._gallery = new PhotoSwipe(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, items, options);
+			this._gallery.init();
 		}
 	});
 });

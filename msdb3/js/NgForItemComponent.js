@@ -1,26 +1,24 @@
 define(function() 
 {
-	return ng.core.Directive({
+	return ng.core.Component({
 		selector: "ngForItem",
+		template:"<ng-content></ng-content>",
 		inputs:["last"],
-		outputs:["complete"]
+		outputs:["onLast"]
 	}).Class({
 		constructor: [ng.core.ElementRef,
 			function (element)
 			{
-				this.complete = new ng.core.EventEmitter();
+				this.onLast = new ng.core.EventEmitter();
 				
 				this.last = false;
 			}
 		],
-		ngOnInit:function()
+		ngAfterContentInit:function()
 		{
 			if(this.last)
 			{
-				setTimeout(() =>
-				{
-					this.complete.emit();
-				});
+				this.onLast.emit();
 			}
 		}
 	});

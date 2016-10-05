@@ -3,8 +3,8 @@
 	<!-- thumbnails -->
 	<div class="grid">
 		<div *ngFor="let image of provider; let last = last;" class="grid-item" [ngStyle]="getItemStyles(image)">
-			<ngForItem [last]="last" (complete)="imagesCreated()">
-				<img width="100%" height="100%" (click)="openImage(image)" [src]="getImageUrl(image)">
+			<ngForItem [last]="last" (onLast)="imagesCreated()">
+				<img (click)="openImage(image)" width="100%" height="100%" [style.cursor]="'pointer'" [src]="getImageUrl(image)">
 			</ngForItem>
 		</div>
 	</div>
