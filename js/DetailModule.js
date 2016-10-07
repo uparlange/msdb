@@ -1,5 +1,5 @@
-define(["CommonModule", "DetailComponent", "DetailProvider", "DriverComponent", "RomsComponent"], 
-function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsComponent)
+define(["CommonModule", "DetailComponent", "DetailProvider", "DriverComponent", "RomsComponent", "ClonesComponent"], 
+function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsComponent, ClonesComponent)
 {
 	const routes = [
 		{path: "", component: DetailComponent}
@@ -13,14 +13,16 @@ function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsCom
 		declarations:[
 			DetailComponent,
 			DriverComponent,
-			RomsComponent
+			RomsComponent,
+			ClonesComponent
 		],
 		providers:[
 			DetailProvider
 		],
 		entryComponents:[
 			DriverComponent,
-			RomsComponent
+			RomsComponent,
+			ClonesComponent
 		]
 	}).Class({
 		constructor: function ()
