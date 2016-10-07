@@ -14,10 +14,14 @@ function(EventManager)
 				this._element = element;
 				this._eventManager = eventManager;
 				
+				this._loading = false;
+				
 				this._onEventHandler = (event) =>
 				{
 					if(event.type === "error" || event.type === "loadedmetadata")
 					{
+						this._loading = false;
+						
 						this._eventManager.emit("HTTP_END");
 					}
 					
@@ -42,6 +46,8 @@ function(EventManager)
 				{
 					element.src = event.source.currentValue;
 					
+					this._loading = true;
+					
 					this._eventManager.emit("HTTP_BEGIN");
 				}
 			}
@@ -52,6 +58,11 @@ function(EventManager)
 			
 			element.removeEventListener("error", this._onEventHandler);
 			element.removeEventListener("loadedmetadata", this._onEventHandler);
+			
+			if(this._loading)
+			{
+				this._eventManager.emit("HTTP_END");
+			}
 		}
 	});
 });

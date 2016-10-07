@@ -41,6 +41,24 @@
 				<span class="sep">-</span>
 				<a href (click)="openRomsPopup()">{{model.data.game.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</a>
 			</md-list-item>
+			<md-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
+				{{'L10N_ROM_OF'|translate}}
+				<span class="sep">:</span>
+				<a routerLink="/detail" [queryParams]="{name:model.data.game.romof}">{{model.data.game.romof}}</a>
+			</md-list-item>
+			<md-list-item *ngIf="model.data.game.isbios == 'yes'">
+				<a routerLink="/result" [queryParams]="{type:'bios',value:model.data.game.name}">{{'L10N_BIOS_GAMES'|translate}}</a>
+			</md-list-item>
+			<md-list-item *ngIf="model.data.game.cloneof != null">
+				{{'L10N_CLONE_OF'|translate}}
+				<span class="sep">:</span>
+				<a routerLink="/detail" [queryParams]="{name:model.data.game.cloneof}">{{model.data.game.cloneof}}</a>
+			</md-list-item>
+			<md-list-item *ngIf="model.data.clones.length > 0">
+				{{'L10N_CLONE_OR_CLONES'|translate}}
+				<span class="sep">:</span>
+				<a href (click)="openClonesPopup()">{{model.data.clones.length}}</a>
+			</md-list-item>
 		</md-list>
 	</md-card-content>
 </md-card>
@@ -72,6 +90,6 @@
 		{{'L10N_IMAGES'|translate}}
 	</md-card-title>
 	<md-card-content>
-		<gallery [colcount]="4" [gap]="5" [folder]="model.getGameFolder()" [provider]="model.data.game.images"></gallery>
+		<gallery [colcount]="4" [gap]="5" [folder]="model.getGameFolder()" [excludedExtensions]="['ico']" [provider]="model.data.game.images"></gallery>
 	</md-card-content>
 </md-card>

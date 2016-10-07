@@ -1,0 +1,8 @@
+<md-toolbar color="primary">
+	{{'L10N_CLONE_INFOS'|translate}}
+</md-toolbar>
+<md-list>
+	<md-list-item *ngFor="let clone of model.data.clones">
+		<a (click)="close()" routerLink="/detail" [queryParams]="{name:clone.name}">{{clone.description}}</a>
+	</md-list-item>
+</md-list>

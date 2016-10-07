@@ -25,7 +25,13 @@ function(MsdbProvider, AppUtils)
 							description:"?"
 						};
 					}
+					
 					this.data.game = data;
+					
+					this._msdbProvider.search("clones", data.name).subscribe((data) => 
+					{
+						this.data.clones = data;
+					});
 				});
 			}
 		},
@@ -97,6 +103,7 @@ function(MsdbProvider, AppUtils)
 		{
 			return {
 				game:{},
+				clones:[],
 				videoAvailable:true
 			};
 		}

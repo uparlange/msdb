@@ -6,7 +6,7 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 	return ng.core.Component({
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName),
-		inputs:["folder", "provider", "colcount", "gap"]
+		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
 	}).Class({
 		constructor: [ng.core.ElementRef,
 			function (element)
@@ -45,31 +45,38 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 			
 			window.removeEventListener("resize", this._windowResizeHandler);
 		},
+		imageAllowed:function(image)
+		{
+			if(!Array.isArray(this.excludedExtensions))
+			{
+				return true;
+			}
+			else
+			{
+				const extension = image.name.split(".")[1];
+				return (this.excludedExtensions.indexOf(extension) === -1);
+			}
+		},
 		getImageUrl:function(image)
 		{
 			return this.folder + "/" + image.name;
 		},
 		getItemStyles:function(image)
 		{
+			const colwidth = this._getColWidth();
+			
 			const styles = {
 				'float': 'left', 
-				'width':this._getColWidth() + "px", 
-				'height':this.getHeight(image) + "px",
+				'width':colwidth + "px", 
+				'height':this._getItemHeight(colwidth, image) + "px",
 				'margin-bottom':this.gap + "px"
 			};
 			return styles;
 		},
-		getHeight:function(image)
-		{
-			if(!image)
-			{
-				return 0;
-			}
-			return Math.round(this._getColWidth() * image.height / image.width);
-		},
 		openImage:function(image)
 		{
-			this.provider.forEach((element, index, array) =>
+			const provider = this._getAllowedImageProvider();
+			provider.forEach((element, index, array) =>
 			{
 				if(element.name === image.name)
 				{
@@ -81,6 +88,27 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 		imagesCreated:function()
 		{
 			this._refreshMasonry();
+		},
+		_getAllowedImageProvider:function()
+		{
+			const images = [];
+			this.provider.forEach((image, index, array) =>
+			{
+				if(this.imageAllowed(image))
+				{
+					images.push({
+						name:image.name,
+						src:this.getImageUrl(image),
+						w:image.width,
+						h:image.height
+					});
+				}
+			});
+			return images;
+		},
+		_getItemHeight:function(requiredWidth, image)
+		{
+			return Math.round(requiredWidth * image.height / image.width);
 		},
 		_refreshMasonry:function()
 		{
@@ -132,15 +160,7 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 			
 			const element = this._element.nativeElement;
 			
-			const items = [];
-			this.provider.forEach((image, index, array) =>
-			{
-				items.push({
-					src:this.getImageUrl(image),
-					w:image.width,
-					h:image.height
-				});
-			});
+			const items = this._getAllowedImageProvider();
 
 			const options = {
 				index: index,
