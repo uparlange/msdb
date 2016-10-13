@@ -1,4 +1,4 @@
-define(["TranslatePipe", "HrefDirective", "VideoDirective", "GalleryComponent", "NgForItemComponent"], 
+define(["app:TranslatePipe", "app:HrefDirective", "app:VideoDirective", "app:GalleryComponent", "app:NgForItemComponent"], 
 function(TranslatePipe, HrefDirective, VideoDirective, GalleryComponent, NgForItemComponent)
 {
 	return ng.core.NgModule({

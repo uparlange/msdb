@@ -1,4 +1,4 @@
-define(["AppUtils", "DetailProvider"], 
+define(["app:AppUtils", "app:DetailProvider"], 
 function(AppUtils, DetailProvider) 
 {
 	const componentName = "clones";

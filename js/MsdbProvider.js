@@ -1,4 +1,4 @@
-define(["EventManager", "AppUtils"], 
+define(["app:EventManager", "app:AppUtils"], 
 function(EventManager, AppUtils) 
 {
 	return ng.core.Class({

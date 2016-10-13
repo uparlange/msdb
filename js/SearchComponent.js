@@ -1,4 +1,4 @@
-define(["SearchProvider", "AppUtils"], 
+define(["app:SearchProvider", "app:AppUtils"], 
 function(SearchProvider, AppUtils) 
 {
 	const componentName = "search";

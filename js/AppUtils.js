@@ -27,12 +27,7 @@ define(function ()
 		},
 		loadModule:function(moduleName)
 		{
-			const eventEmitter = new ng.core.EventEmitter();
-			requirejs([moduleName], function(moduleInstance)
-			{
-				eventEmitter.emit(moduleInstance);
-			});
-			return eventEmitter;
+			return System.import("app:" + moduleName);
 		}
 	};
 });

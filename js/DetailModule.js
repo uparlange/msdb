@@ -1,4 +1,4 @@
-define(["CommonModule", "DetailComponent", "DetailProvider", "DriverComponent", "RomsComponent", "ClonesComponent"], 
+define(["app:CommonModule", "app:DetailComponent", "app:DetailProvider", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent"], 
 function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsComponent, ClonesComponent)
 {
 	const routes = [

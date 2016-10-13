@@ -1,4 +1,4 @@
-define(["MsdbProvider"], 
+define(["app:MsdbProvider"], 
 function(MsdbProvider) 
 {
 	return ng.core.Class({

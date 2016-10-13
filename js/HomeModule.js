@@ -1,4 +1,4 @@
-define(["CommonModule", "HomeComponent", "HomeProvider"], 
+define(["app:CommonModule", "app:HomeComponent", "app:HomeProvider"], 
 function(CommonModule, HomeComponent, HomeProvider)
 {
 	const routes = [

@@ -1,4 +1,4 @@
-define(["CommonModule", "AppComponent", "MsdbProvider", "AppProvider", "AppUtils", "EventManager", "TranslateManager", "ProgressBarDirective"], 
+define(["app:CommonModule", "app:AppComponent", "app:MsdbProvider", "app:AppProvider", "app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective"], 
 function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager, ProgressBarDirective) 
 {
 	const routes = [
