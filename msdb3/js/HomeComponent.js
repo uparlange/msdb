@@ -1,4 +1,4 @@
-define(["HomeProvider", "AppUtils"], 
+define(["app:HomeProvider", "app:AppUtils"], 
 function(HomeProvider, AppUtils) 
 {
 	const componentName = "home";

@@ -1,4 +1,4 @@
-define(["EventManager"], 
+define(["app:EventManager"], 
 function(EventManager) 
 {
 	return ng.core.Directive({

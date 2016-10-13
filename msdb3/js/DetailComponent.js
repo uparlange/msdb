@@ -1,4 +1,4 @@
-define(["DetailProvider", "DriverComponent", "RomsComponent", "ClonesComponent", "AppUtils"], 
+define(["app:DetailProvider", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
 function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
 {
 	const componentName = "detail";

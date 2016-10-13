@@ -1,4 +1,4 @@
-define(["CommonModule", "SearchComponent", "SearchProvider"], 
+define(["app:CommonModule", "app:SearchComponent", "app:SearchProvider"], 
 function(CommonModule, SearchComponent, SearchProvider)
 {
 	const routes = [
