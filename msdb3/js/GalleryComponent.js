@@ -140,7 +140,9 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 		},
 		_getColWidth:function()
 		{
-			return Math.round((this._getGalleryContainer().clientWidth - (this.colcount * this.gap)) / this.colcount);
+			const provider = this._getAllowedImageProvider();
+			const colcount = Math.min(this.colcount, provider.length);
+			return Math.round((this._getGalleryContainer().clientWidth - (colcount * this.gap)) / colcount);
 		},
 		_openPhotoSwift:function(index)
 		{

@@ -54,15 +54,18 @@ function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUti
 		},
 		_openPopup:function(clazz)
 		{
-			const config = new ng.material.MdDialogConfig();
-			config.viewContainerRef = this._viewContainerRef;
-			
-			this._dialogRef = this._mdDialog.open(clazz, config);
-			
-			this._dialogRef.afterClosed().subscribe((result) =>
+			if(this._dialogRef === null)
 			{
-				this._dialogRef = null;
-			});
+				const config = new ng.material.MdDialogConfig();
+				config.viewContainerRef = this._viewContainerRef;
+				
+				this._dialogRef = this._mdDialog.open(clazz, config);
+				
+				this._dialogRef.afterClosed().subscribe((result) =>
+				{
+					this._dialogRef = null;
+				});
+			}
 		}
 	});	
 });

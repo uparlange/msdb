@@ -16,6 +16,17 @@ body
 	background-attachment: fixed;
 }
 
+a
+{
+	text-decoration: initial;	
+	color:#3949ab;
+}
+
+video
+{
+	max-width: 100%;
+}
+
 @font-face 
 {
 	font-family: 'Material Icons';
