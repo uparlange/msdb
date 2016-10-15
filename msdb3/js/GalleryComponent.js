@@ -25,7 +25,7 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 			this._windowResizeHandler = () =>
 			{
 				this._refreshMasonry();
-			}
+			};
 			
 			window.addEventListener("resize", this._windowResizeHandler);
 		},

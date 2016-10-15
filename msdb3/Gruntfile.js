@@ -43,6 +43,7 @@ module.exports = function (grunt) {
             templates: {
 				options: {
 					caseSensitive:true,
+					removeComments: true,
 					collapseWhitespace: true
 				},
                 files: [{
@@ -105,5 +106,5 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('release', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'cssmin', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'cssmin', 'copy']);
 };
