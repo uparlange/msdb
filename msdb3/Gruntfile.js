@@ -120,7 +120,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	
-	grunt.registerTask('npmjsdeps', 'npmjsdeps', function()
+	grunt.registerTask('copydeps', 'copydeps', function()
 	{
 		const htmlparser = require('htmlparser2');
 		const fs = require('fs');
@@ -166,5 +166,5 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'npmjsdeps', 'htmlmin', 'sass', 'cssmin', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'copydeps', 'copy']);
 };
