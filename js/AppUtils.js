@@ -19,15 +19,20 @@ define(function ()
 		},
 		getGameFolder:function(game)
 		{
-			return "http://localhost/projects/msdb2/dist/games/" + game.name;
+			return this._getBaseUrl() + "/games/" + game.name;
 		},
 		getServiceUrl:function(serviceName)
 		{
-			return "http://localhost/projects/msdb2/dist/php/services/" + serviceName + ".php";
+			return this._getBaseUrl() + "/php/services/" + serviceName + ".php";
 		},
 		loadModule:function(moduleName)
 		{
 			return System.import("app:" + moduleName);
+		},
+		_getBaseUrl:function()
+		{
+			return "http://localhost/projects/msdb2/dist";
+			//return "http://192.168.0.15/projects/msdb2/dist";
 		}
 	};
 });
