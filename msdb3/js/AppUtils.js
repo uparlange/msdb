@@ -19,11 +19,11 @@ define(function ()
 		},
 		getGameFolder:function(game)
 		{
-			return "../msdb2/dist/games/" + game.name;
+			return "http://localhost/projects/msdb2/dist/games/" + game.name;
 		},
 		getServiceUrl:function(serviceName)
 		{
-			return "../msdb2/dist/php/services/" + serviceName + ".php";
+			return "http://localhost/projects/msdb2/dist/php/services/" + serviceName + ".php";
 		},
 		loadModule:function(moduleName)
 		{

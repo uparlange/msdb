@@ -1,5 +1,5 @@
-define(["app:AppUtils", "npm:photoswipe/dist/photoswipe.min.js", "npm:photoswipe/dist/photoswipe-ui-default.min.js", "npm:masonry-layout/dist/masonry.pkgd.js", "npm:photoswipe/dist/photoswipe.css", "npm:photoswipe/dist/default-skin/default-skin.css"], 
-function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry) 
+define(["app:AppUtils"], 
+function(AppUtils) 
 {
 	const componentName = "gallery";
 	

@@ -74,10 +74,16 @@ module.exports = function (grunt) {
                 src: 'index.html',
                 dest: 'dist/index.html'
             },
-			icons: {
+			material_design_icons: {
                 cwd: 'node_modules/material-design-icons/iconfont',
                 src: '**/*',
                 dest: 'dist/node_modules/material-design-icons/iconfont',
+                expand: true
+            },
+			photoswipe_default_skin: {
+                cwd: 'node_modules/photoswipe/dist/default-skin',
+                src: '**/*',
+                dest: 'dist/node_modules/photoswipe/dist/default-skin',
                 expand: true
             },
 			data: {
@@ -114,27 +120,38 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	
-	grunt.registerTask('npmdeps', 'npmdeps', function()
+	grunt.registerTask('npmjsdeps', 'npmjsdeps', function()
 	{
 		const htmlparser = require('htmlparser2');
 		const fs = require('fs');
 		
-		const scripts = {};
+		const dependencies = {};
 		const parser = new htmlparser.Parser(
 		{
-			onopentag: function(name, attribs)
+			onopentag: function(tagname, attributes)
 			{
-				if(name === 'script')
+				let attribute = null;
+				switch(tagname)
 				{
-					if(attribs.src !== undefined && attribs.src.indexOf('node_modules') !== -1)
-					{
-						const begin = attribs.src.lastIndexOf("/") + 1;
-						const end =  attribs.src.indexOf(".", begin);
-						const name = attribs.src.substring(begin, end);
-						scripts[name] = {
-							src:attribs.src,
-							dest:'dist/'+attribs.src
-						}
+					case 'script' :
+						attribute = 'src';
+						break;
+					case 'link' :
+						attribute = 'href';
+						break;
+				}
+				if(attributes[attribute] !== undefined && attributes[attribute].indexOf('node_modules') !== -1)
+				{
+					const url = attributes[attribute];
+					const begin = url.lastIndexOf("/") + 1;
+					const end =  url.indexOf(".", begin);
+					const name = url.substring(begin, end) + "_" + tagname;
+					
+					console.log(name, url);
+					
+					dependencies[name] = {
+						src:url,
+						dest:'dist/'+url
 					}
 				}
 			}
@@ -146,11 +163,11 @@ module.exports = function (grunt) {
 		parser.end();
 
 		grunt.config.merge({
-			copy:scripts
+			copy:dependencies
 		});
 	});
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'npmdeps', 'htmlmin', 'sass', 'cssmin', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'npmjsdeps', 'htmlmin', 'sass', 'cssmin', 'copy']);
 };
