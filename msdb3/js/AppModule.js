@@ -1,6 +1,8 @@
 define(["app:CommonModule", "app:AppComponent", "app:MsdbProvider", "app:AppProvider", "app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective"], 
 function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager, ProgressBarDirective) 
 {
+	ng.core.enableProdMode();
+	
 	const routes = [
 		{path: "", redirectTo: "home", pathMatch: "full"},
 		{path: "home", loadChildren:() => AppUtils.loadModule("HomeModule")},

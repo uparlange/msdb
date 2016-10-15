@@ -40,12 +40,16 @@ module.exports = function (grunt) {
             }
         },
         htmlmin: {
-            html: {
-				options: {
-					caseSensitive:true,
-					removeComments: true,
-					collapseWhitespace: true
-				},
+			options: {
+				caseSensitive:true,
+				removeComments: true,
+				collapseWhitespace: true
+			},
+			index:{
+				src: 'index.html',
+                dest: 'dist/index.html'
+			},
+            templates: {
                 files: [{
                     expand: true,
                     cwd: 'html',
@@ -70,10 +74,6 @@ module.exports = function (grunt) {
 			}
         },
 		copy: {
-			index: {
-                src: 'index.html',
-                dest: 'dist/index.html'
-            },
 			material_design_icons: {
                 cwd: 'node_modules/material-design-icons/iconfont',
                 src: '**/*',
@@ -146,9 +146,6 @@ module.exports = function (grunt) {
 					const begin = url.lastIndexOf("/") + 1;
 					const end =  url.indexOf(".", begin);
 					const name = url.substring(begin, end) + "_" + tagname;
-					
-					console.log(name, url);
-					
 					dependencies[name] = {
 						src:url,
 						dest:'dist/'+url
