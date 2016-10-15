@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 			options: {
 				sourceMap: false
 			},
-			transform: {
+			classes: {
 				files: [{
 					expand: true,
 					cwd: 'js/',
@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 			}
 		},
         uglify: {
-            js: {
+            classes: {
 				files: [{
 					expand: true,
 					cwd: 'dist/js/',
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
             }
         },
         htmlmin: {
-            templates: {
+            html: {
 				options: {
 					caseSensitive:true,
 					removeComments: true,
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
                 keepSpecialComments: 0,
 				rebase:false
             },
-			target: {
+			css: {
 				files: [{
 					expand: true,
 					cwd: 'css',
@@ -106,5 +106,5 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'cssmin', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'copy']);
 };
