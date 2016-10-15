@@ -85,7 +85,7 @@
 		<video [source]="model.getVideoUrl()" type="video/mp4" controls (onEvent)="videoStateChange($event)"></video>
 	</md-card-content>
 </md-card>
-<md-card>
+<md-card *ngIf="model.data.game.images != null && model.data.game.images.length > 0">
 	<md-card-title>
 		{{'L10N_IMAGES'|translate}}
 	</md-card-title>

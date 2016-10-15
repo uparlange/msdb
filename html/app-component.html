@@ -1,15 +1,15 @@
 <div class="app-header">
 	<md-toolbar color="primary">
-		<span routerLink="/home">MSDB3</span>
+		<a href="#" routerLink="/home">MSDB3</a>
 		<span class="fill-remaining-space"></span>
-		<button (click)="toggleLanguage()">{{model.data.lang}}</button>
+		<button md-button (click)="toggleLanguage()">{{model.data.lang}}</button>
 		<span class="fill-remaining-space"></span>
-		<span routerLink="/search">Search</span>
+		<a href="#" routerLink="/search">Search</a>
 	</md-toolbar>
 	<md-progress-bar mode="indeterminate"></md-progress-bar>
 </div>
 <div class="app-container">
-	<div style="height:64px;"></div>
+	<div class="app-spacer"></div>
 	<div class="app-content">
 		<router-outlet></router-outlet>
 	</div>
