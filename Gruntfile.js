@@ -81,7 +81,17 @@ module.exports = function (grunt) {
                 dest: 'dist/images',
                 expand: true
 			}
-        }
+        },
+		sass: {
+			options: {
+				sourcemap:"none"
+			},
+			theme: {
+				files: {
+					'css/theme.css': 'theme/theme.scss'
+				}
+			}
+		}
     });
 
 	grunt.loadNpmTasks('grunt-babel');
@@ -91,7 +101,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 
 	grunt.registerTask('test', ['jshint']);
+	grunt.registerTask('theme', ['sass']);
 	grunt.registerTask('release', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'cssmin', 'copy']);
 };

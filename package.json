@@ -29,6 +29,7 @@
 		"grunt-contrib-cssmin": "latest",
 		"grunt-contrib-htmlmin": "latest",
 		"grunt-contrib-jshint": "latest",
-		"grunt-contrib-uglify": "latest"
+		"grunt-contrib-uglify": "latest",
+		"grunt-contrib-sass": "latest"
 	}
 }

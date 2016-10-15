@@ -34,7 +34,7 @@
 				<span class="sep">:</span>
 				{{model.data.game.input.players}}
 			</md-list-item>
-			<md-list-item *ngIf="model.data.game.roms != null">
+			<md-list-item *ngIf="model.data.game.roms != null && model.data.game.roms.length > 0">
 				{{'L10N_SIZE'|translate}}
 				<span class="sep">:</span>
 				{{model.getGameSizeLabel()}}
@@ -54,7 +54,7 @@
 				<span class="sep">:</span>
 				<a routerLink="/detail" [queryParams]="{name:model.data.game.cloneof}">{{model.data.game.cloneof}}</a>
 			</md-list-item>
-			<md-list-item *ngIf="model.data.clones.length > 0">
+			<md-list-item *ngIf="model.data.clones != null && model.data.clones.length > 0">
 				{{'L10N_CLONE_OR_CLONES'|translate}}
 				<span class="sep">:</span>
 				<a href (click)="openClonesPopup()">{{model.data.clones.length}}</a>
@@ -90,6 +90,6 @@
 		{{'L10N_IMAGES'|translate}}
 	</md-card-title>
 	<md-card-content>
-		<gallery [colcount]="4" [gap]="5" [folder]="model.getGameFolder()" [excludedExtensions]="['ico']" [provider]="model.data.game.images"></gallery>
+		<gallery [colcount]="3" [gap]="5" [folder]="model.getGameFolder()" [excludedExtensions]="['ico']" [provider]="model.data.game.images"></gallery>
 	</md-card-content>
 </md-card>
