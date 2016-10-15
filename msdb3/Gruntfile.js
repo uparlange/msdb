@@ -70,6 +70,16 @@ module.exports = function (grunt) {
 			}
         },
 		copy: {
+			index: {
+                src: 'index.html',
+                dest: 'dist/index.html'
+            },
+			icons: {
+                cwd: 'node_modules/material-design-icons/iconfont',
+                src: '**/*',
+                dest: 'dist/node_modules/material-design-icons/iconfont',
+                expand: true
+            },
 			data: {
 				cwd: 'data',
                 src: '**/*',
@@ -103,8 +113,44 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	
+	grunt.registerTask('npmdeps', 'npmdeps', function()
+	{
+		const htmlparser = require('htmlparser2');
+		const fs = require('fs');
+		
+		const scripts = {};
+		const parser = new htmlparser.Parser(
+		{
+			onopentag: function(name, attribs)
+			{
+				if(name === 'script')
+				{
+					if(attribs.src !== undefined && attribs.src.indexOf('node_modules') !== -1)
+					{
+						const begin = attribs.src.lastIndexOf("/") + 1;
+						const end =  attribs.src.indexOf(".", begin);
+						const name = attribs.src.substring(begin, end);
+						scripts[name] = {
+							src:attribs.src,
+							dest:'dist/'+attribs.src
+						}
+					}
+				}
+			}
+		}, 
+		{
+			decodeEntities: true
+		});
+		parser.write(fs.readFileSync('index.html', 'utf8'));
+		parser.end();
+
+		grunt.config.merge({
+			copy:scripts
+		});
+	});
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'npmdeps', 'htmlmin', 'sass', 'cssmin', 'copy']);
 };
