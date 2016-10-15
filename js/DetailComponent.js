@@ -18,12 +18,23 @@ function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUti
 				
 				this._dialogRef = null;
 				
+				this._activatedRouteQueryParamsSubscriber = null;
+				
 				this.model = model;
 			}
 		],
 		ngOnInit : function()
 		{
+			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
+			{
+				this.model.init(params);
+			});
+			
 			this.model.init(this._activatedRoute.queryParams.value);
+		},
+		ngOnDestroy : function()
+		{
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 		},
 		videoStateChange:function(event)
 		{
