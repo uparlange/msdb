@@ -15,5 +15,3 @@ SystemJS.config(
 		}
 	}
 });
-
-SystemJS.import("js/AppModule.js");

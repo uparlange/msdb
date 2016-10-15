@@ -1,5 +1,5 @@
-define(["app:CommonModule", "app:DetailComponent", "app:DetailProvider", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent"], 
-function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsComponent, ClonesComponent)
+define(["app:CommonModule", "app:DetailComponent", "app:DetailProvider", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:VideoDirective", "app:GalleryComponent"], 
+function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsComponent, ClonesComponent, VideoDirective, GalleryComponent)
 {
 	const routes = [
 		{path: "", component: DetailComponent}
@@ -14,7 +14,9 @@ function(CommonModule, DetailComponent, DetailProvider, DriverComponent, RomsCom
 			DetailComponent,
 			DriverComponent,
 			RomsComponent,
-			ClonesComponent
+			ClonesComponent,
+			VideoDirective, 
+			GalleryComponent
 		],
 		providers:[
 			DetailProvider
