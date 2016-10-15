@@ -18,8 +18,6 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 				this._masonry = null;
 				
 				this._resizeTimeout = null;
-				
-				this._lastGalleryContainerWidth = null;
 			}
 		],
 		ngOnInit:function()
@@ -112,24 +110,17 @@ function(AppUtils, PhotoSwipe, PhotoSwipeUI_Default, Masonry)
 		},
 		_refreshMasonry:function()
 		{
-			const currentGalleryContainerWidth = this._getGalleryContainer().clientWidth;
-			
-			if(this._lastGalleryContainerWidth === null || this._lastGalleryContainerWidth !== currentGalleryContainerWidth)
+			if(this._masonry !== null)
 			{
-				if(this._masonry !== null)
-				{
-					this._masonry.destroy();
-				}
-				
-				this._masonry = new Masonry(".grid", {
-					itemSelector: ".grid-item",
-					columnWidth: this._getColWidth(),
-					gutter:this.gap,
-					resize:false
-				});
-				
-				this._lastGalleryContainerWidth = currentGalleryContainerWidth;
+				this._masonry.destroy();
 			}
+			
+			this._masonry = new Masonry(".grid", {
+				itemSelector: ".grid-item",
+				columnWidth: this._getColWidth(),
+				gutter:this.gap,
+				resize:false
+			});
 		},
 		_windowResizeHandler:function()
 		{
