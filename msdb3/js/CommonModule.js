@@ -1,5 +1,5 @@
-define(["app:TranslatePipe", "app:HrefDirective", "app:VideoDirective", "app:GalleryComponent", "app:NgForItemComponent"], 
-function(TranslatePipe, HrefDirective, VideoDirective, GalleryComponent, NgForItemComponent)
+define(["app:TranslatePipe", "app:HrefDirective", "app:NgForItemComponent"], 
+function(TranslatePipe, HrefDirective, NgForItemComponent)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -12,8 +12,6 @@ function(TranslatePipe, HrefDirective, VideoDirective, GalleryComponent, NgForIt
 		declarations:[
 			TranslatePipe,
 			HrefDirective,
-			VideoDirective,
-			GalleryComponent,
 			NgForItemComponent
 		],
 		exports:[
@@ -24,8 +22,6 @@ function(TranslatePipe, HrefDirective, VideoDirective, GalleryComponent, NgForIt
 			ng.material.MaterialModule,
 			TranslatePipe,
 			HrefDirective,
-			VideoDirective,
-			GalleryComponent,
 			NgForItemComponent
 		]
 	}).Class({
