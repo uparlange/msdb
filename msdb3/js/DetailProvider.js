@@ -1,11 +1,13 @@
-define(["app:MsdbProvider", "app:AppUtils"], 
-function(MsdbProvider, AppUtils) 
+define(["app:MsdbProvider", "app:AppUtils", "app:SocketManager"], 
+function(MsdbProvider, AppUtils, SocketManager) 
 {
 	return ng.core.Class({
-		constructor: [MsdbProvider,
-			function (msdbProvider)
+		constructor: [MsdbProvider, SocketManager,
+			function (msdbProvider, SocketManager)
 			{
 				this._msdbProvider = msdbProvider;
+				
+				this._socketManager = SocketManager;
 				
 				this.data = this._getInitData();
 			}
@@ -28,12 +30,24 @@ function(MsdbProvider, AppUtils)
 					
 					this.data.game = data;
 					
+					this._socketManager.sendMessage("IS_ROM_AVAILABLE", this.data.game.name).subscribe((result) =>
+					{
+						if(result.name === this.data.game.name)
+						{
+							this.data.gameAvailable = result.available;
+						}
+					});
+					
 					this._msdbProvider.search("clones", data.name).subscribe((data) => 
 					{
 						this.data.clones = data;
 					});
 				});
 			}
+		},
+		playGame:function()
+		{
+			this._socketManager.sendMessage("PLAY_GAME", this.data.game.name);
 		},
 		setVideoAvailable:function(b)
 		{
@@ -104,7 +118,8 @@ function(MsdbProvider, AppUtils)
 			return {
 				game:{},
 				clones:[],
-				videoAvailable:true
+				videoAvailable:true,
+				gameAvailable:false
 			};
 		}
 	});		
