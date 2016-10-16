@@ -1,5 +1,5 @@
-define(["app:MsdbProvider", "app:AppUtils", "app:SocketManager", "app:MsdbProvider"], 
-function(MsdbProvider, AppUtils, SocketManager, MsdbProvider) 
+define(["app:MsdbProvider", "app:AppUtils", "app:SocketManager"], 
+function(MsdbProvider, AppUtils, SocketManager) 
 {
 	return ng.core.Class({
 		constructor: [SocketManager, MsdbProvider,
