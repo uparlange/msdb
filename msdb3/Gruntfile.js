@@ -148,8 +148,7 @@ module.exports = function (grunt) {
 				{
 					const url = attributes[attribute];
 					const begin = url.lastIndexOf("/") + 1;
-					const end =  url.indexOf(".", begin);
-					const name = url.substring(begin, end) + "_" + tagname;
+					const name = url.substring(begin);
 					dependencies[name] = {
 						src:url,
 						dest:'dist/'+url
