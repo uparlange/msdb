@@ -120,24 +120,28 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	
-	grunt.registerTask('copydeps', 'copydeps', function()
+	grunt.registerTask('npms', 'npms', function()
 	{
 		const htmlparser = require('htmlparser2');
 		const fs = require('fs');
 		
-		const dependencies = {};
+		const scripts = {};
+		const css = {};
 		const parser = new htmlparser.Parser(
 		{
 			onopentag: function(tagname, attributes)
 			{
 				let attribute = null;
+				let dependencies = null;
 				switch(tagname)
 				{
 					case 'script' :
 						attribute = 'src';
+						dependencies = scripts;
 						break;
 					case 'link' :
 						attribute = 'href';
+						dependencies = css;
 						break;
 				}
 				if(attributes[attribute] !== undefined && attributes[attribute].indexOf('node_modules') !== -1)
@@ -160,11 +164,15 @@ module.exports = function (grunt) {
 		parser.end();
 
 		grunt.config.merge({
-			copy:dependencies
+			uglify:scripts
+		});
+		
+		grunt.config.merge({
+			cssmin:css
 		});
 	});
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'copydeps', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'copy', 'npms', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin']);
 };
