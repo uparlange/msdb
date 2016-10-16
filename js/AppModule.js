@@ -1,5 +1,5 @@
-define(["app:CommonModule", "app:AppComponent", "app:MsdbProvider", "app:AppProvider", "app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective"], 
-function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager, ProgressBarDirective) 
+define(["app:CommonModule", "app:AppComponent", "app:MsdbProvider", "app:AppProvider", "app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager"], 
+function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager) 
 {
 	ng.core.enableProdMode();
 	
@@ -8,7 +8,8 @@ function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventM
 		{path: "home", loadChildren:() => AppUtils.loadModule("HomeModule")},
 		{path: "search", loadChildren:() => AppUtils.loadModule("SearchModule")},
 		{path: "detail", loadChildren:() => AppUtils.loadModule("DetailModule")},
-		{path: "result", loadChildren:() => AppUtils.loadModule("ResultModule")}
+		{path: "result", loadChildren:() => AppUtils.loadModule("ResultModule")},
+		{path: "mygames", loadChildren:() => AppUtils.loadModule("MyGamesModule")}
 	];
 	
 	const AppModule = ng.core.NgModule({
@@ -25,7 +26,8 @@ function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventM
 			MsdbProvider,
 			AppProvider,
 			EventManager,
-			TranslateManager
+			TranslateManager,
+			SocketManager
 		],
 		bootstrap:[
 			AppComponent

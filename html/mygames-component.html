@@ -1,0 +1,28 @@
+<md-card>
+	<md-card-title>
+		{{'L10N_MY_GAMES'|translate}}
+	</md-card-title>
+</md-card>
+<md-list>
+	<md-nav-list>
+		<a md-list-item *ngFor="let game of model.data.allGames ; trackBy:game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
+			<img md-list-avatar [src]="model.getIconUrl(game)">
+			<span class="sep"></span>
+			{{game.description}}
+		</a>
+	</md-nav-list>
+</md-list>
+<md-card>
+	<md-card-title>
+		{{'L10N_MY_BIOS'|translate}}
+	</md-card-title>
+</md-card>
+<md-list>
+	<md-nav-list>
+		<a md-list-item *ngFor="let bios of model.data.allBios ; trackBy:bios?.name" routerLink="/detail" [queryParams]="{name:bios.name}">
+			<img md-list-avatar [src]="model.getIconUrl(bios)">
+			<span class="sep"></span>
+			{{bios.description}}
+		</a>
+	</md-nav-list>
+</md-list>
