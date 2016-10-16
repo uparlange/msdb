@@ -3,6 +3,9 @@
 		{{model.data.game.description}}
 	</md-card-title>
 	<md-card-content>
+		<button md-fab *ngIf="model.data.gameAvailable" color="primary" (click)="model.playGame()">
+			<i class="material-icons md-24">play_arrow</i>
+		</button>
 		<md-list>
 			<md-list-item *ngIf="model.data.game.year != null">
 				{{'L10N_YEAR'|translate}}

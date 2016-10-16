@@ -5,7 +5,8 @@ function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUti
 	
 	return ng.core.Component({
 		selector: componentName,
-		templateUrl: AppUtils.getTemplateUrl(componentName)
+		templateUrl: AppUtils.getTemplateUrl(componentName),
+		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
 		constructor: [DetailProvider, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
 			function (model, activatedRoute, viewContainerRef, mdDialog)
@@ -29,8 +30,6 @@ function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUti
 			{
 				this.model.init(params);
 			});
-			
-			this.model.init(this._activatedRoute.queryParams.value);
 		},
 		ngOnDestroy : function()
 		{
