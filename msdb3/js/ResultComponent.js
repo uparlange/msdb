@@ -13,12 +13,17 @@ function(ResultProvider, AppUtils)
 			{
 				this._activatedRoute = activatedRoute;
 				
+				this._activatedRouteQueryParamsSubscriber = null;
+				
 				this.model = model;
 			}
 		],
 		ngOnInit : function()
 		{
-			this.model.init(this._activatedRoute.queryParams.value);
+			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
+			{
+				this.model.init(params);
+			});
 		},
 		getSearchLabel:function(type)
 		{
