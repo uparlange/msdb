@@ -17,7 +17,7 @@
 		<template md-tab-label><i class="material-icons md-24">folder_open</i></template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let category of model.data.categories" (click)="findByCategory(category)">{{category}}</a>
+				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:category}">{{category}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -25,7 +25,7 @@
 		<template md-tab-label><i class="material-icons md-24">list</i></template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let series of model.data.series" (click)="findBySeries(series)">{{series}}</a>
+				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:series}">{{series}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>	
@@ -33,7 +33,7 @@
 		<template md-tab-label><i class="material-icons md-24">today</i></template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let year of model.data.years" (click)="findByYear(year)">{{year}}</a>
+				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:year}">{{year}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -41,7 +41,7 @@
 		<template md-tab-label><i class="material-icons md-24">business</i></template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" (click)="findByManufacturer(manufacturer)">{{manufacturer}}</a>
+				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer}">{{manufacturer}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>

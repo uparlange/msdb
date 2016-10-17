@@ -18,37 +18,11 @@ function(SearchProvider, AppUtils)
 		],
 		findByDescription:function()
 		{
-			this._showResults({
-				type:"description",
-				value:this.model.data.description
-			});
-		},
-		findByYear : function(value)
-		{
-			this._showResults({
-				type:"year",
-				value:value
-			});
-		},
-		findBySeries : function(value)
-		{
-			this._showResults({
-				type:"series",
-				value:value
-			});
-		},
-		findByCategory : function(value)
-		{
-			this._showResults({
-				type:"category",
-				value:value
-			});
-		},
-		findByManufacturer : function(value)
-		{
-			this._showResults({
-				type:"manufacturer",
-				value:value
+			this._router.navigate(['/result'], {
+				queryParams: {
+					type:"description",
+					value:this.model.data.description
+				}	
 			});
 		},
 		tabChanged:function(event)
@@ -74,12 +48,6 @@ function(SearchProvider, AppUtils)
 				case 4 : key = "L10N_SEARCH_BY_MANUFACTURER"; break;
 			}
 			return key;
-		},
-		_showResults : function(queryParams)
-		{
-			this._router.navigate(['/result'], {
-				queryParams:queryParams
-			});
 		}
 	});
 });
