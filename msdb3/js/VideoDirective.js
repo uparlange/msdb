@@ -1,30 +1,19 @@
-define(["app:EventManager"],
-function(EventManager) 
+define(function() 
 {
 	return ng.core.Directive({
 		selector: "video",
 		inputs:["source"],
 		outputs:["onEvent"]
 	}).Class({
-		constructor: [ng.core.ElementRef, EventManager,
-			function (element, eventManager)
+		constructor: [ng.core.ElementRef,
+			function (element)
 			{
 				this.onEvent = new ng.core.EventEmitter();
 				
 				this._element = element;
-				this._eventManager = eventManager;
-				
-				this._loading = false;
 				
 				this._onEventHandler = (event) =>
 				{
-					if(event.type === "error" || event.type === "loadedmetadata")
-					{
-						this._loading = false;
-						
-						this._eventManager.emit("HTTP_END");
-					}
-					
 					this.onEvent.emit(event);
 				};
 			}
@@ -42,13 +31,9 @@ function(EventManager)
 			
 			if(event.hasOwnProperty("source"))
 			{
-				if(event.source.currentValue !== null)
+				if(event.source.currentValue !== null && element.src !== event.source.currentValue)
 				{
 					element.src = event.source.currentValue;
-					
-					this._loading = true;
-					
-					this._eventManager.emit("HTTP_BEGIN");
 				}
 			}
 		},
@@ -58,11 +43,6 @@ function(EventManager)
 			
 			element.removeEventListener("error", this._onEventHandler);
 			element.removeEventListener("loadedmetadata", this._onEventHandler);
-			
-			if(this._loading)
-			{
-				this._eventManager.emit("HTTP_END");
-			}
 		}
 	});
 });
