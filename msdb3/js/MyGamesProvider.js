@@ -16,11 +16,11 @@ function(MsdbProvider, AppUtils, SocketManager)
 		{
 			this.data = this._getInitData();
 		
-			this._socketManager.sendMessage("GET_MY_GAMES", null).subscribe((names) =>
+			this._socketManager.sendMessage("GET_MY_GAMES", null).subscribe((result) =>
 			{
-				if(names.length > 0)
+				if(result !== null && result.length > 0)
 				{
-					this._msdbProvider.search('name', names).subscribe((games) => 
+					this._msdbProvider.search('name', result).subscribe((games) => 
 					{
 						const allGames = [];
 						const allBios = [];

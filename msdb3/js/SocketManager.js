@@ -7,20 +7,25 @@ define(function ()
 				this._url = "http://localhost:3000";
 				
 				this._socket = null;
-				
-				this._connected = false;
 			}
 		],
-		sendMessage: function (name, value)
+		sendMessage:function (name, value)
         {
 			const eventEmitter = new ng.core.EventEmitter();
 			
-			this._getSocket().subscribe(() =>
+			this._getSocket().subscribe((socket) =>
 			{
-				this._socket.emit(name, value, function(data)
+				if(socket !== null)
 				{
-					 eventEmitter.emit(data);
-				});
+					socket.emit(name, value, function(data)
+					{
+						 eventEmitter.emit(data);
+					});
+				}
+				else
+				{
+					eventEmitter.emit(null);
+				}
 			});
 
 			return eventEmitter;
@@ -29,19 +34,27 @@ define(function ()
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
-			if(!this._connected)
+			if(this._socket === null)
 			{
-				this._socket = io(this._url);
-				this._socket.on("connect", function()
+				const socket = io(this._url, {
+					reconnection:false
+				});
+				socket.on("connect", () => 
 				{
-					eventEmitter.emit();
+					this._socket = socket;
+					
+					eventEmitter.emit(this._socket);
+				});
+				socket.on("connect_error", () => 
+				{
+					eventEmitter.emit(null);
 				});
 			}
 			else
 			{
 				setTimeout(() =>
 				{
-					eventEmitter.emit();
+					eventEmitter.emit(this._socket);
 				},0);
 			}
 			
