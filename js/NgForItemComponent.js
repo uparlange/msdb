@@ -18,7 +18,10 @@ define(function()
 		{
 			if(this.last)
 			{
-				this.onLast.emit();
+				setTimeout(() =>
+				{
+					this.onLast.emit();
+				},0);
 			}
 		}
 	});

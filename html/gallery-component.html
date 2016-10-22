@@ -4,9 +4,9 @@
 	<div class="grid">
 		<div *ngFor="let image of provider; let last = last;" class="grid-item" [ngStyle]="getItemStyles(image)">
 			<ngForItem [last]="last" (onLast)="imagesCreated()" *ngIf="imageAllowed(image)">
-				<a href="#" (click)="openImage(image)">
+				<button class="link-button" (click)="openImage(image)">
 					<img width="100%" height="100%" [src]="getImageUrl(image)">
-				</a>
+				</button>
 			</ngForItem>
 		</div>
 	</div>

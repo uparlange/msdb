@@ -30,7 +30,7 @@
 			<md-list-item *ngIf="model.data.game.driver != null && model.data.game.driver.status != null">
 				{{'L10N_STATUS'|translate}}
 				<span class="sep">:</span>
-				<a href (click)="openDriverPopup()" [class]="model.getStatusClass(model.data.game.driver.status)">{{model.getStatusLabel(model.data.game.driver.status)|translate}}</a>
+				<button [class]="'link-button ' + model.getStatusClass(model.data.game.driver.status)" (click)="openDriverPopup()">{{model.getStatusLabel(model.data.game.driver.status)|translate}}</button>
 			</md-list-item>
 			<md-list-item *ngIf="model.data.game.input != null && model.data.game.input.players != null">
 				{{'L10N_PLAYERS_NUMBER'|translate}}
@@ -42,7 +42,7 @@
 				<span class="sep">:</span>
 				{{model.getGameSizeLabel()}}
 				<span class="sep">-</span>
-				<a href (click)="openRomsPopup()">{{model.data.game.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</a>
+				<button class="link-button" (click)="openRomsPopup()">{{model.data.game.roms.length}} {{'L10N_ROM_OR_ROMS'|translate}}</button>
 			</md-list-item>
 			<md-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
 				{{'L10N_ROM_OF'|translate}}
@@ -60,7 +60,7 @@
 			<md-list-item *ngIf="model.data.clones != null && model.data.clones.length > 0">
 				{{'L10N_CLONE_OR_CLONES'|translate}}
 				<span class="sep">:</span>
-				<a href (click)="openClonesPopup()">{{model.data.clones.length}}</a>
+				<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
 			</md-list-item>
 		</md-list>
 	</md-card-content>
