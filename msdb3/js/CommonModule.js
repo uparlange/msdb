@@ -1,5 +1,5 @@
-define(["app:TranslatePipe", "app:HrefDirective", "app:NgForItemComponent"], 
-function(TranslatePipe, HrefDirective, NgForItemComponent)
+define(["app:TranslatePipe", "app:NgForItemComponent"], 
+function(TranslatePipe, NgForItemComponent)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -11,7 +11,6 @@ function(TranslatePipe, HrefDirective, NgForItemComponent)
 		],
 		declarations:[
 			TranslatePipe,
-			HrefDirective,
 			NgForItemComponent
 		],
 		exports:[
@@ -21,7 +20,6 @@ function(TranslatePipe, HrefDirective, NgForItemComponent)
 			ng.router.RouterModule,
 			ng.material.MaterialModule,
 			TranslatePipe,
-			HrefDirective,
 			NgForItemComponent
 		]
 	}).Class({
