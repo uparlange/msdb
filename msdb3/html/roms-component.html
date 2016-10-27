@@ -1,17 +1,14 @@
 <md-toolbar color="primary">
 	{{'L10N_ROM_INFOS'|translate}}
+	<span class="fill-remaining-space"></span>
+	<button (click)="close()" class="link-button">
+		<i class="material-icons md-24">clear</i>
+	</button>
 </md-toolbar>
-<md-card> 
-   <md-card-content>
-		<md-list>
-			<md-list-item *ngFor="let rom of model.data.game.roms">
-				<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
-				<span class="sep">:</span>
-				{{model.getSizeLabel(rom.size)}}
-			</md-list-item>
-		</md-list>
-   </md-card-content>
-   <md-card-actions>
-        <button (click)="close()" md-button>{{'L10N_OK'|translate}}</button>
-   </md-card-actions>
-</md-card>
+<md-list>
+	<md-list-item *ngFor="let rom of model.data.game.roms">
+		<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
+		<span class="sep">:</span>
+		{{model.getSizeLabel(rom.size)}}
+	</md-list-item>
+</md-list>
