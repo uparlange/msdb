@@ -4,8 +4,8 @@
 	<div class="grid">
 		<div *ngFor="let image of provider; let last = last;" class="grid-item" [ngStyle]="getItemStyles(image)">
 			<ngForItem [last]="last" (onLast)="imagesCreated()" *ngIf="imageAllowed(image)">
-				<button class="link-button" (click)="openImage(image)">
-					<img width="100%" height="100%" [src]="getImageUrl(image)">
+				<button [title]="image.name" class="link-button" (click)="openImage(image)">
+					<img width="100%" height="100%" [alt]="image.name" [src]="getImageUrl(image)">
 				</button>
 			</ngForItem>
 		</div>
@@ -39,13 +39,13 @@
 
 					<div class="pswp__counter"></div>
 
-					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+					<button class="pswp__button pswp__button--close" [title]="'L10N_CLOSE'|translate"></button>
 
-					<button class="pswp__button pswp__button--share" title="Share"></button>
+					<button class="pswp__button pswp__button--share" [title]="'L10N_SHARE'|translate"></button>
 
-					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+					<button class="pswp__button pswp__button--fs" [title]="'L10N_TOGGLE_FULLSCREEN'|translate"></button>
 
-					<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+					<button class="pswp__button pswp__button--zoom" [title]="'L10N_ZOOM_IN_OUT'|translate"></button>
 
 					<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
 					<!-- element will get class pswp__preloader--active when preloader is running -->
@@ -62,10 +62,10 @@
 					<div class="pswp__share-tooltip"></div> 
 				</div>
 
-				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+				<button class="pswp__button pswp__button--arrow--left" [title]="'L10N_PREVIOUS'|translate">
 				</button>
 
-				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+				<button class="pswp__button pswp__button--arrow--right" [title]="'L10N_NEXT'|translate">
 				</button>
 
 				<div class="pswp__caption">

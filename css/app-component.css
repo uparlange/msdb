@@ -17,7 +17,7 @@
 .app-header md-progress-bar
 {
 	position:absolute;
-	top:59px;
+	top:64px;
 }
 
 .app-container
@@ -26,11 +26,7 @@
 	margin: auto;
 	height:100%;
 	background:white;
-}
-
-.app-spacer
-{
-	height:64px;
+	padding-top:64px;
 }
 
 .app-content

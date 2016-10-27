@@ -25,6 +25,10 @@ function(ResultProvider, AppUtils)
 				this.model.init(params);
 			});
 		},
+		ngOnDestroy : function()
+		{
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
+		},
 		getSearchLabel:function(type)
 		{
 			return "L10N_SEARCH_BY_" + type.toUpperCase();

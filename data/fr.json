@@ -66,5 +66,11 @@
 	"L10N_MY_GAMES": "Mes jeux",
 	"L10N_SHOW_MY_GAMES": "Consulter ma liste de jeux",
 	"L10N_MY_BIOS": "Mes bios",
-	"L10N_PLAYERS_NUMBER": "Nombre de joueurs"
+	"L10N_PLAYERS_NUMBER": "Nombre de joueurs",
+	"L10N_CLOSE": "Fermer",
+	"L10N_SHARE": "Partager",
+	"L10N_TOGGLE_FULLSCREEN": "Basculer en plein écran",
+	"L10N_ZOOM_IN_OUT": "Zoomer",
+	"L10N_PREVIOUS": "Précédent",
+	"L10N_NEXT": "Suivant"
 }

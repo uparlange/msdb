@@ -66,5 +66,11 @@
 	"L10N_MY_GAMES": "My games",
 	"L10N_SHOW_MY_GAMES":"Show my games",
 	"L10N_MY_BIOS": "My bios",
-	"L10N_PLAYERS_NUMBER": "Players number"
+	"L10N_PLAYERS_NUMBER": "Players number",
+	"L10N_CLOSE": "Close",
+	"L10N_SHARE": "Share",
+	"L10N_TOGGLE_FULLSCREEN": "Toggle fullscreen",
+	"L10N_ZOOM_IN_OUT": "Zoom in/out",
+	"L10N_PREVIOUS": "Previous",
+	"L10N_NEXT": "Next"
 }

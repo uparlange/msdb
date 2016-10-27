@@ -1,3 +1,16 @@
+@font-face 
+{
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+	src: local('Material Icons'),
+		 local('MaterialIcons-Regular'),
+	     url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+	     url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
+	     url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
 html
 {
 	width:100%;
@@ -27,22 +40,10 @@ video
 	max-width: 100%;
 }
 
-@font-face 
-{
-	font-family: 'Material Icons';
-	font-style: normal;
-	font-weight: 400;
-	src: url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
-	src: local('Material Icons'),
-		 local('MaterialIcons-Regular'),
-	     url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
-	     url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
-	     url(../node_modules/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
-}
-
 md-card
 {
 	margin:0px;
+	padding:10px !important;
 }
 md-card:not(:first-child)
 {
@@ -131,11 +132,6 @@ md-list
 {
 	margin-left:5px;
 	margin-right:5px;
-}
-
-.md-primary
-{
-	background:rgb(255,87,34) !important;
 }
 
 .material-icons 

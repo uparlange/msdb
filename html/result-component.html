@@ -1,9 +1,11 @@
 <div *ngIf="model.data.list != null">
-	<md-card>
-		<md-card-title>
-			{{getSearchLabel(model.data.params.type)|translate}} "{{model.data.params.value}}" : {{model.data.list.length}} {{'L10N_RESULTS'|translate}}
-		</md-card-title>
-	</md-card>
+	<div>
+		<md-card>
+			<md-card-title>
+				{{getSearchLabel(model.data.params.type)|translate}} "{{model.data.params.value}}" : {{model.data.list.length}} {{'L10N_RESULTS'|translate}}
+			</md-card-title>
+		</md-card>
+	</div>
 	<md-nav-list>
 		<a md-list-item *ngFor="let game of model.data.list ; trackBy:game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
 			<img md-list-avatar [src]="model.getIconUrl(game)">
