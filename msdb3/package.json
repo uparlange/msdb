@@ -1,6 +1,11 @@
 {
 	"name": "msdb",
 	"version": "3.0.0",
+	"author": "Ugo Parlange",
+	"description": "Mame Smart Database",
+	"homepage": "http://msdb.lapli.fr",
+	"synopsis": "MAME 'Multiple Arcade Machine Emulator' est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Pour vérifier que votre jeu préféré est disponible, allez faire une recherche sur MSDB !",
+	"favicon": "images/apple-touch-icon-114x114.png",
 	"dependencies": {
 		"@angular/common": "2.1.0",
 		"@angular/compiler": "2.1.0",
