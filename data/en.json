@@ -1,4 +1,5 @@
 {
+	"L10N_UPDATE": "Update",
 	"L10N_NEW_VERSION": "A new version of the application is available. Do you want to perform the update ?",
 	"L10N_SHOW_ADDED_GAMES":"Show added games",
     "L10N_GAMES": "games",
@@ -31,6 +32,7 @@
 	"L10N_CLONE_INFOS": "Clone(s) infos",
 	"L10N_CLONE_OR_CLONES": "Clone(s)",
 	"L10N_OK": "Ok",
+	"L10N_CANCEL": "Cancel",	
     "L10N_GOOD": "Good",
     "L10N_IMPERFECT": "Imperfect",
     "L10N_PRELIMINARY": "Preliminary",

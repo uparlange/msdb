@@ -1,4 +1,5 @@
 {
+	"L10N_UPDATE": "Mise à jour",
 	"L10N_NEW_VERSION": "Une nouvelle version de l'application est disponible. Voulez-vous effectuer la mise à jour ?",
 	"L10N_SHOW_ADDED_GAMES":"Consulter la liste des jeux ajoutés",
     "L10N_GAMES": "jeux",
@@ -31,6 +32,7 @@
 	"L10N_CLONE_INFOS": "Clone(s) infos",
 	"L10N_CLONE_OR_CLONES": "Clone(s)",
 	"L10N_OK": "Ok",
+	"L10N_CANCEL": "Annuler",
     "L10N_GOOD": "Bonne",
     "L10N_IMPERFECT": "Imparfaite",
     "L10N_PRELIMINARY": "Préliminaire",
