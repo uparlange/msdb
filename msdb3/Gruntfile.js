@@ -170,8 +170,50 @@ module.exports = function (grunt) {
 			cssmin:css
 		});
 	});
+	
+	grunt.registerTask('manifest', 'manifest', function()
+	{
+		const fs = require('fs');
+		const path = 'dist/manifest.cache';
+		const baseDir = 'dist';
+		
+		let content = '';
+		
+		const readDir = function(dir)
+		{
+			fs.readdirSync(dir).forEach((item, index, array) =>
+			{
+				if(item !== "." && item !== "..")
+				{
+					const path = dir + '/' + item;
+					const stats = fs.statSync(path);
+					if(stats.isDirectory())
+					{
+						readDir(path);
+					}
+					else
+					{
+						content += path.replace(baseDir + '/', '') + '\n';
+					}
+				}
+			});
+		};
+
+		content = 'CACHE MANIFEST\n';
+		content += '# ' + pkg.version + '\n';
+		content += 'CACHE:\n';
+		
+		readDir(baseDir);
+		
+		content += 'NETWORK:\n';
+		content += '*\n';
+		content += 'FALLBACK:\n';
+		
+		fs.writeFileSync(path, content);
+	});	
 
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'copy', 'npms', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin']);
+	grunt.registerTask('cache', ['manifest']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'copy', 'npms', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'manifest']);
 };
