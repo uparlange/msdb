@@ -60,13 +60,14 @@ function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventM
 	{
 		switch(e.type)
 		{
-			case 'updateready' :
-				bootstrapModule(true);
-				break;
-			case 'cached' :
-			case 'noupdate' :
-			case 'error' :
+			case 'error' : // manifest introuvable	
+			case 'cached' : // manifest initialisé
+			case 'noupdate' : // pas de mise à jour
+			case 'obsolete' : // manifest plus disponible
 				bootstrapModule(false);
+				break;
+			case 'updateready' : // mise à jour disponible
+				bootstrapModule(true);
 				break;
 		}
 	};

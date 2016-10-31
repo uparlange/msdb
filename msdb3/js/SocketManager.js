@@ -6,10 +6,36 @@ define(function ()
 			{
 				this._url = "http://localhost:3000";
 				
+				this._eventEmitters = {};
+				
 				this._socket = null;
 			}
 		],
-		sendMessage:function (name, value)
+		on:function(eventName)
+		{
+			let eventEmitter = this._eventEmitters[eventName];
+			if(eventEmitter === undefined)
+			{
+				eventEmitter = new ng.core.EventEmitter();
+				this._eventEmitters[eventName] = eventEmitter;
+			}
+			this._getSocket().subscribe((socket) =>
+			{
+				if(socket !== null)
+				{
+					socket.on(eventName, () =>
+					{
+						eventEmitter.emit();
+					});
+				}
+			});
+			return eventEmitter;
+		},
+		off:function(eventSubscriber)
+		{
+			eventSubscriber.unsubscribe();
+		},
+		emit:function (eventName, value)
         {
 			const eventEmitter = new ng.core.EventEmitter();
 			
@@ -17,7 +43,7 @@ define(function ()
 			{
 				if(socket !== null)
 				{
-					socket.emit(name, value, function(data)
+					socket.emit(eventName, value, function(data)
 					{
 						 eventEmitter.emit(data);
 					});
