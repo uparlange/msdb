@@ -10,6 +10,10 @@ define(function()
 		init : function()
 		{
 
+		},
+		destroy : function()
+		{
+			
 		}
 	});	
 });
