@@ -25,6 +25,14 @@ function(MsdbProvider, AppUtils)
 				});
 			}
 		},
+		destroy : function()
+		{
+			
+		},
+		getSearchLabel:function(type)
+		{
+			return "L10N_SEARCH_BY_" + type.toUpperCase();
+		},
 		getIconUrl : function(game)
 		{
 			return AppUtils.getIconUrl(game);

@@ -17,6 +17,10 @@ function(UpdateProvider, AppUtils)
 		{
 			this.model.init();
 		},
+		ngOnDestroy : function()
+		{
+			this.model.destroy();
+		},
 		reload:function()
 		{
 			window.location.reload();

@@ -22,6 +22,10 @@ function(MsdbProvider)
 				});
 			}
 		},
+		destroy : function()
+		{
+			
+		},
 		_getInitData : function()
 		{
 			return {

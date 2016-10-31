@@ -33,9 +33,9 @@ function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUti
 		},
 		ngOnDestroy : function()
 		{
-			this.model.destroy();
-			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();
+			
+			this.model.destroy();
 		},
 		videoStateChange:function(event)
 		{
