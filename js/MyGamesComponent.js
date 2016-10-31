@@ -17,6 +17,10 @@ function(MyGamesProvider, AppUtils)
 		ngOnInit : function()
 		{
 			this.model.init();
+		},
+		ngOnDestroy:function()
+		{
+			this.model.destroy();
 		}
 	});		
 });

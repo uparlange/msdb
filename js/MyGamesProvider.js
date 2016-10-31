@@ -9,14 +9,33 @@ function(MsdbProvider, AppUtils, SocketManager)
 				
 				this._msdbProvider = MsdbProvider;
 				
+				this._configChangedSubscriber = null;
+				
 				this.data = this._getInitData();
 			}
 		],
 		init : function()
 		{
+			this._configChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
+			{
+				this._refreshGames();
+			});
+			
+			this._refreshGames();
+		},
+		destroy:function()
+		{
+			this._socketManager.off(this._configChangedSubscriber);
+		},
+		getIconUrl : function(game)
+		{
+			return AppUtils.getIconUrl(game);
+		},
+		_refreshGames:function()
+		{
 			this.data = this._getInitData();
-		
-			this._socketManager.sendMessage("GET_MY_GAMES", null).subscribe((result) =>
+			
+			this._socketManager.emit("GET_MY_GAMES", null).subscribe((result) =>
 			{
 				if(result !== null && result.length > 0)
 				{
@@ -43,10 +62,6 @@ function(MsdbProvider, AppUtils, SocketManager)
 					});
 				}
 			});
-		},
-		getIconUrl : function(game)
-		{
-			return AppUtils.getIconUrl(game);
 		},
 		_getInitData:function()
 		{

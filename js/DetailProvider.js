@@ -9,11 +9,18 @@ function(MsdbProvider, AppUtils, SocketManager)
 				
 				this._socketManager = SocketManager;
 				
+				this._configChangedSubscriber = null;
+				
 				this.data = this._getInitData();
 			}
 		],
 		init : function(params)
 		{
+			this._configChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
+			{
+				this._refreshGameAvailability();
+			});
+			
 			if(this.data.game.name !== params.name)
 			{
 				this.data = this._getInitData();
@@ -30,24 +37,22 @@ function(MsdbProvider, AppUtils, SocketManager)
 					
 					this.data.game = data;
 					
-					this._socketManager.sendMessage("IS_ROM_AVAILABLE", this.data.game.name).subscribe((result) =>
-					{
-						if(result !== null && result.name === this.data.game.name)
-						{
-							this.data.gameAvailable = result.available;
-						}
-					});
-					
 					this._msdbProvider.search("clones", data.name).subscribe((data) => 
 					{
 						this.data.clones = data;
 					});
+					
+					this._refreshGameAvailability();
 				});
 			}
 		},
+		destroy:function()
+		{
+			this._socketManager.off(this._configChangedSubscriber);
+		},
 		playGame:function()
 		{
-			this._socketManager.sendMessage("PLAY_GAME", this.data.game.name);
+			this._socketManager.emit("PLAY_GAME", this.data.game.name);
 		},
 		setVideoAvailable:function(b)
 		{
@@ -112,6 +117,18 @@ function(MsdbProvider, AppUtils, SocketManager)
 				lbl = (Math.round(value / 1048576 * 100) / 100) + " MHz";
 			}
 			return lbl;
+		},
+		_refreshGameAvailability:function()
+		{
+			this.data.gameAvailable = false;
+			
+			this._socketManager.emit("IS_ROM_AVAILABLE", this.data.game.name).subscribe((result) =>
+			{
+				if(result !== null && result.name === this.data.game.name)
+				{
+					this.data.gameAvailable = result.available;
+				}
+			});
 		},
 		_getInitData:function()
 		{
