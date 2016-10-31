@@ -29,7 +29,11 @@ function(AppProvider, AppUtils)
 					case "NavigationStart" :
 						if(event.id === 1)
 						{
-							const lastView = localStorage.getItem("MSDB.lastView");
+							let lastView = localStorage.getItem("MSDB.lastView");
+							if(event.urlAfterRedirects === "/mygames")
+							{
+								lastView = event.urlAfterRedirects;
+							}
 							this._router.navigateByUrl(lastView);
 						}
 						break;

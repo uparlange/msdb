@@ -77,6 +77,10 @@ module.exports = function (grunt) {
 			}
         },
 		copy: {
+			package: {
+				src:'package.json',
+				dest:'dist/package.json'
+			},
 			material_design_icons: {
                 cwd: 'node_modules/material-design-icons/iconfont',
                 src: '**/*',
