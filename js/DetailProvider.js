@@ -118,6 +118,10 @@ function(MsdbProvider, AppUtils, SocketManager)
 			}
 			return lbl;
 		},
+		getEncodedValue:function(value)
+		{
+			return AppUtils.getEncodedValue(value);
+		},
 		_refreshGameAvailability:function()
 		{
 			this.data.gameAvailable = false;

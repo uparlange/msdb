@@ -8,7 +8,7 @@
 </md-card>
 <md-card>
 	<md-card-title>
-		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.version}">{{model.data.version}}</a>
+		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.getEncodedValue(model.data.version)}">{{model.data.version}}</a>
 		({{model.data.gameCount}} {{'L10N_GAMES'|translate}})
 	</md-card-title>
 	<md-card-content>

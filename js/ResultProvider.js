@@ -37,6 +37,10 @@ function(MsdbProvider, AppUtils)
 		{
 			return AppUtils.getIconUrl(game);
 		},
+		getDecodedValue:function(value)
+		{
+			return AppUtils.getDecodedValue(value);
+		},
 		_getInitData:function()
 		{
 			return {

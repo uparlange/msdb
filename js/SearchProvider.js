@@ -1,5 +1,5 @@
-define(["app:MsdbProvider"], 
-function(MsdbProvider) 
+define(["app:AppUtils", "app:MsdbProvider"], 
+function(AppUtils, MsdbProvider) 
 {
 	return ng.core.Class({
 		constructor: [MsdbProvider,
@@ -52,6 +52,10 @@ function(MsdbProvider)
 		{
 			const tabKey = this._getTabInfos().byIndex(index).key;
 			return tabKey;
+		},
+		getEncodedValue:function(value)
+		{
+			return AppUtils.getEncodedValue(value);
 		},
 		_loadData:function(dataName)
 		{
