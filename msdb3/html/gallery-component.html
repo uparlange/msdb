@@ -4,7 +4,7 @@
 	<div class="grid">
 		<div *ngFor="let image of provider; let last = last;" class="grid-item" [ngStyle]="getItemStyles(image)">
 			<ngForItem [last]="last" (onLast)="imagesCreated()" *ngIf="imageAllowed(image)">
-				<button [title]="image.name" class="link-button" (click)="openImage(image)">
+				<button style="width:100%;height:100%;" [title]="image.name" class="link-button" (click)="openImage(image)">
 					<img width="100%" height="100%" [alt]="image.name" [src]="getImageUrl(image)">
 				</button>
 			</ngForItem>
