@@ -32,12 +32,11 @@ function(TranslateManager)
 					case "NavigationStart" :
 						if(e.id === 1)
 						{
-							let lastView = localStorage.getItem("MSDB.lastView") || "/home";
-							if(e.urlAfterRedirects === "/mygames")
+							if(e.url !== "/mygames")
 							{
-								lastView = e.urlAfterRedirects;
+								const lastView = localStorage.getItem("MSDB.lastView") || "/home";
+								this._router.navigateByUrl(lastView);
 							}
-							this._router.navigateByUrl(lastView);
 						}
 						break;
 					case "NavigationEnd" :
