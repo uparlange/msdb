@@ -98,14 +98,21 @@ module.exports = function (grunt) {
                 src: '**/*',
                 dest: 'dist/data',
                 expand: true
-			},
-			images: {
-				cwd: 'images',
-                src: '**/*',
-                dest: 'dist/images',
-                expand: true
 			}
         },
+		imagemin: {
+			options: {
+				optimizationLevel : 3
+			},
+			dynamic: {
+				files: [{
+					expand: true,
+					cwd: 'images/',
+					src: ['**/*.*'],
+					dest: 'dist/images/'
+				}]
+			}
+		},
 		sass: {
 			options: {
 				sourcemap:"none"
@@ -126,6 +133,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	
 	grunt.registerTask('npms', 'npms', function()
 	{
@@ -222,5 +230,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
 	grunt.registerTask('cache', ['manifest']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'copy', 'npms', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'manifest']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'copy', 'imagemin', 'npms', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'manifest']);
 };

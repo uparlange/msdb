@@ -1,6 +1,6 @@
 {
 	"name": "msdb",
-	"version": "3.0.10",
+	"version": "3.0.11",
 	"author": "Ugo Parlange",
 	"description": "Mame Smart Database",
 	"homepage": "http://msdb.lapli.fr",
@@ -36,6 +36,7 @@
 		"grunt-contrib-jshint": "latest",
 		"grunt-contrib-uglify": "latest",
 		"grunt-contrib-sass": "latest",
+		"grunt-contrib-imagemin": "latest",
 		"htmlparser2":"latest"
 	}
 }
