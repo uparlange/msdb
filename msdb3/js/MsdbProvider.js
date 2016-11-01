@@ -56,6 +56,12 @@ function(EventManager, AppUtils)
 			
 			return this._callService(url);
 		},
+		getVersions : function()
+		{
+			const url = AppUtils.getServiceUrl("versions");
+			
+			return this._callService(url);
+		},
 		_callService : function(url)
 		{
 			const eventEmitter = new ng.core.EventEmitter();

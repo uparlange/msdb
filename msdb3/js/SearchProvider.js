@@ -44,6 +44,10 @@ function(MsdbProvider)
 		{
 			this._loadData("manufacturers");
 		},
+		loadVersions : function()
+		{
+			this._loadData("versions");
+		},
 		getSearchTabLabel:function(index)
 		{
 			const tabKey = this._getTabInfos().byIndex(index).key;
@@ -76,7 +80,8 @@ function(MsdbProvider)
 					{index:1,key:"L10N_SEARCH_BY_CATEGORY",type:"categories"},
 					{index:2,key:"L10N_SEARCH_BY_SERIES",type:"series"},
 					{index:3,key:"L10N_SEARCH_BY_YEAR",type:"years"},
-					{index:4,key:"L10N_SEARCH_BY_MANUFACTURER",type:"manufacturers"}
+					{index:4,key:"L10N_SEARCH_BY_MANUFACTURER",type:"manufacturers"},
+					{index:5,key:"L10N_SEARCH_BY_MAMEVERSIONADDED",type:"versions"}
 				],
 				byIndex:function(value)
 				{
@@ -114,6 +119,7 @@ function(MsdbProvider)
 				series:null,
 				categories:null,
 				manufacturers:null,
+				versions:null,
 				count:0
 			};
 		}
