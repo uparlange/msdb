@@ -1,5 +1,5 @@
-define(["app:MsdbProvider"], 
-function(MsdbProvider) 
+define(["app:AppUtils", "app:MsdbProvider"], 
+function(AppUtils, MsdbProvider) 
 {
 	return ng.core.Class({
 		constructor: [MsdbProvider,
@@ -25,6 +25,10 @@ function(MsdbProvider)
 		destroy : function()
 		{
 			
+		},
+		getEncodedValue:function(value)
+		{
+			return AppUtils.getEncodedValue(value);
 		},
 		_getInitData : function()
 		{

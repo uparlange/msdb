@@ -14,7 +14,7 @@
 		<template md-tab-content>
 			<form #descriptionForm="ngForm">
 				<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
-				<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" type="submit" md-mini-fab>
+				<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.getEncodedValue(model.data.description)}" type="submit" md-mini-fab>
 					<i class="material-icons md-24 md-light">search</i>
 				</button>
 			</form>
@@ -28,7 +28,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:category.label}">{{category.label}}</a>
+				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">{{category.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -40,7 +40,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:series.label}">{{series.label}}</a>
+				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">{{series.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>	
@@ -52,7 +52,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:year.label}">{{year.label}}</a>
+				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">{{year.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -64,7 +64,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer.label}">{{manufacturer.label}}</a>
+				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">{{manufacturer.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -76,7 +76,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let version of model.data.versions" routerLink="/result" [queryParams]="{type:'mameversionadded', value:version.label}">{{version.label}}</a>
+				<a md-list-item *ngFor="let version of model.data.versions" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">{{version.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>

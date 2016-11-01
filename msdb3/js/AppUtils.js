@@ -1,6 +1,14 @@
 define(function () 
 {
     return {
+		getEncodedValue:function(value)
+		{
+			return encodeURIComponent(value);
+		},
+		getDecodedValue:function(value)
+		{
+			return decodeURIComponent(value);
+		},
 		getTemplateUrl:function(componentName)
 		{
 			return this.getHtmlUrl(componentName + "-component");
