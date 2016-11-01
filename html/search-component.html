@@ -28,7 +28,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:category}">{{category}}</a>
+				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:category.label}">{{category.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -40,7 +40,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:series}">{{series}}</a>
+				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:series.label}">{{series.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>	
@@ -52,7 +52,7 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:year}">{{year}}</a>
+				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:year.label}">{{year.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
@@ -64,7 +64,19 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer}">{{manufacturer}}</a>
+				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer.label}">{{manufacturer.label}}</a>
+			</md-nav-list>
+		</template>
+	</md-tab>
+	<md-tab>
+		<template md-tab-label>
+			<a routerLink="/search" [queryParams]="{type:'versions'}">
+				<i class="material-icons md-24">plus_one</i>
+			</a>
+		</template>
+		<template md-tab-content>
+			<md-nav-list>
+				<a md-list-item *ngFor="let version of model.data.versions" routerLink="/result" [queryParams]="{type:'mameversionadded', value:version.label}">{{version.label}}</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
