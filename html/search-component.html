@@ -1,20 +1,31 @@
 <md-card>
 	<md-card-title>
-		{{getSearchTabLabel(model.data.selectedIndex)|translate}}
+		{{model.getSearchTabLabel(model.data.selectedIndex)|translate}}
 		<span *ngIf="model.data.count !== 0">( {{model.data.count}} )</span>
 	</md-card-title>
 </md-card>
-<md-tab-group [(selectedIndex)]="model.data.selectedIndex" (selectChange)="tabChanged($event)">
-	<md-tab id="description">
-		<template md-tab-label><i class="material-icons md-24">search</i></template>
+<md-tab-group [selectedIndex]="model.data.selectedIndex">
+	<md-tab>
+		<template md-tab-label>
+			<a routerLink="/search" [queryParams]="{type:'description'}">
+				<i class="material-icons md-24">search</i>
+			</a>
+		</template>
 		<template md-tab-content>
-			<form (ngSubmit)="findByDescription()">
+			<form #descriptionForm="ngForm">
 				<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
+				<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" type="submit" md-mini-fab>
+					<i class="material-icons md-24 md-light">search</i>
+				</button>
 			</form>
 		</template>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label><i class="material-icons md-24">folder_open</i></template>
+		<template md-tab-label>
+			<a routerLink="/search" [queryParams]="{type:'categories'}">
+				<i class="material-icons md-24">folder_open</i>
+			</a>
+		</template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:category}">{{category}}</a>
@@ -22,7 +33,11 @@
 		</template>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label><i class="material-icons md-24">list</i></template>
+		<template md-tab-label>
+			<a routerLink="/search" [queryParams]="{type:'series'}">
+				<i class="material-icons md-24">list</i>
+			</a>
+		</template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:series}">{{series}}</a>
@@ -30,7 +45,11 @@
 		</template>
 	</md-tab>	
 	<md-tab>
-		<template md-tab-label><i class="material-icons md-24">today</i></template>
+		<template md-tab-label>
+			<a routerLink="/search" [queryParams]="{type:'years'}">
+				<i class="material-icons md-24">today</i>
+			</a>
+		</template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:year}">{{year}}</a>
@@ -38,7 +57,11 @@
 		</template>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label><i class="material-icons md-24">business</i></template>
+		<template md-tab-label>
+			<a routerLink="/search" [queryParams]="{type:'manufacturers'}">
+				<i class="material-icons md-24">business</i>
+			</a>
+		</template>
 		<template md-tab-content>
 			<md-nav-list>
 				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer}">{{manufacturer}}</a>

@@ -8,46 +8,28 @@ function(SearchProvider, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [SearchProvider, ng.router.Router,
-			function (model, router)
+		constructor: [SearchProvider, ng.router.Router, ng.router.ActivatedRoute,
+			function (model, router, activatedRoute)
 			{
+				this.model = model;
+				
 				this._router = router;
 				
-				this.model = model;
+				this._activatedRoute = activatedRoute;
 			}
 		],
-		findByDescription:function()
+		ngOnInit:function()
 		{
-			this._router.navigate(['/result'], {
-				queryParams: {
-					type:"description",
-					value:this.model.data.description
-				}	
+			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
+			{
+				this.model.init(params);
 			});
 		},
-		tabChanged:function(event)
+		ngOnDestroy:function()
 		{
-			switch(event.index)
-			{
-				case 0 : this.model.loadDescription(); break;
-				case 1 : this.model.loadCategories(); break;
-				case 2 : this.model.loadSeries(); break;
-				case 3 : this.model.loadYears(); break;
-				case 4 : this.model.loadManufacturers(); break;
-			}
-		},
-		getSearchTabLabel:function(index)
-		{
-			var key = "";
-			switch(index)
-			{
-				case 0 : key = "L10N_SEARCH_BY_DESCRIPTION"; break;
-				case 1 : key = "L10N_SEARCH_BY_CATEGORY"; break;
-				case 2 : key = "L10N_SEARCH_BY_SERIES"; break;
-				case 3 : key = "L10N_SEARCH_BY_YEAR"; break;
-				case 4 : key = "L10N_SEARCH_BY_MANUFACTURER"; break;
-			}
-			return key;
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
+			
+			this.model.destroy();
 		}
 	});
 });
