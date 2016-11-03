@@ -1,19 +1,21 @@
-define(["app:TranslateManager"], 
-function(TranslateManager) 
+define(["app:TranslateManager", "app:ConnectionManager"], 
+function(TranslateManager, ConnectionManager) 
 {
 	return ng.core.Class({
-		constructor: [TranslateManager, ng.router.Router,
-			function (translateManager, router)
+		constructor: [TranslateManager, ng.router.Router, ConnectionManager,
+			function (translateManager, router, connectionManager)
 			{
 				this._translateManager = translateManager;
-				
 				this._router = router;
+				this._connectionManager = connectionManager;
 
 				this.data = this._getInitData();
 				
 				this._onLanguageChangeSubscriber = null;
 				
 				this._routerEventsSubscriber = null;
+				
+				this._onOnlineChangeSubscriber = null;
 			}
 		],
 		init : function()
@@ -56,6 +58,13 @@ function(TranslateManager)
 					this._askForReload();
 				});
 			}
+			
+			this.data.online = this._connectionManager.online;
+			
+			this._onOnlineChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
+			{
+				this.data.online = online;
+			});
 		},
 		destroy:function()
 		{
