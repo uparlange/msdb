@@ -71,6 +71,8 @@ function(TranslateManager, ConnectionManager)
 			this._onLanguageChangeSubscriber.unsubscribe();
 			
 			this._routerEventsSubscriber.unsubscribe();
+			
+			this._onOnlineChangeSubscriber.unsubscribe();
 		},
 		toggleLanguage:function()
 		{
