@@ -66,9 +66,12 @@ function(AppUtils, MsdbProvider)
 				const serviceName = "get" + dataName[0].toUpperCase() + dataName.substr(1);
 				this._msdbProvider[serviceName]().subscribe((data) => 
 				{
-					this.data[dataName] = data;
+					if(data !== null)
+					{
+						this.data[dataName] = data;
 					
-					this.data.count = this.data[dataName].length;
+						this.data.count = this.data[dataName].length;
+					}
 				});
 			}
 			else
