@@ -1,9 +1,9 @@
 <div class="app-header">
 	<md-toolbar color="primary">
+		<i class="app-network-status material-icons md-18 md-light">{{model.data.online ? 'network_wifi' : 'signal_wifi_off'}}</i>
 		<a routerLink="/home">
 			<img src="images/logo.png">
 		</a>
-		<i class="app-network-status material-icons md-18 md-light">{{model.data.online ? 'network_wifi' : 'signal_wifi_off'}}</i>
 		<span class="fill-remaining-space"></span>
 		<button md-fab routerLink="/search" [queryParams]="{type:'description'}">
 			<i class="material-icons md-24 md-light">search</i>
