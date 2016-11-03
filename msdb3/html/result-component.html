@@ -1,8 +1,9 @@
-<div *ngIf="model.data.list != null">
+<div>
 	<div>
 		<md-card>
 			<md-card-title>
-				{{model.getSearchLabel(model.data.params.type)|translate}} "{{model.getDecodedValue(model.data.params.value)}}" : {{model.data.list.length}} {{'L10N_RESULTS'|translate}}
+				{{model.getSearchLabel(model.data.params.type)|translate}} "{{model.getDecodedValue(model.data.params.value)}}"
+				<span *ngIf="model.data.list != null"> : {{model.data.list.length}} {{'L10N_RESULTS'|translate}}</span>
 			</md-card-title>
 		</md-card>
 	</div>

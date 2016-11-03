@@ -7,21 +7,22 @@ function(MsdbProvider, AppUtils)
 			{
 				this._msdbProvider = msdbProvider;
 				
-				this.data = this._getInitData();
+				this.data = {
+					list:null,
+					params:{}
+				};
 			}
 		],
 		init : function(params)
 		{
 			if(this.data.params.type !== params.type || this.data.params.value !== params.value)
 			{
-				this.data = this._getInitData();
+				this.data.list = null;
+				this.data.params = params;
 				
 				this._msdbProvider.search(params.type, params.value).subscribe((data) => 
 				{
-					this.data = {
-						list:data,
-						params:params
-					};
+					this.data.list = data;
 				});
 			}
 		},
@@ -31,7 +32,7 @@ function(MsdbProvider, AppUtils)
 		},
 		getSearchLabel:function(type)
 		{
-			return "L10N_SEARCH_BY_" + type.toUpperCase();
+			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
 		},
 		getIconUrl : function(game)
 		{
@@ -40,13 +41,6 @@ function(MsdbProvider, AppUtils)
 		getDecodedValue:function(value)
 		{
 			return AppUtils.getDecodedValue(value);
-		},
-		_getInitData:function()
-		{
-			return {
-				list:null,
-				params:{}
-			};
 		}
 	});	
 });

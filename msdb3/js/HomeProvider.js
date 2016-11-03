@@ -16,9 +16,12 @@ function(AppUtils, MsdbProvider)
 			{
 				this._msdbProvider.getMameInfos().subscribe((data) => 
 				{
-					data.version = data.build.substr(0, data.build.indexOf("(")).trim();
+					if(data !== null)
+					{
+						data.version = data.build.substr(0, data.build.indexOf("(")).trim();
 					
-					this.data = data;
+						this.data = data;
+					}
 				});
 			}
 		},
