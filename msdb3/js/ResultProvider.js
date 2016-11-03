@@ -15,7 +15,7 @@ function(MsdbProvider, AppUtils)
 		],
 		init : function(params)
 		{
-			if(this.data.params.type !== params.type || this.data.params.value !== params.value)
+			if(this.data.params.type !== params.type || this.data.params.value !== params.value || this.data.list === null)
 			{
 				this.data.list = null;
 				this.data.params = params;

@@ -14,15 +14,15 @@ function(EventManager, AppUtils)
 		],
 		getMameInfos : function()
 		{
-			const url = AppUtils.getServiceUrl("mameinfos", null);
+			const url = AppUtils.getServiceUrl("mameinfos");
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
 		getDetail : function(name)
 		{
 			const url = AppUtils.getServiceUrl("detail") + "?name=" + name;
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
 		search : function(type, value)
 		{
@@ -30,39 +30,39 @@ function(EventManager, AppUtils)
 			params[type] = value;
 			const url = AppUtils.getServiceUrl("search") + "?params=" + JSON.stringify(params);
 			
-			return this._callService(url, []);
+			return this._callService(url);
 		},
 		getYears : function()
 		{
 			const url = AppUtils.getServiceUrl("years");
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
 		getSeries : function()
 		{
 			const url = AppUtils.getServiceUrl("series");
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
 		getCategories : function()
 		{
 			const url = AppUtils.getServiceUrl("categories");
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
 		getManufacturers : function()
 		{
 			const url = AppUtils.getServiceUrl("manufacturers");
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
 		getVersions : function()
 		{
 			const url = AppUtils.getServiceUrl("versions");
 			
-			return this._callService(url, null);
+			return this._callService(url);
 		},
-		_callService : function(url, defaultValue)
+		_callService : function(url)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
@@ -76,7 +76,7 @@ function(EventManager, AppUtils)
 					{
 						this._eventManager.emit("HTTP_END");
 						
-						eventEmitter.emit(defaultValue);
+						eventEmitter.emit(null);
 					}).subscribe((result) => 
 					{
 						this._eventManager.emit("HTTP_END");
@@ -88,7 +88,7 @@ function(EventManager, AppUtils)
 				{
 					this._eventManager.emit("HTTP_END");
 					
-					eventEmitter.emit(defaultValue);
+					eventEmitter.emit(null);
 				}
 				
 			});

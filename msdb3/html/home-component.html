@@ -6,7 +6,7 @@
 		{{'L10N_DESCRIPTION'|translate}}
 	</md-card-content>
 </md-card>
-<md-card>
+<md-card *ngIf="model.data.build != null">
 	<md-card-title>
 		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.getEncodedValue(model.data.version)}">{{model.data.version}}</a>
 		({{model.data.gameCount}} {{'L10N_GAMES'|translate}})
