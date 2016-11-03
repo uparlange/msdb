@@ -21,6 +21,12 @@
 	top:64px;
 }
 
+.app-network-status
+{
+	position: absolute;
+    top: 5px;
+}
+
 .app-container
 {
 	max-width: 800px;

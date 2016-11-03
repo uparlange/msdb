@@ -1,5 +1,7 @@
-define(["app:CommonModule", "app:AppComponent", "app:MsdbProvider", "app:AppProvider", "app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager"], 
-function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager) 
+define(["app:CommonModule", "app:AppComponent", "app:MsdbProvider", "app:AppProvider", "app:AppUtils", 
+		"app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager", "app:ConnectionManager"], 
+function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, 
+		 EventManager, TranslateManager, ProgressBarDirective, SocketManager, ConnectionManager) 
 {
 	ng.core.enableProdMode();
 
@@ -28,7 +30,8 @@ function(CommonModule, AppComponent, MsdbProvider, AppProvider, AppUtils, EventM
 			AppProvider,
 			EventManager,
 			TranslateManager,
-			SocketManager
+			SocketManager,
+			ConnectionManager
 		],
 		bootstrap:[
 			AppComponent
