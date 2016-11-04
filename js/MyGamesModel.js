@@ -1,13 +1,13 @@
-define(["app:MsdbProvider", "app:AppUtils", "app:SocketManager"], 
-function(MsdbProvider, AppUtils, SocketManager) 
+define(["app:MsdbService", "app:AppUtils", "app:SocketManager"], 
+function(MsdbService, AppUtils, SocketManager) 
 {
 	return ng.core.Class({
-		constructor: [SocketManager, MsdbProvider,
-			function (SocketManager, MsdbProvider)
+		constructor: [SocketManager, MsdbService,
+			function (SocketManager, MsdbService)
 			{
 				this._socketManager = SocketManager;
 				
-				this._msdbProvider = MsdbProvider;
+				this._MsdbService = MsdbService;
 				
 				this._configChangedSubscriber = null;
 				
@@ -39,7 +39,7 @@ function(MsdbProvider, AppUtils, SocketManager)
 			{
 				if(result !== null && result.length > 0)
 				{
-					this._msdbProvider.search('name', result).subscribe((games) => 
+					this._MsdbService.search('name', result).subscribe((games) => 
 					{
 						const allGames = [];
 						const allBios = [];

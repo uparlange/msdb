@@ -1,5 +1,5 @@
-define(["app:CommonModule", "app:MyGamesComponent", "app:MyGamesProvider"], 
-function(CommonModule, MyGamesComponent, MyGamesProvider)
+define(["app:CommonModule", "app:MyGamesComponent", "app:MyGamesModel"], 
+function(CommonModule, MyGamesComponent, MyGamesModel)
 {
 	const routes = [
 		{path: "", component: MyGamesComponent}
@@ -14,7 +14,7 @@ function(CommonModule, MyGamesComponent, MyGamesProvider)
 			MyGamesComponent
 		],
 		providers:[
-			MyGamesProvider
+			MyGamesModel
 		]
 	}).Class({
 		constructor: function ()

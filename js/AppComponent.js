@@ -1,5 +1,5 @@
-define(["app:AppProvider", "app:AppUtils"], 
-function(AppProvider, AppUtils) 
+define(["app:AppModel", "app:AppUtils"], 
+function(AppModel, AppUtils) 
 {
 	const componentName = "app";
 	
@@ -8,7 +8,7 @@ function(AppProvider, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [AppProvider,
+		constructor: [AppModel,
 			function (model)
 			{
 				this.model = model;

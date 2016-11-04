@@ -1,5 +1,5 @@
-define(["app:SearchProvider", "app:AppUtils"], 
-function(SearchProvider, AppUtils) 
+define(["app:SearchModel", "app:AppUtils"], 
+function(SearchModel, AppUtils) 
 {
 	const componentName = "search";
 	
@@ -8,7 +8,7 @@ function(SearchProvider, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [SearchProvider, ng.router.Router, ng.router.ActivatedRoute,
+		constructor: [SearchModel, ng.router.Router, ng.router.ActivatedRoute,
 			function (model, router, activatedRoute)
 			{
 				this.model = model;

@@ -1,11 +1,11 @@
-define(["app:MsdbProvider", "app:AppUtils"], 
-function(MsdbProvider, AppUtils) 
+define(["app:MsdbService", "app:AppUtils"], 
+function(MsdbService, AppUtils) 
 {
 	return ng.core.Class({
-		constructor: [MsdbProvider,
-			function (msdbProvider)
+		constructor: [MsdbService,
+			function (MsdbService)
 			{
-				this._msdbProvider = msdbProvider;
+				this._MsdbService = MsdbService;
 				
 				this.data = {
 					list:null,
@@ -20,7 +20,7 @@ function(MsdbProvider, AppUtils)
 				this.data.list = null;
 				this.data.params = params;
 				
-				this._msdbProvider.search(params.type, params.value).subscribe((data) => 
+				this._MsdbService.search(params.type, params.value).subscribe((data) => 
 				{
 					this.data.list = data;
 				});

@@ -1,5 +1,5 @@
-define(["app:HomeProvider", "app:AppUtils"], 
-function(HomeProvider, AppUtils) 
+define(["app:HomeModel", "app:AppUtils"], 
+function(HomeModel, AppUtils) 
 {
 	const componentName = "home";
 	
@@ -7,7 +7,7 @@ function(HomeProvider, AppUtils)
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName)
 	}).Class({
-		constructor: [HomeProvider,
+		constructor: [HomeModel,
 			function (model)
 			{
 				this.model = model;
