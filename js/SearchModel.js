@@ -7,18 +7,33 @@ function(AppUtils, MsdbService)
 			{
 				this._MsdbService = MsdbService;
 				
-				this.data = this._getInitData();
-				
-				this._activatedRouteQueryParamsSubscriber = null;
+				this.data = {
+					selectedIndex:0,
+					years:null,
+					series:null,
+					categories:null,
+					manufacturers:null,
+					versions:null,
+					count:0,
+					params:{}
+				};
 			}
 		],
 		init:function(params)
 		{
-			const tabIndex = this._getTabInfos().byType(params.type).index;
-			this.data.selectedIndex = tabIndex;
-			
-			const methodeName = "load" + params.type[0].toUpperCase() + params.type.substring(1);
-			this[methodeName]();
+			if(this.data.params.type !== params.type)
+			{
+				this.data.params = params;
+				
+				const tabIndex = this._getTabInfos().byType(params.type).index;
+				if(this.data.selectedIndex !== tabIndex)
+				{
+					this.data.selectedIndex = tabIndex;
+				}
+				
+				const methodeName = "load" + params.type[0].toUpperCase() + params.type.substring(1);
+				this[methodeName]();
+			}
 		},
 		destroy:function()
 		{
@@ -116,18 +131,6 @@ function(AppUtils, MsdbService)
 					});
 					return tab;
 				}
-			};
-		},
-		_getInitData : function()
-		{
-			return {
-				selectedIndex:0,
-				years:null,
-				series:null,
-				categories:null,
-				manufacturers:null,
-				versions:null,
-				count:0
 			};
 		}
 	});		

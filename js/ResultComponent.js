@@ -11,11 +11,11 @@ function(ResultModel, AppUtils)
 		constructor: [ResultModel, ng.router.ActivatedRoute,
 			function (model, activatedRoute)
 			{
+				this.model = model;
+				
 				this._activatedRoute = activatedRoute;
 				
 				this._activatedRouteQueryParamsSubscriber = null;
-				
-				this.model = model;
 			}
 		],
 		ngOnInit : function()
@@ -27,9 +27,9 @@ function(ResultModel, AppUtils)
 		},
 		ngOnDestroy : function()
 		{
-			this._activatedRouteQueryParamsSubscriber.unsubscribe();
-			
 			this.model.destroy();
+			
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 		}
 	});		
 });
