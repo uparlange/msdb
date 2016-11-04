@@ -16,6 +16,8 @@ function(SearchModel, AppUtils)
 				this._router = router;
 				
 				this._activatedRoute = activatedRoute;
+				
+				this._activatedRouteQueryParamsSubscriber = null;
 			}
 		],
 		ngOnInit:function()
@@ -27,9 +29,9 @@ function(SearchModel, AppUtils)
 		},
 		ngOnDestroy:function()
 		{
-			this._activatedRouteQueryParamsSubscriber.unsubscribe();
-			
 			this.model.destroy();
+			
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 		}
 	});
 });

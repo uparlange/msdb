@@ -11,6 +11,8 @@ function(DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils)
 		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
 			function (model, activatedRoute, viewContainerRef, mdDialog)
 			{
+				this.model = model;
+				
 				this._activatedRoute = activatedRoute;
 				
 				this._viewContainerRef = viewContainerRef;
@@ -20,8 +22,6 @@ function(DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils)
 				this._dialogRef = null;
 				
 				this._activatedRouteQueryParamsSubscriber = null;
-				
-				this.model = model;
 			}
 		],
 		ngOnInit : function()
@@ -33,9 +33,9 @@ function(DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils)
 		},
 		ngOnDestroy : function()
 		{
-			this._activatedRouteQueryParamsSubscriber.unsubscribe();
-			
 			this.model.destroy();
+			
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 		},
 		videoStateChange:function(event)
 		{
