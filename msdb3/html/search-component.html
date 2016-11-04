@@ -76,7 +76,11 @@
 		</template>
 		<template md-tab-content>
 			<md-nav-list>
-				<a md-list-item *ngFor="let version of model.data.versions" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">{{version.label}}</a>
+				<a md-list-item *ngFor="let version of model.data.versions" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
+					{{version.label}}
+					<span class="fill-remaining-space"></span>
+					+{{version.data}}
+				</a>
 			</md-nav-list>
 		</template>
 	</md-tab>
