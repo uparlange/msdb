@@ -1,5 +1,5 @@
-define(["app:DetailProvider", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
-function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
+define(["app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
+function(DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
 {
 	const componentName = "detail";
 	
@@ -8,7 +8,7 @@ function(DetailProvider, DriverComponent, RomsComponent, ClonesComponent, AppUti
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [DetailProvider, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
+		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
 			function (model, activatedRoute, viewContainerRef, mdDialog)
 			{
 				this._activatedRoute = activatedRoute;

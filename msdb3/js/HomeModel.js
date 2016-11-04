@@ -1,11 +1,11 @@
-define(["app:AppUtils", "app:MsdbProvider"], 
-function(AppUtils, MsdbProvider) 
+define(["app:AppUtils", "app:MsdbService"], 
+function(AppUtils, MsdbService) 
 {
 	return ng.core.Class({
-		constructor: [MsdbProvider,
-			function (msdbProvider)
+		constructor: [MsdbService,
+			function (MsdbService)
 			{
-				this._msdbProvider = msdbProvider;
+				this._MsdbService = MsdbService;
 				
 				this.data = this._getInitData();
 			}
@@ -14,7 +14,7 @@ function(AppUtils, MsdbProvider)
 		{
 			if(this.data.build === null)
 			{
-				this._msdbProvider.getMameInfos().subscribe((data) => 
+				this._MsdbService.getMameInfos().subscribe((data) => 
 				{
 					if(data !== null)
 					{

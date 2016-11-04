@@ -1,5 +1,5 @@
-define(["app:ResultProvider", "app:AppUtils"], 
-function(ResultProvider, AppUtils) 
+define(["app:ResultModel", "app:AppUtils"], 
+function(ResultModel, AppUtils) 
 {
 	const componentName = "result";
 	
@@ -8,7 +8,7 @@ function(ResultProvider, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [ResultProvider, ng.router.ActivatedRoute,
+		constructor: [ResultModel, ng.router.ActivatedRoute,
 			function (model, activatedRoute)
 			{
 				this._activatedRoute = activatedRoute;

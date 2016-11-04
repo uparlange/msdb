@@ -1,5 +1,5 @@
-define(["app:CommonModule", "app:SearchComponent", "app:SearchProvider"], 
-function(CommonModule, SearchComponent, SearchProvider)
+define(["app:CommonModule", "app:SearchComponent", "app:SearchModel"], 
+function(CommonModule, SearchComponent, SearchModel)
 {
 	const routes = [
 		{path: "", component: SearchComponent}
@@ -14,7 +14,7 @@ function(CommonModule, SearchComponent, SearchProvider)
 			SearchComponent
 		],
 		providers:[
-			SearchProvider
+			SearchModel
 		]
 	}).Class({
 		constructor: function ()

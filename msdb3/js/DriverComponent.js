@@ -1,5 +1,5 @@
-define(["app:AppUtils", "app:DetailProvider"], 
-function(AppUtils, DetailProvider) 
+define(["app:AppUtils", "app:DetailModel"], 
+function(AppUtils, DetailModel) 
 {
 	const componentName = "driver";
 	
@@ -7,7 +7,7 @@ function(AppUtils, DetailProvider)
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName)
 	}).Class({
-		constructor: [DetailProvider, ng.material.MdDialogRef,
+		constructor: [DetailModel, ng.material.MdDialogRef,
 			function (model, mdDialogRef)
 			{
 				this._mdDialogRef = mdDialogRef;

@@ -1,5 +1,5 @@
-define(["app:MyGamesProvider", "app:AppUtils"], 
-function(MyGamesProvider, AppUtils) 
+define(["app:MyGamesModel", "app:AppUtils"], 
+function(MyGamesModel, AppUtils) 
 {
 	const componentName = "mygames";
 	
@@ -8,7 +8,7 @@ function(MyGamesProvider, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [MyGamesProvider,
+		constructor: [MyGamesModel,
 			function (model)
 			{
 				this.model = model;

@@ -1,5 +1,5 @@
-define(["app:CommonModule", "app:HomeComponent", "app:HomeProvider"], 
-function(CommonModule, HomeComponent, HomeProvider)
+define(["app:CommonModule", "app:HomeComponent", "app:HomeModel"], 
+function(CommonModule, HomeComponent, HomeModel)
 {
 	const routes = [
 		{path: "", component: HomeComponent}
@@ -14,7 +14,7 @@ function(CommonModule, HomeComponent, HomeProvider)
 			HomeComponent
 		],
 		providers:[
-			HomeProvider
+			HomeModel
 		]
 	}).Class({
 		constructor: function ()
