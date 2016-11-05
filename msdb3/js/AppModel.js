@@ -1,14 +1,15 @@
-define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager"], 
-function(AbstractViewModel, MsdbService, ConnectionManager) 
+define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager"], 
+function(AbstractViewModel, MsdbService, ConnectionManager, TranslateManager) 
 {
 	return ng.core.Class({
 		extends:AbstractViewModel,
-		constructor: [MsdbService, ConnectionManager, ng.router.Router,
-			function (MsdbService, ConnectionManager, Router)
+		constructor: [MsdbService, ConnectionManager, ng.router.Router, TranslateManager,
+			function (MsdbService, ConnectionManager, Router, TranslateManager)
 			{
 				AbstractViewModel.call(this, MsdbService, ConnectionManager);
 				
 				this._router = Router;
+				this._translateManager = TranslateManager;
 				
 				this._routerEventsSubscriber = null;
 			}
