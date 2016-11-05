@@ -1,66 +1,25 @@
-define(["app:MsdbService", "app:AppUtils", "app:SocketManager"], 
-function(MsdbService, AppUtils, SocketManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, SocketManager) 
 {
 	return ng.core.Class({
-		constructor: [MsdbService, SocketManager,
-			function (MsdbService, SocketManager)
+		extends:AbstractModel,
+		constructor: [MsdbService, ConnectionManager, SocketManager,
+			function (MsdbService, ConnectionManager, SocketManager)
 			{
-				this._MsdbService = MsdbService;
+				AbstractModel.call(this, MsdbService, ConnectionManager);
 				
 				this._socketManager = SocketManager;
 				
-				this._configChangedSubscriber = null;
-				
-				this.data = this._getInitData();
+				this._socketManagerConfigChangedSubscriber = null;
 			}
 		],
-		init : function(params)
-		{
-			this._configChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
-			{
-				this._refreshGameAvailability();
-			});
-			
-			if(this.data.game.name !== params.name)
-			{
-				this.data = this._getInitData();
-				
-				this._MsdbService.getDetail(params.name).subscribe((data) => 
-				{
-					if(data === null)
-					{
-						data = {
-							name:params.name,
-							description:"?"
-						};
-					}
-					
-					this.data.game = data;
-					
-					this._MsdbService.search("clones", data.name).subscribe((data) => 
-					{
-						this.data.clones = data;
-					});
-					
-					this._refreshGameAvailability();
-				});
-			}
-		},
-		destroy:function()
-		{
-			this._socketManager.off(this._configChangedSubscriber);
-		},
 		playGame:function()
 		{
-			this._socketManager.emit("PLAY_GAME", this.data.game.name);
+			this._socketManager.emit("PLAY_GAME", this.params.name);
 		},
 		setVideoAvailable:function(b)
 		{
 			this.data.videoAvailable = b;
-		},
-		getVideoUrl:function()
-		{
-			return (this.data.game.name !== undefined) ? "http://adb.arcadeitalia.net/download_file.php?tipo=mame_current&codice=" + this.data.game.name + "&entity=shortplay&oper=streaming&filler=" + this.data.game.name + ".mp4" : null;
 		},
 		getStatusClass:function(status)
 		{
@@ -70,65 +29,48 @@ function(MsdbService, AppUtils, SocketManager)
 		{
 			return "L10N_" + status.toUpperCase();
 		},
-		getGameFolder:function()
+		_init : function()
 		{
-			return AppUtils.getGameFolder(this.data.game);
-		},
-		getGameSizeLabel:function()
-		{
-			var sizeLabel = "?";
-			if(this.data.game.roms !== undefined)
+			this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
 			{
-				var size = 0;
-				this.data.game.roms.forEach((element, index, array) =>
+				this._refreshGameAvailability();
+			});
+		},
+		_refresh:function()
+		{
+			this.data = this._getInitData();
+				
+			this._msdbService.getDetail(this.params.name).subscribe((data) => 
+			{
+				if(data === null)
 				{
-					size += parseInt(element.size);
+					data = {
+						name:this.params.name,
+						description:"?"
+					};
+				}
+				
+				this.data.game = data;
+				
+				this._msdbService.search("clones", this.params.name).subscribe((data) => 
+				{
+					this.data.clones = data;
 				});
-				sizeLabel = this.getSizeLabel(size);
-			}
-			return sizeLabel;
+				
+				this._refreshGameAvailability();
+			});
 		},
-		getSizeLabel: function (value)
+		_destroy:function()
 		{
-			var lbl = value + " Octet(s)";
-			if (value >= 1073741824)
-			{
-				lbl = (Math.round(value / 1073741824 * 100) / 100) + " Go";
-			}
-			else if (value >= 1048576)
-			{
-				lbl = (Math.round(value / 1048576 * 100) / 100) + " Mo";
-			}
-			else if (value >= 1024)
-			{
-				lbl = (Math.round(value / 1024 * 100) / 100) + " Ko";
-			}
-			return lbl;
-		},
-		getFrequencyLabel: function (value)
-		{
-			var lbl = value + " Hz";
-			if (value >= 1000000000)
-			{
-				lbl = (Math.round(value / 1073741824 * 100) / 100) + " GHz";
-			}
-			else if (value >= 1000000)
-			{
-				lbl = (Math.round(value / 1048576 * 100) / 100) + " MHz";
-			}
-			return lbl;
-		},
-		getEncodedValue:function(value)
-		{
-			return AppUtils.getEncodedValue(value);
+			this._socketManager.off(this._socketManagerConfigChangedSubscriber);
 		},
 		_refreshGameAvailability:function()
 		{
 			this.data.gameAvailable = false;
 			
-			this._socketManager.emit("IS_ROM_AVAILABLE", this.data.game.name).subscribe((result) =>
+			this._socketManager.emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result) =>
 			{
-				if(result !== null && result.name === this.data.game.name)
+				if(result !== null && result.name === this.params.name)
 				{
 					this.data.gameAvailable = result.available;
 				}

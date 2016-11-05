@@ -85,7 +85,7 @@
 		{{'L10N_VIDEOS'|translate}}
 	</md-card-title>
 	<md-card-content>
-		<video [source]="model.getVideoUrl()" type="video/mp4" controls (onEvent)="videoStateChange($event)"></video>
+		<video [source]="model.getGameVideoUrl(model.data.game)" type="video/mp4" controls (onEvent)="videoStateChange($event)"></video>
 	</md-card-content>
 </md-card>
 <md-card *ngIf="model.data.game.images != null && model.data.game.images.length > 0">
@@ -93,6 +93,6 @@
 		{{'L10N_IMAGES'|translate}}
 	</md-card-title>
 	<md-card-content>
-		<gallery [colcount]="3" [gap]="5" [folder]="model.getGameFolder()" [excludedExtensions]="['ico']" [provider]="model.data.game.images"></gallery>
+		<gallery [colcount]="3" [gap]="5" [folder]="model.getGameFolder(model.data.game)" [excludedExtensions]="['ico']" [provider]="model.data.game.images"></gallery>
 	</md-card-content>
 </md-card>
