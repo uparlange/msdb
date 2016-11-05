@@ -1,11 +1,11 @@
 define(function() 
 {
 	return ng.core.Class({
-		constructor:function (model, mdDialogRef)
+		constructor:function (Model, MdDialogRef)
 		{
-			this.model = model;
+			this.model = Model;
 			
-			this._mdDialogRef = mdDialogRef;
+			this._mdDialogRef = MdDialogRef;
 		},
 		close:function()
 		{
