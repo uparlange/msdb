@@ -1,12 +1,12 @@
-define(["app:EventManager"], 
-function (EventManager) 
+define(["app:AbstractEventManager"], 
+function (AbstractEventManager) 
 {
     return ng.core.Class({
-		extends:EventManager,
+		extends:AbstractEventManager,
         constructor: [
 			function ()
 			{
-				EventManager.call(this);
+				AbstractEventManager.call(this);
 				
 				this.online = window.navigator.onLine;
 				

@@ -1,5 +1,5 @@
-define(["app:ResultModel", "app:AppUtils"], 
-function(ResultModel, AppUtils) 
+define(["app:AbstractComponent", "app:ResultModel", "app:AppUtils"], 
+function(AbstractComponent, ResultModel, AppUtils) 
 {
 	const componentName = "result";
 	
@@ -8,28 +8,12 @@ function(ResultModel, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
+		extends:AbstractComponent,
 		constructor: [ResultModel, ng.router.ActivatedRoute,
 			function (model, activatedRoute)
 			{
-				this.model = model;
-				
-				this._activatedRoute = activatedRoute;
-				
-				this._activatedRouteQueryParamsSubscriber = null;
+				AbstractComponent.call(this, model, activatedRoute);
 			}
-		],
-		ngOnInit : function()
-		{
-			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
-			{
-				this.model.init(params);
-			});
-		},
-		ngOnDestroy : function()
-		{
-			this.model.destroy();
-			
-			this._activatedRouteQueryParamsSubscriber.unsubscribe();
-		}
+		]
 	});		
 });

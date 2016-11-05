@@ -1,5 +1,5 @@
-define(["app:HomeModel", "app:AppUtils"], 
-function(HomeModel, AppUtils) 
+define(["app:AbstractComponent", "app:HomeModel", "app:AppUtils"], 
+function(AbstractComponent, HomeModel, AppUtils) 
 {
 	const componentName = "home";
 	
@@ -7,19 +7,12 @@ function(HomeModel, AppUtils)
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName)
 	}).Class({
-		constructor: [HomeModel,
-			function (model)
+		extends:AbstractComponent,
+		constructor: [HomeModel, ng.router.ActivatedRoute,
+			function (model, activatedRoute)
 			{
-				this.model = model;
+				AbstractComponent.call(this, model, activatedRoute);
 			}
-		],
-		ngOnInit : function()
-		{
-			this.model.init();
-		},
-		ngOnDestroy : function()
-		{
-			this.model.destroy();
-		}
+		]
 	});	
 });

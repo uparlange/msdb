@@ -2,11 +2,10 @@ define(["app:EventManager", "app:AppUtils"],
 function(EventManager, AppUtils) 
 {
 	return ng.core.Class({
-		constructor: [ng.http.Http, ng.common.PlatformLocation, EventManager,
-			function (http, platformLocation, eventManager)
+		constructor: [ng.http.Http, EventManager,
+			function (http, eventManager)
 			{
 				this._http = http;
-				this._platformLocation = platformLocation;
 				this._eventManager = eventManager;
 				
 				this._initialized = false;
