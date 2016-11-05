@@ -1,13 +1,13 @@
-define(["app:AbstractComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
-function(AbstractComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
+define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
+function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
 	{
-		extends:AbstractComponent,
+		extends:AbstractViewComponent,
 		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
 			function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
 			{
-				AbstractComponent.call(this, DetailModel, ActivatedRoute);
+				AbstractViewComponent.call(this, DetailModel, ActivatedRoute);
 				
 				this._viewContainerRef = ViewContainerRef;
 				

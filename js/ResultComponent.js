@@ -1,13 +1,13 @@
-define(["app:AbstractComponent", "app:ResultModel", "app:AppUtils"], 
-function(AbstractComponent, ResultModel, AppUtils) 
+define(["app:AbstractViewComponent", "app:ResultModel", "app:AppUtils"], 
+function(AbstractViewComponent, ResultModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("result")).Class(
 	{
-		extends:AbstractComponent,
+		extends:AbstractViewComponent,
 		constructor: [ResultModel, ng.router.ActivatedRoute,
 			function (ResultModel, ActivatedRoute)
 			{
-				AbstractComponent.call(this, ResultModel, ActivatedRoute);
+				AbstractViewComponent.call(this, ResultModel, ActivatedRoute);
 			}
 		]
 	});		

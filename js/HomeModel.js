@@ -1,12 +1,12 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
-function(AbstractModel, MsdbService, ConnectionManager) 
+define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager"], 
+function(AbstractViewModel, MsdbService, ConnectionManager) 
 {
 	return ng.core.Class({
-		extends:AbstractModel,
+		extends:AbstractViewModel,
 		constructor:[MsdbService, ConnectionManager,
 			function(MsdbService, ConnectionManager)
 			{
-				AbstractModel.call(this, MsdbService, ConnectionManager);
+				AbstractViewModel.call(this, MsdbService, ConnectionManager);
 			}
 		],
 		_refresh : function()
