@@ -1,13 +1,13 @@
-define(["app:AbstractComponent", "app:SearchModel", "app:AppUtils"], 
-function(AbstractComponent, SearchModel, AppUtils) 
+define(["app:AbstractViewComponent", "app:SearchModel", "app:AppUtils"], 
+function(AbstractViewComponent, SearchModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("search")).Class(
 	{
-		extends:AbstractComponent,
+		extends:AbstractViewComponent,
 		constructor: [SearchModel, ng.router.ActivatedRoute,
 			function (SearchModel, ActivatedRoute)
 			{
-				AbstractComponent.call(this, SearchModel, ActivatedRoute);
+				AbstractViewComponent.call(this, SearchModel, ActivatedRoute);
 			}
 		]
 	});

@@ -1,12 +1,12 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
-function(AbstractModel, MsdbService, ConnectionManager, SocketManager) 
+define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
+function(AbstractViewModel, MsdbService, ConnectionManager, SocketManager) 
 {
 	return ng.core.Class({
-		extends:AbstractModel,
+		extends:AbstractViewModel,
 		constructor: [MsdbService, ConnectionManager, SocketManager,
 			function (MsdbService, ConnectionManager, SocketManager)
 			{
-				AbstractModel.call(this, MsdbService, ConnectionManager);
+				AbstractViewModel.call(this, MsdbService, ConnectionManager);
 				
 				this._socketManager = SocketManager;
 				
