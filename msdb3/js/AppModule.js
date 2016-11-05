@@ -7,7 +7,6 @@ function(CommonModule, AppComponent, MsdbService, AppModel, AppUtils,
 
 	const routes = [
 		{path: "", redirectTo: "home", pathMatch: "full"},
-		{path: "update", loadChildren:() => AppUtils.loadModule("UpdateModule")},
 		{path: "home", loadChildren:() => AppUtils.loadModule("HomeModule")},
 		{path: "search", loadChildren:() => AppUtils.loadModule("SearchModule")},
 		{path: "detail", loadChildren:() => AppUtils.loadModule("DetailModule")},
