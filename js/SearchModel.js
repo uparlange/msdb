@@ -14,7 +14,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 			const tabKey = this._getTabInfos().byIndex(index).key;
 			return tabKey;
 		},
-		_init:function()
+		_refresh:function()
 		{
 			const tabIndex = this._getTabInfos().byType(this.params.type).index;
 			this.data.selectedIndex = tabIndex;

@@ -13,7 +13,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		{
 			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
 		},
-		_init:function()
+		_refresh:function()
 		{
 			this.data.list = null;
 			this._msdbService.search(this.params.type, this.params.value).subscribe((data) => 
