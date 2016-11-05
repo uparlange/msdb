@@ -29,9 +29,6 @@ module.exports = function (grunt) {
 			}
 		},
         uglify: {
-			options:{
-				mangle: false
-			},
             classes: {
 				files: [{
 					expand: true,
@@ -135,13 +132,14 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	
-	grunt.registerTask('npms', 'npms', function()
+	grunt.registerTask('prepare', 'prepare', function()
 	{
 		const htmlparser = require('htmlparser2');
 		const fs = require('fs');
 		
-		const scripts = {};
-		const css = {};
+		const uglify = {};
+		const cssmin = {};
+		const copy = {};
 		const parser = new htmlparser.Parser(
 		{
 			onopentag: function(tagname, attributes)
@@ -150,13 +148,13 @@ module.exports = function (grunt) {
 				let dependencies = null;
 				switch(tagname)
 				{
-					case 'script' :
-						attribute = 'src';
-						dependencies = scripts;
+					case 'script' : 
+						attribute = 'src'; 
+						dependencies = uglify;
 						break;
-					case 'link' :
-						attribute = 'href';
-						dependencies = css;
+					case 'link' : 
+						attribute = 'href'; 
+						dependencies = cssmin;
 						break;
 				}
 				if(attributes[attribute] !== undefined && attributes[attribute].indexOf('node_modules') !== -1)
@@ -164,6 +162,10 @@ module.exports = function (grunt) {
 					const url = attributes[attribute];
 					const begin = url.lastIndexOf("/") + 1;
 					const name = url.substring(begin);
+					if(name.indexOf('.min') !== -1)
+					{
+						dependencies = copy;
+					}
 					dependencies[name] = {
 						src:url,
 						dest:'dist/'+url
@@ -178,11 +180,15 @@ module.exports = function (grunt) {
 		parser.end();
 
 		grunt.config.merge({
-			uglify:scripts
+			copy:copy
 		});
 		
 		grunt.config.merge({
-			cssmin:css
+			uglify:uglify
+		});
+		
+		grunt.config.merge({
+			cssmin:cssmin
 		});
 	});
 	
@@ -230,5 +236,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
 	grunt.registerTask('cache', ['manifest']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'copy', 'imagemin', 'npms', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'manifest']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'prepare', 'copy', 'imagemin', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'manifest']);
 };
