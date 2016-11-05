@@ -1,5 +1,5 @@
-define(["app:MyGamesModel", "app:AppUtils"], 
-function(MyGamesModel, AppUtils) 
+define(["app:AbstractComponent", "app:MyGamesModel", "app:AppUtils"], 
+function(AbstractComponent, MyGamesModel, AppUtils) 
 {
 	const componentName = "mygames";
 	
@@ -8,19 +8,12 @@ function(MyGamesModel, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
-		constructor: [MyGamesModel,
-			function (model)
+		extends:AbstractComponent,
+		constructor: [MyGamesModel, ng.router.ActivatedRoute,
+			function (model, activatedRoute)
 			{
-				this.model = model;
+				AbstractComponent.call(this, model, activatedRoute);
 			}
-		],
-		ngOnInit : function()
-		{
-			this.model.init();
-		},
-		ngOnDestroy:function()
-		{
-			this.model.destroy();
-		}
+		]
 	});		
 });

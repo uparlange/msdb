@@ -19,7 +19,7 @@ function(AppUtils)
 			{
 				if(online)
 				{
-					this._callInitMethod();
+					this._callRefreshMethod();
 				}
 			});
 			
@@ -28,6 +28,8 @@ function(AppUtils)
 				this.params = params;
 				
 				this._callInitMethod();
+				
+				this._callRefreshMethod();
 			}
 		},
 		destroy:function()
@@ -53,6 +55,13 @@ function(AppUtils)
 			if(typeof this._init === "function")
 			{
 				this._init();
+			}
+		},
+		_callRefreshMethod:function()
+		{
+			if(typeof this._refresh === "function")
+			{
+				this._refresh();
 			}
 		},
 		_callDestroyMethod:function()

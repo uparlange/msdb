@@ -9,7 +9,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 				AbstractModel.call(this, MsdbService, ConnectionManager);
 			}
 		],
-		_init : function()
+		_refresh : function()
 		{
 			this._msdbService.getMameInfos().subscribe((data) => 
 			{

@@ -1,37 +1,26 @@
-define(["app:MsdbService", "app:AppUtils", "app:SocketManager"], 
-function(MsdbService, AppUtils, SocketManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, SocketManager) 
 {
 	return ng.core.Class({
-		constructor: [SocketManager, MsdbService,
-			function (SocketManager, MsdbService)
+		extends:AbstractModel,
+		constructor: [MsdbService, ConnectionManager, SocketManager,
+			function (MsdbService, ConnectionManager, SocketManager)
 			{
+				AbstractModel.call(this, MsdbService, ConnectionManager);
+				
 				this._socketManager = SocketManager;
 				
-				this._MsdbService = MsdbService;
-				
-				this._configChangedSubscriber = null;
-				
-				this.data = this._getInitData();
+				this._socketManagerConfigChangedSubscriber = null;
 			}
 		],
-		init : function()
+		_init : function()
 		{
-			this._configChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
+			this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
 			{
-				this._refreshGames();
+				this._refresh();
 			});
-			
-			this._refreshGames();
 		},
-		destroy:function()
-		{
-			this._socketManager.off(this._configChangedSubscriber);
-		},
-		getIconUrl : function(game)
-		{
-			return AppUtils.getIconUrl(game);
-		},
-		_refreshGames:function()
+		_refresh:function()
 		{
 			this.data = this._getInitData();
 			
@@ -39,7 +28,7 @@ function(MsdbService, AppUtils, SocketManager)
 			{
 				if(result !== null && result.length > 0)
 				{
-					this._MsdbService.search('name', result).subscribe((games) => 
+					this._msdbService.search("name", result).subscribe((games) => 
 					{
 						const allGames = [];
 						const allBios = [];
@@ -62,6 +51,10 @@ function(MsdbService, AppUtils, SocketManager)
 					});
 				}
 			});
+		},
+		_destroy:function()
+		{
+			this._socketManager.off(this._socketManagerConfigChangedSubscriber);
 		},
 		_getInitData:function()
 		{
