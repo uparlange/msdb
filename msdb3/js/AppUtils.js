@@ -1,6 +1,15 @@
 define(function () 
 {
     return {
+		getComponentConfiguration:function(componentName, params)
+		{
+			const defaultParams = {
+				selector: componentName,
+				templateUrl: "html/" + componentName + "-component" + ".html",
+				styleUrls: ["css/" + componentName + "-component.css"]
+			};
+			return Object.assign({}, defaultParams, params);
+		},
 		getEncodedValue:function(value)
 		{
 			return encodeURIComponent(value);
@@ -8,18 +17,6 @@ define(function ()
 		getDecodedValue:function(value)
 		{
 			return decodeURIComponent(value);
-		},
-		getTemplateUrl:function(componentName)
-		{
-			return this.getHtmlUrl(componentName + "-component");
-		},
-		getHtmlUrl:function(pageName)
-		{
-			return "html/" + pageName + ".html";
-		},
-		getStyleUrls:function(componentName)
-		{
-			return ["css/" + componentName + "-component.css"];
 		},
 		getSizeLabel: function (value)
   		{   

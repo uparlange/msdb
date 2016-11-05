@@ -1,13 +1,8 @@
 define(["app:AbstractComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
 function(AbstractComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
 {
-	const componentName = "detail";
-	
-	return ng.core.Component({
-		selector: componentName,
-		templateUrl: AppUtils.getTemplateUrl(componentName),
-		styleUrls: AppUtils.getStyleUrls(componentName)
-	}).Class({
+	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
+	{
 		extends:AbstractComponent,
 		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
 			function (model, activatedRoute, viewContainerRef, mdDialog)

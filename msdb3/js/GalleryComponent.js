@@ -1,13 +1,9 @@
 define(["app:AppUtils"], 
 function(AppUtils) 
 {
-	const componentName = "gallery";
-	
-	return ng.core.Component({
-		selector: componentName,
-		templateUrl: AppUtils.getTemplateUrl(componentName),
+	return ng.core.Component(AppUtils.getComponentConfiguration("gallery", {
 		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
-	}).Class({
+	})).Class({
 		constructor: [ng.core.ElementRef,
 			function (element)
 			{
