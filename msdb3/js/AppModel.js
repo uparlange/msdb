@@ -4,11 +4,11 @@ function(AbstractModel, MsdbService, ConnectionManager)
 	return ng.core.Class({
 		extends:AbstractModel,
 		constructor: [MsdbService, ConnectionManager, ng.router.Router,
-			function (MsdbService, ConnectionManager, router)
+			function (MsdbService, ConnectionManager, Router)
 			{
 				AbstractModel.call(this, MsdbService, ConnectionManager);
 				
-				this._router = router;
+				this._router = Router;
 				
 				this._routerEventsSubscriber = null;
 			}

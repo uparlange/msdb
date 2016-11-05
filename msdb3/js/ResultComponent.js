@@ -5,9 +5,9 @@ function(AbstractComponent, ResultModel, AppUtils)
 	{
 		extends:AbstractComponent,
 		constructor: [ResultModel, ng.router.ActivatedRoute,
-			function (model, activatedRoute)
+			function (ResultModel, ActivatedRoute)
 			{
-				AbstractComponent.call(this, model, activatedRoute);
+				AbstractComponent.call(this, ResultModel, ActivatedRoute);
 			}
 		]
 	});		
