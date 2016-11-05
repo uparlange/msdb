@@ -1,5 +1,5 @@
-define(["app:AppUtils", "app:DetailModel"], 
-function(AppUtils, DetailModel) 
+define(["app:AbstractPopupComponent", "app:DetailModel", "app:AppUtils"], 
+function(AbstractPopupComponent, DetailModel, AppUtils) 
 {
 	const componentName = "roms";
 	
@@ -7,17 +7,12 @@ function(AppUtils, DetailModel)
 		selector: componentName,
 		templateUrl: AppUtils.getTemplateUrl(componentName)
 	}).Class({
+		extends:AbstractPopupComponent,
 		constructor: [DetailModel, ng.material.MdDialogRef,
 			function (model, mdDialogRef)
 			{
-				this._mdDialogRef = mdDialogRef;
-				
-				this.model = model;
+				AbstractPopupComponent.call(this, model, mdDialogRef);
 			}
-		],
-		close:function()
-		{
-			this._mdDialogRef.close();
-		}
+		]
 	});	
 });
