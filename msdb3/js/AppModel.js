@@ -1,32 +1,20 @@
-define(["app:TranslateManager", "app:ConnectionManager"], 
-function(TranslateManager, ConnectionManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
+function(AbstractModel, MsdbService, ConnectionManager) 
 {
 	return ng.core.Class({
-		constructor: [TranslateManager, ng.router.Router, ConnectionManager,
-			function (translateManager, router, connectionManager)
+		extends:AbstractModel,
+		constructor: [MsdbService, ConnectionManager, ng.router.Router,
+			function (MsdbService, ConnectionManager, router)
 			{
-				this._translateManager = translateManager;
-				this._router = router;
-				this._connectionManager = connectionManager;
-
-				this.data = this._getInitData();
+				AbstractModel.call(this, MsdbService, ConnectionManager);
 				
-				this._onLanguageChangeSubscriber = null;
+				this._router = router;
 				
 				this._routerEventsSubscriber = null;
-				
-				this._onOnlineChangeSubscriber = null;
 			}
 		],
-		init : function()
+		_init : function()
 		{
-			this.data.lang = this._translateManager.getCurrentLanguage();
-				
-			this._onLanguageChangeSubscriber = this._translateManager.onLanguageChange.subscribe(() => 
-			{
-				this.data.lang = this._translateManager.getCurrentLanguage();
-			});
-			
 			this._routerEventsSubscriber = this._router.events.subscribe((e) =>
 			{
 				switch(e.constructor.name)
@@ -58,25 +46,10 @@ function(TranslateManager, ConnectionManager)
 					this._askForReload();
 				});
 			}
-			
-			this.data.online = this._connectionManager.online;
-			
-			this._onOnlineChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
-			{
-				this.data.online = online;
-			});
 		},
-		destroy:function()
+		_destroy:function()
 		{
-			this._onLanguageChangeSubscriber.unsubscribe();
-			
 			this._routerEventsSubscriber.unsubscribe();
-			
-			this._onOnlineChangeSubscriber.unsubscribe();
-		},
-		toggleLanguage:function()
-		{
-			this._translateManager.setLanguage(this.data.lang === "fr" ? "en" : "fr");
 		},
 		_askForReload : function()
 		{
@@ -88,11 +61,9 @@ function(TranslateManager, ConnectionManager)
 				}
 			});
 		},
-		_getInitData : function()
+		_getInitData:function()
 		{
-			return {
-				lang:null
-			};
+			return null;
 		}
 	});		
 });
