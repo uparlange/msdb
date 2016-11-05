@@ -1,11 +1,11 @@
 define(function() 
 {
 	return ng.core.Class({
-		constructor:function (model, activatedRoute)
+		constructor:function (Model, ActivatedRoute)
 		{
-			this.model = model;
+			this.model = Model;
 				
-			this._activatedRoute = activatedRoute;
+			this._activatedRoute = ActivatedRoute;
 			
 			this._activatedRouteQueryParamsSubscriber = null;
 		},
