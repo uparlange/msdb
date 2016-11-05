@@ -72,33 +72,11 @@ function(AppUtils)
 		},
 		getSizeLabel: function (value)
 		{
-			var lbl = value + " Octet(s)";
-			if (value >= 1073741824)
-			{
-				lbl = (Math.round(value / 1073741824 * 100) / 100) + " Go";
-			}
-			else if (value >= 1048576)
-			{
-				lbl = (Math.round(value / 1048576 * 100) / 100) + " Mo";
-			}
-			else if (value >= 1024)
-			{
-				lbl = (Math.round(value / 1024 * 100) / 100) + " Ko";
-			}
-			return lbl;
+			return AppUtils.getSizeLabel(value);
 		},
 		getFrequencyLabel: function (value)
 		{
-			var lbl = value + " Hz";
-			if (value >= 1000000000)
-			{
-				lbl = (Math.round(value / 1073741824 * 100) / 100) + " GHz";
-			}
-			else if (value >= 1000000)
-			{
-				lbl = (Math.round(value / 1048576 * 100) / 100) + " MHz";
-			}
-			return lbl;
+			return AppUtils.getFrequencyLabel(value);
 		},		
 		_callInitMethod:function()
 		{
