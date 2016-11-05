@@ -1,11 +1,10 @@
-define(function() 
+define(["app:AppUtils"], 
+function(AppUtils)
 {
-	return ng.core.Component({
-		selector: "ngForItem",
-		template:"<ng-content></ng-content>",
+	return ng.core.Component(AppUtils.getComponentConfiguration("ngForItem", {
 		inputs:["last"],
 		outputs:["onLast"]
-	}).Class({
+	})).Class({
 		constructor: [ng.core.ElementRef,
 			function (element)
 			{

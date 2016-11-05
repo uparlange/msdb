@@ -1,13 +1,8 @@
 define(["app:AppModel", "app:AppUtils"], 
 function(AppModel, AppUtils) 
 {
-	const componentName = "app";
-	
-	return ng.core.Component({
-		selector: componentName,
-		templateUrl: AppUtils.getTemplateUrl(componentName),
-		styleUrls: AppUtils.getStyleUrls(componentName)
-	}).Class({
+	return ng.core.Component(AppUtils.getComponentConfiguration("app")).Class(
+	{
 		constructor: [AppModel,
 			function (model)
 			{
