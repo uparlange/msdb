@@ -5,9 +5,9 @@ function(AbstractPopupComponent, DetailModel, AppUtils)
 	{
 		extends:AbstractPopupComponent,
 		constructor: [DetailModel, ng.material.MdDialogRef,
-			function (model, mdDialogRef)
+			function (DetailModel, MdDialogRef)
 			{
-				AbstractPopupComponent.call(this, model, mdDialogRef);
+				AbstractPopupComponent.call(this, DetailModel, MdDialogRef);
 			}
 		]
 	});	

@@ -5,13 +5,13 @@ function(AbstractComponent, DetailModel, DriverComponent, RomsComponent, ClonesC
 	{
 		extends:AbstractComponent,
 		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
-			function (model, activatedRoute, viewContainerRef, mdDialog)
+			function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
 			{
-				AbstractComponent.call(this, model, activatedRoute);
+				AbstractComponent.call(this, DetailModel, ActivatedRoute);
 				
-				this._viewContainerRef = viewContainerRef;
+				this._viewContainerRef = ViewContainerRef;
 				
-				this._mdDialog = mdDialog;
+				this._mdDialog = MdDialog;
 				
 				this._dialogRef = null;
 			}
