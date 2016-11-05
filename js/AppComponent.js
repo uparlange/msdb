@@ -1,25 +1,14 @@
-define(["app:AppModel", "app:AppUtils"], 
-function(AppModel, AppUtils) 
+define(["app:AbstractComponent", "app:AppModel", "app:AppUtils"], 
+function(AbstractComponent, AppModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("app")).Class(
 	{
-		constructor: [AppModel,
-			function (model)
+		extends:AbstractComponent,
+		constructor: [AppModel, ng.router.ActivatedRoute,
+			function (model, activatedRoute)
 			{
-				this.model = model;
+				AbstractComponent.call(this, model, activatedRoute);
 			}
-		],
-		ngOnInit:function()
-		{
-			this.model.init();
-		},
-		ngOnDestroy:function()
-		{
-			this.model.destroy();
-		},
-		toggleLanguage:function()
-		{
-			this.model.toggleLanguage();
-		}
+		]
 	});
 });

@@ -11,12 +11,15 @@ function(AppUtils)
 			
 			this.params = null;
 			
+			this.online = this._connectionManager.online;
+			
 			this.data = this._getInitData();
 		},
 		init:function(params)
 		{
 			this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
 			{
+				this.online = online;
 				if(online)
 				{
 					this._callRefreshMethod();
@@ -34,7 +37,7 @@ function(AppUtils)
 		},
 		destroy:function()
 		{
-			this._connectionManagerChangeSubscriber.unsubscribe();
+			this._connectionManager.off(this._connectionManagerChangeSubscriber);
 			
 			this._callDestroyMethod();
 		},
