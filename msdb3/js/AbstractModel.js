@@ -38,9 +38,29 @@ function(AppUtils)
 			
 			this._callDestroyMethod();
 		},
-		getIconUrl : function(game)
+		getGameIconUrl : function(game)
 		{
-			return AppUtils.getIconUrl(game);
+			return AppUtils.getGameIconUrl(game);
+		},
+		getGameFolder:function(game)
+		{
+			return AppUtils.getGameFolder(game);
+		},
+		getGameVideoUrl:function(game)
+		{
+			return AppUtils.getGameVideoUrl(game);
+		},	
+		getGameSizeLabel:function()
+		{
+			let size = 0;
+			if(this.data.game.roms !== undefined)
+			{
+				this.data.game.roms.forEach((element, index, array) =>
+				{
+					size += parseInt(element.size);
+				});
+			}
+			return this.getSizeLabel(size);
 		},
 		getEncodedValue:function(value)
 		{
@@ -50,6 +70,36 @@ function(AppUtils)
 		{
 			return AppUtils.getDecodedValue(value);
 		},
+		getSizeLabel: function (value)
+		{
+			var lbl = value + " Octet(s)";
+			if (value >= 1073741824)
+			{
+				lbl = (Math.round(value / 1073741824 * 100) / 100) + " Go";
+			}
+			else if (value >= 1048576)
+			{
+				lbl = (Math.round(value / 1048576 * 100) / 100) + " Mo";
+			}
+			else if (value >= 1024)
+			{
+				lbl = (Math.round(value / 1024 * 100) / 100) + " Ko";
+			}
+			return lbl;
+		},
+		getFrequencyLabel: function (value)
+		{
+			var lbl = value + " Hz";
+			if (value >= 1000000000)
+			{
+				lbl = (Math.round(value / 1073741824 * 100) / 100) + " GHz";
+			}
+			else if (value >= 1000000)
+			{
+				lbl = (Math.round(value / 1048576 * 100) / 100) + " MHz";
+			}
+			return lbl;
+		},		
 		_callInitMethod:function()
 		{
 			if(typeof this._init === "function")

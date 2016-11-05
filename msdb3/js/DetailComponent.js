@@ -1,5 +1,5 @@
-define(["app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
-function(DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
+define(["app:AbstractComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
+function(AbstractComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
 {
 	const componentName = "detail";
 	
@@ -8,35 +8,19 @@ function(DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils)
 		templateUrl: AppUtils.getTemplateUrl(componentName),
 		styleUrls: AppUtils.getStyleUrls(componentName)
 	}).Class({
+		extends:AbstractComponent,
 		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
 			function (model, activatedRoute, viewContainerRef, mdDialog)
 			{
-				this.model = model;
-				
-				this._activatedRoute = activatedRoute;
+				AbstractComponent.call(this, model, activatedRoute);
 				
 				this._viewContainerRef = viewContainerRef;
 				
 				this._mdDialog = mdDialog;
 				
 				this._dialogRef = null;
-				
-				this._activatedRouteQueryParamsSubscriber = null;
 			}
 		],
-		ngOnInit : function()
-		{
-			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
-			{
-				this.model.init(params);
-			});
-		},
-		ngOnDestroy : function()
-		{
-			this.model.destroy();
-			
-			this._activatedRouteQueryParamsSubscriber.unsubscribe();
-		},
 		videoStateChange:function(event)
 		{
 			this.model.setVideoAvailable((event.type !== "error"));
