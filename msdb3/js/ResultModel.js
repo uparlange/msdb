@@ -1,46 +1,31 @@
-define(["app:MsdbService", "app:AppUtils"], 
-function(MsdbService, AppUtils) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
+function(AbstractModel, MsdbService, ConnectionManager) 
 {
 	return ng.core.Class({
-		constructor: [MsdbService,
-			function (MsdbService)
+		extends:AbstractModel,
+		constructor:[MsdbService, ConnectionManager,
+			function(MsdbService, ConnectionManager)
 			{
-				this._MsdbService = MsdbService;
-				
-				this.data = {
-					list:null,
-					params:{}
-				};
+				AbstractModel.call(this, MsdbService, ConnectionManager);
 			}
 		],
-		init : function(params)
-		{
-			if(this.data.params.type !== params.type || this.data.params.value !== params.value || this.data.list === null)
-			{
-				this.data.list = null;
-				this.data.params = params;
-				
-				this._MsdbService.search(params.type, params.value).subscribe((data) => 
-				{
-					this.data.list = data;
-				});
-			}
-		},
-		destroy : function()
-		{
-			
-		},
 		getSearchLabel:function(type)
 		{
 			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
 		},
-		getIconUrl : function(game)
+		_init:function()
 		{
-			return AppUtils.getIconUrl(game);
+			this.data.list = null;
+			this._msdbService.search(this.params.type, this.params.value).subscribe((data) => 
+			{
+				this.data.list = data;
+			});
 		},
-		getDecodedValue:function(value)
+		_getInitData:function()
 		{
-			return AppUtils.getDecodedValue(value);
+			return {
+				list:null
+			};
 		}
 	});	
 });

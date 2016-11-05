@@ -1,76 +1,62 @@
-define(["app:AppUtils", "app:MsdbService"], 
-function(AppUtils, MsdbService) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
+function(AbstractModel, MsdbService, ConnectionManager) 
 {
 	return ng.core.Class({
-		constructor: [MsdbService,
-			function (MsdbService)
+		extends:AbstractModel,
+		constructor:[MsdbService, ConnectionManager,
+			function(MsdbService, ConnectionManager)
 			{
-				this._MsdbService = MsdbService;
-				
-				this.data = {
-					selectedIndex:0,
-					years:null,
-					series:null,
-					categories:null,
-					manufacturers:null,
-					versions:null,
-					count:0,
-					params:{}
-				};
+				AbstractModel.call(this, MsdbService, ConnectionManager);
 			}
 		],
-		init:function(params)
-		{
-			if(this.data.params.type !== params.type)
-			{
-				this.data.params = params;
-				
-				const tabIndex = this._getTabInfos().byType(params.type).index;
-				if(this.data.selectedIndex !== tabIndex)
-				{
-					this.data.selectedIndex = tabIndex;
-				}
-				
-				const methodeName = "load" + params.type[0].toUpperCase() + params.type.substring(1);
-				this[methodeName]();
-			}
-		},
-		destroy:function()
-		{
-			
-		},
-		loadDescription:function()
-		{
-			this.data.count = 0;
-		},
-		loadYears : function()
-		{
-			this._loadData("years");
-		},
-		loadSeries : function()
-		{
-			this._loadData("series");
-		},
-		loadCategories : function()
-		{
-			this._loadData("categories");
-		},
-		loadManufacturers : function()
-		{
-			this._loadData("manufacturers");
-		},
-		loadVersions : function()
-		{
-			this._loadData("versions");
-		},
 		getSearchTabLabel:function(index)
 		{
 			const tabKey = this._getTabInfos().byIndex(index).key;
 			return tabKey;
 		},
-		getEncodedValue:function(value)
+		_init:function()
 		{
-			return AppUtils.getEncodedValue(value);
+			const tabIndex = this._getTabInfos().byType(this.params.type).index;
+			this.data.selectedIndex = tabIndex;
+			
+			const methodeName = "_load" + this.params.type[0].toUpperCase() + this.params.type.substring(1);
+			this[methodeName]();
+		},
+		_loadDescription:function()
+		{
+			this.data.count = 0;
+		},
+		_loadYears : function()
+		{
+			this._loadData("years");
+		},
+		_loadSeries : function()
+		{
+			this._loadData("series");
+		},
+		_loadCategories : function()
+		{
+			this._loadData("categories");
+		},
+		_loadManufacturers : function()
+		{
+			this._loadData("manufacturers");
+		},
+		_loadVersions : function()
+		{
+			this._loadData("versions");
+		},
+		_getInitData : function()
+		{
+			return {
+				selectedIndex:0,
+				years:null,
+				series:null,
+				categories:null,
+				manufacturers:null,
+				versions:null,
+				count:0
+			};
 		},
 		_loadData:function(dataName)
 		{
@@ -79,7 +65,7 @@ function(AppUtils, MsdbService)
 			if(this.data[dataName] === null)
 			{
 				const serviceName = "get" + dataName[0].toUpperCase() + dataName.substr(1);
-				this._MsdbService[serviceName]().subscribe((data) => 
+				this._msdbService[serviceName]().subscribe((data) => 
 				{
 					if(data !== null)
 					{

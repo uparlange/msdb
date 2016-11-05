@@ -1,20 +1,19 @@
-define(["app:AppUtils", "app:MsdbService"], 
-function(AppUtils, MsdbService) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
+function(AbstractModel, MsdbService, ConnectionManager) 
 {
 	return ng.core.Class({
-		constructor: [MsdbService,
-			function (MsdbService)
+		extends:AbstractModel,
+		constructor:[MsdbService, ConnectionManager,
+			function(MsdbService, ConnectionManager)
 			{
-				this._MsdbService = MsdbService;
-				
-				this.data = this._getInitData();
+				AbstractModel.call(this, MsdbService, ConnectionManager);
 			}
 		],
-		init : function()
+		_init : function()
 		{
 			if(this.data.build === null)
 			{
-				this._MsdbService.getMameInfos().subscribe((data) => 
+				this._msdbService.getMameInfos().subscribe((data) => 
 				{
 					if(data !== null)
 					{
@@ -24,14 +23,6 @@ function(AppUtils, MsdbService)
 					}
 				});
 			}
-		},
-		destroy : function()
-		{
-			
-		},
-		getEncodedValue:function(value)
-		{
-			return AppUtils.getEncodedValue(value);
 		},
 		_getInitData : function()
 		{
