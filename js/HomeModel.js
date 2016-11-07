@@ -11,14 +11,17 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 		],
 		_refresh : function()
 		{
-			this._msdbService.getMameInfos().subscribe((data) => 
+			if(this.data.build === null)
 			{
-				if(data !== null)
+				this._msdbService.getMameInfos().subscribe((data) => 
 				{
-					data.version = data.build.substr(0, data.build.indexOf("(")).trim();
-					this.data = data;
-				}
-			});
+					if(data !== null)
+					{
+						data.version = data.build.substr(0, data.build.indexOf("(")).trim();
+						this.data = data;
+					}
+				});
+			}
 		},
 		_getInitData : function()
 		{

@@ -79,7 +79,9 @@ function(AbstractViewModel, MsdbService, ConnectionManager, SocketManager)
 		_getInitData:function()
 		{
 			return {
-				game:{},
+				game:{
+					dipswitchs:[]
+				},
 				clones:[],
 				videoAvailable:true,
 				gameAvailable:false
