@@ -1,5 +1,7 @@
-define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", "app:AppUtils"], 
-function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, AppUtils) 
+define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", 
+		"app:DipSwitchsComponent", "app:AppUtils"], 
+function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, 
+		 DipSwitchsComponent, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
 	{
@@ -31,6 +33,10 @@ function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, Clo
 		openClonesPopup:function()
 		{
 			this._openPopup(ClonesComponent);
+		},
+		openDipSwitchsPopup:function()
+		{
+			this._openPopup(DipSwitchsComponent);
 		},
 		_openPopup:function(clazz)
 		{

@@ -19,7 +19,7 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 			this._msdbService.search(this.params.type, this.params.value).subscribe((data) => 
 			{
 				this.data.list = data;
-			});
+			});	
 		},
 		_getInitData:function()
 		{

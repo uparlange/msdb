@@ -1,0 +1,20 @@
+<md-toolbar color="primary">
+	{{'L10N_DIP_SWITCH'|translate}}
+	<span class="fill-remaining-space"></span>
+	<button (click)="close()" class="link-button">
+		<i class="material-icons md-24">clear</i>
+	</button>
+</md-toolbar>
+<ul>
+	<li *ngFor="let item of provider">{{item.name}}
+		<ul>
+			<li *ngFor="let switch of item.switchs">{{switch.name}}
+				<ul>
+					<li *ngFor="let value of switch.values" [class]="value.default == 'yes' ? 'dipvalue-default' : null">
+						{{value.name}} ({{value.value}})
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>

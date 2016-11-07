@@ -9,9 +9,7 @@ function(AppUtils)
 			
 			this._connectionManagerChangeSubscriber = null;
 			
-			this.params = null;
-			
-			this.online = this._connectionManager.online;
+			this.params = {};
 			
 			this.data = this._getInitData();
 		},
@@ -19,16 +17,19 @@ function(AppUtils)
 		{
 			this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
 			{
-				this.online = online;
+				this.params.online = online;
 				if(online)
 				{
 					this._callRefreshMethod();
 				}
 			});
 			
-			if(JSON.stringify(this.params) !== JSON.stringify(params))
+			const currentParams = this.params;
+			const newParams = Object.assign({online:this._connectionManager.online}, params);
+			
+			if(JSON.stringify(currentParams) !== JSON.stringify(newParams))
 			{
-				this.params = params;
+				this.params = newParams;
 				
 				this._callInitMethod();
 				
