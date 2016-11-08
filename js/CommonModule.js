@@ -1,5 +1,5 @@
-define(["app:TranslatePipe", "app:NgForItemComponent"], 
-function(TranslatePipe, NgForItemComponent)
+define(["app:TranslatePipe", "app:NgForItemComponent", "app:BlazyDirective"], 
+function(TranslatePipe, NgForItemComponent, BlazyDirective)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -11,7 +11,8 @@ function(TranslatePipe, NgForItemComponent)
 		],
 		declarations:[
 			TranslatePipe,
-			NgForItemComponent
+			NgForItemComponent,
+			BlazyDirective
 		],
 		exports:[
 			ng.common.CommonModule,
@@ -20,7 +21,8 @@ function(TranslatePipe, NgForItemComponent)
 			ng.router.RouterModule,
 			ng.material.MaterialModule,
 			TranslatePipe,
-			NgForItemComponent
+			NgForItemComponent,
+			BlazyDirective
 		]
 	}).Class({
 		constructor: function ()

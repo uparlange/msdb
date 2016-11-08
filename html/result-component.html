@@ -9,7 +9,7 @@
 	</div>
 	<md-nav-list>
 		<a md-list-item *ngFor="let game of model.data.list ; trackBy:game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
-			<img md-list-avatar [src]="model.getGameIconUrl(game)">
+			<img md-list-avatar [lazySrc]="model.getGameIconUrl(game)">
 			<span class="sep"></span>
 			{{game.description}}
 		</a>
