@@ -6,11 +6,11 @@
 	</button>
 </md-toolbar>
 <ul>
-	<li *ngFor="let item of provider">{{item.name}}
+	<li *ngFor="let item of provider; trackBy item?.name">{{item.name}}
 		<ul>
-			<li *ngFor="let switch of item.switchs">{{switch.name}}
+			<li *ngFor="let switch of item.switchs; trackBy switch?.name">{{switch.name}}
 				<ul>
-					<li *ngFor="let value of switch.values" [class]="value.default == 'yes' ? 'dipvalue-default' : null">
+					<li *ngFor="let value of switch.values; trackBy value?.name" [class]="value.default == 'yes' ? 'dipvalue-default' : null">
 						{{value.name}} ({{value.value}})
 					</li>
 				</ul>

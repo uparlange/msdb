@@ -23,7 +23,7 @@ body
 	height:100%;
 	margin:0px;
 	padding:0px;
-	/*background-image:url(../images/background.jpg);*/
+	background-image:url(../images/background.jpg);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-attachment: fixed;
@@ -198,4 +198,14 @@ md-list
 	font-size: 16px;
 	color:rgb(68,138,255);
 	background: none;
+}
+
+.b-lazy
+{
+	background:#D3D3D3;
+}
+
+.b-lazy.b-loaded
+{
+	background:initial;
 }

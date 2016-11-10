@@ -11,14 +11,12 @@
 				<i class="material-icons md-24">search</i>
 			</a>
 		</template>
-		<template md-tab-content>
-			<form #descriptionForm="ngForm">
-				<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
-				<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.getEncodedValue(model.data.description)}" type="submit" md-mini-fab>
-					<i class="material-icons md-24 md-light">search</i>
-				</button>
-			</form>
-		</template>
+		<form #descriptionForm="ngForm">
+			<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
+			<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.getEncodedValue(model.data.description)}" type="submit" md-mini-fab>
+				<i class="material-icons md-24 md-light">search</i>
+			</button>
+		</form>
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -26,11 +24,11 @@
 				<i class="material-icons md-24">folder_open</i>
 			</a>
 		</template>
-		<template md-tab-content>
-			<md-nav-list>
-				<a md-list-item *ngFor="let category of model.data.categories" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">{{category.label}}</a>
-			</md-nav-list>
-		</template>
+		<md-nav-list>
+			<a md-list-item *ngFor="let category of model.data.categories; trackBy category?.label" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">
+				{{category.label}}
+			</a>
+		</md-nav-list>
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -38,11 +36,11 @@
 				<i class="material-icons md-24">list</i>
 			</a>
 		</template>
-		<template md-tab-content>
-			<md-nav-list>
-				<a md-list-item *ngFor="let series of model.data.series" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">{{series.label}}</a>
-			</md-nav-list>
-		</template>
+		<md-nav-list>
+			<a md-list-item *ngFor="let series of model.data.series; trackBy series?.label" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">
+				{{series.label}}
+			</a>
+		</md-nav-list>
 	</md-tab>	
 	<md-tab>
 		<template md-tab-label>
@@ -50,11 +48,13 @@
 				<i class="material-icons md-24">today</i>
 			</a>
 		</template>
-		<template md-tab-content>
-			<md-nav-list>
-				<a md-list-item *ngFor="let year of model.data.years" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">{{year.label}}</a>
-			</md-nav-list>
-		</template>
+		<md-nav-list>
+			<a md-list-item *ngFor="let year of model.data.years; trackBy year?.label" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">
+				{{year.label}}
+				<span class="fill-remaining-space"></span>
+				({{year.data}})
+			</a>
+		</md-nav-list>
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -62,11 +62,11 @@
 				<i class="material-icons md-24">business</i>
 			</a>
 		</template>
-		<template md-tab-content>
-			<md-nav-list>
-				<a md-list-item *ngFor="let manufacturer of model.data.manufacturers" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">{{manufacturer.label}}</a>
-			</md-nav-list>
-		</template>
+		<md-nav-list>
+			<a md-list-item *ngFor="let manufacturer of model.data.manufacturers; trackBy manufacturer?.label" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">
+				{{manufacturer.label}}
+			</a>
+		</md-nav-list>
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -74,14 +74,12 @@
 				<i class="material-icons md-24">plus_one</i>
 			</a>
 		</template>
-		<template md-tab-content>
-			<md-nav-list>
-				<a md-list-item *ngFor="let version of model.data.versions" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
-					{{version.label}}
-					<span class="fill-remaining-space"></span>
-					+{{version.data}}
-				</a>
-			</md-nav-list>
-		</template>
+		<md-nav-list>
+			<a md-list-item *ngFor="let version of model.data.versions; trackBy version?.label" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
+				{{version.label}}
+				<span class="fill-remaining-space"></span>
+				(+{{version.data}})
+			</a>
+		</md-nav-list>
 	</md-tab>
 </md-tab-group>
