@@ -6,7 +6,7 @@
 	</button>
 </md-toolbar>
 <md-list>
-	<md-list-item *ngFor="let rom of model.data.game.roms">
+	<md-list-item *ngFor="let rom of model.data.game.roms; trackBy rome?.name">
 		<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
 		<span class="sep">:</span>
 		{{model.getSizeLabel(rom.size)}}

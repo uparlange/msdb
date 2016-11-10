@@ -1,16 +1,16 @@
-define(["app:BlazyManager"], 
-function(BlazyManager) 
+define(["app:LazyManager"], 
+function(LazyManager) 
 {
 	return ng.core.Directive({
 		selector: "[lazySrc]",
 		inputs: ["lazySrc"]
 	}).Class({
-		constructor: [ng.core.ElementRef, BlazyManager,
-			function (element, BlazyManager)
+		constructor: [ng.core.ElementRef, LazyManager,
+			function (element, LazyManager)
 			{
 				this._element = element;
 				
-				this._blazyManager = BlazyManager;
+				this._blazyManager = LazyManager;
 			}
 		],
 		ngOnInit:function()
