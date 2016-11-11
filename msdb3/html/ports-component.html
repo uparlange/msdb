@@ -1,0 +1,12 @@
+<md-toolbar color="primary">
+	{{'L10N_PORT'|translate}}
+	<span class="fill-remaining-space"></span>
+	<button (click)="close()" class="link-button">
+		<i class="material-icons md-24">clear</i>
+	</button>
+</md-toolbar>
+<md-list>
+	<md-list-item *ngFor="let port of model.data.game.ports; trackBy port?.tag">
+		{{port.tag}}
+	</md-list-item>
+</md-list>

@@ -1,7 +1,7 @@
 define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", 
-		"app:DipSwitchsComponent", "app:AppUtils"], 
+		"app:DipSwitchsComponent", "app:AppUtils", "app:ChipsComponent", "app:BiossetsComponent", "app:PortsComponent"], 
 function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, 
-		 DipSwitchsComponent, AppUtils) 
+		 DipSwitchsComponent, AppUtils, ChipsComponent, BiossetsComponent, PortsComponent) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
 	{
@@ -37,6 +37,18 @@ function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, Clo
 		openDipSwitchsPopup:function()
 		{
 			this._openPopup(DipSwitchsComponent);
+		},
+		openChipsPopup:function()
+		{
+			this._openPopup(ChipsComponent);
+		},
+		openBiossetsPopup:function()
+		{
+			this._openPopup(BiossetsComponent);
+		},
+		openPortsPopup:function()
+		{
+			this._openPopup(PortsComponent);
 		},
 		_openPopup:function(clazz)
 		{

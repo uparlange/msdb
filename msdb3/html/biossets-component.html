@@ -1,14 +1,14 @@
 <md-toolbar color="primary">
-	{{'L10N_ROM_INFOS'|translate}}
+	{{'L10N_BIOS_SET'|translate}}
 	<span class="fill-remaining-space"></span>
 	<button (click)="close()" class="link-button">
 		<i class="material-icons md-24">clear</i>
 	</button>
 </md-toolbar>
 <md-list>
-	<md-list-item *ngFor="let rom of model.data.game.roms; trackBy rom?.name">
-		<span [class]="model.getStatusClass(rom.status)">{{rom.name}}</span>
+	<md-list-item *ngFor="let biosset of model.data.game.biossets; trackBy biosset?.name">
+		{{biosset.name}}
 		<span class="sep">:</span>
-		{{model.getSizeLabel(rom.size)}}
+		{{biosset.description}}
 	</md-list-item>
 </md-list>

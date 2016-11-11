@@ -80,7 +80,10 @@ function(AbstractViewModel, MsdbService, ConnectionManager, SocketManager)
 		{
 			return {
 				game:{
-					dipswitchs:[]
+					dipswitchs:[],
+					chips:[],
+					biossets:[],
+					ports:[]
 				},
 				clones:[],
 				videoAvailable:true,
