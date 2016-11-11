@@ -1,0 +1,17 @@
+<md-toolbar color="primary">
+	{{'L10N_CHIP'|translate}}
+	<span class="fill-remaining-space"></span>
+	<button (click)="close()" class="link-button">
+		<i class="material-icons md-24">clear</i>
+	</button>
+</md-toolbar>
+<ul>
+	<li *ngFor="let item of provider; trackBy item?.name">
+		{{item.name}}
+		<ul>
+			<li *ngFor="let value of item.values; trackBy value?.tag">
+				{{value.tag}} <b>{{value.name}}</b> <span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
+			</li>
+		</ul>
+	</li>
+</ul>
