@@ -31,7 +31,7 @@ body
 
 a
 {
-	text-decoration: initial;	
+	text-decoration: none;	
 	color:rgb(68,138,255);
 }
 
@@ -207,5 +207,5 @@ md-list
 
 .b-lazy.b-loaded
 {
-	background:initial;
+	background:none;
 }

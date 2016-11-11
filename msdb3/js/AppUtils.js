@@ -71,7 +71,7 @@ define(function ()
 		_getBaseUrl:function()
 		{
 			//return "http://localhost/projects/msdb2/dist";
-			//return "http://192.168.0.15/projects/msdb2/dist";
+			//return "http://192.168.15.1/projects/msdb2/dist";
 			return "";
 		}
 	};

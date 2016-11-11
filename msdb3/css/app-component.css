@@ -33,10 +33,14 @@
 	margin: auto;
 	height:100%;
 	background:white;
-	padding-top:64px;
 }
 
-.app-content
+.app-container-header
+{
+	height:64px;
+}
+
+.app-container-content
 {
 	background:white;
 	padding:10px;
