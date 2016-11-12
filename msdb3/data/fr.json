@@ -74,5 +74,6 @@
 	"L10N_TOGGLE_FULLSCREEN": "Basculer en plein écran",
 	"L10N_ZOOM_IN_OUT": "Zoomer",
 	"L10N_PREVIOUS": "Précédent",
-	"L10N_NEXT": "Suivant"
+	"L10N_NEXT": "Suivant",
+	"L10N_DEVICE_REF": "Devices References"
 }

@@ -83,7 +83,8 @@ function(AbstractViewModel, MsdbService, ConnectionManager, SocketManager)
 					dipswitchs:[],
 					chips:[],
 					biossets:[],
-					ports:[]
+					ports:[],
+					devicerefs:[]
 				},
 				clones:[],
 				videoAvailable:true,

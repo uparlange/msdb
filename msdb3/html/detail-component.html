@@ -73,6 +73,7 @@
 					<button md-menu-item *ngIf="model.data.game.chips.length > 0" (click)="openChipsPopup()">{{'L10N_CHIP'|translate}}</button>
 					<button md-menu-item *ngIf="model.data.game.biossets.length > 0" (click)="openBiossetsPopup()">{{'L10N_BIOS_SET'|translate}}</button>
 					<button md-menu-item *ngIf="model.data.game.ports.length > 0" (click)="openPortsPopup()">{{'L10N_PORT'|translate}}</button>
+					<button md-menu-item *ngIf="model.data.game.devicerefs.length > 0" (click)="openDeviceReferencesPopup()">{{'L10N_DEVICE_REF'|translate}}</button>
 				</md-menu>
 			</md-list-item>
 		</md-list>
@@ -89,6 +90,9 @@
 			</md-list-item>
 			<md-list-item>
 				<a target="_blank" href="http://www.planetemu.net/?section=recherche&recherche={{model.data.game.description}}&type=Phrase exacte&rubrique=roms">ROM {{model.data.game.description}}</a>
+			</md-list-item>
+			<md-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
+				<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">BIOS {{model.data.game.romof}}</a>
 			</md-list-item>
 		</md-list>
 	</md-card-content>

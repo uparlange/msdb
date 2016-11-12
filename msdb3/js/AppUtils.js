@@ -19,34 +19,12 @@ define(function ()
 			return decodeURIComponent(value);
 		},
 		getSizeLabel: function (value)
-  		{   
-			let lbl = value + " Octet(s)";
-			if (value >= 1073741824)
-			{
-				lbl = (Math.round(value / 1073741824 * 100) / 100) + " Go";
-			}
-			else if (value >= 1048576)
-			{
-				lbl = (Math.round(value / 1048576 * 100) / 100) + " Mo";
-			}
-			else if (value >= 1024)
-			{
-				lbl = (Math.round(value / 1024 * 100) / 100) + " Ko";
-			}
-			return lbl;
+  		{
+			return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
   		},   
 		getFrequencyLabel: function (value)
 		{
-			let lbl = value + " Hz";
-			if (value >= 1000000000)
-			{
-				lbl = (Math.round(value / 1073741824 * 100) / 100) + " GHz";
-			}
-			else if (value >= 1000000)
-			{
-				lbl = (Math.round(value / 1048576 * 100) / 100) + " MHz";
-			}
-			return lbl;
+			return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
 		},
 		getGameIconUrl:function(game)
 		{
@@ -67,6 +45,23 @@ define(function ()
 		loadModule:function(moduleName)
 		{
 			return System.import("app:" + moduleName);
+		},
+		_getUnitLabel:function(value, steps, stepMultiplier)
+		{
+			let step = null;
+			steps.forEach((item, index, array) =>
+			{
+				const stepValue = Math.pow(stepMultiplier, index);
+				if(value >= stepValue)
+				{
+					step = {unit:item,value:stepValue};
+				}
+				else
+				{
+					return;
+				}
+			});
+			return (Math.round(value / step.value * 100) / 100) + " " + step.unit;
 		},
 		_getBaseUrl:function()
 		{
