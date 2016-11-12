@@ -1,9 +1,9 @@
 define(["app:CommonModule", "app:DetailComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", 
 		"app:ClonesComponent", "app:VideoDirective", "app:GalleryComponent", "app:DipSwitchsComponent", "app:ChipsComponent",
-		"app:BiossetsComponent", "app:PortsComponent"], 
+		"app:BiossetsComponent", "app:PortsComponent", "app:DeviceRefsComponent"], 
 function(CommonModule, DetailComponent, DetailModel, DriverComponent, RomsComponent, 
 		 ClonesComponent, VideoDirective, GalleryComponent, DipSwitchsComponent, ChipsComponent,
-		 BiossetsComponent, PortsComponent)
+		 BiossetsComponent, PortsComponent, DeviceRefsComponent)
 {
 	const routes = [
 		{path: "", component: DetailComponent}
@@ -24,7 +24,8 @@ function(CommonModule, DetailComponent, DetailModel, DriverComponent, RomsCompon
 			DipSwitchsComponent,
 			ChipsComponent,
 			BiossetsComponent,
-			PortsComponent
+			PortsComponent,
+			DeviceRefsComponent
 		],
 		providers:[
 			DetailModel
@@ -36,7 +37,8 @@ function(CommonModule, DetailComponent, DetailModel, DriverComponent, RomsCompon
 			DipSwitchsComponent,
 			ChipsComponent,
 			BiossetsComponent,
-			PortsComponent
+			PortsComponent,
+			DeviceRefsComponent
 		]
 	}).Class({
 		constructor: function ()

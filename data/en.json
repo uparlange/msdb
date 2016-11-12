@@ -74,5 +74,6 @@
 	"L10N_TOGGLE_FULLSCREEN": "Toggle fullscreen",
 	"L10N_ZOOM_IN_OUT": "Zoom in/out",
 	"L10N_PREVIOUS": "Previous",
-	"L10N_NEXT": "Next"
+	"L10N_NEXT": "Next",
+	"L10N_DEVICE_REF": "Devices References"
 }

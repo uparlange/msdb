@@ -1,7 +1,7 @@
 define(["app:AbstractPopupComponent", "app:DetailModel", "app:AppUtils"], 
 function(AbstractPopupComponent, DetailModel, AppUtils) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("ports")).Class(
+	return ng.core.Component(AppUtils.getComponentConfiguration("deviceRefs")).Class(
 	{
 		extends:AbstractPopupComponent,
 		constructor: [DetailModel, ng.material.MdDialogRef,
@@ -9,10 +9,6 @@ function(AbstractPopupComponent, DetailModel, AppUtils)
 			{
 				AbstractPopupComponent.call(this, DetailModel, MdDialogRef);
 			}
-		],
-		getPortValue:function(value)
-		{
-			return value.replace(/:/g, " > ");
-		}
+		]
 	});	
 });

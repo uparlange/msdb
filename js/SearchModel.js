@@ -14,6 +14,16 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 			const tabKey = this._getTabInfos().byIndex(index).key;
 			return tabKey;
 		},
+		getVersion:function(value)
+		{
+			value = value.replace(".", "");
+			value = value.replace(/0/g, "");
+			return "0" + value;
+		},
+		changeLogAvailable:function(value)
+		{
+			return (value.indexOf("u") === -1);
+		},
 		_refresh:function()
 		{
 			const tabIndex = this._getTabInfos().byType(this.params.type).index;
