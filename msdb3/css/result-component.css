@@ -9,3 +9,8 @@ md-nav-list
 	float:right;
 	top: -6px;
 }
+
+.result-title
+{
+	margin-bottom:10px;
+}
