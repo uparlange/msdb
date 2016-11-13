@@ -6,6 +6,7 @@
 		{{'L10N_DESCRIPTION'|translate}}
 	</md-card-content>
 </md-card>
+<div class="default-spacer"></div>
 <md-card *ngIf="model.data.build != null">
 	<md-card-title>
 		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.getEncodedValue(model.data.version)}">{{model.data.version}}</a>
@@ -20,6 +21,7 @@
 		</ul>
 	</md-card-content>
 </md-card>
+<div class="default-spacer"></div>
 <md-card>
 	<md-card-title>
 		{{'L10N_HOW_TO_PLAY'|translate}}
@@ -33,6 +35,7 @@
 		</ol>
 	</md-card-content>
 </md-card>
+<div class="default-spacer"></div>
 <md-card>
 	<md-card-title>
 		{{'L10N_REFERENCES'|translate}}

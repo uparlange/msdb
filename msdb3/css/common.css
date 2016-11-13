@@ -45,10 +45,6 @@ md-card
 	margin:0px;
 	padding:10px !important;
 }
-md-card:not(:first-child)
-{
-	margin-top:10px;
-}
 
 md-dialog-container
 {
@@ -62,9 +58,20 @@ md-list
 	margin:0px !important;
 }
 
+md-nav-list
+{
+	padding:0px !important;
+	margin:0px !important;
+}
+
 [routerLink]
 {
 	cursor:pointer;
+}
+
+.default-spacer
+{
+	height:10px;
 }
 
 .md-tab-label
