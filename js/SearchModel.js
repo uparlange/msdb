@@ -60,34 +60,42 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 		{
 			return {
 				selectedIndex:0,
-				years:null,
-				series:null,
-				categories:null,
-				manufacturers:null,
-				versions:null,
-				count:0
+				years:{list:null,count:0},
+				series:{list:null,count:0},
+				categories:{list:null,count:0},
+				manufacturers:{list:null,count:0},
+				versions:{list:null,count:0},
+				count:0,
+				itemByPage:20
 			};
 		},
 		_loadData:function(dataName)
 		{
 			this.data.count = 0;
 			
-			if(this.data[dataName] === null)
+			if(this.data[dataName].list === null)
 			{
 				const serviceName = "get" + dataName[0].toUpperCase() + dataName.substr(1);
 				this._msdbService[serviceName]().subscribe((data) => 
 				{
-					if(data !== null)
+					if(Array.isArray(data))
 					{
-						this.data[dataName] = data;
-					
-						this.data.count = this.data[dataName].length;
+						this.data[dataName].count = data.length;
+						
+						this.data.count = data.length;
+						
+						const list = [];
+						while (data.length > 0) 
+						{
+							list.push(data.splice(0, this.data.itemByPage));
+						}
+						this.data[dataName].list = list;
 					}
 				});
 			}
 			else
 			{
-				this.data.count = this.data[dataName].length;
+				this.data.count = this.data[dataName].count;
 			}
 		},
 		_getTabInfos : function()
