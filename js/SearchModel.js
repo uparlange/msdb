@@ -83,12 +83,29 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 						this.data[dataName].count = data.length;
 						
 						this.data.count = data.length;
+
+						const groups = {};
+						data.forEach((item, index, array) => 
+						{
+							let group = null;
+							const letter = item.label[0].toUpperCase();
+							group = isNaN(parseInt(letter)) ? letter : "0-9";
+							if(groups[group] === undefined)
+							{
+								groups[group] = [];
+							}
+							groups[group].push(item);
+						});
 						
 						const list = [];
-						while (data.length > 0) 
+						for(let group in groups)
 						{
-							list.push(data.splice(0, this.data.itemByPage));
+							list.push({
+								label:group,
+								data:groups[group]
+							});
 						}
+						
 						this.data[dataName].list = list;
 					}
 				});

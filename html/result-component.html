@@ -5,7 +5,7 @@
 			<span *ngIf="model.data.count > 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
 		</md-card-title>
 	</md-card>
-	<div *ngFor="let group of model.data.list; let index = index;">
+	<div *ngFor="let group of model.data.list; trackBy group?.label">
 		<div *ngIf="model.data.list.length > 1">
 			<div class="default-spacer"></div>
 			<md-card >
