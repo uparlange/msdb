@@ -1,26 +1,10 @@
-form
-{
-	margin-top: 10px;
-}
-
-md-tab-group
-{
-	margin-top: 10px;
-}
-
-md-nav-list
-{
-	padding-top:10px;
-	padding-bottom:10px;
-}
-
 [scrollToTop]
 {
 	float:right;
 	top: -6px;
 }
 
-.search-version-add-count
+.search-version-addition-count
 {
 	margin-right:15px;
 }

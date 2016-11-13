@@ -4,6 +4,7 @@
 		<span *ngIf="model.data.count !== 0">( {{model.data.count}} )</span>
 	</md-card-title>
 </md-card>
+<div class="default-spacer"></div>
 <md-tab-group [selectedIndex]="model.data.selectedIndex">
 	<md-tab>
 		<template md-tab-label>
@@ -11,6 +12,7 @@
 				<i class="material-icons md-24">search</i>
 			</a>
 		</template>
+		<div class="default-spacer"></div>
 		<form #descriptionForm="ngForm">
 			<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
 			<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.getEncodedValue(model.data.description)}" type="submit" md-mini-fab>
@@ -24,6 +26,7 @@
 				<i class="material-icons md-24">folder_open</i>
 			</a>
 		</template>
+		<div class="default-spacer"></div>
 		<div *ngFor="let page of model.data.categories.list; let index = index;">
 			<md-card *ngIf="index > 0">
 				<md-card-title>
@@ -46,6 +49,7 @@
 				<i class="material-icons md-24">list</i>
 			</a>
 		</template>
+		<div class="default-spacer"></div>
 		<div *ngFor="let page of model.data.series.list; let index = index;">
 			<md-card *ngIf="index > 0">
 				<md-card-title>
@@ -68,6 +72,7 @@
 				<i class="material-icons md-24">today</i>
 			</a>
 		</template>
+		<div class="default-spacer"></div>
 		<div *ngFor="let page of model.data.years.list; let index = index;">
 			<md-card *ngIf="index > 0">
 				<md-card-title>
@@ -92,6 +97,7 @@
 				<i class="material-icons md-24">business</i>
 			</a>
 		</template>
+		<div class="default-spacer"></div>
 		<div *ngFor="let page of model.data.manufacturers.list; let index = index;">
 			<md-card *ngIf="index > 0">
 				<md-card-title>
@@ -114,6 +120,7 @@
 				<i class="material-icons md-24">plus_one</i>
 			</a>
 		</template>
+		<div class="default-spacer"></div>
 		<div *ngFor="let page of model.data.versions.list; let index = index;">
 			<md-card *ngIf="index > 0">
 				<md-card-title>
@@ -128,7 +135,7 @@
 					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
 						{{version.label}} 
 					</a>
-					<span class="search-version-add-count">(+{{version.data}})</span>
+					<span class="search-version-addition-count">(+{{version.data}})</span>
 					<a *ngIf="model.changeLogAvailable(model.getEncodedValue(version.label))" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(model.getEncodedValue(version.label))+'.txt'">
 						<i class="material-icons md-24 md-dark">track_changes</i>
 					</a>
