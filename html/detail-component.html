@@ -89,7 +89,7 @@
 				<a target="_blank" href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
 			</md-list-item>
 			<md-list-item>
-				<a target="_blank" href="http://www.planetemu.net/?section=recherche&recherche={{model.data.game.description}}&type=Phrase exacte&rubrique=roms">ROM {{model.data.game.description}}</a>
+				<a target="_blank" [href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">ROM {{model.data.game.description}}</a>
 			</md-list-item>
 			<md-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
 				<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">BIOS {{model.data.game.romof}}</a>

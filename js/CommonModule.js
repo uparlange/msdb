@@ -1,5 +1,5 @@
-define(["app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective"], 
-function(TranslatePipe, NgForItemComponent, LazyDirective)
+define(["app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective", "app:ScrollToTopDirective"], 
+function(TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -12,7 +12,8 @@ function(TranslatePipe, NgForItemComponent, LazyDirective)
 		declarations:[
 			TranslatePipe,
 			NgForItemComponent,
-			LazyDirective
+			LazyDirective,
+			ScrollToTopDirective
 		],
 		exports:[
 			ng.common.CommonModule,
@@ -22,7 +23,8 @@ function(TranslatePipe, NgForItemComponent, LazyDirective)
 			ng.material.MaterialModule,
 			TranslatePipe,
 			NgForItemComponent,
-			LazyDirective
+			LazyDirective,
+			ScrollToTopDirective
 		]
 	}).Class({
 		constructor: function ()

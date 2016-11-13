@@ -15,16 +15,28 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 		},
 		_refresh:function()
 		{
-			this.data.list = null;
+			this.data = this._getInitData();
 			this._msdbService.search(this.params.type, this.params.value).subscribe((data) => 
 			{
-				this.data.list = data;
+				if(Array.isArray(data))
+				{
+					this.data.count = data.length;
+					
+					const list = [];
+					while (data.length > 0) 
+					{
+						list.push(data.splice(0, this.data.itemByPage));
+					}
+					this.data.list = list;
+				}
 			});	
 		},
 		_getInitData:function()
 		{
 			return {
-				list:null
+				list:[],
+				count:0,
+				itemByPage:20
 			};
 		}
 	});	
