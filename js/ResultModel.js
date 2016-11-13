@@ -22,11 +22,28 @@ function(AbstractViewModel, MsdbService, ConnectionManager)
 				{
 					this.data.count = data.length;
 					
-					const list = [];
-					while (data.length > 0) 
+					const groups = {};
+					data.forEach((item, index, array) => 
 					{
-						list.push(data.splice(0, this.data.itemByPage));
+						let group = null;
+						const letter = item.description[0].toUpperCase();
+						group = isNaN(parseInt(letter)) ? letter : "0-9";
+						if(groups[group] === undefined)
+						{
+							groups[group] = [];
+						}
+						groups[group].push(item);
+					});
+					
+					const list = [];
+					for(let group in groups)
+					{
+						list.push({
+							label:group,
+							data:groups[group]
+						});
 					}
+
 					this.data.list = list;
 				}
 			});	
