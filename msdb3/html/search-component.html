@@ -24,11 +24,21 @@
 				<i class="material-icons md-24">folder_open</i>
 			</a>
 		</template>
-		<md-nav-list>
-			<a md-list-item *ngFor="let category of model.data.categories; trackBy category?.label" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">
-				{{category.label}}
-			</a>
-		</md-nav-list>
+		<div *ngFor="let page of model.data.categories.list; let index = index;">
+			<md-card *ngIf="index > 0">
+				<md-card-title>
+					Page {{index+1}} / {{model.data.categories.list.length}}
+					<button md-mini-fab scrollToTop>
+						<i class="material-icons md-24 md-light">arrow_drop_up</i>
+					</button>
+				</md-card-title>
+			</md-card>
+			<md-nav-list>
+				<a md-list-item *ngFor="let category of page; trackBy category?.label" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">
+					{{category.label}}
+				</a>
+			</md-nav-list>
+		</div>
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -36,11 +46,21 @@
 				<i class="material-icons md-24">list</i>
 			</a>
 		</template>
-		<md-nav-list>
-			<a md-list-item *ngFor="let series of model.data.series; trackBy series?.label" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">
-				{{series.label}}
-			</a>
-		</md-nav-list>
+		<div *ngFor="let page of model.data.series.list; let index = index;">
+			<md-card *ngIf="index > 0">
+				<md-card-title>
+					Page {{index+1}} / {{model.data.series.list.length}}
+					<button md-mini-fab scrollToTop>
+						<i class="material-icons md-24 md-light">arrow_drop_up</i>
+					</button>
+				</md-card-title>
+			</md-card>
+			<md-nav-list>
+				<a md-list-item *ngFor="let series of page; trackBy series?.label" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">
+					{{series.label}}
+				</a>
+			</md-nav-list>
+		</div>
 	</md-tab>	
 	<md-tab>
 		<template md-tab-label>
@@ -48,13 +68,23 @@
 				<i class="material-icons md-24">today</i>
 			</a>
 		</template>
-		<md-nav-list>
-			<a md-list-item *ngFor="let year of model.data.years; trackBy year?.label" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">
-				{{year.label}}
-				<span class="fill-remaining-space"></span>
-				({{year.data}})
-			</a>
-		</md-nav-list>
+		<div *ngFor="let page of model.data.years.list; let index = index;">
+			<md-card *ngIf="index > 0">
+				<md-card-title>
+					Page {{index+1}} / {{model.data.years.list.length}}
+					<button md-mini-fab scrollToTop>
+						<i class="material-icons md-24 md-light">arrow_drop_up</i>
+					</button>
+				</md-card-title>
+			</md-card>
+			<md-nav-list>
+				<a md-list-item *ngFor="let year of page; trackBy year?.label" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">
+					{{year.label}}
+					<span class="fill-remaining-space"></span>
+					({{year.data}})
+				</a>
+			</md-nav-list>
+		</div>
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -62,11 +92,21 @@
 				<i class="material-icons md-24">business</i>
 			</a>
 		</template>
-		<md-nav-list>
-			<a md-list-item *ngFor="let manufacturer of model.data.manufacturers; trackBy manufacturer?.label" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">
-				{{manufacturer.label}}
-			</a>
-		</md-nav-list>
+		<div *ngFor="let page of model.data.manufacturers.list; let index = index;">
+			<md-card *ngIf="index > 0">
+				<md-card-title>
+					Page {{index+1}} / {{model.data.manufacturers.list.length}}
+					<button md-mini-fab scrollToTop>
+						<i class="material-icons md-24 md-light">arrow_drop_up</i>
+					</button>
+				</md-card-title>
+			</md-card>
+			<md-nav-list>
+				<a md-list-item *ngFor="let manufacturer of page; trackBy manufacturer?.label" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">
+					{{manufacturer.label}}
+				</a>
+			</md-nav-list>
+		</div>	
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
@@ -74,15 +114,29 @@
 				<i class="material-icons md-24">plus_one</i>
 			</a>
 		</template>
-		<md-nav-list>
-			<md-list-item *ngFor="let version of model.data.versions; trackBy version?.label">
-				<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
-					{{version.label}} (+{{version.data}})
-				</a>
-				<a *ngIf="model.changeLogAvailable(model.getEncodedValue(version.label))" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(model.getEncodedValue(version.label))+'.txt'">
-					<i class="material-icons md-24">track_changes</i>
-				</a>
-			</md-list-item>
-		</md-nav-list>
+		<div *ngFor="let page of model.data.versions.list; let index = index;">
+			<md-card *ngIf="index > 0">
+				<md-card-title>
+					Page {{index+1}} / {{model.data.versions.list.length}}
+					<button md-mini-fab scrollToTop>
+						<i class="material-icons md-24 md-light">arrow_drop_up</i>
+					</button>
+				</md-card-title>
+			</md-card>
+			<md-nav-list>
+				<md-list-item *ngFor="let version of page; trackBy version?.label">
+					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
+						{{version.label}} 
+					</a>
+					<span class="search-version-add-count">(+{{version.data}})</span>
+					<a *ngIf="model.changeLogAvailable(model.getEncodedValue(version.label))" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(model.getEncodedValue(version.label))+'.txt'">
+						<i class="material-icons md-24 md-dark">track_changes</i>
+					</a>
+					<span *ngIf="!model.changeLogAvailable(model.getEncodedValue(version.label))">
+						<i class="material-icons md-24 md-dark md-inactive">track_changes</i>
+					</span>
+				</md-list-item>
+			</md-nav-list>
+		</div>
 	</md-tab>
 </md-tab-group>
