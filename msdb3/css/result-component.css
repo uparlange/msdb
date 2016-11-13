@@ -1,0 +1,11 @@
+md-nav-list
+{
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+[scrollToTop]
+{
+	float:right;
+	top: -6px;
+}

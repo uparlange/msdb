@@ -79,7 +79,7 @@
 				<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
 					{{version.label}} (+{{version.data}})
 				</a>
-				<a *ngIf="model.changeLogAvailable(model.getEncodedValue(version.label))" target="_blank" href="http://mamedev.org/releases/whatsnew_{{model.getVersion(model.getEncodedValue(version.label))}}.txt">
+				<a *ngIf="model.changeLogAvailable(model.getEncodedValue(version.label))" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(model.getEncodedValue(version.label))+'.txt'">
 					<i class="material-icons md-24">track_changes</i>
 				</a>
 			</md-list-item>
