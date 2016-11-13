@@ -1,28 +1,41 @@
 <md-card>
 	<md-card-title>
 		{{'L10N_MY_GAMES'|translate}}
+		<button md-mini-fab scrollToTop>
+			<i class="material-icons md-24 md-light">arrow_drop_up</i>
+		</button>
 	</md-card-title>
 </md-card>
-<md-list>
-	<md-nav-list>
-		<a md-list-item *ngFor="let game of model.data.allGames; trackBy game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
-			<img md-list-avatar [src]="model.getGameIconUrl(game)">
-			<span class="sep"></span>
-			{{game.description}}
-		</a>
-	</md-nav-list>
-</md-list>
+<div *ngIf="model.data.allGames.length > 0">
+	<div class="default-spacer"></div>
+	<md-list>
+		<md-nav-list>
+			<a md-list-item *ngFor="let game of model.data.allGames; trackBy game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
+				<img md-list-avatar [src]="model.getGameIconUrl(game)">
+				<span class="sep"></span>
+				{{game.description}}
+			</a>
+		</md-nav-list>
+	</md-list>
+</div>
+<div class="default-spacer"></div>
 <md-card>
 	<md-card-title>
 		{{'L10N_MY_BIOS'|translate}}
+		<button md-mini-fab scrollToTop>
+			<i class="material-icons md-24 md-light">arrow_drop_up</i>
+		</button>
 	</md-card-title>
 </md-card>
-<md-list>
-	<md-nav-list>
-		<a md-list-item *ngFor="let bios of model.data.allBios; trackBy bios?.name" routerLink="/detail" [queryParams]="{name:bios.name}">
-			<img md-list-avatar [src]="model.getGameIconUrl(bios)">
-			<span class="sep"></span>
-			{{bios.description}}
-		</a>
-	</md-nav-list>
-</md-list>
+<div *ngIf="model.data.allBios.length > 0">
+	<div class="default-spacer"></div>
+	<md-list>
+		<md-nav-list>
+			<a md-list-item *ngFor="let bios of model.data.allBios; trackBy bios?.name" routerLink="/detail" [queryParams]="{name:bios.name}">
+				<img md-list-avatar [src]="model.getGameIconUrl(bios)">
+				<span class="sep"></span>
+				{{bios.description}}
+			</a>
+		</md-nav-list>
+	</md-list>
+</div>
