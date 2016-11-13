@@ -69,6 +69,12 @@ md-nav-list
 	cursor:pointer;
 }
 
+[scrollToTop]
+{
+	float:right;
+	top: -6px;
+}
+
 .default-spacer
 {
 	height:10px;
