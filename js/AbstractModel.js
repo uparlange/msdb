@@ -107,6 +107,10 @@ function(AbstractClass, AppUtils)
 			{
 				this.onDestroy();
 			}
+			else
+			{
+				console.warn(this.getClassName(), "onDestroy?");
+			}
 		}
 	});			
 });

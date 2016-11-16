@@ -31,6 +31,10 @@ function (AbstractClass)
 			{
 				this.onDestroy(this._element);
 			}
+			else
+			{
+				console.warn(this.getClassName(), "onDestroy?");
+			}
 		}
 	});			
 });
