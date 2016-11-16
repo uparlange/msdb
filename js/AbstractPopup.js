@@ -28,7 +28,7 @@ function(AbstractClass)
 			}
 			else
 			{
-				console.warn(this.getClassName(), "onDestroy?");
+				this.getLogger().warn("onDestroy?");
 			}
 		},
 		close:function()
