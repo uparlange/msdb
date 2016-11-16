@@ -20,6 +20,17 @@ function(AbstractClass)
 				this.onInit();
 			}
 		},
+		ngOnDestroy : function()
+		{
+			if(typeof this.onDestroy === "function")
+			{
+				this.onDestroy();
+			}
+			else
+			{
+				console.warn(this.getClassName(), "onDestroy?");
+			}
+		},
 		close:function()
 		{
 			this._mdDialogRef.close();

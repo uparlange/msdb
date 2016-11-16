@@ -2,10 +2,14 @@ define(function ()
 {
 	const AbstractClass = function ()
 	{
-		console.log(this.constructor.name, "constructor");
+		console.log(this.getClassName(), "constructor");
 	};
 	
 	return ng.core.Class({
-		constructor:AbstractClass
+		constructor:AbstractClass,
+		getClassName:function()
+		{
+			return this.constructor.name;
+		}
 	});			
 });
