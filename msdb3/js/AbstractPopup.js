@@ -13,6 +13,13 @@ function(AbstractClass)
 	return ng.core.Class({
 		extends:AbstractClass,
 		constructor:AbstractPopup,
+		ngOnInit : function()
+		{
+			if(typeof this.onInit === "function")
+			{
+				this.onInit();
+			}
+		},
 		close:function()
 		{
 			this._mdDialogRef.close();
