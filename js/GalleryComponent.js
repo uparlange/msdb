@@ -1,22 +1,23 @@
-define(["app:AppUtils"], 
-function(AppUtils) 
+define(["app:AbstractComponent", "app:AppUtils"], 
+function(AbstractComponent, AppUtils) 
 {
+	const GalleryComponent = function (element)
+	{
+		AbstractComponent.call(this, element);
+		
+		this._gallery = null;
+		
+		this._masonry = null;
+		
+		this._resizeTimeout = null;
+	};
+	
 	return ng.core.Component(AppUtils.getComponentConfiguration("gallery", {
 		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
 	})).Class({
-		constructor: [ng.core.ElementRef,
-			function (element)
-			{
-				this._element = element;
-				
-				this._gallery = null;
-				
-				this._masonry = null;
-				
-				this._resizeTimeout = null;
-			}
-		],
-		ngOnInit:function()
+		extends:AbstractComponent,
+		constructor: [ng.core.ElementRef, GalleryComponent],
+		onInit:function(element)
 		{
 			this._windowResizeHandler = () =>
 			{
@@ -25,7 +26,7 @@ function(AppUtils)
 			
 			window.addEventListener("resize", this._windowResizeHandler);
 		},
-		ngOnDestroy:function()
+		onDestroy:function(element)
 		{
 			if(this._gallery !== null)
 			{
@@ -124,15 +125,11 @@ function(AppUtils)
 		},
 		_getGalleryContainer:function()
 		{
-			const element = this._element.nativeElement;
-			
-			return element.getElementsByClassName("gallery")[0];
+			return this._element.getElementsByClassName("gallery")[0];
 		},
 		_getPhotoSwipeContainer:function()
 		{
-			const element = this._element.nativeElement;
-			
-			return element.getElementsByClassName("pswp")[0];
+			return this._element.getElementsByClassName("pswp")[0];
 		},
 		_getColWidth:function()
 		{
@@ -146,8 +143,6 @@ function(AppUtils)
 			{
 				this._gallery.close();
 			}
-			
-			const element = this._element.nativeElement;
 			
 			const items = this._getAllowedImageProvider();
 
