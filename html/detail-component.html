@@ -62,18 +62,18 @@
 				<span class="sep">:</span>
 				<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
 			</md-list-item>
-			<md-list-item *ngIf="model.data.game.dipswitchs.length > 0 || model.data.game.chips.length > 0 || model.data.game.biossets.length > 0">
+			<md-list-item>
 				{{'L10N_MORE'|translate}}
 				<span class="sep">:</span>
 				<button md-icon-button [md-menu-trigger-for]="menu">
 					<i class="material-icons md-24">menu</i>
 				</button>
 				<md-menu #menu="mdMenu">
-					<button md-menu-item *ngIf="model.data.game.dipswitchs.length > 0" (click)="openDipSwitchsPopup()">{{'L10N_DIP_SWITCH'|translate}}</button>
-					<button md-menu-item *ngIf="model.data.game.chips.length > 0" (click)="openChipsPopup()">{{'L10N_CHIP'|translate}}</button>
-					<button md-menu-item *ngIf="model.data.game.biossets.length > 0" (click)="openBiossetsPopup()">{{'L10N_BIOS_SET'|translate}}</button>
-					<button md-menu-item *ngIf="model.data.game.ports.length > 0" (click)="openPortsPopup()">{{'L10N_PORT'|translate}}</button>
-					<button md-menu-item *ngIf="model.data.game.devicerefs.length > 0" (click)="openDeviceReferencesPopup()">{{'L10N_DEVICE_REF'|translate}}</button>
+					<button md-menu-item [disabled]="!model.data.game.dipswitchs.length > 0" (click)="openDipSwitchsPopup()">{{'L10N_DIP_SWITCH'|translate}}</button>
+					<button md-menu-item [disabled]="!model.data.game.chips.length > 0" (click)="openChipsPopup()">{{'L10N_CHIP'|translate}}</button>
+					<button md-menu-item [disabled]="!model.data.game.biossets.length > 0" (click)="openBiossetsPopup()">{{'L10N_BIOS_SET'|translate}}</button>
+					<button md-menu-item [disabled]="!model.data.game.ports.length > 0" (click)="openPortsPopup()">{{'L10N_PORT'|translate}}</button>
+					<button md-menu-item [disabled]="!model.data.game.devicerefs.length > 0" (click)="openDeviceReferencesPopup()">{{'L10N_DEVICE_REF'|translate}}</button>
 				</md-menu>
 			</md-list-item>
 		</md-list>

@@ -1,20 +1,27 @@
-define(["app:AppUtils"],  
-function(AppUtils) 
+define(["app:AbstractClass", "app:AppUtils"],  
+function(AbstractClass, AppUtils) 
 {
+	const AbstractViewModel = function (MsdbService, ConnectionManager)
+	{
+		AbstractClass.call(this);
+		
+		this._msdbService = MsdbService;
+		this._connectionManager = ConnectionManager;
+		
+		this._connectionManagerChangeSubscriber = null;
+		
+		this.params = {};
+		
+		this.data = this._getInitData();
+	};
+	
 	return ng.core.Class({
-		constructor:function (MsdbService, ConnectionManager)
-		{
-			this._msdbService = MsdbService;
-			this._connectionManager = ConnectionManager;
-			
-			this._connectionManagerChangeSubscriber = null;
-			
-			this.params = {};
-			
-			this.data = this._getInitData();
-		},
+		extends:AbstractClass,
+		constructor:AbstractViewModel,
 		init:function(params)
 		{
+			console.info(this.constructor.name, "init");
+			
 			this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
 			{
 				this.params.online = online;
@@ -38,6 +45,8 @@ function(AppUtils)
 		},
 		destroy:function()
 		{
+			console.info(this.constructor.name, "destroy");
+			
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
 			
 			this._callDestroyMethod();
@@ -86,6 +95,8 @@ function(AppUtils)
 		{
 			if(typeof this._init === "function")
 			{
+				console.info(this.constructor.name, "_init");
+				
 				this._init();
 			}
 		},
@@ -93,6 +104,8 @@ function(AppUtils)
 		{
 			if(typeof this._refresh === "function")
 			{
+				console.info(this.constructor.name, "_refresh");
+				
 				this._refresh();
 			}
 		},
@@ -100,6 +113,8 @@ function(AppUtils)
 		{
 			if(typeof this._destroy === "function")
 			{
+				console.info(this.constructor.name, "_destroy");
+				
 				this._destroy();
 			}
 		}

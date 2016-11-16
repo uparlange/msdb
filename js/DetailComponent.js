@@ -5,21 +5,21 @@ function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, Clo
 		 DipSwitchsComponent, AppUtils, ChipsComponent, BiossetsComponent, PortsComponent,
 		 DeviceRefsComponent) 
 {
+	const DetailComponent = function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
+	{
+		AbstractViewComponent.call(this, DetailModel, ActivatedRoute);
+		
+		this._viewContainerRef = ViewContainerRef;
+		
+		this._mdDialog = MdDialog;
+		
+		this._dialogRef = null;
+	};
+	
 	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
 	{
 		extends:AbstractViewComponent,
-		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog,
-			function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
-			{
-				AbstractViewComponent.call(this, DetailModel, ActivatedRoute);
-				
-				this._viewContainerRef = ViewContainerRef;
-				
-				this._mdDialog = MdDialog;
-				
-				this._dialogRef = null;
-			}
-		],
+		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog, DetailComponent],
 		videoStateChange:function(event)
 		{
 			this.model.setVideoAvailable((event.type !== "error"));

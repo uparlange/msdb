@@ -6,7 +6,6 @@ function(TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
-			ng.router.RouterModule,
 			ng.material.MaterialModule.forRoot()
 		],
 		declarations:[
@@ -19,7 +18,6 @@ function(TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
-			ng.router.RouterModule,
 			ng.material.MaterialModule,
 			TranslatePipe,
 			NgForItemComponent,

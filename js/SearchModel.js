@@ -1,14 +1,14 @@
 define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager"], 
 function(AbstractViewModel, MsdbService, ConnectionManager) 
 {
+	const SearchModel = function(MsdbService, ConnectionManager)
+	{
+		AbstractViewModel.call(this, MsdbService, ConnectionManager);
+	};
+	
 	return ng.core.Class({
 		extends:AbstractViewModel,
-		constructor:[MsdbService, ConnectionManager,
-			function(MsdbService, ConnectionManager)
-			{
-				AbstractViewModel.call(this, MsdbService, ConnectionManager);
-			}
-		],
+		constructor:[MsdbService, ConnectionManager, SearchModel],
 		getSearchTabLabel:function(index)
 		{
 			const tabKey = this._getTabInfos().byIndex(index).key;
