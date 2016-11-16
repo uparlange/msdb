@@ -1,29 +1,26 @@
-define(["app:LazyManager"], 
-function(LazyManager) 
+define(["app:AbstractDirective", "app:LazyManager"], 
+function(AbstractDirective, LazyManager) 
 {
+	const LazyDirective = function (element, LazyManager)
+	{
+		AbstractDirective.call(this, element);
+		
+		this._blazyManager = LazyManager;
+	};
+	
 	return ng.core.Directive({
 		selector: "[lazySrc]",
 		inputs: ["lazySrc"]
 	}).Class({
-		constructor: [ng.core.ElementRef, LazyManager,
-			function (element, LazyManager)
-			{
-				this._element = element;
-				
-				this._blazyManager = LazyManager;
-			}
-		],
-		ngOnInit:function()
+		extends:AbstractDirective,
+		constructor: [ng.core.ElementRef, LazyManager, LazyDirective],
+		onInit:function(element)
 		{
-			const element = this._element.nativeElement;
-			
 			element.classList.add("b-lazy");
 			element.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 		},
-		ngOnChanges: function (event)
+		onChanges: function (element, event)
 		{
-			const element = this._element.nativeElement;
-			
 			if(event.hasOwnProperty("lazySrc"))
 			{
 				const lazySrc = event.lazySrc.currentValue || null;
@@ -34,10 +31,6 @@ function(LazyManager)
 					this._blazyManager.register(element);
 				}
 			}
-		},
-		ngOnDestroy:function()
-		{
-
 		}
 	});
 });

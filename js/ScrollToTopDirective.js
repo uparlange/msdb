@@ -1,18 +1,18 @@
-define(function() 
+define(["app:AbstractDirective"],
+function(AbstractDirective) 
 {
+	const ScrollToTopDirective = function (element)
+	{
+		AbstractDirective.call(this, element);
+	};
+	
 	return ng.core.Directive({
 		selector: "[scrollToTop]"
 	}).Class({
-		constructor: [ng.core.ElementRef,
-			function (element)
-			{
-				this._element = element;
-			}
-		],
-		ngOnInit : function()
+		extends:AbstractDirective,
+		constructor: [ng.core.ElementRef, ScrollToTopDirective],
+		onInit : function(element)
 		{
-			const element = this._element.nativeElement;
-			
 			this._clickHandler = function()
 			{
 				window.scrollTo(0,0);
@@ -20,10 +20,8 @@ define(function()
 			
 			element.addEventListener("click", this._clickHandler);
 		},
-		ngOnDestroy : function()
+		onDestroy : function(element)
 		{
-			const element = this._element.nativeElement;
-			
 			element.removeEventListener("click", this._clickHandler);
 		}
 	});	
