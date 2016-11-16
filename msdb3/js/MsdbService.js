@@ -1,16 +1,19 @@
-define(["app:EventManager", "app:AppUtils"], 
-function(EventManager, AppUtils) 
+define(["app:AbstractService", "app:EventManager", "app:AppUtils"], 
+function(AbstractService, EventManager, AppUtils) 
 {
+	const MsdbService = function (http, eventManager)
+	{
+		AbstractService.call(this);
+		
+		this._http = http;
+		this._eventManager = eventManager;
+		
+		this._initialized = false;
+	};
+	
 	return ng.core.Class({
-		constructor: [ng.http.Http, EventManager,
-			function (http, eventManager)
-			{
-				this._http = http;
-				this._eventManager = eventManager;
-				
-				this._initialized = false;
-			}
-		],
+		extends:AbstractService,
+		constructor: [ng.http.Http, EventManager, MsdbService],
 		getMameInfos : function()
 		{
 			const url = AppUtils.getServiceUrl("mameinfos");
