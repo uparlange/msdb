@@ -1,9 +1,9 @@
-define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager"], 
-function(AbstractViewModel, MsdbService, ConnectionManager, TranslateManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, TranslateManager) 
 {
 	const AppModel = function (MsdbService, ConnectionManager, Router, TranslateManager)
 	{
-		AbstractViewModel.call(this, MsdbService, ConnectionManager);
+		AbstractModel.call(this, MsdbService, ConnectionManager);
 		
 		this._router = Router;
 		this._translateManager = TranslateManager;
@@ -42,7 +42,7 @@ function(AbstractViewModel, MsdbService, ConnectionManager, TranslateManager)
 	};
 	
 	return ng.core.Class({
-		extends:AbstractViewModel,
+		extends:AbstractModel,
 		constructor: [MsdbService, ConnectionManager, ng.router.Router, TranslateManager, AppModel],
 		_askForReload : function()
 		{

@@ -1,7 +1,7 @@
 define(["app:AbstractClass", "app:AppUtils"],  
 function(AbstractClass, AppUtils) 
 {
-	const AbstractViewModel = function (MsdbService, ConnectionManager)
+	const AbstractModel = function (MsdbService, ConnectionManager)
 	{
 		AbstractClass.call(this);
 		
@@ -17,7 +17,7 @@ function(AbstractClass, AppUtils)
 	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractViewModel,
+		constructor:AbstractModel,
 		init:function(params)
 		{
 			console.info(this.constructor.name, "init");
