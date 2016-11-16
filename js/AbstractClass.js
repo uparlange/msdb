@@ -9,7 +9,17 @@ define(function ()
 		constructor:AbstractClass,
 		getClassName:function()
 		{
-			return this.constructor.name;
+			let className = "";
+			try 
+			{
+				className = this.constructor.name;
+			}
+			catch(e)
+			{
+				// Tant pis :-(
+			}
+			
+			return className;
 		},
 		getLogger:function()
 		{

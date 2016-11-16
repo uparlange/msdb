@@ -5,7 +5,7 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
 		 ConnectionManager, LazyManager) 
 {
-	//ng.core.enableProdMode();
+	ng.core.enableProdMode();
 
 	const AppModule = function ()
 	{
