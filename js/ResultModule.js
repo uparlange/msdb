@@ -1,5 +1,5 @@
-define(["app:AbstractModule", "app:CommonModule", "app:ResultComponent", "app:ResultModel"], 
-function(AbstractModule, CommonModule, ResultComponent, ResultModel)
+define(["app:AbstractModule", "app:CommonModule", "app:ResultView", "app:ResultModel"], 
+function(AbstractModule, CommonModule, ResultView, ResultModel)
 {
 	const ResultModule = function ()
 	{
@@ -10,11 +10,11 @@ function(AbstractModule, CommonModule, ResultComponent, ResultModel)
 		imports:[
 			CommonModule,
 			ng.router.RouterModule.forChild([
-				{path: "", component: ResultComponent}
+				{path: "", component: ResultView}
 			])
 		],
 		declarations:[
-			ResultComponent
+			ResultView
 		],
 		providers:[
 			ResultModel

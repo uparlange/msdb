@@ -1,7 +1,7 @@
-define(["app:AbstractModule", "app:CommonModule", "app:DetailComponent", "app:DetailModel", "app:DriverPopup", 
+define(["app:AbstractModule", "app:CommonModule", "app:DetailView", "app:DetailModel", "app:DriverPopup", 
 		"app:RomsPopup", "app:ClonesPopup", "app:VideoDirective", "app:GalleryComponent", "app:DipSwitchsPopup", 
 		"app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup", "app:DeviceRefsPopup"], 
-function(AbstractModule, CommonModule, DetailComponent, DetailModel, DriverPopup, 
+function(AbstractModule, CommonModule, DetailView, DetailModel, DriverPopup, 
 		 RomsPopup, ClonesPopup, VideoDirective, GalleryComponent, DipSwitchsPopup, 
 		 ChipsPopup, BiossetsPopup, PortsPopup, DeviceRefsPopup)
 {
@@ -14,11 +14,11 @@ function(AbstractModule, CommonModule, DetailComponent, DetailModel, DriverPopup
 		imports:[
 			CommonModule,
 			ng.router.RouterModule.forChild([
-				{path: "", component: DetailComponent}
+				{path: "", component: DetailView}
 			])
 		],
 		declarations:[
-			DetailComponent,
+			DetailView,
 			DriverPopup,
 			RomsPopup,
 			ClonesPopup,

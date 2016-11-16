@@ -1,5 +1,5 @@
-define(["app:AbstractModule", "app:CommonModule", "app:MyGamesComponent", "app:MyGamesModel"], 
-function(AbstractModule, CommonModule, MyGamesComponent, MyGamesModel)
+define(["app:AbstractModule", "app:CommonModule", "app:MyGamesView", "app:MyGamesModel"], 
+function(AbstractModule, CommonModule, MyGamesView, MyGamesModel)
 {
 	const MyGamesModule = function ()
 	{
@@ -10,11 +10,11 @@ function(AbstractModule, CommonModule, MyGamesComponent, MyGamesModel)
 		imports:[
 			CommonModule,
 			ng.router.RouterModule.forChild([
-				{path: "", component: MyGamesComponent}
+				{path: "", component: MyGamesView}
 			])
 		],
 		declarations:[
-			MyGamesComponent
+			MyGamesView
 		],
 		providers:[
 			MyGamesModel

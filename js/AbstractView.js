@@ -1,7 +1,7 @@
 define(["app:AbstractClass"],
 function(AbstractClass) 
 {
-	const AbstractViewComponent = function (Model, ActivatedRoute)
+	const AbstractView = function (Model, ActivatedRoute)
 	{
 		AbstractClass.call(this);
 		
@@ -14,7 +14,7 @@ function(AbstractClass)
 	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractViewComponent,
+		constructor:AbstractView,
 		ngOnInit:function()
 		{
 			console.info(this.constructor.name, "init");
