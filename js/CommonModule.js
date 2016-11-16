@@ -1,6 +1,11 @@
-define(["app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective", "app:ScrollToTopDirective"], 
-function(TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
+define(["app:AbstractModule", "app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective", "app:ScrollToTopDirective"], 
+function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
 {
+	const CommonModule = function()
+	{
+		AbstractModule.call(this);
+	};
+	
 	return ng.core.NgModule({
 		imports:[
 			ng.common.CommonModule,
@@ -25,9 +30,7 @@ function(TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
 			ScrollToTopDirective
 		]
 	}).Class({
-		constructor: function ()
-		{
-			
-		}
+		extends:AbstractModule,
+		constructor:CommonModule
 	});
 });

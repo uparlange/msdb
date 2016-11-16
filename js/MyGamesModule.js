@@ -1,14 +1,17 @@
-define(["app:CommonModule", "app:MyGamesComponent", "app:MyGamesModel"], 
-function(CommonModule, MyGamesComponent, MyGamesModel)
+define(["app:AbstractModule", "app:CommonModule", "app:MyGamesComponent", "app:MyGamesModel"], 
+function(AbstractModule, CommonModule, MyGamesComponent, MyGamesModel)
 {
-	const routes = [
-		{path: "", component: MyGamesComponent}
-	];
+	const MyGamesModule = function ()
+	{
+		AbstractModule.call(this);
+	};
 	
 	return ng.core.NgModule({
 		imports:[
 			CommonModule,
-			ng.router.RouterModule.forChild(routes)
+			ng.router.RouterModule.forChild([
+				{path: "", component: MyGamesComponent}
+			])
 		],
 		declarations:[
 			MyGamesComponent
@@ -17,9 +20,7 @@ function(CommonModule, MyGamesComponent, MyGamesModel)
 			MyGamesModel
 		]
 	}).Class({
-		constructor: function ()
-		{
-			
-		}
+		extends:AbstractModule,
+		constructor:MyGamesModule
 	});
 });

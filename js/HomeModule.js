@@ -1,14 +1,17 @@
-define(["app:CommonModule", "app:HomeComponent", "app:HomeModel"], 
-function(CommonModule, HomeComponent, HomeModel)
+define(["app:AbstractModule", "app:CommonModule", "app:HomeComponent", "app:HomeModel"], 
+function(AbstractModule, CommonModule, HomeComponent, HomeModel)
 {
-	const routes = [
-		{path: "", component: HomeComponent}
-	];
+	const HomeModule = function ()
+	{
+		AbstractModule.call(this);
+	};
 	
 	return ng.core.NgModule({
 		imports:[
 			CommonModule,
-			ng.router.RouterModule.forChild(routes)
+			ng.router.RouterModule.forChild([
+				{path: "", component: HomeComponent}
+			])
 		],
 		declarations:[
 			HomeComponent
@@ -17,9 +20,7 @@ function(CommonModule, HomeComponent, HomeModel)
 			HomeModel
 		]
 	}).Class({
-		constructor: function ()
-		{
-			
-		}
+		extends:AbstractModule,
+		constructor:[HomeModule] 
 	});
 });
