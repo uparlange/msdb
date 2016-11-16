@@ -12,7 +12,7 @@ function(AbstractPopup, DetailModel, AppUtils)
 	{
 		extends:AbstractPopup,
 		constructor: [DetailModel, ng.material.MdDialogRef, DipSwitchsPopup],
-		ngOnInit:function()
+		onInit:function()
 		{
 			const map = {};
 			const provider = [];
