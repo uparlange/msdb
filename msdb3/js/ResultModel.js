@@ -1,14 +1,14 @@
 define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager"], 
 function(AbstractViewModel, MsdbService, ConnectionManager) 
 {
+	const ResultModel = function(MsdbService, ConnectionManager)
+	{
+		AbstractViewModel.call(this, MsdbService, ConnectionManager);
+	};
+	
 	return ng.core.Class({
 		extends:AbstractViewModel,
-		constructor:[MsdbService, ConnectionManager,
-			function(MsdbService, ConnectionManager)
-			{
-				AbstractViewModel.call(this, MsdbService, ConnectionManager);
-			}
-		],
+		constructor:[MsdbService, ConnectionManager, ResultModel],
 		getSearchLabel:function(type)
 		{
 			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";

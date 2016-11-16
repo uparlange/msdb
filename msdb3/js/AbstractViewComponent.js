@@ -1,16 +1,24 @@
-define(function() 
+define(["app:AbstractClass"],
+function(AbstractClass) 
 {
-	return ng.core.Class({
-		constructor:function (Model, ActivatedRoute)
-		{
-			this.model = Model;
-				
-			this._activatedRoute = ActivatedRoute;
+	const AbstractViewComponent = function (Model, ActivatedRoute)
+	{
+		AbstractClass.call(this);
+		
+		this.model = Model;
 			
-			this._activatedRouteQueryParamsSubscriber = null;
-		},
+		this._activatedRoute = ActivatedRoute;
+		
+		this._activatedRouteQueryParamsSubscriber = null;
+	};
+	
+	return ng.core.Class({
+		extends:AbstractClass,
+		constructor:AbstractViewComponent,
 		ngOnInit:function()
 		{
+			console.info(this.constructor.name, "init");
+			
 			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
 			{
 				this.model.init(params);
@@ -18,6 +26,8 @@ define(function()
 		},
 		ngOnDestroy:function()
 		{
+			console.info(this.constructor.name, "destroy");
+			
 			this.model.destroy();
 			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();

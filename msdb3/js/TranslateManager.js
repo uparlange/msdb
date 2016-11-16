@@ -1,21 +1,25 @@
-define(function () 
+define(["app:AbstractManager"],
+function (AbstractManager) 
 {
-    return ng.core.Class({
-        constructor: [ng.http.Http,
-			function (http)
-			{
-				this._http = http;
-				
-				this.onLanguageChange = new ng.core.EventEmitter();
+	const TranslateManager = function (http)
+	{
+		AbstractManager.call(this);
+		
+		this._http = http;
+		
+		this.onLanguageChange = new ng.core.EventEmitter();
 
-				this._properties = {};
-				
-				this._loading = false;
-				this._pendingRequests = [];
-				
-				this.setLanguage(this._getDefaultLanguage());
-			}
-		],
+		this._properties = {};
+		
+		this._loading = false;
+		this._pendingRequests = [];
+		
+		this.setLanguage(this._getDefaultLanguage());
+	};
+	
+    return ng.core.Class({
+		extends:AbstractManager,
+        constructor: [ng.http.Http, TranslateManager],
 		setLanguage:function(lang)
 		{
 			if(this._currentLang !== lang)

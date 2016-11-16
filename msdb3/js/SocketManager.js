@@ -1,16 +1,20 @@
-define(function () 
+define(["app:AbstractManager"],
+function (AbstractManager) 
 {
+	const SocketManager = function ()
+	{
+		AbstractManager.call(this);
+		
+		this._url = "http://localhost:3000";
+		
+		this._eventEmitters = {};
+		
+		this._socket = null;
+	};
+	
     return ng.core.Class({
-        constructor: [
-			function ()
-			{
-				this._url = "http://localhost:3000";
-				
-				this._eventEmitters = {};
-				
-				this._socket = null;
-			}
-		],
+		extends:AbstractManager,
+        constructor: [SocketManager],
 		on:function(eventName)
 		{
 			let eventEmitter = this._eventEmitters[eventName];
