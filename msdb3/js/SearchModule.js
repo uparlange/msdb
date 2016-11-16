@@ -1,5 +1,5 @@
-define(["app:AbstractModule", "app:CommonModule", "app:SearchComponent", "app:SearchModel"], 
-function(AbstractModule, CommonModule, SearchComponent, SearchModel)
+define(["app:AbstractModule", "app:CommonModule", "app:SearchView", "app:SearchModel"], 
+function(AbstractModule, CommonModule, SearchView, SearchModel)
 {
 	const SearchModule = function ()
 	{
@@ -10,11 +10,11 @@ function(AbstractModule, CommonModule, SearchComponent, SearchModel)
 		imports:[
 			CommonModule,
 			ng.router.RouterModule.forChild([
-				{path: "", component: SearchComponent}
+				{path: "", component: SearchView}
 			])
 		],
 		declarations:[
-			SearchComponent
+			SearchView
 		],
 		providers:[
 			SearchModel

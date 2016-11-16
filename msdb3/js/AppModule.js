@@ -1,7 +1,7 @@
-define(["app:AbstractModule", "app:CommonModule", "app:AppComponent", "app:MsdbService", "app:AppModel", 
+define(["app:AbstractModule", "app:CommonModule", "app:AppView", "app:MsdbService", "app:AppModel", 
 		"app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager", 
 		"app:ConnectionManager", "app:LazyManager"], 
-function(AbstractModule, CommonModule, AppComponent, MsdbService, AppModel, 
+function(AbstractModule, CommonModule, AppView, MsdbService, AppModel, 
 		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
 		 ConnectionManager, LazyManager) 
 {
@@ -26,7 +26,7 @@ function(AbstractModule, CommonModule, AppComponent, MsdbService, AppModel,
 			], {useHash:true})
 		],
 		declarations:[
-			AppComponent,
+			AppView,
 			ProgressBarDirective
 		],
 		providers:[
@@ -39,7 +39,7 @@ function(AbstractModule, CommonModule, AppComponent, MsdbService, AppModel,
 			LazyManager
 		],
 		bootstrap:[
-			AppComponent
+			AppView
 		]
 	}).Class({
 		extends:AbstractModule,

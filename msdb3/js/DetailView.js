@@ -1,13 +1,13 @@
-define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverPopup", "app:RomsPopup", "app:ClonesPopup", 
+define(["app:AbstractView", "app:DetailModel", "app:DriverPopup", "app:RomsPopup", "app:ClonesPopup", 
 		"app:DipSwitchsPopup", "app:AppUtils", "app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup",
 		"app:DeviceRefsPopup"], 
-function(AbstractViewComponent, DetailModel, DriverPopup, RomsPopup, ClonesPopup, 
+function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup, 
 		 DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
 		 DeviceRefsPopup) 
 {
-	const DetailComponent = function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
+	const DetailView = function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
 	{
-		AbstractViewComponent.call(this, DetailModel, ActivatedRoute);
+		AbstractView.call(this, DetailModel, ActivatedRoute);
 		
 		this._viewContainerRef = ViewContainerRef;
 		
@@ -18,8 +18,8 @@ function(AbstractViewComponent, DetailModel, DriverPopup, RomsPopup, ClonesPopup
 	
 	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
 	{
-		extends:AbstractViewComponent,
-		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog, DetailComponent],
+		extends:AbstractView,
+		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog, DetailView],
 		videoStateChange:function(event)
 		{
 			this.model.setVideoAvailable((event.type !== "error"));
