@@ -1,13 +1,13 @@
-define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager"], 
-function(AbstractViewModel, MsdbService, ConnectionManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
+function(AbstractModel, MsdbService, ConnectionManager) 
 {
 	const ResultModel = function(MsdbService, ConnectionManager)
 	{
-		AbstractViewModel.call(this, MsdbService, ConnectionManager);
+		AbstractModel.call(this, MsdbService, ConnectionManager);
 	};
 	
 	return ng.core.Class({
-		extends:AbstractViewModel,
+		extends:AbstractModel,
 		constructor:[MsdbService, ConnectionManager, ResultModel],
 		getSearchLabel:function(type)
 		{

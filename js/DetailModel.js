@@ -1,9 +1,9 @@
-define(["app:AbstractViewModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
-function(AbstractViewModel, MsdbService, ConnectionManager, SocketManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, SocketManager) 
 {
 	const DetailModel = function (MsdbService, ConnectionManager, SocketManager)
 	{
-		AbstractViewModel.call(this, MsdbService, ConnectionManager);
+		AbstractModel.call(this, MsdbService, ConnectionManager);
 		
 		this._socketManager = SocketManager;
 		
@@ -11,7 +11,7 @@ function(AbstractViewModel, MsdbService, ConnectionManager, SocketManager)
 	};
 	
 	return ng.core.Class({
-		extends:AbstractViewModel,
+		extends:AbstractModel,
 		constructor: [MsdbService, ConnectionManager, SocketManager, DetailModel],
 		playGame:function()
 		{
