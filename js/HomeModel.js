@@ -9,7 +9,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 	return ng.core.Class({
 		extends:AbstractModel,
 		constructor:[MsdbService, ConnectionManager, HomeModel],
-		_refresh : function()
+		onRefresh : function()
 		{
 			if(this.data.build === null)
 			{

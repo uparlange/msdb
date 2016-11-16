@@ -13,14 +13,14 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 	return ng.core.Class({
 		extends:AbstractModel,
 		constructor: [MsdbService, ConnectionManager, SocketManager, MyGamesModel],
-		_init : function()
+		onInit : function()
 		{
 			this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
 			{
 				this._refresh();
 			});
 		},
-		_refresh:function()
+		onRefresh:function()
 		{
 			this.data = this._getInitData();
 			
@@ -52,7 +52,7 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 				}
 			});
 		},
-		_destroy:function()
+		onDestroy:function()
 		{
 			this._socketManager.off(this._socketManagerConfigChangedSubscriber);
 		},
