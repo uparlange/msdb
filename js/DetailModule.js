@@ -1,9 +1,9 @@
-define(["app:AbstractModule", "app:CommonModule", "app:DetailComponent", "app:DetailModel", "app:DriverComponent", 
-		"app:RomsComponent", "app:ClonesComponent", "app:VideoDirective", "app:GalleryComponent", "app:DipSwitchsComponent", 
-		"app:ChipsComponent", "app:BiossetsComponent", "app:PortsComponent", "app:DeviceRefsComponent"], 
-function(AbstractModule, CommonModule, DetailComponent, DetailModel, DriverComponent, 
-		 RomsComponent, ClonesComponent, VideoDirective, GalleryComponent, DipSwitchsComponent, 
-		 ChipsComponent, BiossetsComponent, PortsComponent, DeviceRefsComponent)
+define(["app:AbstractModule", "app:CommonModule", "app:DetailComponent", "app:DetailModel", "app:DriverPopup", 
+		"app:RomsPopup", "app:ClonesPopup", "app:VideoDirective", "app:GalleryComponent", "app:DipSwitchsPopup", 
+		"app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup", "app:DeviceRefsPopup"], 
+function(AbstractModule, CommonModule, DetailComponent, DetailModel, DriverPopup, 
+		 RomsPopup, ClonesPopup, VideoDirective, GalleryComponent, DipSwitchsPopup, 
+		 ChipsPopup, BiossetsPopup, PortsPopup, DeviceRefsPopup)
 {
 	const DetailModule = function ()
 	{
@@ -19,29 +19,29 @@ function(AbstractModule, CommonModule, DetailComponent, DetailModel, DriverCompo
 		],
 		declarations:[
 			DetailComponent,
-			DriverComponent,
-			RomsComponent,
-			ClonesComponent,
+			DriverPopup,
+			RomsPopup,
+			ClonesPopup,
 			VideoDirective, 
 			GalleryComponent,
-			DipSwitchsComponent,
-			ChipsComponent,
-			BiossetsComponent,
-			PortsComponent,
-			DeviceRefsComponent
+			DipSwitchsPopup,
+			ChipsPopup,
+			BiossetsPopup,
+			PortsPopup,
+			DeviceRefsPopup
 		],
 		providers:[
 			DetailModel
 		],
 		entryComponents:[
-			DriverComponent,
-			RomsComponent,
-			ClonesComponent,
-			DipSwitchsComponent,
-			ChipsComponent,
-			BiossetsComponent,
-			PortsComponent,
-			DeviceRefsComponent
+			DriverPopup,
+			RomsPopup,
+			ClonesPopup,
+			DipSwitchsPopup,
+			ChipsPopup,
+			BiossetsPopup,
+			PortsPopup,
+			DeviceRefsPopup
 		]
 	}).Class({
 		extends:AbstractModule,

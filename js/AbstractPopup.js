@@ -1,7 +1,7 @@
 define(["app:AbstractClass"],
 function(AbstractClass) 
 {
-	const AbstractPopupComponent = function (Model, MdDialogRef)
+	const AbstractPopup = function (Model, MdDialogRef)
 	{
 		AbstractClass.call(this);
 		
@@ -12,7 +12,7 @@ function(AbstractClass)
 	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractPopupComponent,
+		constructor:AbstractPopup,
 		close:function()
 		{
 			this._mdDialogRef.close();
