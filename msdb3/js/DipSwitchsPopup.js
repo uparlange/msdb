@@ -1,17 +1,17 @@
-define(["app:AbstractPopupComponent", "app:DetailModel", "app:AppUtils"], 
-function(AbstractPopupComponent, DetailModel, AppUtils) 
+define(["app:AbstractPopup", "app:DetailModel", "app:AppUtils"], 
+function(AbstractPopup, DetailModel, AppUtils) 
 {
-	const DipSwitchsComponent = function (DetailModel, MdDialogRef)
+	const DipSwitchsPopup = function (DetailModel, MdDialogRef)
 	{
-		AbstractPopupComponent.call(this, DetailModel, MdDialogRef);
+		AbstractPopup.call(this, DetailModel, MdDialogRef);
 		
 		this.provider = [];
 	};
 	
 	return ng.core.Component(AppUtils.getComponentConfiguration("dipSwitchs")).Class(
 	{
-		extends:AbstractPopupComponent,
-		constructor: [DetailModel, ng.material.MdDialogRef, DipSwitchsComponent],
+		extends:AbstractPopup,
+		constructor: [DetailModel, ng.material.MdDialogRef, DipSwitchsPopup],
 		ngOnInit:function()
 		{
 			const map = {};

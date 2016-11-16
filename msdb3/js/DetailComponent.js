@@ -1,9 +1,9 @@
-define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverComponent", "app:RomsComponent", "app:ClonesComponent", 
-		"app:DipSwitchsComponent", "app:AppUtils", "app:ChipsComponent", "app:BiossetsComponent", "app:PortsComponent",
-		"app:DeviceRefsComponent"], 
-function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, ClonesComponent, 
-		 DipSwitchsComponent, AppUtils, ChipsComponent, BiossetsComponent, PortsComponent,
-		 DeviceRefsComponent) 
+define(["app:AbstractViewComponent", "app:DetailModel", "app:DriverPopup", "app:RomsPopup", "app:ClonesPopup", 
+		"app:DipSwitchsPopup", "app:AppUtils", "app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup",
+		"app:DeviceRefsPopup"], 
+function(AbstractViewComponent, DetailModel, DriverPopup, RomsPopup, ClonesPopup, 
+		 DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
+		 DeviceRefsPopup) 
 {
 	const DetailComponent = function (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
 	{
@@ -26,35 +26,35 @@ function(AbstractViewComponent, DetailModel, DriverComponent, RomsComponent, Clo
 		},
 		openDriverPopup:function()
 		{
-			this._openPopup(DriverComponent);
+			this._openPopup(DriverPopup);
 		},
 		openRomsPopup:function()
 		{
-			this._openPopup(RomsComponent);
+			this._openPopup(RomsPopup);
 		},
 		openClonesPopup:function()
 		{
-			this._openPopup(ClonesComponent);
+			this._openPopup(ClonesPopup);
 		},
 		openDipSwitchsPopup:function()
 		{
-			this._openPopup(DipSwitchsComponent);
+			this._openPopup(DipSwitchsPopup);
 		},
 		openChipsPopup:function()
 		{
-			this._openPopup(ChipsComponent);
+			this._openPopup(ChipsPopup);
 		},
 		openBiossetsPopup:function()
 		{
-			this._openPopup(BiossetsComponent);
+			this._openPopup(BiossetsPopup);
 		},
 		openPortsPopup:function()
 		{
-			this._openPopup(PortsComponent);
+			this._openPopup(PortsPopup);
 		},
 		openDeviceReferencesPopup:function()
 		{
-			this._openPopup(DeviceRefsComponent);
+			this._openPopup(DeviceRefsPopup);
 		},
 		_openPopup:function(clazz)
 		{
