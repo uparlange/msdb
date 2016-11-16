@@ -2,7 +2,7 @@ define(function ()
 {
 	const AbstractClass = function ()
 	{
-		console.log(this.getClassName(), "constructor");
+		this.getLogger().info("constructor");
 	};
 	
 	return ng.core.Class({
@@ -10,6 +10,20 @@ define(function ()
 		getClassName:function()
 		{
 			return this.constructor.name;
+		},
+		getLogger:function()
+		{
+			const that = this;
+			return {
+				info:function(message)
+				{
+					console.info(that.getClassName(), message);
+				},
+				warn:function(message)
+				{
+					console.warn(that.getClassName(), message);
+				}
+			};
 		}
 	});			
 });

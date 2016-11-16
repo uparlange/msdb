@@ -109,7 +109,7 @@ function(AbstractClass, AppUtils)
 			}
 			else
 			{
-				console.warn(this.getClassName(), "onDestroy?");
+				this.getLogger().warn("onDestroy?");
 			}
 		}
 	});			
