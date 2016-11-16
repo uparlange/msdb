@@ -9,11 +9,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 	return ng.core.Class({
 		extends:AbstractModel,
 		constructor:[MsdbService, ConnectionManager, ResultModel],
-		getSearchLabel:function(type)
-		{
-			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
-		},
-		_refresh:function()
+		onRefresh:function()
 		{
 			this.data = this._getInitData();
 			this._msdbService.search(this.params.type, this.params.value).subscribe((data) => 
@@ -47,6 +43,10 @@ function(AbstractModel, MsdbService, ConnectionManager)
 					this.data.list = list;
 				}
 			});	
+		},
+		getSearchLabel:function(type)
+		{
+			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
 		},
 		_getInitData:function()
 		{

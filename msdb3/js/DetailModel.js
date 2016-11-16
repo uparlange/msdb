@@ -13,30 +13,14 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 	return ng.core.Class({
 		extends:AbstractModel,
 		constructor: [MsdbService, ConnectionManager, SocketManager, DetailModel],
-		playGame:function()
-		{
-			this._socketManager.emit("PLAY_GAME", this.params.name);
-		},
-		setVideoAvailable:function(b)
-		{
-			this.data.videoAvailable = b;
-		},
-		getStatusClass:function(status)
-		{
-			return "label-" + status;
-		},
-		getStatusLabel:function(status)
-		{
-			return "L10N_" + status.toUpperCase();
-		},
-		_init : function()
+		onInit : function()
 		{
 			this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
 			{
 				this._refreshGameAvailability();
 			});
 		},
-		_refresh:function()
+		onRefresh:function()
 		{
 			this.data = this._getInitData();
 				
@@ -60,9 +44,25 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 				this._refreshGameAvailability();
 			});
 		},
-		_destroy:function()
+		onDestroy:function()
 		{
 			this._socketManager.off(this._socketManagerConfigChangedSubscriber);
+		},
+		playGame:function()
+		{
+			this._socketManager.emit("PLAY_GAME", this.params.name);
+		},
+		setVideoAvailable:function(b)
+		{
+			this.data.videoAvailable = b;
+		},
+		getStatusClass:function(status)
+		{
+			return "label-" + status;
+		},
+		getStatusLabel:function(status)
+		{
+			return "L10N_" + status.toUpperCase();
 		},
 		_refreshGameAvailability:function()
 		{

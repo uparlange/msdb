@@ -20,8 +20,6 @@ function(AbstractClass, AppUtils)
 		constructor:AbstractModel,
 		init:function(params)
 		{
-			console.info(this.constructor.name, "init");
-			
 			this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
 			{
 				this.params.online = online;
@@ -45,8 +43,6 @@ function(AbstractClass, AppUtils)
 		},
 		destroy:function()
 		{
-			console.info(this.constructor.name, "destroy");
-			
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
 			
 			this._callDestroyMethod();
@@ -93,29 +89,23 @@ function(AbstractClass, AppUtils)
 		},		
 		_callInitMethod:function()
 		{
-			if(typeof this._init === "function")
+			if(typeof this.onInit === "function")
 			{
-				console.info(this.constructor.name, "_init");
-				
-				this._init();
+				this.onInit();
 			}
 		},
 		_callRefreshMethod:function()
 		{
-			if(typeof this._refresh === "function")
+			if(typeof this.onRefresh === "function")
 			{
-				console.info(this.constructor.name, "_refresh");
-				
-				this._refresh();
+				this.onRefresh();
 			}
 		},
 		_callDestroyMethod:function()
 		{
-			if(typeof this._destroy === "function")
+			if(typeof this.onDestroy === "function")
 			{
-				console.info(this.constructor.name, "_destroy");
-				
-				this._destroy();
+				this.onDestroy();
 			}
 		}
 	});			

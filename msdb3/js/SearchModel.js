@@ -9,6 +9,14 @@ function(AbstractModel, MsdbService, ConnectionManager)
 	return ng.core.Class({
 		extends:AbstractModel,
 		constructor:[MsdbService, ConnectionManager, SearchModel],
+		onRefresh:function()
+		{
+			const tabIndex = this._getTabInfos().byType(this.params.type).index;
+			this.data.selectedIndex = tabIndex;
+			
+			const methodeName = "_load" + this.params.type[0].toUpperCase() + this.params.type.substring(1);
+			this[methodeName]();
+		},
 		getSearchTabLabel:function(index)
 		{
 			const tabKey = this._getTabInfos().byIndex(index).key;
@@ -23,14 +31,6 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		changeLogAvailable:function(value)
 		{
 			return (value.indexOf("u") === -1);
-		},
-		_refresh:function()
-		{
-			const tabIndex = this._getTabInfos().byType(this.params.type).index;
-			this.data.selectedIndex = tabIndex;
-			
-			const methodeName = "_load" + this.params.type[0].toUpperCase() + this.params.type.substring(1);
-			this[methodeName]();
 		},
 		_loadDescription:function()
 		{

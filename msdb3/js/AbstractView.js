@@ -17,8 +17,6 @@ function(AbstractClass)
 		constructor:AbstractView,
 		ngOnInit:function()
 		{
-			console.info(this.constructor.name, "init");
-			
 			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
 			{
 				this.model.init(params);
@@ -26,8 +24,6 @@ function(AbstractClass)
 		},
 		ngOnDestroy:function()
 		{
-			console.info(this.constructor.name, "destroy");
-			
 			this.model.destroy();
 			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();
