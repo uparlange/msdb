@@ -1,25 +1,28 @@
-define(["app:TranslateManager"], 
-function(TranslateManager) 
+define(["app:AbstractPipe", "app:TranslateManager"], 
+function(AbstractPipe, TranslateManager) 
 {
+	const TranslatePipe = function (translateManager)
+	{
+		AbstractPipe.call(this);
+		
+		this._translateManager = translateManager;
+		
+		this._onLanguageChangeSubscriber = this._translateManager.onLanguageChange.subscribe(() => 
+		{
+			this._refreshTranslation();
+		});
+		
+		this.tranlateKey = null;
+		
+		this.tranlateValue = null;
+	};
+	
 	return ng.core.Pipe({
 		name:"translate",
 		pure: false
 	}).Class({
-		constructor: [TranslateManager,
-			function (translateManager)
-			{
-				this._translateManager = translateManager;
-				
-				this._onLanguageChangeSubscriber = this._translateManager.onLanguageChange.subscribe(() => 
-				{
-					this._refreshTranslation();
-				});
-				
-				this.tranlateKey = null;
-				
-				this.tranlateValue = null;
-			}
-		],
+		extends:AbstractPipe,
+		constructor: [TranslateManager, TranslatePipe],
 		transform:function(value, attr) 
 		{
 			if(this.tranlateKey !== value)
