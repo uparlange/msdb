@@ -15,6 +15,8 @@ function (AbstractClass)
 		{
 			if(typeof this.onInit === "function")
 			{
+				this.getLogger().info("onInit");
+				
 				this.onInit(this._element);
 			}
 		},
@@ -22,6 +24,8 @@ function (AbstractClass)
 		{
 			if(typeof this.afterContentInit === "function")
 			{
+				this.getLogger().info("afterContentInit");
+				
 				this.afterContentInit(this._element);
 			}
 		},

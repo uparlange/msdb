@@ -3,10 +3,7 @@ function(AbstractService, EventManager, AppUtils)
 {
 	const MsdbService = function (http, eventManager)
 	{
-		AbstractService.call(this);
-		
-		this._http = http;
-		this._eventManager = eventManager;
+		AbstractService.call(this, http, eventManager);
 		
 		this._initialized = false;
 	};
@@ -68,37 +65,28 @@ function(AbstractService, EventManager, AppUtils)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
-			this._eventManager.emit("HTTP_BEGIN");
-			
 			this._init().subscribe(() => 
 			{
 				if(this._initialized)
 				{
-					this._http.get(url).catch((e) =>
+					this.httpGet(url).subscribe((result) =>
 					{
-						this._eventManager.emit("HTTP_END");
-						
-						eventEmitter.emit(null);
-					}).subscribe((result) => 
-					{
-						this._eventManager.emit("HTTP_END");
-						
-						eventEmitter.emit(result.json().data);
+						const value = (result !== null) ? result.data : result;
+						eventEmitter.emit(value);
 					});
 				}
 				else
 				{
-					this._eventManager.emit("HTTP_END");
-					
 					eventEmitter.emit(null);
-				}
-				
+				}	
 			});
+			
 			return eventEmitter;
 		},
 		_init : function()
 		{
 			const eventEmitter = new ng.core.EventEmitter();
+			
 			if(this._initialized)
 			{
 				setTimeout(() =>
@@ -108,16 +96,15 @@ function(AbstractService, EventManager, AppUtils)
 			}
 			else
 			{
-				this._http.get(AppUtils.getServiceUrl("init")).catch((e) =>
+				const url = AppUtils.getServiceUrl("init");
+				this.httpGet(url).subscribe((result) =>
 				{
-					eventEmitter.emit();
-				}).subscribe(() => 
-				{
-					this._initialized = true;
+					this._initialized = (result !== null);
 					
 					eventEmitter.emit();
 				});
 			}
+			
 			return eventEmitter;
 		}
 	});

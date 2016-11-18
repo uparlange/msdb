@@ -2,29 +2,23 @@ define(function ()
 {
 	const AbstractClass = function ()
 	{
-		this.getLogger().info("constructor");
+		this.getLogger().debug("constructor");
 	};
 	
 	return ng.core.Class({
 		constructor:AbstractClass,
 		getClassName:function()
 		{
-			let className = "";
-			try 
-			{
-				className = this.constructor.name;
-			}
-			catch(e)
-			{
-				// Tant pis :-(
-			}
-			
-			return className;
+			return this.constructor.name;
 		},
 		getLogger:function()
 		{
 			const that = this;
 			return {
+				debug:function(message)
+				{
+					console.debug(that.getClassName(), message);
+				},
 				info:function(message)
 				{
 					console.info(that.getClassName(), message);

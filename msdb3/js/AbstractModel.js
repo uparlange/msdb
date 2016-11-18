@@ -91,6 +91,8 @@ function(AbstractClass, AppUtils)
 		{
 			if(typeof this.onInit === "function")
 			{
+				this.getLogger().info("onInit");
+				
 				this.onInit();
 			}
 		},
@@ -98,6 +100,8 @@ function(AbstractClass, AppUtils)
 		{
 			if(typeof this.onRefresh === "function")
 			{
+				this.getLogger().info("onRefresh");
+				
 				this.onRefresh();
 			}
 		},
