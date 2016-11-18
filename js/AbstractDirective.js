@@ -15,6 +15,8 @@ function (AbstractClass)
 		{
 			if(typeof this.onInit === "function")
 			{
+				this.getLogger().info("onInit");
+				
 				this.onInit(this._element);
 			}
 		},

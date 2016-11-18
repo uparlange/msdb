@@ -21,12 +21,28 @@ function(AbstractClass)
 			{
 				this.model.init(params);
 			});
+			
+			if(typeof this.onInit === "function")
+			{
+				this.getLogger().info("onInit");
+				
+				this.onInit();
+			}
 		},
 		ngOnDestroy:function()
 		{
 			this.model.destroy();
 			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();
+			
+			if(typeof this.onDestroy === "function")
+			{
+				this.onDestroy();
+			}
+			else
+			{
+				this.getLogger().warn("onDestroy?");
+			}
 		}
 	});			
 });
