@@ -1,30 +1,29 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager", "app:AppUtils"], 
-function(AbstractModel, MsdbService, ConnectionManager, TranslateManager, AppUtils) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager", "app:AppUtils",
+		"app:CacheManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, TranslateManager, AppUtils,
+		 CacheManager) 
 {
-	const AppModel = function (MsdbService, ConnectionManager, Router, TranslateManager)
+	const AppModel = function (MsdbService, ConnectionManager, Router, TranslateManager, CacheManager)
 	{
 		AbstractModel.call(this, MsdbService, ConnectionManager);
 		
 		this._router = Router;
 		this._translateManager = TranslateManager;
+		this._cacheManager = CacheManager;
 		
 		this._routerEventsSubscriber = this._router.events.subscribe((e) =>
 		{
 			switch(e.constructor.name)
 			{
 				case "NavigationStart" :
-					if(e.id === 1)
+					if(AppUtils.getDevice().mobile() !== null && e.id === 1)
 					{
-						// load last page on mobile devices
-						if(AppUtils.getDevice().mobile() !== null)
-						{
-							const lastView = localStorage.getItem("MSDB.lastView") || "/home";
-							this._router.navigateByUrl(lastView);
-						}
+						const lastView = this._cacheManager.getItem("lastView", "/home");
+						this._router.navigateByUrl(lastView);
 					}
 					break;
 				case "NavigationEnd" :
-					localStorage.setItem("MSDB.lastView", e.urlAfterRedirects);
+					this._cacheManager.setItem("lastView", e.urlAfterRedirects);
 					break;
 			}
 		});
@@ -44,7 +43,7 @@ function(AbstractModel, MsdbService, ConnectionManager, TranslateManager, AppUti
 	
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor: [MsdbService, ConnectionManager, ng.router.Router, TranslateManager, AppModel],
+		constructor: [MsdbService, ConnectionManager, ng.router.Router, TranslateManager, CacheManager, AppModel],
 		_askForReload : function()
 		{
 			this._translateManager.getValues(["L10N_NEW_VERSION"]).subscribe((translations) =>

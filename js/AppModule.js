@@ -1,9 +1,9 @@
 define(["app:AbstractModule", "app:CommonModule", "app:AppView", "app:MsdbService", "app:AppModel", 
 		"app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager", 
-		"app:ConnectionManager", "app:LazyManager"], 
+		"app:ConnectionManager", "app:LazyManager", "app:CacheManager"], 
 function(AbstractModule, CommonModule, AppView, MsdbService, AppModel, 
 		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
-		 ConnectionManager, LazyManager) 
+		 ConnectionManager, LazyManager, CacheManager) 
 {
 	ng.core.enableProdMode();
 
@@ -37,7 +37,8 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 				TranslateManager,
 				SocketManager,
 				ConnectionManager,
-				LazyManager
+				LazyManager,
+				CacheManager
 			],
 			bootstrap:[
 				AppView
