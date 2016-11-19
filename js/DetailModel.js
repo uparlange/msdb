@@ -64,6 +64,18 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 		{
 			return "L10N_" + status.toUpperCase();
 		},
+		getGameSizeLabel:function()
+		{
+			let size = 0;
+			if(this.data.game.roms !== undefined)
+			{
+				this.data.game.roms.forEach((element, index, array) =>
+				{
+					size += parseInt(element.size);
+				});
+			}
+			return this.getSizeLabel(size);
+		},
 		_refreshGameAvailability:function()
 		{
 			this.data.gameAvailable = false;
