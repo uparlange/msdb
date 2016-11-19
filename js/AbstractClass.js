@@ -28,6 +28,14 @@ define(function ()
 					console.warn(that.getClassName(), message);
 				}
 			};
-		}
+		},
+		getEncodedValue:function(value)
+		{
+			return encodeURIComponent(value);
+		},
+		getDecodedValue:function(value)
+		{
+			return decodeURIComponent(value);
+		},
 	});			
 });
