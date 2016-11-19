@@ -15,7 +15,8 @@ function(AbstractModel, MsdbService, ConnectionManager, TranslateManager)
 				case "NavigationStart" :
 					if(e.id === 1)
 					{
-						if(e.url !== "/mygames")
+						// load last page on mobile devices
+						if(this.getDevice().mobile() !== null)
 						{
 							const lastView = localStorage.getItem("MSDB.lastView") || "/home";
 							this._router.navigateByUrl(lastView);

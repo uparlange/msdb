@@ -109,6 +109,8 @@ function(AbstractClass, AppUtils)
 		{
 			if(typeof this.onDestroy === "function")
 			{
+				this.getLogger().info("onDestroy");
+				
 				this.onDestroy();
 			}
 			else

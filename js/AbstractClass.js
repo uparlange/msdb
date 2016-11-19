@@ -3,6 +3,8 @@ define(function ()
 	const AbstractClass = function ()
 	{
 		this.getLogger().debug("constructor");
+		
+		this._md = new MobileDetect(window.navigator.userAgent);
 	};
 	
 	return ng.core.Class({
@@ -10,6 +12,10 @@ define(function ()
 		getClassName:function()
 		{
 			return this.constructor.name;
+		},
+		getDevice:function()
+		{
+			return this._md;
 		},
 		getLogger:function()
 		{
