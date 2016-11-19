@@ -58,18 +58,6 @@ function(AbstractClass, AppUtils)
 		getGameVideoUrl:function(game)
 		{
 			return AppUtils.getGameVideoUrl(game);
-		},	
-		getGameSizeLabel:function()
-		{
-			let size = 0;
-			if(this.data.game.roms !== undefined)
-			{
-				this.data.game.roms.forEach((element, index, array) =>
-				{
-					size += parseInt(element.size);
-				});
-			}
-			return this.getSizeLabel(size);
 		},
 		getSizeLabel: function (value)
 		{
