@@ -5,7 +5,7 @@ function(AbstractService, EventManager, AppUtils)
 	{
 		AbstractService.call(this, http, eventManager);
 		
-		this._initialized = false;
+		this._mameInfos = null;
 	};
 	
 	return ng.core.Class({
@@ -13,9 +13,14 @@ function(AbstractService, EventManager, AppUtils)
 		constructor: [ng.http.Http, EventManager, MsdbService],
 		getMameInfos : function()
 		{
-			const url = AppUtils.getServiceUrl("mameinfos");
+			const eventEmitter = new ng.core.EventEmitter();
 			
-			return this._callService(url);
+			this._init().subscribe(() => 
+			{
+				eventEmitter.emit(this._mameInfos);
+			})
+			
+			return eventEmitter;
 		},
 		getDetail : function(name)
 		{
@@ -67,12 +72,11 @@ function(AbstractService, EventManager, AppUtils)
 			
 			this._init().subscribe(() => 
 			{
-				if(this._initialized)
+				if(this._initialized())
 				{
 					this.httpGet(url).subscribe((result) =>
 					{
-						const value = (result !== null) ? result.data : result;
-						eventEmitter.emit(value);
+						eventEmitter.emit(this._getData(result));
 					});
 				}
 				else
@@ -83,11 +87,19 @@ function(AbstractService, EventManager, AppUtils)
 			
 			return eventEmitter;
 		},
+		_initialized:function()
+		{
+			return (this._mameInfos !== null);
+		},
+		_getData:function(result)
+		{
+			return (result !== null) ? result.data : result;
+		},
 		_init : function()
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
-			if(this._initialized)
+			if(this._initialized())
 			{
 				setTimeout(() =>
 				{
@@ -99,7 +111,7 @@ function(AbstractService, EventManager, AppUtils)
 				const url = AppUtils.getServiceUrl("init");
 				this.httpGet(url).subscribe((result) =>
 				{
-					this._initialized = (result !== null);
+					this._mameInfos = this._getData(result);
 					
 					eventEmitter.emit();
 				});

@@ -33,6 +33,8 @@ function (AbstractClass)
 		{
 			if(typeof this.onDestroy === "function")
 			{
+				this.getLogger().info("onDestroy");
+				
 				this.onDestroy(this._element);
 			}
 			else
