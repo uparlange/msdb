@@ -71,14 +71,6 @@ function(AbstractClass, AppUtils)
 			}
 			return this.getSizeLabel(size);
 		},
-		getEncodedValue:function(value)
-		{
-			return AppUtils.getEncodedValue(value);
-		},
-		getDecodedValue:function(value)
-		{
-			return AppUtils.getDecodedValue(value);
-		},
 		getSizeLabel: function (value)
 		{
 			return AppUtils.getSizeLabel(value);

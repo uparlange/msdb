@@ -1,5 +1,7 @@
-define(["app:AbstractModule", "app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective", "app:ScrollToTopDirective"], 
-function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective)
+define(["app:AbstractModule", "app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective", "app:ScrollToTopDirective",
+		"app:FormDirective"], 
+function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective,
+		 FormDirective)
 {
 	const CommonModule = function()
 	{
@@ -17,7 +19,8 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 			TranslatePipe,
 			NgForItemComponent,
 			LazyDirective,
-			ScrollToTopDirective
+			ScrollToTopDirective,
+			FormDirective
 		],
 		exports:[
 			ng.common.CommonModule,
@@ -27,7 +30,8 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 			TranslatePipe,
 			NgForItemComponent,
 			LazyDirective,
-			ScrollToTopDirective
+			ScrollToTopDirective,
+			FormDirective
 		]
 	}).Class({
 		extends:AbstractModule,
