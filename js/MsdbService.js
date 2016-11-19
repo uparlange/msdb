@@ -18,7 +18,7 @@ function(AbstractService, EventManager, AppUtils)
 			this._init().subscribe(() => 
 			{
 				eventEmitter.emit(this._mameInfos);
-			})
+			});
 			
 			return eventEmitter;
 		},
