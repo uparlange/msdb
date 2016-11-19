@@ -1,12 +1,17 @@
 define(function () 
 {
     return {
+		_md : new MobileDetect(window.navigator.userAgent),
+		getDevice:function()
+		{
+			return this._md;
+		},
 		getComponentConfiguration:function(componentName, params)
 		{
 			const defaultParams = {
 				selector: componentName,
-				templateUrl: "html/" + componentName + "-component" + ".html",
-				styleUrls: ["css/" + componentName + "-component.css"]
+				templateUrl: "html/" + componentName + "-template" + ".html",
+				styleUrls: ["css/" + componentName + "-template.css"]
 			};
 			return Object.assign({}, defaultParams, params);
 		},
@@ -66,7 +71,7 @@ define(function ()
 		_getBaseUrl:function()
 		{
 			//return "http://localhost/projects/msdb2/dist";
-			//return "http://192.168.15.1/projects/msdb2/dist";
+			//return "http://192.168.0.15/projects/msdb2/dist";
 			return "";
 		}
 	};
