@@ -31,10 +31,10 @@ function(AbstractClass)
 		},
 		ngOnDestroy:function()
 		{
-			this.model.destroy();
-			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 			
+			this.model.destroy();
+
 			if(typeof this.onDestroy === "function")
 			{
 				this.getLogger().info("onDestroy");
