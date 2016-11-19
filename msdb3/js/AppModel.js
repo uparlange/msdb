@@ -1,5 +1,5 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager"], 
-function(AbstractModel, MsdbService, ConnectionManager, TranslateManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager", "app:AppUtils"], 
+function(AbstractModel, MsdbService, ConnectionManager, TranslateManager, AppUtils) 
 {
 	const AppModel = function (MsdbService, ConnectionManager, Router, TranslateManager)
 	{
@@ -16,7 +16,7 @@ function(AbstractModel, MsdbService, ConnectionManager, TranslateManager)
 					if(e.id === 1)
 					{
 						// load last page on mobile devices
-						if(this.getDevice().mobile() !== null)
+						if(AppUtils.getDevice().mobile() !== null)
 						{
 							const lastView = localStorage.getItem("MSDB.lastView") || "/home";
 							this._router.navigateByUrl(lastView);
