@@ -3,7 +3,9 @@ function(AbstractDirective)
 {
 	const FormDirective = function (element)
 	{
-		AbstractDirective.call(this, element);
+		AbstractDirective.call(this);
+		
+		this._element = element.nativeElement;
 	};
 	
 	return ng.core.Directive({
@@ -11,9 +13,9 @@ function(AbstractDirective)
 	}).Class({
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, FormDirective],
-		onInit:function(element)
+		onInit:function()
 		{
-			element.action = "javascript:void(0);";
+			this._element.action = "javascript:void(0);";
 		}
 	});
 });

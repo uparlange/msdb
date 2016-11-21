@@ -33,7 +33,7 @@ function(AbstractPipe, TranslateManager)
 			}
 			return this.tranlateValue;
 		},
-		ngOnDestroy()
+		onDestroy()
 		{ 
 			this._onLanguageChangeSubscriber.unsubscribe();
 		},

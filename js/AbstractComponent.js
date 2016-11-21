@@ -1,45 +1,48 @@
-define(["app:AbstractClass"],
-function (AbstractClass) 
+define(["app:AbstractDirective"],
+function (AbstractDirective) 
 {
-	const AbstractComponent = function (element)
+	const AbstractComponent = function ()
 	{
-		AbstractClass.call(this);
-		
-		this._element = element.nativeElement;
+		AbstractDirective.call(this);
 	};
 	
 	return ng.core.Class({
-		extends:AbstractClass,
+		extends:AbstractDirective,
 		constructor:AbstractComponent,
-		ngOnInit : function()
-		{
-			if(typeof this.onInit === "function")
-			{
-				this.getLogger().info("onInit");
-				
-				this.onInit(this._element);
-			}
-		},
 		ngAfterContentInit:function()
 		{
 			if(typeof this.afterContentInit === "function")
 			{
 				this.getLogger().info("afterContentInit");
 				
-				this.afterContentInit(this._element);
+				this.afterContentInit();
 			}
 		},
-		ngOnDestroy : function()
+		ngAfterContentChecked:function()
 		{
-			if(typeof this.onDestroy === "function")
+			if(typeof this.afterContentChecked === "function")
 			{
-				this.getLogger().info("onDestroy");
+				this.getLogger().info("afterContentChecked");
 				
-				this.onDestroy(this._element);
+				this.afterContentChecked();
 			}
-			else
+		},
+		ngAfterViewInit:function()
+		{
+			if(typeof this.afterViewInit === "function")
 			{
-				this.getLogger().warn("onDestroy?");
+				this.getLogger().info("afterViewInit");
+				
+				this.afterViewInit();
+			}
+		},
+		ngAfterViewChecked:function()
+		{
+			if(typeof this.afterViewChecked === "function")
+			{
+				this.getLogger().info("afterViewChecked");
+				
+				this.afterViewChecked();
 			}
 		}
 	});			

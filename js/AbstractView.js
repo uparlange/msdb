@@ -1,9 +1,9 @@
-define(["app:AbstractClass"],
-function(AbstractClass) 
+define(["app:AbstractComponent"],
+function(AbstractComponent) 
 {
 	const AbstractView = function (Model, ActivatedRoute)
 	{
-		AbstractClass.call(this);
+		AbstractComponent.call(this);
 		
 		this.model = Model;
 			
@@ -13,38 +13,24 @@ function(AbstractClass)
 	};
 	
 	return ng.core.Class({
-		extends:AbstractClass,
+		extends:AbstractComponent,
 		constructor:AbstractView,
 		ngOnInit:function()
 		{
+			AbstractComponent.call(this);
+			
 			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
 			{
 				this.model.init(params);
 			});
-			
-			if(typeof this.onInit === "function")
-			{
-				this.getLogger().info("onInit");
-				
-				this.onInit();
-			}
 		},
 		ngOnDestroy:function()
 		{
+			AbstractComponent.call(this);
+			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 			
 			this.model.destroy();
-
-			if(typeof this.onDestroy === "function")
-			{
-				this.getLogger().info("onDestroy");
-				
-				this.onDestroy();
-			}
-			else
-			{
-				this.getLogger().warn("onDestroy?");
-			}
 		}
 	});			
 });

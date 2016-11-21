@@ -1,9 +1,9 @@
-define(["app:AbstractClass"],
-function(AbstractClass) 
+define(["app:AbstractComponent"],
+function(AbstractComponent) 
 {
 	const AbstractPopup = function (Model, MdDialogRef)
 	{
-		AbstractClass.call(this);
+		AbstractComponent.call(this);
 		
 		this.model = Model;
 		
@@ -11,30 +11,8 @@ function(AbstractClass)
 	};
 	
 	return ng.core.Class({
-		extends:AbstractClass,
+		extends:AbstractComponent,
 		constructor:AbstractPopup,
-		ngOnInit : function()
-		{
-			if(typeof this.onInit === "function")
-			{
-				this.getLogger().info("onInit");
-				
-				this.onInit();
-			}
-		},
-		ngOnDestroy : function()
-		{
-			if(typeof this.onDestroy === "function")
-			{
-				this.getLogger().info("onDestroy");
-				
-				this.onDestroy();
-			}
-			else
-			{
-				this.getLogger().warn("onDestroy?");
-			}
-		},
 		close:function()
 		{
 			this._mdDialogRef.close();
