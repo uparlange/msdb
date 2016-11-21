@@ -1,5 +1,5 @@
-define(["app:LogManager"],
-function (LogManager) 
+define(["app:LogUtils"],
+function (LogUtils) 
 {
 	const AbstractClass = function ()
 	{
@@ -10,7 +10,7 @@ function (LogManager)
 		constructor:AbstractClass,
 		getLogger:function()
 		{
-			return LogManager.getLogger(this.constructor.name);
+			return LogUtils.getLogger(this.constructor.name);
 		},
 		getEncodedValue:function(value)
 		{
