@@ -3,7 +3,9 @@ function(AbstractDirective)
 {
 	const VideoDirective = function (element)
 	{
-		AbstractDirective.call(this, element);
+		AbstractDirective.call(this);
+		
+		this._element = element.nativeElement;
 		
 		this.onEvent = new ng.core.EventEmitter();
 		
@@ -20,25 +22,25 @@ function(AbstractDirective)
 	}).Class({
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, VideoDirective],
-		onInit:function(element)
+		onInit:function()
 		{
-			element.addEventListener("error", this._onEventHandler);
-			element.addEventListener("loadedmetadata", this._onEventHandler);
+			this._element.addEventListener("error", this._onEventHandler);
+			this._element.addEventListener("loadedmetadata", this._onEventHandler);
 		},
-		onChanges: function (element, event)
+		onChanges: function (event)
 		{
 			if(event.hasOwnProperty("source"))
 			{
-				if(event.source.currentValue !== null && element.src !== event.source.currentValue)
+				if(event.source.currentValue !== null && this._element.src !== event.source.currentValue)
 				{
-					element.src = event.source.currentValue;
+					this._element.src = event.source.currentValue;
 				}
 			}
 		},
-		onDestroy:function(element)
+		onDestroy:function()
 		{
-			element.removeEventListener("error", this._onEventHandler);
-			element.removeEventListener("loadedmetadata", this._onEventHandler);
+			this._element.removeEventListener("error", this._onEventHandler);
+			this._element.removeEventListener("loadedmetadata", this._onEventHandler);
 		}
 	});
 });

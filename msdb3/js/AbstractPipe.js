@@ -8,6 +8,19 @@ function (AbstractClass)
 	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractPipe
+		constructor:AbstractPipe,
+		ngOnDestroy : function()
+		{
+			if(typeof this.onDestroy === "function")
+			{
+				this.getLogger().info("onDestroy");
+				
+				this.onDestroy();
+			}
+			else
+			{
+				this.getLogger().warn("onDestroy?");
+			}
+		}
 	});			
 });

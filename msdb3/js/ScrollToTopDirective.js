@@ -4,6 +4,8 @@ function(AbstractDirective)
 	const ScrollToTopDirective = function (element)
 	{
 		AbstractDirective.call(this, element);
+		
+		this._element = element.nativeElement;
 	};
 	
 	return ng.core.Directive({
@@ -11,18 +13,18 @@ function(AbstractDirective)
 	}).Class({
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ScrollToTopDirective],
-		onInit : function(element)
+		onInit : function()
 		{
 			this._clickHandler = function()
 			{
 				window.scrollTo(0,0);
 			};
 			
-			element.addEventListener("click", this._clickHandler);
+			this._element.addEventListener("click", this._clickHandler);
 		},
-		onDestroy : function(element)
+		onDestroy : function()
 		{
-			element.removeEventListener("click", this._clickHandler);
+			this._element.removeEventListener("click", this._clickHandler);
 		}
 	});	
 });	

@@ -1,30 +1,37 @@
 define(["app:AbstractClass"],
 function (AbstractClass) 
 {
-	const AbstractDirective = function (element)
+	const AbstractDirective = function ()
 	{
 		AbstractClass.call(this);
-		
-		this._element = element.nativeElement;
 	};
 	
 	return ng.core.Class({
 		extends:AbstractClass,
 		constructor:AbstractDirective,
+		ngOnChanges : function(event)
+		{
+			if(typeof this.onChanges === "function")
+			{
+				this.onChanges(event);
+			}
+		},
 		ngOnInit : function()
 		{
 			if(typeof this.onInit === "function")
 			{
 				this.getLogger().info("onInit");
 				
-				this.onInit(this._element);
+				this.onInit();
 			}
 		},
-		ngOnChanges : function(event)
+		ngDoCheck : function()
 		{
-			if(typeof this.onChanges === "function")
+			if(typeof this.onDoCheck === "function")
 			{
-				this.onChanges(this._element, event);
+				this.getLogger().info("onDoCheck");
+				
+				this.onDoCheck();
 			}
 		},
 		ngOnDestroy : function()
@@ -33,7 +40,7 @@ function (AbstractClass)
 			{
 				this.getLogger().info("onDestroy");
 				
-				this.onDestroy(this._element);
+				this.onDestroy();
 			}
 			else
 			{

@@ -1,9 +1,9 @@
 define(["app:AbstractComponent", "app:AppUtils"], 
 function(AbstractComponent, AppUtils)
 {
-	const NgForItemComponent = function (element)
+	const NgForItemComponent = function ()
 	{
-		AbstractComponent.call(this, element);
+		AbstractComponent.call(this);
 		
 		this.onLast = new ng.core.EventEmitter();
 		
@@ -15,8 +15,8 @@ function(AbstractComponent, AppUtils)
 		outputs:["onLast"]
 	})).Class({
 		extends:AbstractComponent,
-		constructor: [ng.core.ElementRef, NgForItemComponent],
-		afterContentInit:function(element)
+		constructor: [NgForItemComponent],
+		afterContentInit:function()
 		{
 			if(this.last)
 			{

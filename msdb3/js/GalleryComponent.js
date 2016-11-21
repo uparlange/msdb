@@ -3,7 +3,9 @@ function(AbstractComponent, AppUtils)
 {
 	const GalleryComponent = function (element)
 	{
-		AbstractComponent.call(this, element);
+		AbstractComponent.call(this);
+		
+		this._element = element.nativeElement;
 		
 		this._gallery = null;
 		
@@ -17,7 +19,7 @@ function(AbstractComponent, AppUtils)
 	})).Class({
 		extends:AbstractComponent,
 		constructor: [ng.core.ElementRef, GalleryComponent],
-		onInit:function(element)
+		onInit:function()
 		{
 			this._windowResizeHandler = () =>
 			{
@@ -26,7 +28,7 @@ function(AbstractComponent, AppUtils)
 			
 			window.addEventListener("resize", this._windowResizeHandler);
 		},
-		onDestroy:function(element)
+		onDestroy:function()
 		{
 			if(this._gallery !== null)
 			{
