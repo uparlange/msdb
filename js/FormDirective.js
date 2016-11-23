@@ -1,3 +1,4 @@
+/*jshint scripturl:true*/
 define(["app:AbstractDirective"],
 function(AbstractDirective)
 {
