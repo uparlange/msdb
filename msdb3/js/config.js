@@ -10,3 +10,8 @@ SystemJS.config(
 		}
 	}
 });
+
+window.GlobalConfig = {
+	prod:true,
+	logLevel:"off"
+};

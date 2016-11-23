@@ -9,9 +9,24 @@ define(function()
 	const LOG_LEVEL_FATAL = 1;
 	const LOG_LEVEL_OFF = 0;
 	
-	const logLevel = LOG_LEVEL_ALL;
+	const getLevelByName = function(name)
+	{
+		let level = 0;
+		switch(name)
+		{
+			case "all" : level = LOG_LEVEL_ALL; break;
+			case "trace" : level = LOG_LEVEL_TRACE; break;
+			case "debug" : level = LOG_LEVEL_DEBUG; break;
+			case "info" : level = LOG_LEVEL_INFO; break;
+			case "warn" : level = LOG_LEVEL_WARN; break;
+			case "error" : level = LOG_LEVEL_ERROR; break;
+			case "fatal" : level = LOG_LEVEL_FATAL; break;
+			case "off" : level = LOG_LEVEL_OFF; break;
+		}
+		return level;
+	};
 	
-	const debugEnabled = true;
+	const logLevel = getLevelByName(GlobalConfig.logLevel);
 	
 	return {
 		getLogger(className)
@@ -19,21 +34,21 @@ define(function()
 			return {
 				debug:function(message)
 				{
-					if(debugEnabled && logLevel >= LOG_LEVEL_DEBUG)
+					if(logLevel >= LOG_LEVEL_DEBUG)
 					{
 						console.debug(className, message);
 					}
 				},
 				info:function(message)
 				{
-					if(debugEnabled && logLevel >= LOG_LEVEL_INFO)
+					if(logLevel >= LOG_LEVEL_INFO)
 					{
 						console.info(className, message);
 					}
 				},
 				warn:function(message)
 				{
-					if(debugEnabled && logLevel >= LOG_LEVEL_WARN)
+					if(logLevel >= LOG_LEVEL_WARN)
 					{
 						console.warn(className, message);
 					}
