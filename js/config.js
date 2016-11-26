@@ -11,11 +11,11 @@ SystemJS.config(
 	}
 });
 
-window.GlobalConfig = {}
+window.GlobalConfig = {};
 if(window.location.search.indexOf("debug") === -1)
 {
 	window.GlobalConfig.prod = true;
-	window.GlobalConfig.logLevel = "info"
+	window.GlobalConfig.logLevel = "info";
 }
 else
 {
