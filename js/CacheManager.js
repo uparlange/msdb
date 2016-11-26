@@ -50,7 +50,7 @@ function (AbstractManager)
 			}
 			const calculatedKey = this._getApplicationKey(key);
 			const value = localStorage.getItem(calculatedKey);
-			return JSON.parse(value || defaultValue);
+			return JSON.parse(value) || defaultValue;
 		},
 		_setItem:function(key, value)
 		{
