@@ -21,6 +21,6 @@ function(AbstractModule, CommonModule, ResultView, ResultModel)
 		]
 	}).Class({
 		extends:AbstractModule,
-		constructor:ResultModule
+		constructor:[ResultModule]
 	});
 });

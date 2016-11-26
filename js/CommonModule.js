@@ -35,6 +35,6 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 		]
 	}).Class({
 		extends:AbstractModule,
-		constructor:CommonModule
+		constructor:[CommonModule]
 	});
 });

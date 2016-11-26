@@ -21,6 +21,6 @@ function(AbstractModule, CommonModule, MyGamesView, MyGamesModel)
 		]
 	}).Class({
 		extends:AbstractModule,
-		constructor:MyGamesModule
+		constructor:[MyGamesModule]
 	});
 });

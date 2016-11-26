@@ -48,7 +48,7 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:AppModule
+			constructor:[AppModule]
 		})
 	);
 });
