@@ -3,6 +3,8 @@ function (LogUtils)
 {
 	const AbstractClass = function ()
 	{
+		this._logger = LogUtils.getLogger(this.constructor.name);
+		
 		this.getLogger().debug("constructor");
 	};
 	
@@ -10,7 +12,7 @@ function (LogUtils)
 		constructor:AbstractClass,
 		getLogger:function()
 		{
-			return LogUtils.getLogger(this.constructor.name);
+			return this._logger;
 		},
 		getEncodedValue:function(value)
 		{
