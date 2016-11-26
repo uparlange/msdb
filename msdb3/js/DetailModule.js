@@ -45,6 +45,6 @@ function(AbstractModule, CommonModule, DetailView, DetailModel, DriverPopup,
 		]
 	}).Class({
 		extends:AbstractModule,
-		constructor:DetailModule
+		constructor:[DetailModule]
 	});
 });

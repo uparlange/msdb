@@ -21,6 +21,6 @@ function(AbstractModule, CommonModule, SearchView, SearchModel)
 		]
 	}).Class({
 		extends:AbstractModule,
-		constructor:SearchModule
+		constructor:[SearchModule]
 	});
 });

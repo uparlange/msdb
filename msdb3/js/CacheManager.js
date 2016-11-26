@@ -12,7 +12,7 @@ function (AbstractManager)
 	
 	return ng.core.Class({
 		extends:AbstractManager,
-		constructor:CacheManager,
+		constructor:[CacheManager],
 		setDefaultNs:function(ns)
 		{
 			const lastNs = this._getDefaultNs();
