@@ -63,7 +63,12 @@ define(function()
 						{
 							_consoleWorker = new Worker("js/LogWorker.js");
 						}
-						_consoleWorker.postMessage([methodName, className, message]);
+						const params = {
+							methodName:methodName,
+							className:className,
+							message:message
+						};
+						_consoleWorker.postMessage([params]);
 					}
 					else
 					{
