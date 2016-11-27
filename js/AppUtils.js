@@ -15,14 +15,6 @@ define(function ()
 			};
 			return Object.assign({}, defaultParams, params);
 		},
-		getEncodedValue:function(value)
-		{
-			return encodeURIComponent(value);
-		},
-		getDecodedValue:function(value)
-		{
-			return decodeURIComponent(value);
-		},
 		getSizeLabel: function (value)
   		{
 			return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
@@ -71,7 +63,7 @@ define(function ()
 		_getBaseUrl:function()
 		{
 			//return "http://localhost/projects/msdb2/dist";
-			//return "http://192.168.0.15/projects/msdb2/dist";
+			//return "http://192.168.137.198/projects/msdb2/dist";
 			return "";
 		}
 	};
