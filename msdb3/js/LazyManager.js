@@ -23,6 +23,10 @@ function (AbstractManager)
 			{ 
 				this._blazy.revalidate();
 			}, 50);
+		},
+		unRegister:function(element)
+		{
+			
 		}
     });
 });

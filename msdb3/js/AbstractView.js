@@ -17,7 +17,7 @@ function(AbstractComponent)
 		constructor:AbstractView,
 		ngOnInit:function()
 		{
-			AbstractComponent.call(this);
+			AbstractComponent.prototype.ngOnInit.call(this);
 			
 			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
 			{
@@ -26,7 +26,7 @@ function(AbstractComponent)
 		},
 		ngOnDestroy:function()
 		{
-			AbstractComponent.call(this);
+			AbstractComponent.prototype.ngOnDestroy.call(this);
 			
 			this._activatedRouteQueryParamsSubscriber.unsubscribe();
 			

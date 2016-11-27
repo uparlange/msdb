@@ -33,7 +33,7 @@ function(AbstractPipe, TranslateManager)
 			}
 			return this.tranlateValue;
 		},
-		onDestroy()
+		onDestroy:function()
 		{ 
 			this._onLanguageChangeSubscriber.unsubscribe();
 		},
