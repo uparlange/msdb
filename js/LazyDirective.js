@@ -33,6 +33,10 @@ function(AbstractDirective, LazyManager)
 					this._blazyManager.register(this._element);
 				}
 			}
+		},
+		onDestroy: function()
+		{
+			this._blazyManager.unRegister(this._element);
 		}
 	});
 });
