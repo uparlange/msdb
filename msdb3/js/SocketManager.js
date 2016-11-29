@@ -23,6 +23,7 @@ function (AbstractManager)
 				eventEmitter = new ng.core.EventEmitter();
 				this._eventEmitters[eventName] = eventEmitter;
 			}
+			
 			this._getSocket().subscribe((socket) =>
 			{
 				if(socket !== null)
@@ -33,6 +34,7 @@ function (AbstractManager)
 					});
 				}
 			});
+			
 			return eventEmitter;
 		},
 		off:function(eventSubscriber)
@@ -47,7 +49,7 @@ function (AbstractManager)
 			{
 				if(socket !== null)
 				{
-					socket.emit(eventName, value, function(data)
+					socket.emit(eventName, value, (data) =>
 					{
 						 eventEmitter.emit(data);
 					});
@@ -66,18 +68,18 @@ function (AbstractManager)
 			
 			if(this._socket === null)
 			{
-				const socket = io(this._url, {
+				this._socket = io(this._url, {
 					reconnection:false
 				});
-				socket.on("connect", () => 
+				this._socket.on("connect", () => 
 				{
-					this._socket = socket;
-					
 					eventEmitter.emit(this._socket);
 				});
-				socket.on("connect_error", () => 
+				this._socket.on("connect_error", () => 
 				{
-					eventEmitter.emit(null);
+					this._socket = null;
+					
+					eventEmitter.emit(this._socket);
 				});
 			}
 			else

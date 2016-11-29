@@ -5,13 +5,13 @@
 			<span *ngIf="model.data.count > 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
 		</md-card-title>
 	</md-card>
-	<div *ngFor="let group of model.data.list; trackBy group?.label">
+	<div *ngFor="let group of model.data.list; let index=index; trackBy group?.label">
 		<div *ngIf="model.data.list.length > 1">
 			<div class="default-spacer"></div>
 			<md-card >
 				<md-card-title>
 					{{group.label}}
-					<button md-mini-fab scrollToTop>
+					<button *ngIf="index > 0" md-mini-fab scrollToTop>
 						<i class="material-icons md-24 md-light">arrow_drop_up</i>
 					</button>
 				</md-card-title>
