@@ -26,13 +26,13 @@
 				<i class="material-icons md-24">folder_open</i>
 			</a>
 		</template>
-		<div *ngFor="let group of model.data.categories.list; trackBy group?.label">
+		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.categories.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
 					<md-card-title>
 						{{group.label}}
-						<button md-mini-fab scrollToTop>
+						<button *ngIf="index > 0" md-mini-fab scrollToTop>
 							<i class="material-icons md-24 md-light">arrow_drop_up</i>
 						</button>
 					</md-card-title>
@@ -52,13 +52,13 @@
 				<i class="material-icons md-24">list</i>
 			</a>
 		</template>
-		<div *ngFor="let group of model.data.series.list; trackBy group?.label">
+		<div *ngFor="let group of model.data.series.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.series.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
 					<md-card-title>
 						{{group.label}}
-						<button md-mini-fab scrollToTop>
+						<button *ngIf="index > 0" md-mini-fab scrollToTop>
 							<i class="material-icons md-24 md-light">arrow_drop_up</i>
 						</button>
 					</md-card-title>
@@ -78,13 +78,13 @@
 				<i class="material-icons md-24">today</i>
 			</a>
 		</template>
-		<div *ngFor="let group of model.data.years.list; trackBy group?.label">
+		<div *ngFor="let group of model.data.years.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.years.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
 					<md-card-title>
 						{{group.label}}
-						<button md-mini-fab scrollToTop>
+						<button *ngIf="index > 0" md-mini-fab scrollToTop>
 							<i class="material-icons md-24 md-light">arrow_drop_up</i>
 						</button>
 					</md-card-title>
@@ -106,13 +106,13 @@
 				<i class="material-icons md-24">business</i>
 			</a>
 		</template>
-		<div *ngFor="let group of model.data.manufacturers.list; trackBy group?.label">
+		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.manufacturers.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
 					<md-card-title>
 						{{group.label}}
-						<button md-mini-fab scrollToTop>
+						<button *ngIf="index > 0" md-mini-fab scrollToTop>
 							<i class="material-icons md-24 md-light">arrow_drop_up</i>
 						</button>
 					</md-card-title>
@@ -133,18 +133,6 @@
 			</a>
 		</template>
 		<div *ngFor="let group of model.data.versions.list; trackBy group?.label">
-			<div *ngIf="model.data.versions.list.length > 1">
-				<div class="default-spacer"></div>
-				<md-card >
-					<md-card-title>
-						{{group.label}}
-						<button md-mini-fab scrollToTop>
-							<i class="material-icons md-24 md-light">arrow_drop_up</i>
-						</button>
-					</md-card-title>
-				</md-card>
-			</div>
-			<div class="default-spacer"></div>
 			<md-nav-list>
 				<md-list-item *ngFor="let version of group.data; trackBy version?.label">
 					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">

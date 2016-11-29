@@ -1,9 +1,9 @@
 define(["app:AbstractModule", "app:CommonModule", "app:AppView", "app:MsdbService", "app:AppModel", 
 		"app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager", 
-		"app:ConnectionManager", "app:LazyManager", "app:CacheManager"], 
+		"app:ConnectionManager", "app:LazyManager", "app:CacheManager", "app:UpdateManager"], 
 function(AbstractModule, CommonModule, AppView, MsdbService, AppModel, 
 		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
-		 ConnectionManager, LazyManager, CacheManager) 
+		 ConnectionManager, LazyManager, CacheManager, UpdateManager) 
 {
 	if(GlobalConfig.prod)
 	{
@@ -41,7 +41,8 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 				SocketManager,
 				ConnectionManager,
 				LazyManager,
-				CacheManager
+				CacheManager,
+				UpdateManager
 			],
 			bootstrap:[
 				AppView

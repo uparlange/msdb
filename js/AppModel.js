@@ -1,15 +1,15 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:TranslateManager", "app:AppUtils",
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:AppUtils", "app:UpdateManager",
 		"app:CacheManager"], 
-function(AbstractModel, MsdbService, ConnectionManager, TranslateManager, AppUtils,
+function(AbstractModel, MsdbService, ConnectionManager, AppUtils, UpdateManager,
 		 CacheManager) 
 {
-	const AppModel = function (MsdbService, ConnectionManager, Router, TranslateManager, CacheManager)
+	const AppModel = function (MsdbService, ConnectionManager, Router, CacheManager, UpdateManager)
 	{
 		AbstractModel.call(this, MsdbService, ConnectionManager);
 		
 		this._router = Router;
-		this._translateManager = TranslateManager;
 		this._cacheManager = CacheManager;
+		this._updateManager = UpdateManager;
 		
 		this._routerEventsSubscriber = this._router.events.subscribe((e) =>
 		{
@@ -28,32 +28,12 @@ function(AbstractModel, MsdbService, ConnectionManager, TranslateManager, AppUti
 			}
 		});
 		
-		if(window.applicationCache.status === window.applicationCache.UPDATEREADY)
-		{
-			this._askForReload();
-		}
-		else
-		{
-			window.applicationCache.addEventListener("updateready", () =>
-			{
-				this._askForReload();
-			});
-		}
+		this._updateManager.check();
 	};
 	
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor: [MsdbService, ConnectionManager, ng.router.Router, TranslateManager, CacheManager, AppModel],
-		_askForReload : function()
-		{
-			this._translateManager.getValues(["L10N_NEW_VERSION"]).subscribe((translations) =>
-			{
-				if (confirm(translations.L10N_NEW_VERSION))
-				{
-					window.location.reload();
-				}
-			});
-		},
+		constructor: [MsdbService, ConnectionManager, ng.router.Router, CacheManager, UpdateManager, AppModel],
 		_getInitData:function()
 		{
 			return null;
