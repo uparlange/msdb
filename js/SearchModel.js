@@ -11,11 +11,28 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		constructor:[MsdbService, ConnectionManager, SearchModel],
 		onRefresh:function()
 		{
-			const tabIndex = this._getTabInfos().byType(this.params.type).index;
+			const tabInfos = this._getTabInfos();
+			const tabs = tabInfos.getTabs();
+			const tabIndex = tabInfos.byType(this.params.type).index;
+			const methodeName = "_load" + this.params.type[0].toUpperCase() + this.params.type.substring(1);
+			
 			this.data.selectedIndex = tabIndex;
 			
-			const methodeName = "_load" + this.params.type[0].toUpperCase() + this.params.type.substring(1);
 			this[methodeName]();
+			
+			setTimeout(() =>
+			{
+				tabs.forEach((element, index, array) => 
+				{
+					if(index > 0 && index != tabIndex)
+					{
+						this.data[element.type] = {
+							list : null,
+							count : 0
+						};
+					}
+				});
+			},0);
 		},
 		getSearchTabLabel:function(index)
 		{
@@ -126,6 +143,10 @@ function(AbstractModel, MsdbService, ConnectionManager)
 					{index:4,key:"L10N_SEARCH_BY_MANUFACTURER",type:"manufacturers"},
 					{index:5,key:"L10N_SEARCH_BY_MAMEVERSIONADDED",type:"versions"}
 				],
+				getTabs:function()
+				{
+					return this._tabs;
+				},
 				byIndex:function(value)
 				{
 					let tab = null;
