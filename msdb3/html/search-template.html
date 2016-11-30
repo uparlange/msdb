@@ -14,7 +14,7 @@
 		</template>
 		<div class="default-spacer"></div>
 		<form #descriptionForm="ngForm">
-			<md-input required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
+			<md-input pattern=".{3,}" required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
 			<button [disabled]="!descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.getEncodedValue(model.data.description)}" type="submit" md-mini-fab>
 				<i class="material-icons md-24 md-light">search</i>
 			</button>
