@@ -6,21 +6,23 @@ function(AbstractModule, CommonModule, SearchView, SearchModel)
 		AbstractModule.call(this);
 	};
 	
-	return ng.core.NgModule({
-		imports:[
-			CommonModule,
-			ng.router.RouterModule.forChild([
-				{path: "", component: SearchView}
-			])
-		],
-		declarations:[
-			SearchView
-		],
-		providers:[
-			SearchModel
-		]
-	}).Class({
-		extends:AbstractModule,
-		constructor:[SearchModule]
-	});
+	return {
+		module:ng.core.NgModule({
+			imports:[
+				CommonModule,
+				ng.router.RouterModule.forChild([
+					{path: "", component: SearchView}
+				])
+			],
+			declarations:[
+				SearchView
+			],
+			providers:[
+				SearchModel
+			]
+		}).Class({
+			extends:AbstractModule,
+			constructor:[SearchModule]
+		})
+	};
 });

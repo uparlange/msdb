@@ -6,21 +6,23 @@ function(AbstractModule, CommonModule, HomeView, HomeModel)
 		AbstractModule.call(this);
 	};
 	
-	return ng.core.NgModule({
-		imports:[
-			CommonModule,
-			ng.router.RouterModule.forChild([
-				{path: "", component: HomeView}
-			])
-		],
-		declarations:[
-			HomeView
-		],
-		providers:[
-			HomeModel
-		]
-	}).Class({
-		extends:AbstractModule,
-		constructor:[HomeModule] 
-	});
+	return {
+		module:ng.core.NgModule({
+			imports:[
+				CommonModule,
+				ng.router.RouterModule.forChild([
+					{path: "", component: HomeView}
+				])
+			],
+			declarations:[
+				HomeView
+			],
+			providers:[
+				HomeModel
+			]
+		}).Class({
+			extends:AbstractModule,
+			constructor:[HomeModule] 
+		})
+	};
 });

@@ -6,21 +6,23 @@ function(AbstractModule, CommonModule, ResultView, ResultModel)
 		AbstractModule.call(this);
 	};
 	
-	return ng.core.NgModule({
-		imports:[
-			CommonModule,
-			ng.router.RouterModule.forChild([
-				{path: "", component: ResultView}
-			])
-		],
-		declarations:[
-			ResultView
-		],
-		providers:[
-			ResultModel
-		]
-	}).Class({
-		extends:AbstractModule,
-		constructor:[ResultModule]
-	});
+	return {
+		module:ng.core.NgModule({
+			imports:[
+				CommonModule,
+				ng.router.RouterModule.forChild([
+					{path: "", component: ResultView}
+				])
+			],
+			declarations:[
+				ResultView
+			],
+			providers:[
+				ResultModel
+			]
+		}).Class({
+			extends:AbstractModule,
+			constructor:[ResultModule]
+		})
+	};
 });
