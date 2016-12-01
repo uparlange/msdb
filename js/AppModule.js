@@ -22,11 +22,11 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 				ng.platformBrowser.BrowserModule,
 				ng.router.RouterModule.forRoot([
 					{path: "", redirectTo: "home", pathMatch: "full"},
-					{path: "home", loadChildren:() => AppUtils.loadModule("HomeModule")},
-					{path: "search", loadChildren:() => AppUtils.loadModule("SearchModule")},
-					{path: "detail", loadChildren:() => AppUtils.loadModule("DetailModule")},
-					{path: "result", loadChildren:() => AppUtils.loadModule("ResultModule")},
-					{path: "mygames", loadChildren:() => AppUtils.loadModule("MyGamesModule")}
+					{path: "home", loadChildren:AppUtils.getModuleName("HomeModule")},
+					{path: "search", loadChildren:AppUtils.getModuleName("SearchModule")},
+					{path: "detail", loadChildren:AppUtils.getModuleName("DetailModule")},
+					{path: "result", loadChildren:AppUtils.getModuleName("ResultModule")},
+					{path: "mygames", loadChildren:AppUtils.getModuleName("MyGamesModule")}
 				], {useHash:true})
 			],
 			declarations:[

@@ -6,21 +6,23 @@ function(AbstractModule, CommonModule, MyGamesView, MyGamesModel)
 		AbstractModule.call(this);
 	};
 	
-	return ng.core.NgModule({
-		imports:[
-			CommonModule,
-			ng.router.RouterModule.forChild([
-				{path: "", component: MyGamesView}
-			])
-		],
-		declarations:[
-			MyGamesView
-		],
-		providers:[
-			MyGamesModel
-		]
-	}).Class({
-		extends:AbstractModule,
-		constructor:[MyGamesModule]
-	});
+	return {
+		module:ng.core.NgModule({
+			imports:[
+				CommonModule,
+				ng.router.RouterModule.forChild([
+					{path: "", component: MyGamesView}
+				])
+			],
+			declarations:[
+				MyGamesView
+			],
+			providers:[
+				MyGamesModel
+			]
+		}).Class({
+			extends:AbstractModule,
+			constructor:[MyGamesModule]
+		})
+	};
 });
