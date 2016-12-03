@@ -1,14 +1,12 @@
 define(["app:AbstractDirective"],
 function (AbstractDirective) 
 {
-	const AbstractComponent = function ()
-	{
-		AbstractDirective.call(this);
-	};
-	
 	return ng.core.Class({
 		extends:AbstractDirective,
-		constructor:AbstractComponent,
+		constructor:function AbstractComponent ()
+		{
+			AbstractDirective.call(this);
+		},
 		ngAfterContentInit:function()
 		{
 			if(typeof this.afterContentInit === "function")

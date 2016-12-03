@@ -1,16 +1,14 @@
 define(["app:AbstractManager"],
 function (AbstractManager) 
 {
-	const AbstractEventManager = function ()
-	{
-		AbstractManager.call(this);
-		
-		this._eventEmitters = {};
-	};
-	
 	return ng.core.Class({
 		extends:AbstractManager,
-		constructor:AbstractEventManager,
+		constructor:function AbstractEventManager ()
+		{
+			AbstractManager.call(this);
+			
+			this._eventEmitters = {};
+		},
 		on : function(eventName)
 		{
 			let eventEmitter = this._eventEmitters[eventName];

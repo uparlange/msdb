@@ -1,15 +1,13 @@
 define(["app:LogUtils"],
 function (LogUtils) 
 {
-	const AbstractClass = function ()
-	{
-		this._logger = LogUtils.getLogger(this.constructor.name);
-		
-		this.getLogger().debug("constructor");
-	};
-	
 	return ng.core.Class({
-		constructor:AbstractClass,
+		constructor:function AbstractClass ()
+		{
+			this._logger = LogUtils.getLogger(this.constructor.name);
+			
+			this.getLogger().debug("constructor");
+		},
 		getLogger:function()
 		{
 			return this._logger;

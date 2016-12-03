@@ -1,23 +1,21 @@
 define(["app:AbstractClass", "app:AppUtils"],  
 function(AbstractClass, AppUtils) 
 {
-	const AbstractModel = function (MsdbService, ConnectionManager)
-	{
-		AbstractClass.call(this);
-		
-		this._msdbService = MsdbService;
-		this._connectionManager = ConnectionManager;
-		
-		this._connectionManagerChangeSubscriber = null;
-		
-		this.params = {};
-		
-		this.data = this._getInitData();
-	};
-	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractModel,
+		constructor:function AbstractModel (MsdbService, ConnectionManager)
+		{
+			AbstractClass.call(this);
+			
+			this._msdbService = MsdbService;
+			this._connectionManager = ConnectionManager;
+			
+			this._connectionManagerChangeSubscriber = null;
+			
+			this.params = {};
+			
+			this.data = this._getInitData();
+		},
 		init:function(params)
 		{
 			this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
