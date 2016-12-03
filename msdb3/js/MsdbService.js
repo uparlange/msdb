@@ -98,7 +98,8 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 							
 							if(useCache === true)
 							{
-								this._cacheManager.setItem(url, value);
+								const key = "service_" + url;
+								this._cacheManager.setItem(key, value);
 							}
 
 							eventEmitter.emit(value);
