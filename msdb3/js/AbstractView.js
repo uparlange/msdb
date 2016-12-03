@@ -1,20 +1,18 @@
 define(["app:AbstractComponent"],
 function(AbstractComponent) 
 {
-	const AbstractView = function (Model, ActivatedRoute)
-	{
-		AbstractComponent.call(this);
-		
-		this.model = Model;
-			
-		this._activatedRoute = ActivatedRoute;
-		
-		this._activatedRouteQueryParamsSubscriber = null;
-	};
-	
 	return ng.core.Class({
 		extends:AbstractComponent,
-		constructor:AbstractView,
+		constructor:function AbstractView (Model, ActivatedRoute)
+		{
+			AbstractComponent.call(this);
+			
+			this.model = Model;
+				
+			this._activatedRoute = ActivatedRoute;
+			
+			this._activatedRouteQueryParamsSubscriber = null;
+		},
 		ngOnInit:function()
 		{
 			AbstractComponent.prototype.ngOnInit.call(this);

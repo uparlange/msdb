@@ -1,18 +1,16 @@
 define(["app:AbstractClass"],
 function (AbstractClass) 
 {
-	const AbstractService = function (http, eventManager)
-	{
-		AbstractClass.call(this);
-		
-		this._http = http;
-		
-		this._eventManager = eventManager;
-	};
-	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractService,
+		constructor:function AbstractService (http, eventManager)
+		{
+			AbstractClass.call(this);
+			
+			this._http = http;
+			
+			this._eventManager = eventManager;
+		},
 		httpGet:function(url, defaultValue)
 		{
 			const eventEmitter = new ng.core.EventEmitter();

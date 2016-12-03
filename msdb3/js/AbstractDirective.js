@@ -1,14 +1,12 @@
 define(["app:AbstractClass"],
 function (AbstractClass) 
 {
-	const AbstractDirective = function ()
-	{
-		AbstractClass.call(this);
-	};
-	
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:AbstractDirective,
+		constructor:function AbstractDirective ()
+		{
+			AbstractClass.call(this);
+		},
 		ngOnChanges : function(event)
 		{
 			if(typeof this.onChanges === "function")
