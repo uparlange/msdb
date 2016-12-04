@@ -18,7 +18,7 @@ function(AbstractComponent)
 			AbstractComponent.prototype.ngOnInit.call(this);
 			
 			this._activatedRouteQueryParamsSubscriber = this._activatedRoute.queryParams.subscribe((params) =>
-			{
+			{	
 				this.model.init(params);
 			});
 		},
