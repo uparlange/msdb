@@ -39,9 +39,9 @@ define(function ()
 		{
 			return this._getBaseUrl() + "/php/services/" + serviceName + ".php";
 		},
-		loadModule:function(moduleName)
+		getModuleName:function(moduleName)
 		{
-			return System.import("app:" + moduleName);
+			return "app:" + moduleName + "#module";
 		},
 		_getUnitLabel:function(value, steps, stepMultiplier)
 		{
