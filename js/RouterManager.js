@@ -75,7 +75,7 @@ function (AbstractManager, CacheManager, AppUtils)
 						
 						const scrollTop = this._cacheManager.getItem("scrollTop_" + this.getCurrentPath(), 0);
 						this._bodyRef.scrollTop = scrollTop;
-					},0);
+					},50);
 				});
 				const config = {
 					childList:true,
