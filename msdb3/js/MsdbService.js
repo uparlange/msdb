@@ -72,11 +72,12 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
+			const cacheKey = this._getCacheKey(url);
 			let value = null;
 			
 			if(useCache === true)
 			{
-				value = this._cacheManager.getItem(url);
+				value = this._cacheManager.getItem(cacheKey);
 			}
 			
 			if(value !== null)
@@ -98,8 +99,7 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 							
 							if(useCache === true)
 							{
-								const key = "service_" + url;
-								this._cacheManager.setItem(key, value);
+								this._cacheManager.setItem(cacheKey, value);
 							}
 
 							eventEmitter.emit(value);
@@ -113,6 +113,10 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 			}
 
 			return eventEmitter;
+		},
+		_getCacheKey:function(url)
+		{
+			return "service_" + url;
 		},
 		_initialized:function()
 		{
