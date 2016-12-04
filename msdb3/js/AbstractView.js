@@ -26,9 +26,13 @@ function(AbstractComponent)
 		{
 			AbstractComponent.prototype.ngOnDestroy.call(this);
 			
-			this._activatedRouteQueryParamsSubscriber.unsubscribe();
-			
 			this.model.destroy();
+			this.model = null;
+			
+			this._activatedRoute = null;
+			
+			this._activatedRouteQueryParamsSubscriber.unsubscribe();
+			this._activatedRouteQueryParamsSubscriber = null;
 		}
 	});			
 });

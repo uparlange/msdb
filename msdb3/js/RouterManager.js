@@ -25,18 +25,16 @@ function (AbstractManager, CacheManager, AppUtils)
 							{
 								if(AppUtils.getDevice().mobile() !== null)
 								{
-									const lastView = this._cacheManager.getItem("lastView", "/home");
-									this._router.navigateByUrl(lastView);
+									this._restoreLastView();
 								}
 							}
 							else
 							{
-								const scrollTop = this._bodyRef.scrollTop;
-								this._cacheManager.setItem("scrollTop_" + this.getCurrentPath(), scrollTop);
+								this.saveCurrentViewScrollPosition();
 							}
 							break;
 						case "NavigationEnd" :
-							this._cacheManager.setItem("lastView", e.urlAfterRedirects);
+							this._saveLastView(e.urlAfterRedirects);
 							this._enableMutationObserver();
 							break;
 					}
@@ -47,7 +45,26 @@ function (AbstractManager, CacheManager, AppUtils)
 		{
 			
 		},
-		getCurrentPath:function()
+		saveCurrentViewScrollPosition:function()
+		{
+			const scrollTop = this._bodyRef.scrollTop;
+			this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), scrollTop);
+		},
+		_restoreCurrentViewScrollPosition:function()
+		{
+			const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
+			this._bodyRef.scrollTop = scrollTop;
+		},
+		_saveLastView:function(url)
+		{
+			this._cacheManager.setItem("lastView", url);
+		},
+		_restoreLastView:function()
+		{
+			const lastView = this._cacheManager.getItem("lastView", "/home");
+			this._router.navigateByUrl(lastView);
+		},
+		_getCurrentPath:function()
 		{
 			return this._location.path(true);
 		},
@@ -72,9 +89,7 @@ function (AbstractManager, CacheManager, AppUtils)
 					this._creationCompleteTimeout = setTimeout(() =>
 					{ 
 						this._disableMutationObserver();
-						
-						const scrollTop = this._cacheManager.getItem("scrollTop_" + this.getCurrentPath(), 0);
-						this._bodyRef.scrollTop = scrollTop;
+						this._restoreCurrentViewScrollPosition();
 					},50);
 				});
 				const config = {

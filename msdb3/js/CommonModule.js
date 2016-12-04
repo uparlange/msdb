@@ -1,7 +1,7 @@
 define(["app:AbstractModule", "app:TranslatePipe", "app:NgForItemComponent", "app:LazyDirective", "app:ScrollToTopDirective",
-		"app:FormDirective"], 
+		"app:FormDirective", "app:HrefDirective"], 
 function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective,
-		 FormDirective)
+		 FormDirective, HrefDirective)
 {
 	return ng.core.NgModule({
 		imports:[
@@ -15,7 +15,8 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 			NgForItemComponent,
 			LazyDirective,
 			ScrollToTopDirective,
-			FormDirective
+			FormDirective,
+			HrefDirective
 		],
 		exports:[
 			ng.common.CommonModule,
@@ -26,7 +27,8 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 			NgForItemComponent,
 			LazyDirective,
 			ScrollToTopDirective,
-			FormDirective
+			FormDirective,
+			HrefDirective
 		]
 	}).Class({
 		extends:AbstractModule,

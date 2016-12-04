@@ -11,6 +11,14 @@ function(AbstractComponent)
 			
 			this._mdDialogRef = MdDialogRef;
 		},
+		ngOnDestroy:function()
+		{
+			AbstractComponent.prototype.ngOnDestroy.call(this);
+			
+			this.model = null;
+			
+			this._mdDialogRef = null;
+		},
 		close:function()
 		{
 			this._mdDialogRef.close();
