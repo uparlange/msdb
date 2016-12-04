@@ -62,9 +62,16 @@ define(function ()
 		},
 		_getBaseUrl:function()
 		{
-			//return "http://localhost/projects/msdb2/dist";
-			//return "http://192.168.137.198/projects/msdb2/dist";
-			return "";
+			let path = window.location.protocol + "//" + window.location.host + window.location.pathname;
+			if(!GlobalConfig.prod)
+			{
+				path = path.replace("msdb3", "msdb2");
+				if(path.indexOf("dist") === -1)
+				{
+					path += "dist";
+				}
+			}
+			return path;
 		}
 	};
 });
