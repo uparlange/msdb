@@ -1,14 +1,14 @@
 define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
 function(AbstractModel, MsdbService, ConnectionManager) 
 {
-	const HomeModel = function(MsdbService, ConnectionManager)
-	{
-		AbstractModel.call(this, MsdbService, ConnectionManager);
-	};
-	
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, HomeModel],
+		constructor:[MsdbService, ConnectionManager, 
+			function HomeModel (MsdbService, ConnectionManager)
+			{
+				AbstractModel.call(this, MsdbService, ConnectionManager);
+			}
+		],
 		onRefresh : function()
 		{
 			if(this.data.build === null)

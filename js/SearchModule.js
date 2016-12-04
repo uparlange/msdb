@@ -1,11 +1,6 @@
 define(["app:AbstractModule", "app:CommonModule", "app:SearchView", "app:SearchModel"], 
 function(AbstractModule, CommonModule, SearchView, SearchModel)
 {
-	const SearchModule = function ()
-	{
-		AbstractModule.call(this);
-	};
-	
 	return {
 		module:ng.core.NgModule({
 			imports:[
@@ -22,7 +17,12 @@ function(AbstractModule, CommonModule, SearchView, SearchModel)
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:[SearchModule]
+			constructor:[
+				function SearchModule ()
+				{
+					AbstractModule.call(this);
+				}
+			]
 		})
 	};
 });

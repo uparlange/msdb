@@ -3,11 +3,6 @@ define(["app:AbstractModule", "app:TranslatePipe", "app:NgForItemComponent", "ap
 function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective,
 		 FormDirective)
 {
-	const CommonModule = function()
-	{
-		AbstractModule.call(this);
-	};
-	
 	return ng.core.NgModule({
 		imports:[
 			ng.common.CommonModule,
@@ -35,6 +30,11 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 		]
 	}).Class({
 		extends:AbstractModule,
-		constructor:[CommonModule]
+		constructor:[
+			function CommonModule()
+			{
+				AbstractModule.call(this);
+			}
+		]
 	});
 });

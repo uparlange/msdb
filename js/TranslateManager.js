@@ -1,25 +1,25 @@
 define(["app:AbstractManager"],
 function (AbstractManager) 
 {
-	const TranslateManager = function (http)
-	{
-		AbstractManager.call(this);
-		
-		this._http = http;
-		
-		this.onLanguageChange = new ng.core.EventEmitter();
-
-		this._properties = {};
-		
-		this._loading = false;
-		this._pendingRequests = [];
-		
-		this.setLanguage(this._getDefaultLanguage());
-	};
-	
-    return ng.core.Class({
+	return ng.core.Class({
 		extends:AbstractManager,
-        constructor: [ng.http.Http, TranslateManager],
+        constructor: [ng.http.Http, 
+			function TranslateManager (Http)
+			{
+				AbstractManager.call(this);
+				
+				this._http = Http;
+				
+				this.onLanguageChange = new ng.core.EventEmitter();
+
+				this._properties = {};
+				
+				this._loading = false;
+				this._pendingRequests = [];
+				
+				this.setLanguage(this._getDefaultLanguage());
+			}
+		],
 		setLanguage:function(lang)
 		{
 			if(this._currentLang !== lang)

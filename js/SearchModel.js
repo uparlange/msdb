@@ -1,14 +1,14 @@
 define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
 function(AbstractModel, MsdbService, ConnectionManager) 
 {
-	const SearchModel = function(MsdbService, ConnectionManager)
-	{
-		AbstractModel.call(this, MsdbService, ConnectionManager);
-	};
-	
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, SearchModel],
+		constructor:[MsdbService, ConnectionManager, 
+			function SearchModel(MsdbService, ConnectionManager)
+			{
+				AbstractModel.call(this, MsdbService, ConnectionManager);
+			}
+		],
 		onRefresh:function()
 		{
 			const tabInfos = this._getTabInfos();

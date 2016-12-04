@@ -1,18 +1,18 @@
 define(["app:AbstractDirective"],
 function(AbstractDirective) 
 {
-	const ScrollToTopDirective = function (element)
-	{
-		AbstractDirective.call(this, element);
-		
-		this._element = element.nativeElement;
-	};
-	
 	return ng.core.Directive({
 		selector: "[scrollToTop]"
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, ScrollToTopDirective],
+		constructor: [ng.core.ElementRef, 
+			function ScrollToTopDirective (ElementRef)
+			{
+				AbstractDirective.call(this);
+				
+				this._element = ElementRef.nativeElement;
+			}
+		],
 		onInit : function()
 		{
 			this._clickHandler = function()
