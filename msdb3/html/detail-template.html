@@ -62,7 +62,7 @@
 				<span class="sep">:</span>
 				<button class="link-button" (click)="openClonesPopup()">{{model.data.clones.length}}</button>
 			</md-list-item>
-			<md-list-item>
+			<md-list-item *ngIf="model.data.game.dipswitchs.length > 0 || model.data.game.chips.length > 0 || model.data.game.biossets.length > 0 || model.data.game.ports.length > 0 || model.data.game.devicerefs.length > 0">
 				{{'L10N_MORE'|translate}}
 				<span class="sep">:</span>
 				<button md-icon-button [md-menu-trigger-for]="menu">
