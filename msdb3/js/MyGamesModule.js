@@ -1,11 +1,6 @@
 define(["app:AbstractModule", "app:CommonModule", "app:MyGamesView", "app:MyGamesModel"], 
 function(AbstractModule, CommonModule, MyGamesView, MyGamesModel)
 {
-	const MyGamesModule = function ()
-	{
-		AbstractModule.call(this);
-	};
-	
 	return {
 		module:ng.core.NgModule({
 			imports:[
@@ -22,7 +17,12 @@ function(AbstractModule, CommonModule, MyGamesView, MyGamesModel)
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:[MyGamesModule]
+			constructor:[
+				function MyGamesModule ()
+				{
+					AbstractModule.call(this);
+				}
+			]
 		})
 	};
 });

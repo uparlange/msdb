@@ -1,18 +1,18 @@
 define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:SocketManager"], 
 function(AbstractModel, MsdbService, ConnectionManager, SocketManager) 
 {
-	const DetailModel = function (MsdbService, ConnectionManager, SocketManager)
-	{
-		AbstractModel.call(this, MsdbService, ConnectionManager);
-		
-		this._socketManager = SocketManager;
-		
-		this._socketManagerConfigChangedSubscriber = null;
-	};
-	
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor: [MsdbService, ConnectionManager, SocketManager, DetailModel],
+		constructor: [MsdbService, ConnectionManager, SocketManager, 
+			function DetailModel (MsdbService, ConnectionManager, SocketManager)
+			{
+				AbstractModel.call(this, MsdbService, ConnectionManager);
+				
+				this._socketManager = SocketManager;
+				
+				this._socketManagerConfigChangedSubscriber = null;
+			}
+		],
 		onInit : function()
 		{
 			this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>

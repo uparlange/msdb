@@ -1,18 +1,18 @@
 define(["app:AbstractManager"],
 function (AbstractManager) 
 {
-	const CacheManager = function ()
-	{
-		AbstractManager.call(this);
-		
-		this._defaultNs = "build";
-		
-		this._applicationCachePrefix = "MSDB";
-	};
-	
 	return ng.core.Class({
 		extends:AbstractManager,
-		constructor:[CacheManager],
+		constructor:[
+			function CacheManager ()
+			{
+				AbstractManager.call(this);
+				
+				this._defaultNs = "build";
+				
+				this._applicationCachePrefix = "MSDB";
+			}
+		],
 		setDefaultNs:function(ns)
 		{
 			const lastNs = this._getDefaultNs();

@@ -1,21 +1,20 @@
 define(["app:AbstractDirective", "app:LazyManager"], 
 function(AbstractDirective, LazyManager) 
 {
-	const LazyDirective = function (element, LazyManager)
-	{
-		AbstractDirective.call(this);
-		
-		this._element = element.nativeElement;
-		
-		this._blazyManager = LazyManager;
-	};
-	
 	return ng.core.Directive({
 		selector: "[lazySrc]",
 		inputs: ["lazySrc"]
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, LazyManager, LazyDirective],
+		constructor: [ng.core.ElementRef, LazyManager, 
+			function LazyDirective (ElementRef, LazyManager)
+			{
+				AbstractDirective.call(this);
+				
+				this._element = ElementRef.nativeElement;
+				this._lazyManager = LazyManager;
+			}
+		],
 		onInit:function()
 		{
 			this._element.classList.add("b-lazy");
@@ -30,13 +29,13 @@ function(AbstractDirective, LazyManager)
 				{
 					this._element.dataset.src = lazySrc;
 					
-					this._blazyManager.register(this._element);
+					this._lazyManager.register(this._element);
 				}
 			}
 		},
 		onDestroy: function()
 		{
-			this._blazyManager.unRegister(this._element);
+			this._lazyManager.unRegister(this._element);
 		}
 	});
 });

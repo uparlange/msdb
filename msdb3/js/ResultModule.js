@@ -1,11 +1,6 @@
 define(["app:AbstractModule", "app:CommonModule", "app:ResultView", "app:ResultModel"], 
 function(AbstractModule, CommonModule, ResultView, ResultModel)
 {
-	const ResultModule = function ()
-	{
-		AbstractModule.call(this);
-	};
-	
 	return {
 		module:ng.core.NgModule({
 			imports:[
@@ -22,7 +17,12 @@ function(AbstractModule, CommonModule, ResultView, ResultModel)
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:[ResultModule]
+			constructor:[
+				function ResultModule ()
+				{
+					AbstractModule.call(this);
+				}
+			]
 		})
 	};
 });

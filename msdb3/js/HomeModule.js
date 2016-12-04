@@ -1,11 +1,6 @@
 define(["app:AbstractModule", "app:CommonModule", "app:HomeView", "app:HomeModel"], 
 function(AbstractModule, CommonModule, HomeView, HomeModel)
 {
-	const HomeModule = function ()
-	{
-		AbstractModule.call(this);
-	};
-	
 	return {
 		module:ng.core.NgModule({
 			imports:[
@@ -22,7 +17,12 @@ function(AbstractModule, CommonModule, HomeView, HomeModel)
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:[HomeModule] 
+			constructor:[
+				function HomeModule ()
+				{
+					AbstractModule.call(this);
+				}
+			] 
 		})
 	};
 });

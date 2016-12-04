@@ -1,19 +1,14 @@
 define(["app:AbstractModule", "app:CommonModule", "app:AppView", "app:MsdbService", "app:AppModel", 
 		"app:AppUtils", "app:EventManager", "app:TranslateManager", "app:ProgressBarDirective", "app:SocketManager", 
-		"app:ConnectionManager", "app:LazyManager", "app:CacheManager", "app:UpdateManager"], 
+		"app:ConnectionManager", "app:LazyManager", "app:CacheManager", "app:UpdateManager", "app:RouterManager"], 
 function(AbstractModule, CommonModule, AppView, MsdbService, AppModel, 
 		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
-		 ConnectionManager, LazyManager, CacheManager, UpdateManager) 
+		 ConnectionManager, LazyManager, CacheManager, UpdateManager, RouterManager) 
 {
 	if(GlobalConfig.prod)
 	{
 		ng.core.enableProdMode();
 	}
-
-	const AppModule = function ()
-	{
-		AbstractModule.call(this);
-	};
 
 	ng.platformBrowserDynamic.platformBrowserDynamic().bootstrapModule(
 		ng.core.NgModule({
@@ -42,14 +37,20 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 				ConnectionManager,
 				LazyManager,
 				CacheManager,
-				UpdateManager
+				UpdateManager,
+				RouterManager
 			],
 			bootstrap:[
 				AppView
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:[AppModule]
+			constructor:[
+				function AppModule ()
+				{
+					AbstractModule.call(this);
+				}
+			]
 		})
 	);
 });

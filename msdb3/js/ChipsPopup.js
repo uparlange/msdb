@@ -1,15 +1,15 @@
 define(["app:AbstractPopup", "app:DetailModel", "app:AppUtils"], 
 function(AbstractPopup, DetailModel, AppUtils) 
 {
-	const ChipsPopup = function (DetailModel, MdDialogRef)
-	{
-		AbstractPopup.call(this, DetailModel, MdDialogRef);
-	};
-	
 	return ng.core.Component(AppUtils.getComponentConfiguration("chips")).Class(
 	{
 		extends:AbstractPopup,
-		constructor: [DetailModel, ng.material.MdDialogRef, ChipsPopup],
+		constructor: [DetailModel, ng.material.MdDialogRef, 
+			function ChipsPopup (DetailModel, MdDialogRef)
+			{
+				AbstractPopup.call(this, DetailModel, MdDialogRef);
+			}
+		],
 		onInit:function()
 		{
 			const map = {};

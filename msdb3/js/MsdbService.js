@@ -1,18 +1,18 @@
 define(["app:AbstractService", "app:EventManager", "app:CacheManager", "app:AppUtils"], 
 function(AbstractService, EventManager, CacheManager, AppUtils) 
 {
-	const MsdbService = function (http, eventManager, CacheManager)
-	{
-		AbstractService.call(this, http, eventManager);
-		
-		this._cacheManager = CacheManager;
-		
-		this._mameInfos = null;
-	};
-	
 	return ng.core.Class({
 		extends:AbstractService,
-		constructor: [ng.http.Http, EventManager, CacheManager, MsdbService],
+		constructor: [ng.http.Http, EventManager, CacheManager, 
+			function MsdbService (Http, EventManager, CacheManager)
+			{
+				AbstractService.call(this, Http, EventManager);
+				
+				this._cacheManager = CacheManager;
+				
+				this._mameInfos = null;
+			}
+		],
 		getMameInfos : function()
 		{
 			const eventEmitter = new ng.core.EventEmitter();

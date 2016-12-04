@@ -5,11 +5,6 @@ function(AbstractModule, CommonModule, DetailView, DetailModel, DriverPopup,
 		 RomsPopup, ClonesPopup, VideoDirective, GalleryComponent, DipSwitchsPopup, 
 		 ChipsPopup, BiossetsPopup, PortsPopup, DeviceRefsPopup)
 {
-	const DetailModule = function ()
-	{
-		AbstractModule.call(this);
-	};
-	
 	return {
 		module:ng.core.NgModule({
 			imports:[
@@ -46,7 +41,12 @@ function(AbstractModule, CommonModule, DetailView, DetailModel, DriverPopup,
 			]
 		}).Class({
 			extends:AbstractModule,
-			constructor:[DetailModule]
+			constructor:[
+				function DetailModule ()
+				{
+					AbstractModule.call(this);
+				}
+			]
 		})
 	};
 });

@@ -1,24 +1,24 @@
 define(["app:AbstractComponent", "app:AppUtils"], 
 function(AbstractComponent, AppUtils) 
 {
-	const GalleryComponent = function (element)
-	{
-		AbstractComponent.call(this);
-		
-		this._element = element.nativeElement;
-		
-		this._gallery = null;
-		
-		this._masonry = null;
-		
-		this._resizeTimeout = null;
-	};
-	
 	return ng.core.Component(AppUtils.getComponentConfiguration("gallery", {
 		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
 	})).Class({
 		extends:AbstractComponent,
-		constructor: [ng.core.ElementRef, GalleryComponent],
+		constructor: [ng.core.ElementRef, 
+			function GalleryComponent (ElementRef)
+			{
+				AbstractComponent.call(this);
+				
+				this._element = ElementRef.nativeElement;
+				
+				this._gallery = null;
+				
+				this._masonry = null;
+				
+				this._resizeTimeout = null;
+			}
+		],
 		onInit:function()
 		{
 			this._windowResizeHandler = () =>

@@ -1,18 +1,18 @@
 define(["app:AbstractManager"],
 function (AbstractManager) 
 {
-	const LazyManager = function ()
-	{
-		AbstractManager.call(this);
-		
-		this._blazy = new Blazy();
-		
-		this._timeoutInterval = null;
-	};
-	
-    return ng.core.Class({
+	return ng.core.Class({
 		extends:AbstractManager,
-        constructor: [LazyManager],
+        constructor: [
+			function LazyManager ()
+			{
+				AbstractManager.call(this);
+				
+				this._blazy = new Blazy();
+				
+				this._timeoutInterval = null;
+			}
+		],
 		register:function(element)
 		{
 			if(this._timeoutInterval !== null)

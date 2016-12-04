@@ -1,27 +1,27 @@
 define(["app:AbstractDirective"],
 function(AbstractDirective)
 {
-	const VideoDirective = function (element)
-	{
-		AbstractDirective.call(this);
-		
-		this._element = element.nativeElement;
-		
-		this.onEvent = new ng.core.EventEmitter();
-		
-		this._onEventHandler = (event) =>
-		{
-			this.onEvent.emit(event);
-		};
-	};
-	
 	return ng.core.Directive({
 		selector: "video",
 		inputs:["source"],
 		outputs:["onEvent"]
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, VideoDirective],
+		constructor: [ng.core.ElementRef, 
+			function VideoDirective (ElementRef)
+			{
+				AbstractDirective.call(this);
+				
+				this._element = ElementRef.nativeElement;
+				
+				this.onEvent = new ng.core.EventEmitter();
+				
+				this._onEventHandler = (event) =>
+				{
+					this.onEvent.emit(event);
+				};
+			}
+		],
 		onInit:function()
 		{
 			this._element.addEventListener("error", this._onEventHandler);

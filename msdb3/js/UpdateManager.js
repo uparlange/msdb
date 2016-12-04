@@ -1,24 +1,24 @@
 define(["app:AbstractManager", "app:TranslateManager"],
 function (AbstractManager, TranslateManager) 
 {
-	const UpdateManager = function (TranslateManager)
-	{
-		AbstractManager.call(this);
-		
-		this._translateManager = TranslateManager;
-		
-		this._checked = false;
-		
-		window.applicationCache.addEventListener("updateready", () =>
-		{
-			this._askForReload();
-		});
-	};
-	
-    return ng.core.Class({
+	return ng.core.Class({
 		extends:AbstractManager,
-        constructor: [TranslateManager, UpdateManager],
-		check:function()
+        constructor: [TranslateManager, 
+			function UpdateManager (TranslateManager)
+			{
+				AbstractManager.call(this);
+				
+				this._translateManager = TranslateManager;
+				
+				this._checked = false;
+				
+				window.applicationCache.addEventListener("updateready", () =>
+				{
+					this._askForReload();
+				});
+			}
+		],
+		init:function()
 		{
 			if(window.applicationCache.status === window.applicationCache.UPDATEREADY)
 			{

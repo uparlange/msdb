@@ -1,25 +1,24 @@
 define(["app:AbstractDirective", "app:EventManager"], 
 function(AbstractDirective, EventManager) 
 {
-	const ProgressBarDirective = function (element, eventManager)
-	{
-		AbstractDirective.call(this);
-		
-		this._element = element.nativeElement;
-		
-		this._eventManager = eventManager;
-		
-		this._httpBegintEventEmitter = null;
-		this._httpEndEventEmitter = null;
-		
-		this._counter = 0;
-	};
-	
 	return ng.core.Directive({
 		selector: "md-progress-bar"
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, EventManager, ProgressBarDirective],
+		constructor: [ng.core.ElementRef, EventManager, 
+			function ProgressBarDirective (ElementRef, EventManager)
+			{
+				AbstractDirective.call(this);
+				
+				this._element = ElementRef.nativeElement;
+				this._eventManager = EventManager;
+				
+				this._httpBegintEventEmitter = null;
+				this._httpEndEventEmitter = null;
+				
+				this._counter = 0;
+			}
+		],
 		onInit : function()
 		{
 			this._element.style.display = "none";
