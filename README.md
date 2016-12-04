@@ -1,5 +1,8 @@
 # MSDB (Mame Smart DataBase)
-MAME 'Multiple Arcade Machine Emulator' is an arcade emulator. The list of games is such that it is considered a kind of large library or 'memory' of the arcade game. To check that your favorite game is available, go for a search on MSDB!
+MAME 'Multiple Arcade Machine Emulator' is an arcade emulator. The list of games is such that it is considered as a large library or 'memory' of the arcade game. To check if your favorite game is available, go for a search on MSDB!
+# Demo
+- MSDB page : http://msdb.lapli.fr
+- Homepage : http://www.lapli.fr
 # Technical
 This application has been developped using
 - Angular 2 (es5 bundles not typescript)
