@@ -65,7 +65,7 @@ define(function ()
 			let path = null;
 			if(GlobalConfig.prod)
 			{
-				path = "http://msdb.lapli.fr"
+				path = "http://msdb.lapli.fr";
 			}
 			else
 			{
