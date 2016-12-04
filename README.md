@@ -11,4 +11,4 @@ To check if your favorite game is available, go for a search on MSDB!
 This application has been developped using
 * Angular 2 (es5 bundles not typescript) (https://github.com/angular/angular) 
 * Angular Material 2 (https://github.com/angular/material2)
-and others libraries, see package.json for dependencies
+and others libraries, see package.json for dependencies (https://github.com/uparlange/msdb/blob/master/package.json)
