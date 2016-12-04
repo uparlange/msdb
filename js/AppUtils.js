@@ -62,9 +62,14 @@ define(function ()
 		},
 		_getBaseUrl:function()
 		{
-			let path = window.location.protocol + "//" + window.location.host + window.location.pathname;
-			if(!GlobalConfig.prod)
+			let path = null;
+			if(GlobalConfig.prod)
 			{
+				path = "http://msdb.lapli.fr"
+			}
+			else
+			{
+				path = window.location.protocol + "//" + window.location.host + window.location.pathname;
 				path = path.replace("msdb3", "msdb2");
 				if(path.indexOf("dist") === -1)
 				{
