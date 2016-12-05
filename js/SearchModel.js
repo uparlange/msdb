@@ -41,13 +41,15 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		},
 		getVersion:function(value)
 		{
-			value = value.replace(".", "");
-			value = value.replace(/0/g, "");
-			return "0" + value;
+			let version = value;
+			version = version.replace("0.00", "0");
+			version = version.replace("0.0", "0");
+			version = version.replace("0.", "0");
+			return version;
 		},
 		changeLogAvailable:function(value)
 		{
-			return (value.indexOf("u") === -1);
+			return (value.indexOf("u") === -1 && value.indexOf("b") === -1);
 		},
 		_loadDescription:function()
 		{
@@ -77,6 +79,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		{
 			return {
 				selectedIndex:0,
+				description:"",
 				years:{list:null,count:0},
 				series:{list:null,count:0},
 				categories:{list:null,count:0},

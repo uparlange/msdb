@@ -29,7 +29,7 @@ define(function ()
 		},
 		getGameFolder:function(game)
 		{
-			return this._getBaseUrl() + "/games/" + game.name;
+			return this._getBaseUrl() + "games/" + game.name;
 		},
 		getGameVideoUrl:function(game)
 		{
@@ -37,7 +37,7 @@ define(function ()
 		},
 		getServiceUrl:function(serviceName)
 		{
-			return this._getBaseUrl() + "/php/services/" + serviceName + ".php";
+			return this._getBaseUrl() + "php/services/" + serviceName + ".php";
 		},
 		getModuleName:function(moduleName)
 		{
@@ -62,18 +62,14 @@ define(function ()
 		},
 		_getBaseUrl:function()
 		{
-			let path = null;
-			if(GlobalConfig.prod)
-			{
-				path = "http://msdb.lapli.fr";
-			}
-			else
+			let path = "";
+			if(!GlobalConfig.prod)
 			{
 				path = window.location.protocol + "//" + window.location.host + window.location.pathname;
 				path = path.replace("msdb3", "msdb2");
 				if(path.indexOf("dist") === -1)
 				{
-					path += "dist";
+					path += "dist/";
 				}
 			}
 			return path;
