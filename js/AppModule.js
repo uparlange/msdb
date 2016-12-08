@@ -5,7 +5,7 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
 		 ConnectionManager, LazyManager, CacheManager, UpdateManager, RouterManager) 
 {
-	if(GlobalConfig.prod)
+	if(GlobalConfig.PRODUCTION)
 	{
 		ng.core.enableProdMode();
 	}

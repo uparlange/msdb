@@ -28,7 +28,7 @@ define(function()
 
 	let _consoleWorker = null;
 	
-	const _level = getLevelByName(GlobalConfig.logLevel);
+	const _level = getLevelByName(GlobalConfig.LOG_LEVEL);
 	
 	return {
 		getLogger:function(className)
@@ -53,6 +53,13 @@ define(function()
 					if(_level >= _LOG_LEVEL_WARN)
 					{
 						this._log("warn", message);
+					}
+				},
+				error:function(message)
+				{
+					if(_level >= _LOG_LEVEL_ERROR)
+					{
+						this._log("error", message);
 					}
 				},
 				_log:function(methodName, message)

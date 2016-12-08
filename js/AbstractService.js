@@ -22,9 +22,11 @@ function (AbstractClass)
 			
 			this._eventManager.emit("HTTP_BEGIN");
 			
-			this._http.get(url).catch((e) =>
+			this._http.get(url).timeout(GlobalConfig.HTTP_REQUEST_TIMEOUT, new Error('timeout exceeded')).catch((e) =>
 			{
 				this._eventManager.emit("HTTP_END");
+				
+				this.getLogger().error(e.toString());
 				
 				eventEmitter.emit(defaultValue);
 			}).subscribe((result) => 

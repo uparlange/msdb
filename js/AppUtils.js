@@ -63,7 +63,7 @@ define(function ()
 		_getBaseUrl:function()
 		{
 			let path = "";
-			if(!GlobalConfig.prod)
+			if(!GlobalConfig.PRODUCTION)
 			{
 				path = window.location.protocol + "//" + window.location.host + window.location.pathname;
 				path = path.replace("msdb3", "msdb2");

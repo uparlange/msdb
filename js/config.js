@@ -12,13 +12,16 @@ SystemJS.config(
 });
 
 window.GlobalConfig = {};
+
 if(window.location.search.indexOf("debug") === -1)
 {
-	window.GlobalConfig.prod = true;
-	window.GlobalConfig.logLevel = "off";
+	GlobalConfig.PRODUCTION = true;
+	GlobalConfig.LOG_LEVEL = "off";
 }
 else
 {
-	window.GlobalConfig.prod = false;
-	window.GlobalConfig.logLevel = "all";
+	GlobalConfig.PRODUCTION = false;
+	GlobalConfig.LOG_LEVEL = "all";
 }
+
+GlobalConfig.HTTP_REQUEST_TIMEOUT = 30000;
