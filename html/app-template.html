@@ -2,7 +2,7 @@
 	<md-toolbar color="primary">
 		<i class="app-network-status material-icons md-18 md-light">{{model.params.online ? 'network_wifi' : 'signal_wifi_off'}}</i>
 		<a routerLink="/home">
-			<img src="images/logo.png">
+			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
 		<button md-fab routerLink="/search" [queryParams]="{type:'description'}">
