@@ -6,7 +6,8 @@ module.exports = function (grunt) {
 		pkg:pkg,
         clean: {
             dist: ['dist'],
-			babel: ['dist/js/*.babel.js']
+			babel: ['dist/js/*.babel.js'],
+			index_temp: ['dist/index_temp.html']
         },
 		jshint: {
 			options: {
@@ -45,8 +46,8 @@ module.exports = function (grunt) {
 				removeComments: true,
 				collapseWhitespace: true
 			},
-			index:{
-				src: 'index.html',
+			index_temp:{
+				src: 'dist/index_temp.html',
                 dest: 'dist/index.html'
 			},
             templates: {
@@ -95,6 +96,16 @@ module.exports = function (grunt) {
                 src: '**/*',
                 dest: 'dist/data',
                 expand: true
+			},
+			index: {
+				src:'index.html',
+				dest:'dist/index_temp.html',
+				options: {
+                    process: function (content, srcpath)
+                    {
+                        return content.replace(/APP_VERSION/g, pkg.version);
+                    }
+                }
 			}
         },
 		imagemin: {
@@ -236,5 +247,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('theme', ['sass']);
 	grunt.registerTask('cache', ['manifest']);
-	grunt.registerTask('default', ['clean:dist', 'jshint', 'prepare', 'copy', 'imagemin', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'sass', 'cssmin', 'manifest']);
+	grunt.registerTask('default', ['clean:dist', 'jshint', 'prepare', 'copy', 'imagemin', 'babel', 'uglify', 'clean:babel', 'htmlmin', 'clean:index_temp', 'sass', 'cssmin', 'manifest']);
 };
