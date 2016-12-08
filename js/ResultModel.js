@@ -12,6 +12,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		onRefresh:function()
 		{
 			this.data = this._getInitData();
+			
 			this._msdbService.search(this.params.type, this.params.value).subscribe((data) => 
 			{
 				if(Array.isArray(data))
@@ -42,6 +43,10 @@ function(AbstractModel, MsdbService, ConnectionManager)
 
 					this.data.list = list;
 				}
+				else
+				{
+					this.data.count = 0;
+				}
 			});	
 		},
 		getSearchLabel:function(type)
@@ -52,8 +57,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		{
 			return {
 				list:[],
-				count:0,
-				itemByPage:20
+				count:-1
 			};
 		}
 	});	
