@@ -1,14 +1,20 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
-function(AbstractModel, MsdbService, ConnectionManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:CacheManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, CacheManager) 
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, 
-			function SearchModel(MsdbService, ConnectionManager)
+		constructor:[MsdbService, ConnectionManager, CacheManager,
+			function SearchModel(MsdbService, ConnectionManager, CacheManager)
 			{
 				AbstractModel.call(this, MsdbService, ConnectionManager);
+				
+				this._cacheManager = CacheManager;
 			}
 		],
+		onInit:function()
+		{
+			this.data.description = this._cacheManager.getItem("searchDescription", "");
+		},
 		onRefresh:function()
 		{
 			const tabInfos = this._getTabInfos();
@@ -33,6 +39,10 @@ function(AbstractModel, MsdbService, ConnectionManager)
 					}
 				});
 			},0);
+		},
+		onDestroy:function()
+		{
+			this._cacheManager.setItem("searchDescription", this.data.description);
 		},
 		getSearchTabLabel:function(index)
 		{
