@@ -7,17 +7,17 @@
 	</md-card-content>
 </md-card>
 <div class="default-spacer"></div>
-<md-card *ngIf="model.data.build != null">
+<md-card *ngIf="model.data.mame.build != null">
 	<md-card-title>
-		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.getEncodedValue(model.data.version)}">{{model.data.version}}</a>
-		({{model.data.gameCount}} {{'L10N_GAMES'|translate}})
+		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.getEncodedValue(model.data.mame.version)}">{{model.data.mame.version}}</a>
+		({{model.data.mame.gameCount}} {{'L10N_GAMES'|translate}})
 	</md-card-title>
 	<md-card-content>
 		<ul>
-			<li>Parent : {{model.data.parentCount}}</li>
-			<li>Clone : {{model.data.cloneCount}}</li>
-			<li>Bios : {{model.data.biosCount}}</li>
-			<li>Device : {{model.data.deviceCount}}</li>
+			<li>Parent : {{model.data.mame.parentCount}}</li>
+			<li>Clone : {{model.data.mame.cloneCount}}</li>
+			<li>Bios : {{model.data.mame.biosCount}}</li>
+			<li>Device : {{model.data.mame.deviceCount}}</li>
 		</ul>
 	</md-card-content>
 </md-card>
@@ -28,7 +28,7 @@
 	</md-card-title>
 	<md-card-content>
 		<ol>
-			<li><a routerLink="/search" [queryParams]="{type:'description'}">{{'L10N_FIND_GAME'|translate}}</a></li>
+			<li><a routerLink="/search" [queryParams]="{type:model.data.searchLastType}">{{'L10N_FIND_GAME'|translate}}</a></li>
 			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a></li>
 			<li><a target="_blank" href="http://www.planetemu.net/roms/mame-roms">{{'L10N_DOWNLOAD_GAME'|translate}}</a></li>
 			<li>{{'L10N_HAVE_FUN'|translate}}</li>

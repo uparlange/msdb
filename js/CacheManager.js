@@ -1,12 +1,12 @@
-define(["app:AbstractManager"],
-function (AbstractManager) 
+define(["app:AbstractEventManager"],
+function (AbstractEventManager) 
 {
 	return ng.core.Class({
-		extends:AbstractManager,
+		extends:AbstractEventManager,
 		constructor:[
 			function CacheManager ()
 			{
-				AbstractManager.call(this);
+				AbstractEventManager.call(this);
 				
 				this._defaultNs = "build";
 				
@@ -19,6 +19,7 @@ function (AbstractManager)
 			if(lastNs !== ns)
 			{
 				this._clear();
+				
 				this._setItem(this._defaultNs, ns);
 			}
 		},
@@ -28,7 +29,15 @@ function (AbstractManager)
 		},
 		setItem:function(key, value)
 		{
+			const oldValue = this.getItem(key);
+			
 			this._setItem(key, value);
+			
+			this.emit("change", {
+				key:key,
+				oldValue:oldValue,
+				newValue:value
+			});
 		},
 		_getDefaultNs:function(key)
 		{

@@ -5,12 +5,10 @@
 	</md-card-title>
 </md-card>
 <div class="default-spacer"></div>
-<md-tab-group [selectedIndex]="model.data.selectedIndex">
+<md-tab-group [selectedIndex]="model.data.selectedIndex" (selectChange)="model.tabChanged($event)">
 	<md-tab>
 		<template md-tab-label>
-			<a routerLink="/search" [queryParams]="{type:'description'}">
-				<i class="material-icons md-24">search</i>
-			</a>
+			<i class="material-icons md-24">search</i>
 		</template>
 		<div class="default-spacer"></div>
 		<form #descriptionForm="ngForm">
@@ -25,9 +23,7 @@
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
-			<a routerLink="/search" [queryParams]="{type:'categories'}">
-				<i class="material-icons md-24">folder_open</i>
-			</a>
+			<i class="material-icons md-24">folder_open</i>
 		</template>
 		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.categories.list.length > 1">
@@ -51,9 +47,7 @@
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
-			<a routerLink="/search" [queryParams]="{type:'series'}">
-				<i class="material-icons md-24">list</i>
-			</a>
+			<i class="material-icons md-24">list</i>
 		</template>
 		<div *ngFor="let group of model.data.series.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.series.list.length > 1">
@@ -77,9 +71,7 @@
 	</md-tab>	
 	<md-tab>
 		<template md-tab-label>
-			<a routerLink="/search" [queryParams]="{type:'years'}">
-				<i class="material-icons md-24">today</i>
-			</a>
+			<i class="material-icons md-24">today</i>
 		</template>
 		<div *ngFor="let group of model.data.years.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.years.list.length > 1">
@@ -105,9 +97,7 @@
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
-			<a routerLink="/search" [queryParams]="{type:'manufacturers'}">
-				<i class="material-icons md-24">business</i>
-			</a>
+			<i class="material-icons md-24">business</i>
 		</template>
 		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy group?.label">
 			<div *ngIf="model.data.manufacturers.list.length > 1">
@@ -131,9 +121,7 @@
 	</md-tab>
 	<md-tab>
 		<template md-tab-label>
-			<a routerLink="/search" [queryParams]="{type:'versions'}">
-				<i class="material-icons md-24">plus_one</i>
-			</a>
+			<i class="material-icons md-24">plus_one</i>
 		</template>
 		<div *ngFor="let group of model.data.versions.list; trackBy group?.label">
 			<md-nav-list>

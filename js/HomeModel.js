@@ -1,24 +1,30 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
-function(AbstractModel, MsdbService, ConnectionManager) 
+define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:CacheManager"], 
+function(AbstractModel, MsdbService, ConnectionManager, CacheManager) 
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, 
-			function HomeModel (MsdbService, ConnectionManager)
+		constructor:[MsdbService, ConnectionManager, CacheManager,
+			function HomeModel (MsdbService, ConnectionManager, CacheManager)
 			{
 				AbstractModel.call(this, MsdbService, ConnectionManager);
+				
+				this._cacheManager = CacheManager;
 			}
 		],
+		onInit : function()
+		{
+			this.data.searchLastType = this._cacheManager.getItem("searchLastType", "description");
+		},
 		onRefresh : function()
 		{
-			if(this.data.build === null)
+			if(this.data.mame.build === null)
 			{
 				this._msdbService.getMameInfos().subscribe((data) => 
 				{
 					if(data !== null)
 					{
 						data.version = data.build.substr(0, data.build.indexOf("(")).trim();
-						this.data = data;
+						this.data.mame = data;
 					}
 				});
 			}
@@ -26,7 +32,10 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		_getInitData : function()
 		{
 			return {
-				build:null
+				searchLastType:null,
+				mame:{
+					build:null
+				}
 			};
 		}
 	});	

@@ -3,12 +3,15 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, CacheManager,
-			function SearchModel(MsdbService, ConnectionManager, CacheManager)
+		constructor:[MsdbService, ConnectionManager, CacheManager, ng.router.Router,
+			function SearchModel(MsdbService, ConnectionManager, CacheManager, Router)
 			{
 				AbstractModel.call(this, MsdbService, ConnectionManager);
 				
 				this._cacheManager = CacheManager;
+				this._router = Router;
+				
+				this._tabsInfo = this._getTabsInfo();
 			}
 		],
 		onInit:function()
@@ -17,20 +20,22 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 		},
 		onRefresh:function()
 		{
-			const tabInfos = this._getTabInfos();
-			const tabs = tabInfos.getTabs();
-			const tabIndex = tabInfos.byType(this.params.type).index;
-			const methodeName = "_load" + this.params.type[0].toUpperCase() + this.params.type.substring(1);
+			const type = (this.params.type !== undefined) ? this.params.type : "description";
+			const tabInfo = this._tabsInfo.byType(type);
 			
-			this.data.selectedIndex = tabIndex;
+			this._cacheManager.setItem("searchLastType", tabInfo.type);
+
+			this.data.selectedIndex = tabInfo.index;
 			
+			const methodeName = "_load" + type[0].toUpperCase() + type.substring(1);
 			this[methodeName]();
 			
 			setTimeout(() =>
 			{
+				const tabs = this._tabsInfo.getTabs();
 				tabs.forEach((element, index, array) => 
 				{
-					if(index > 0 && index != tabIndex)
+					if(index > 0 && index != tabInfo.index)
 					{
 						this.data[element.type] = {
 							list : null,
@@ -44,10 +49,15 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 		{
 			this._cacheManager.setItem("searchDescription", this.data.description);
 		},
+		tabChanged:function(event)
+		{
+			const tabInfo = this._tabsInfo.byIndex(event.index);
+			this._displayTabView(tabInfo.type);
+		},
 		getSearchTabLabel:function(index)
 		{
-			const tabKey = this._getTabInfos().byIndex(index).key;
-			return tabKey;
+			const tabInfo = this._tabsInfo.byIndex(index);
+			return tabInfo.key;
 		},
 		getVersion:function(value)
 		{
@@ -60,6 +70,14 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 		changeLogAvailable:function(value)
 		{
 			return (value.indexOf("u") === -1 && value.indexOf("b") === -1);
+		},
+		_displayTabView:function(type)
+		{
+			this._router.navigate(['/search'], {
+				queryParams:{
+					type:type
+				}
+			});
 		},
 		_loadDescription:function()
 		{
@@ -145,7 +163,7 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 				this.data.count = this.data[dataName].count;
 			}
 		},
-		_getTabInfos : function()
+		_getTabsInfo : function()
 		{
 			return {
 				_tabs : [

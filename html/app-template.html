@@ -5,7 +5,7 @@
 			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
-		<button md-fab routerLink="/search" [queryParams]="{type:'description'}">
+		<button md-fab routerLink="/search" [queryParams]="{type:model.data.searchLastType}">
 			<i class="material-icons md-24 md-light">search</i>
 		</button>
 	</md-toolbar>
