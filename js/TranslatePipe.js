@@ -42,8 +42,6 @@ function(AbstractPipe, TranslateManager)
 			this._translateManager.getValues([this.tranlateKey]).subscribe((translations) => 
 			{
 				this.tranlateValue = translations[this.tranlateKey];
-				
-				this._needRefresh = false;
 			});
 		}
 	});
