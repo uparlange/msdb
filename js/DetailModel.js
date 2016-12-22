@@ -76,6 +76,14 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 			}
 			return this.getSizeLabel(size);
 		},
+		trackByName:function(index, item)
+		{
+			return item ? item.name : undefined;
+		},
+		trackByTag:function(index, item)
+		{
+			return item ? item.tag : undefined;
+		},
 		_refreshGameAvailability:function()
 		{
 			this.data.gameAvailable = false;

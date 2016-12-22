@@ -53,6 +53,14 @@ function(AbstractModel, MsdbService, ConnectionManager)
 		{
 			return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
 		},
+		trackByLabel:function(index, item)
+		{
+			return item ? item.label : undefined;
+		},
+		trackByName:function(index, item)
+		{
+			return item ? item.name : undefined;
+		},
 		_getInitData:function()
 		{
 			return {

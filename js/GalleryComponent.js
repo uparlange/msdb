@@ -42,6 +42,10 @@ function(AbstractComponent, AppUtils)
 			
 			window.removeEventListener("resize", this._windowResizeHandler);
 		},
+		trackByName:function(index, item)
+		{
+			return item ? item.name : undefined;
+		},
 		imageAllowed:function(image)
 		{
 			if(!Array.isArray(this.excludedExtensions))

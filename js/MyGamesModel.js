@@ -17,7 +17,7 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 		{
 			this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() =>
 			{
-				this._refresh();
+				this.onRefresh();
 			});
 		},
 		onRefresh:function()
@@ -55,6 +55,10 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 		onDestroy:function()
 		{
 			this._socketManager.off(this._socketManagerConfigChangedSubscriber);
+		},
+		trackByName:function(index, item)
+		{
+			return item ? item.name : undefined;
 		},
 		_getInitData:function()
 		{

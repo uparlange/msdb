@@ -71,6 +71,10 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 		{
 			return (value.indexOf("u") === -1 && value.indexOf("b") === -1);
 		},
+		trackByLabel:function(index, item)
+		{
+			return item ? item.label : undefined;
+		},
 		_displayTabView:function(type)
 		{
 			this._router.navigate(['/search'], {
