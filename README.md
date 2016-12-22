@@ -4,8 +4,8 @@ The list of games is such that it is considered as a large library or 'memory' o
 To check if your favorite game is available, go for a search on MSDB!
 
 # Demo
-* MSDB Homepage (http://msdb.lapli.fr)
-* Author Homepage (http://www.lapli.fr)
+* MSDB Homepage (https://msdb.lapli.fr)
+* Author Homepage (https://www.lapli.fr)
 
 # Technical
 This application has been developped using
