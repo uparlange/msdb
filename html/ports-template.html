@@ -6,7 +6,7 @@
 	</button>
 </md-toolbar>
 <md-list>
-	<md-list-item *ngFor="let port of model.data.game.ports; trackBy port?.tag">
+	<md-list-item *ngFor="let port of model.data.game.ports; trackBy:model.trackByTag">
 		{{getPortValue(port.tag)}}
 	</md-list-item>
 </md-list>

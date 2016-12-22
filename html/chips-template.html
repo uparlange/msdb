@@ -6,10 +6,10 @@
 	</button>
 </md-toolbar>
 <ul>
-	<li *ngFor="let item of provider; trackBy item?.name">
+	<li *ngFor="let item of provider; trackBy:model.trackByName">
 		{{item.name}}
 		<ul>
-			<li *ngFor="let value of item.values; trackBy value?.tag">
+			<li *ngFor="let value of item.values; trackBy:model.trackByTag">
 				{{value.tag}} <b>{{value.name}}</b> <span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
 			</li>
 		</ul>

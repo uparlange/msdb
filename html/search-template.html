@@ -25,7 +25,7 @@
 		<template md-tab-label>
 			<i class="material-icons md-24">folder_open</i>
 		</template>
-		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy group?.label">
+		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.categories.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
@@ -39,7 +39,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let category of group.data; trackBy category?.label" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">
+				<a md-list-item *ngFor="let category of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">
 					{{category.label}}
 				</a>
 			</md-nav-list>
@@ -49,7 +49,7 @@
 		<template md-tab-label>
 			<i class="material-icons md-24">list</i>
 		</template>
-		<div *ngFor="let group of model.data.series.list; let index=index; trackBy group?.label">
+		<div *ngFor="let group of model.data.series.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.series.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
@@ -63,7 +63,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let series of group.data; trackBy series?.label" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">
+				<a md-list-item *ngFor="let series of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">
 					{{series.label}}
 				</a>
 			</md-nav-list>
@@ -73,7 +73,7 @@
 		<template md-tab-label>
 			<i class="material-icons md-24">today</i>
 		</template>
-		<div *ngFor="let group of model.data.years.list; let index=index; trackBy group?.label">
+		<div *ngFor="let group of model.data.years.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.years.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
@@ -87,7 +87,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let year of group.data; trackBy year?.label" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">
+				<a md-list-item *ngFor="let year of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">
 					{{year.label}}
 					<span class="fill-remaining-space"></span>
 					({{year.data}})
@@ -99,7 +99,7 @@
 		<template md-tab-label>
 			<i class="material-icons md-24">business</i>
 		</template>
-		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy group?.label">
+		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.manufacturers.list.length > 1">
 				<div class="default-spacer"></div>
 				<md-card >
@@ -113,7 +113,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let manufacturer of group.data; trackBy manufacturer?.label" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">
+				<a md-list-item *ngFor="let manufacturer of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">
 					{{manufacturer.label}}
 				</a>
 			</md-nav-list>
@@ -123,9 +123,9 @@
 		<template md-tab-label>
 			<i class="material-icons md-24">plus_one</i>
 		</template>
-		<div *ngFor="let group of model.data.versions.list; trackBy group?.label">
+		<div *ngFor="let group of model.data.versions.list; trackBy:model.trackByLabel">
 			<md-nav-list>
-				<md-list-item *ngFor="let version of group.data; trackBy version?.label">
+				<md-list-item *ngFor="let version of group.data; trackBy:model.trackByLabel">
 					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
 						{{version.label}} 
 					</a>

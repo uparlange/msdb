@@ -5,7 +5,7 @@
 			<span *ngIf="model.data.count >= 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
 		</md-card-title>
 	</md-card>
-	<div *ngFor="let group of model.data.list; let index=index; trackBy group?.label">
+	<div *ngFor="let group of model.data.list; let index=index; trackBy:model.trackByLabel">
 		<div *ngIf="model.data.list.length > 1">
 			<div class="default-spacer"></div>
 			<md-card >
@@ -19,7 +19,7 @@
 		</div>
 		<div class="default-spacer"></div>
 		<md-nav-list>
-			<a md-list-item *ngFor="let game of group.data; trackBy game?.name" routerLink="/detail" [queryParams]="{name:game.name}">
+			<a md-list-item *ngFor="let game of group.data; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:game.name}">
 				<img md-list-avatar [lazySrc]="model.getGameIconUrl(game)">
 				<span class="sep"></span>
 				{{game.description}}

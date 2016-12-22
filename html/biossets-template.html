@@ -6,7 +6,7 @@
 	</button>
 </md-toolbar>
 <md-list>
-	<md-list-item *ngFor="let biosset of model.data.game.biossets; trackBy biosset?.name">
+	<md-list-item *ngFor="let biosset of model.data.game.biossets; trackBy:model.trackByName">
 		{{biosset.name}}
 		<span class="sep">:</span>
 		{{biosset.description}}

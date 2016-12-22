@@ -6,7 +6,7 @@
 	</button>
 </md-toolbar>
 <md-list>
-	<md-list-item *ngFor="let deviceref of model.data.game.devicerefs; trackBy deviceref?.name">
+	<md-list-item *ngFor="let deviceref of model.data.game.devicerefs; trackBy:model.trackByName">
 		{{deviceref.name}}
 	</md-list-item>
 </md-list>

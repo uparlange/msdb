@@ -2,7 +2,7 @@
 
 	<!-- thumbnails -->
 	<div class="grid">
-		<div *ngFor="let image of provider; trackBy image?.name; let last = last;" class="grid-item" [ngStyle]="getItemStyles(image)">
+		<div *ngFor="let image of provider; trackBy:trackByName; let last = last;" class="grid-item" [ngStyle]="getItemStyles(image)">
 			<ngForItem [last]="last" (onLast)="imagesCreated()" *ngIf="imageAllowed(image)">
 				<button style="width:100%;height:100%;" [title]="image.name" class="link-button" (click)="openImage(image)">
 					<img width="100%" height="100%" [alt]="image.name" [lazySrc]="getImageUrl(image)">
