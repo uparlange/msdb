@@ -8,7 +8,7 @@ function (AbstractManager)
 			{
 				AbstractManager.call(this);
 				
-				this._url = "http://localhost:3000";
+				this._url = "https://localhost:3000";
 				
 				this._eventEmitters = {};
 				
@@ -69,6 +69,7 @@ function (AbstractManager)
 			if(this._socket === null)
 			{
 				this._socket = io(this._url, {
+					secure: true,
 					reconnection:false
 				});
 				this._socket.on("connect", () => 
