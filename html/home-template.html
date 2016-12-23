@@ -9,7 +9,7 @@
 <div class="default-spacer"></div>
 <md-card *ngIf="model.data.mame.build != null">
 	<md-card-title>
-		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.getEncodedValue(model.data.mame.version)}">{{model.data.mame.version}}</a>
+		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.mame.version}">{{model.data.mame.version}}</a>
 		({{model.data.mame.gameCount}} {{'L10N_GAMES'|translate}})
 	</md-card-title>
 	<md-card-content>

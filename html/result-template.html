@@ -1,7 +1,7 @@
 <div>
 	<md-card>
 		<md-card-title>
-			{{model.getSearchLabel(model.params.type)|translate}} "{{model.getDecodedValue(model.params.value)}}"
+			{{model.getSearchLabel(model.params.type)|translate}} "{{model.params.value}}"
 			<span *ngIf="model.data.count >= 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
 		</md-card-title>
 	</md-card>

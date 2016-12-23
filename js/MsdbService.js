@@ -26,56 +26,86 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 		},
 		getDetail : function(name)
 		{
-			const url = AppUtils.getServiceUrl("detail") + "?name=" + name;
+			const params = new ng.http.URLSearchParams();
+			params.set("name", name);
 			
-			return this._callService(url, true);
+			const config = {
+				url:AppUtils.getServiceUrl("detail"),
+				params:params,
+				useCache:true
+			};
+			
+			return this._callService(config);
 		},
 		search : function(type, value)
 		{
-			const params = {};
-			params[type] = value;
-			const url = AppUtils.getServiceUrl("search") + "?params=" + JSON.stringify(params);
+			const search = {};
+			search[type] = value;
 			
-			return this._callService(url);
+			const params = new ng.http.URLSearchParams();
+			params.set("params", JSON.stringify(search));
+			
+			const config = {
+				url:AppUtils.getServiceUrl("search"),
+				params:params,
+				useCache:false
+			};
+			
+			return this._callService(config);
 		},
 		getYears : function()
 		{
-			const url = AppUtils.getServiceUrl("years");
+			const config = {
+				url:AppUtils.getServiceUrl("years"),
+				useCache:true
+			};
 			
-			return this._callService(url, true);
+			return this._callService(config);
 		},
 		getSeries : function()
 		{
-			const url = AppUtils.getServiceUrl("series");
+			const config = {
+				url:AppUtils.getServiceUrl("series"),
+				useCache:true
+			};
 			
-			return this._callService(url, true);
+			return this._callService(config);
 		},
 		getCategories : function()
 		{
-			const url = AppUtils.getServiceUrl("categories");
+			const config = {
+				url:AppUtils.getServiceUrl("categories"),
+				useCache:true
+			};
 			
-			return this._callService(url, true);
+			return this._callService(config);
 		},
 		getManufacturers : function()
 		{
-			const url = AppUtils.getServiceUrl("manufacturers");
+			const config = {
+				url:AppUtils.getServiceUrl("manufacturers"),
+				useCache:true
+			};
 			
-			return this._callService(url, true);
+			return this._callService(config);
 		},
 		getVersions : function()
 		{
-			const url = AppUtils.getServiceUrl("versions");
+			const config = {
+				url:AppUtils.getServiceUrl("versions"),
+				useCache:true
+			};
 			
-			return this._callService(url, true);
+			return this._callService(config);
 		},
-		_callService : function(url, useCache)
+		_callService : function(config)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
-			const cacheKey = this._getCacheKey(url);
+			const cacheKey = this._getCacheKey(config.url);
 			let value = null;
 			
-			if(useCache === true)
+			if(config.useCache === true)
 			{
 				value = this._cacheManager.getItem(cacheKey);
 			}
@@ -93,11 +123,11 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 				{
 					if(this._initialized())
 					{
-						this.httpGet(url).subscribe((result) =>
+						this.httpGet(config.url, config.params).subscribe((result) =>
 						{
 							value = this._getData(result);
 							
-							if(useCache === true)
+							if(config.useCache === true)
 							{
 								this._cacheManager.setItem(cacheKey, value);
 							}

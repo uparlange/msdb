@@ -11,14 +11,6 @@ function (LogUtils)
 		getLogger:function()
 		{
 			return this._logger;
-		},
-		getEncodedValue:function(value)
-		{
-			return encodeURIComponent(value);
-		},
-		getDecodedValue:function(value)
-		{
-			return decodeURIComponent(value);
-		},
+		}
 	});			
 });

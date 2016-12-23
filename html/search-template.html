@@ -16,7 +16,7 @@
 			<button *ngIf="model.data.description.length > 0" (click)="model.data.description = '';descriptionInput.focus();" type="button" md-mini-fab>
 				<i class="material-icons md-24 md-light">clear</i>
 			</button>
-			<button *ngIf="descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.getEncodedValue(model.data.description)}" type="submit" md-mini-fab>
+			<button *ngIf="descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" type="submit" md-mini-fab>
 				<i class="material-icons md-24 md-light">search</i>
 			</button>
 		</form>
@@ -39,7 +39,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let category of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'category', value:model.getEncodedValue(category.label)}">
+				<a md-list-item *ngFor="let category of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'category', value:category.label}">
 					{{category.label}}
 				</a>
 			</md-nav-list>
@@ -63,7 +63,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let series of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'series', value:model.getEncodedValue(series.label)}">
+				<a md-list-item *ngFor="let series of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'series', value:series.label}">
 					{{series.label}}
 				</a>
 			</md-nav-list>
@@ -87,7 +87,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let year of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'year', value:model.getEncodedValue(year.label)}">
+				<a md-list-item *ngFor="let year of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'year', value:year.label}">
 					{{year.label}}
 					<span class="fill-remaining-space"></span>
 					({{year.data}})
@@ -113,7 +113,7 @@
 			</div>
 			<div class="default-spacer"></div>
 			<md-nav-list>
-				<a md-list-item *ngFor="let manufacturer of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'manufacturer', value:model.getEncodedValue(manufacturer.label)}">
+				<a md-list-item *ngFor="let manufacturer of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer.label}">
 					{{manufacturer.label}}
 				</a>
 			</md-nav-list>
@@ -126,14 +126,14 @@
 		<div *ngFor="let group of model.data.versions.list; trackBy:model.trackByLabel">
 			<md-nav-list>
 				<md-list-item *ngFor="let version of group.data; trackBy:model.trackByLabel">
-					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:model.getEncodedValue(version.label)}">
+					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:version.label}">
 						{{version.label}} 
 					</a>
 					<span class="search-version-addition-count">(+{{version.data}})</span>
-					<a *ngIf="model.changeLogAvailable(model.getEncodedValue(version.label))" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(model.getEncodedValue(version.label))+'.txt'">
+					<a *ngIf="model.changeLogAvailable(version.label)" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(version.label)+'.txt'">
 						<i class="material-icons md-24 md-dark">track_changes</i>
 					</a>
-					<span *ngIf="!model.changeLogAvailable(model.getEncodedValue(version.label))">
+					<span *ngIf="!model.changeLogAvailable(version.label)">
 						<i class="material-icons md-24 md-dark md-inactive">track_changes</i>
 					</span>
 				</md-list-item>
