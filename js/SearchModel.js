@@ -27,6 +27,18 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 
 			this.data.selectedIndex = tabInfo.index;
 			
+			const tabs = this._tabsInfo.getTabs();
+			tabs.forEach((element, index, array) => 
+			{
+				if(index > 0 && index != tabInfo.index)
+				{
+					this.data[element.type] = {
+						list : null,
+						count : 0
+					};
+				}
+			});
+			
 			const methodeName = "_load" + type[0].toUpperCase() + type.substring(1);
 			this[methodeName]();
 		},
