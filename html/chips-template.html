@@ -1,17 +1,18 @@
-<md-toolbar color="primary">
+<h1 md-dialog-title>
 	{{'L10N_CHIP'|translate}}
-	<span class="fill-remaining-space"></span>
-	<button (click)="close()" class="link-button">
+	<button md-dialog-close class="link-button">
 		<i class="material-icons md-24">clear</i>
 	</button>
-</md-toolbar>
-<ul>
-	<li *ngFor="let item of provider; trackBy:model.trackByName">
-		{{item.name}}
-		<ul>
-			<li *ngFor="let value of item.values; trackBy:model.trackByTag">
-				{{value.tag}} <b>{{value.name}}</b> <span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
-			</li>
-		</ul>
-	</li>
-</ul>
+</h1>
+<md-dialog-content>
+	<ul>
+		<li *ngFor="let item of provider; trackBy:model.trackByName">
+			{{item.name}}
+			<ul>
+				<li *ngFor="let value of item.values; trackBy:model.trackByTag">
+					{{value.tag}} <b>{{value.name}}</b> <span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</md-dialog-content>

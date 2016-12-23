@@ -1,12 +1,13 @@
-<md-toolbar color="primary">
+<h1 md-dialog-title>
 	{{'L10N_CLONE_INFOS'|translate}}
-	<span class="fill-remaining-space"></span>
-	<button (click)="close()" class="link-button">
+	<button md-dialog-close class="link-button">
 		<i class="material-icons md-24">clear</i>
 	</button>
-</md-toolbar>
-<md-list>
-	<md-list-item *ngFor="let clone of model.data.clones; trackBy:model.trackByName">
-		<a (click)="close()" routerLink="/detail" [queryParams]="{name:clone.name}">{{clone.description}}</a>
-	</md-list-item>
-</md-list>
+</h1>
+<md-dialog-content>
+	<md-list>
+		<md-list-item *ngFor="let clone of model.data.clones; trackBy:model.trackByName">
+			<a (click)="close()" routerLink="/detail" [queryParams]="{name:clone.name}">{{clone.description}}</a>
+		</md-list-item>
+	</md-list>
+</md-dialog-content>

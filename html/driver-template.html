@@ -1,39 +1,40 @@
-<md-toolbar color="primary">
+<h1 md-dialog-title>
 	{{'L10N_DRIVER_INFOS'|translate}}
-	<span class="fill-remaining-space"></span>
-	<button (click)="close()" class="link-button">
+	<button md-dialog-close class="link-button">
 		<i class="material-icons md-24">clear</i>
 	</button>
-</md-toolbar>
-<md-list>
-	<md-list-item>
-		{{'L10N_SINCE_MAME'|translate}}
-		<span class="sep">:</span>
-		<a (click)="close()" routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.game.mameVersionAdded}">{{model.data.game.mameVersionAdded}}</a>
-	</md-list-item>
-	<md-list-item>
-		{{'L10N_EMULATION'|translate}}
-		<span class="sep">:</span>
-		<span [class]="model.getStatusClass(model.data.game.driver.emulation)">{{model.getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
-	</md-list-item>
-	<md-list-item>
-		{{'L10N_COLOR'|translate}}
-		<span class="sep">:</span>
-		<span [class]="model.getStatusClass(model.data.game.driver.color)">{{model.getStatusLabel(model.data.game.driver.color)|translate}}</span>
-	</md-list-item>
-	<md-list-item>
-		{{'L10N_SOUND'|translate}}
-		<span class="sep">:</span>
-		<span [class]="model.getStatusClass(model.data.game.driver.sound)">{{model.getStatusLabel(model.data.game.driver.sound)|translate}}</span>
-	</md-list-item>
-	<md-list-item>
-		{{'L10N_GRAPHIC'|translate}}
-		<span class="sep">:</span>
-		<span [class]="model.getStatusClass(model.data.game.driver.graphic)">{{model.getStatusLabel(model.data.game.driver.graphic)|translate}}</span>
-	</md-list-item>
-	<md-list-item>
-		{{'L10N_SAVESTATE'|translate}}
-		<span class="sep">:</span>
-		{{model.getStatusLabel(model.data.game.driver.savestate)|translate}}
-	</md-list-item>
-</md-list>
+</h1>
+<md-dialog-content>
+	<md-list>
+		<md-list-item>
+			{{'L10N_SINCE_MAME'|translate}}
+			<span class="sep">:</span>
+			<a (click)="close()" routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.game.mameVersionAdded}">{{model.data.game.mameVersionAdded}}</a>
+		</md-list-item>
+		<md-list-item>
+			{{'L10N_EMULATION'|translate}}
+			<span class="sep">:</span>
+			<span [class]="model.getStatusClass(model.data.game.driver.emulation)">{{model.getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
+		</md-list-item>
+		<md-list-item>
+			{{'L10N_COLOR'|translate}}
+			<span class="sep">:</span>
+			<span [class]="model.getStatusClass(model.data.game.driver.color)">{{model.getStatusLabel(model.data.game.driver.color)|translate}}</span>
+		</md-list-item>
+		<md-list-item>
+			{{'L10N_SOUND'|translate}}
+			<span class="sep">:</span>
+			<span [class]="model.getStatusClass(model.data.game.driver.sound)">{{model.getStatusLabel(model.data.game.driver.sound)|translate}}</span>
+		</md-list-item>
+		<md-list-item>
+			{{'L10N_GRAPHIC'|translate}}
+			<span class="sep">:</span>
+			<span [class]="model.getStatusClass(model.data.game.driver.graphic)">{{model.getStatusLabel(model.data.game.driver.graphic)|translate}}</span>
+		</md-list-item>
+		<md-list-item>
+			{{'L10N_SAVESTATE'|translate}}
+			<span class="sep">:</span>
+			{{model.getStatusLabel(model.data.game.driver.savestate)|translate}}
+		</md-list-item>
+	</md-list>
+</md-dialog-content>
