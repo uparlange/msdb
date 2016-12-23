@@ -12,7 +12,9 @@
 		</template>
 		<div class="default-spacer"></div>
 		<form #descriptionForm="ngForm">
-			<md-input #descriptionInput pattern=".{3,}" required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description"></md-input>
+			<md-input-container>
+				<input md-input #descriptionInput pattern=".{3,}" required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description">
+			</md-input-container>
 			<button *ngIf="model.data.description.length > 0" (click)="model.data.description = '';descriptionInput.focus();" type="button" md-mini-fab>
 				<i class="material-icons md-24 md-light">clear</i>
 			</button>
