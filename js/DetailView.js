@@ -61,6 +61,7 @@ function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup,
 			if(this._dialogRef === null)
 			{
 				const config = new ng.material.MdDialogConfig();
+				config.disableClose = true;
 				config.viewContainerRef = this._viewContainerRef;
 				
 				this._dialogRef = this._mdDialog.open(clazz, config);
