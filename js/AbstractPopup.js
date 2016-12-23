@@ -18,10 +18,6 @@ function(AbstractComponent)
 			this.model = null;
 			
 			this._mdDialogRef = null;
-		},
-		close:function()
-		{
-			this._mdDialogRef.close();
 		}
 	});			
 });
