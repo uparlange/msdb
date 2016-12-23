@@ -102,7 +102,7 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 			
-			const cacheKey = this._getCacheKey(config.url);
+			const cacheKey = this._getCacheKey(config);
 			let value = null;
 			
 			if(config.useCache === true)
@@ -144,9 +144,14 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 
 			return eventEmitter;
 		},
-		_getCacheKey:function(url)
+		_getCacheKey:function(config)
 		{
-			return "service_" + url;
+			let cacheKey = "service_" + config.url;
+			if(config.params !== undefined)
+			{
+				cacheKey += "?" + config.params.toString();
+			}
+			return cacheKey;
 		},
 		_initialized:function()
 		{
