@@ -29,21 +29,6 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 			
 			const methodeName = "_load" + type[0].toUpperCase() + type.substring(1);
 			this[methodeName]();
-			
-			setTimeout(() =>
-			{
-				const tabs = this._tabsInfo.getTabs();
-				tabs.forEach((element, index, array) => 
-				{
-					if(index > 0 && index != tabInfo.index)
-					{
-						this.data[element.type] = {
-							list : null,
-							count : 0
-						};
-					}
-				});
-			},0);
 		},
 		onDestroy:function()
 		{
