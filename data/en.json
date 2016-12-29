@@ -1,4 +1,6 @@
 {
+	"L10_NO_CONNECTION": "No connection !",
+	"L10_CONNECTED": "Connected !",	
 	"L10N_UPDATE": "Update",
 	"L10N_NEW_VERSION": "A new version of the application is available. Do you want to perform the update ?",
 	"L10N_SHOW_ADDED_GAMES":"Show added games",
