@@ -1,18 +1,19 @@
-define(["app:AbstractManager", "app:TranslateManager"],
-function (AbstractManager, TranslateManager) 
+define(["app:AbstractManager", "app:TranslateManager", "app:WindowRef"],
+function (AbstractManager, TranslateManager, WindowRef) 
 {
 	return ng.core.Class({
 		extends:AbstractManager,
-        constructor: [TranslateManager, 
-			function UpdateManager (TranslateManager)
+        constructor: [TranslateManager, WindowRef,
+			function UpdateManager (TranslateManager, WindowRef)
 			{
 				AbstractManager.call(this);
 				
 				this._translateManager = TranslateManager;
+				this._window = WindowRef.nativeWindow;
 				
 				this._checked = false;
 				
-				window.applicationCache.addEventListener("updateready", () =>
+				this._window.applicationCache.addEventListener("updateready", () =>
 				{
 					this._askForReload();
 				});
@@ -20,7 +21,7 @@ function (AbstractManager, TranslateManager)
 		],
 		init:function()
 		{
-			if(window.applicationCache.status === window.applicationCache.UPDATEREADY)
+			if(this._window.applicationCache.status === this._window.applicationCache.UPDATEREADY)
 			{
 				this._askForReload();
 			}
@@ -35,7 +36,7 @@ function (AbstractManager, TranslateManager)
 					{
 						this._checked = true;
 						
-						window.location.reload();
+						this._window.location.reload();
 					}
 				});
 			}
