@@ -25,11 +25,11 @@ function (AbstractClass)
 		},
 		ngDoCheck : function()
 		{
-			if(typeof this.onDoCheck === "function")
+			if(typeof this.doCheck === "function")
 			{
-				this.getLogger().info("onDoCheck");
+				this.getLogger().info("doCheck");
 				
-				this.onDoCheck();
+				this.doCheck();
 			}
 		},
 		ngOnDestroy : function()
