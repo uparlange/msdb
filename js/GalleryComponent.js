@@ -5,13 +5,16 @@ function(AbstractComponent, AppUtils, WindowRef)
 		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
 	})).Class({
 		extends:AbstractComponent,
-		constructor: [ng.core.ElementRef, WindowRef,
-			function GalleryComponent (ElementRef, WindowRef)
+		constructor: [ng.core.ElementRef, ng.core.Renderer, WindowRef,
+			function GalleryComponent (ElementRef, Renderer, WindowRef)
 			{
 				AbstractComponent.call(this);
 				
 				this._element = ElementRef.nativeElement;
+				this._renderer = Renderer;
 				this._window = WindowRef.nativeWindow;
+
+				this._windowResizeHandler = null;
 				
 				this._gallery = null;
 				
@@ -22,12 +25,12 @@ function(AbstractComponent, AppUtils, WindowRef)
 		],
 		onInit:function()
 		{
-			this._windowResizeHandler = () =>
+			this._onWindowResizeHandler = () =>
 			{
 				this._refreshMasonry();
 			};
 			
-			this._window.addEventListener("resize", this._windowResizeHandler);
+			this._windowResizeHandler = this._renderer.listen(this._window, "resize", this._onWindowResizeHandler);
 		},
 		onDestroy:function()
 		{
@@ -41,7 +44,7 @@ function(AbstractComponent, AppUtils, WindowRef)
 				this._masonry.destroy();
 			}
 			
-			this._window.removeEventListener("resize", this._windowResizeHandler);
+			this._windowResizeHandler();
 		},
 		trackByName:function(index, item)
 		{
@@ -132,10 +135,12 @@ function(AbstractComponent, AppUtils, WindowRef)
 		},
 		_getGalleryContainer:function()
 		{
+			// TODO get reference in other way ?
 			return this._element.getElementsByClassName("gallery")[0];
 		},
 		_getPhotoSwipeContainer:function()
 		{
+			// TODO get reference in other way ?
 			return this._element.getElementsByClassName("pswp")[0];
 		},
 		_getColWidth:function()
