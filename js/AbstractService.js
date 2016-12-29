@@ -13,6 +13,12 @@ function (AbstractClass)
 		},
 		httpGet:function(url, params, defaultValue)
 		{
+			const source = this._http.get(url,{search:params});
+
+			return this._httpCall(source, defaultValue);
+		},
+		_httpCall:function(source, defaultValue)
+		{
 			const eventEmitter = new ng.core.EventEmitter();
 
 			if(defaultValue === undefined)
@@ -22,18 +28,16 @@ function (AbstractClass)
 			
 			this._eventManager.emit("HTTP_BEGIN");
 			
-			this._http.get(url,{search:params}).timeout(GlobalConfig.HTTP_REQUEST_TIMEOUT).catch((e) =>
+			source.timeout(GlobalConfig.HTTP_REQUEST_TIMEOUT).subscribe((result) => 
 			{
 				this._eventManager.emit("HTTP_END");
-				
-				this.getLogger().error(e.toString());
-				
-				eventEmitter.emit(defaultValue);
-			}).subscribe((result) => 
-			{
-				this._eventManager.emit("HTTP_END");
-				
+
 				eventEmitter.emit(result.json());
+			},(error) =>
+			{
+				this._eventManager.emit("HTTP_END");
+
+				eventEmitter.emit(defaultValue);
 			});
 			
 			return eventEmitter;
