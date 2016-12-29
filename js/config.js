@@ -11,9 +11,9 @@ SystemJS.config(
 	}
 });
 
-window.GlobalConfig = {};
+GlobalConfig = {};
 
-if(window.location.search.indexOf("debug") === -1)
+if(location.search.indexOf("debug") === -1)
 {
 	GlobalConfig.PRODUCTION = true;
 	GlobalConfig.LOG_LEVEL = "off";
