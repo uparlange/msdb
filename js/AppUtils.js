@@ -1,7 +1,7 @@
 define(function () 
 {
     return {
-		_md : new MobileDetect(window.navigator.userAgent),
+		_md : new MobileDetect(navigator.userAgent),
 		getDevice:function()
 		{
 			return this._md;
@@ -65,7 +65,7 @@ define(function ()
 			let path = "";
 			if(!GlobalConfig.PRODUCTION)
 			{
-				path = window.location.protocol + "//" + window.location.host + window.location.pathname;
+				path = location.protocol + "//" + location.host + location.pathname;
 				path = path.replace("msdb3", "msdb2");
 				if(path.indexOf("dist") === -1)
 				{
