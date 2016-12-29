@@ -1,20 +1,18 @@
 define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager", "app:UpdateManager", "app:RouterManager", 
-		"app:CacheManager", "app:TranslateManager"], 
+		"app:CacheManager"], 
 function(AbstractModel, MsdbService, ConnectionManager, UpdateManager, RouterManager, 
-		 CacheManager, TranslateManager) 
+		 CacheManager) 
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor: [MsdbService, ConnectionManager, UpdateManager, RouterManager, CacheManager, ng.material.MdSnackBar, TranslateManager,
-			function AppModel (MsdbService, ConnectionManager, UpdateManager, RouterManager, CacheManager, MdSnackBar, TranslateManager)
+		constructor: [MsdbService, ConnectionManager, UpdateManager, RouterManager, CacheManager,
+			function AppModel (MsdbService, ConnectionManager, UpdateManager, RouterManager, CacheManager)
 			{
 				AbstractModel.call(this, MsdbService, ConnectionManager);
 
 				this._updateManager = UpdateManager;
 				this._routerManager = RouterManager;
 				this._cacheManager = CacheManager;
-				this._mdSnackBar = MdSnackBar;
-				this._translateManager = TranslateManager;
 				
 				this._routerManager.init();
 				
@@ -30,18 +28,6 @@ function(AbstractModel, MsdbService, ConnectionManager, UpdateManager, RouterMan
 				});
 			}
 		],
-		onConnectionChange:function(online)
-		{
-			const config = new ng.material.MdSnackBarConfig();
-			config.duration = 1500;
-
-			const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
-
-			this._translateManager.getValues([key]).subscribe((translations) => 
-			{
-				this._mdSnackBar.open(translations[key], null, config);
-			});
-		},
 		_getInitData:function()
 		{
 			return {
