@@ -1,22 +1,26 @@
-define(["app:AbstractDirective"],
-function(AbstractDirective) 
+define(["app:AbstractDirective", "app:WindowRef"],
+function(AbstractDirective, WindowRef) 
 {
 	return ng.core.Directive({
 		selector: "[scrollToTop]"
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, 
-			function ScrollToTopDirective (ElementRef)
+		constructor: [ng.core.ElementRef, ng.core.Renderer, WindowRef,
+			function ScrollToTopDirective (ElementRef, Renderer, WindowRef)
 			{
 				AbstractDirective.call(this);
 				
 				this._element = ElementRef.nativeElement;
+				this._renderer = Renderer;
+				this._window = WindowRef.nativeWindow;
 				
+				this._elementClickHandler = null;
+
 				this._scrollDuration = 500;
 				
-				this._onClickHandler = () =>
+				this._onElementClickHandler = () =>
 				{
-					const cosParameter = window.scrollY / 2;
+					const cosParameter = this._window.scrollY / 2;
 					
 					let scrollCount = 0;
 					let oldTimestamp = performance.now();
@@ -26,28 +30,28 @@ function(AbstractDirective)
 						scrollCount += Math.PI / (this._scrollDuration / (newTimestamp - oldTimestamp));
 						if (scrollCount >= Math.PI) 
 						{
-							window.scrollTo(0, 0);
+							this._window.scrollTo(0, 0);
 						}
-						if (window.scrollY === 0)
+						if (this._window.scrollY === 0)
 						{
 							return;
 						}
-						window.scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
+						this._window.scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
 						oldTimestamp = newTimestamp;
-						window.requestAnimationFrame(step);
+						this._window.requestAnimationFrame(step);
 					}
 					
-					window.requestAnimationFrame(step);
+					this._window.requestAnimationFrame(step);
 				};
 			}
 		],
 		onInit : function()
 		{
-			this._element.addEventListener("click", this._onClickHandler);
+			this._elementClickHandler = this._renderer.listen(this._element, "click", this._onElementClickHandler);
 		},
 		onDestroy : function()
 		{
-			this._element.removeEventListener("click", this._onClickHandler);
+			this._elementClickHandler();
 		}
 	});	
 });	
