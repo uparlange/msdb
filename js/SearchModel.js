@@ -25,8 +25,7 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 			
 			this._cacheManager.setItem("searchLastType", tabInfo.type);
 
-			this.data.selectedIndex = tabInfo.index;
-			
+			/*
 			const tabs = this._tabsInfo.getTabs();
 			tabs.forEach((element, index, array) => 
 			{
@@ -38,9 +37,13 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 					};
 				}
 			});
+			*/
 			
 			const methodeName = "_load" + type[0].toUpperCase() + type.substring(1);
-			this[methodeName]();
+			this[methodeName]().subscribe(() =>
+			{
+				this.data.selectedIndex = tabInfo.index;
+			});
 		},
 		onDestroy:function()
 		{
@@ -82,27 +85,36 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 		},
 		_loadDescription:function()
 		{
-			this.data.count = 0;
+			const eventEmitter = new ng.core.EventEmitter();
+			
+			setTimeout(() => 
+			{
+				this.data.count = 0;
+				
+				eventEmitter.emit();
+			});
+			
+			return eventEmitter;
 		},
 		_loadYears : function()
 		{
-			this._loadData("years");
+			return this._loadData("years");
 		},
 		_loadSeries : function()
 		{
-			this._loadData("series");
+			return this._loadData("series");
 		},
 		_loadCategories : function()
 		{
-			this._loadData("categories");
+			return this._loadData("categories");
 		},
 		_loadManufacturers : function()
 		{
-			this._loadData("manufacturers");
+			return this._loadData("manufacturers");
 		},
 		_loadVersions : function()
 		{
-			this._loadData("versions");
+			return this._loadData("versions");
 		},
 		_getInitData : function()
 		{
@@ -120,6 +132,8 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 		},
 		_loadData:function(dataName)
 		{
+			const eventEmitter = new ng.core.EventEmitter();
+			
 			this.data.count = 0;
 			
 			if(this.data[dataName].list === null)
@@ -156,13 +170,22 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 						}
 						
 						this.data[dataName].list = list;
+						
+						eventEmitter.emit();
 					}
 				});
 			}
 			else
 			{
-				this.data.count = this.data[dataName].count;
+				setTimeout(() => 
+				{
+					this.data.count = this.data[dataName].count;
+
+					eventEmitter.emit();
+				});
 			}
+			
+			return eventEmitter;
 		},
 		_getTabsInfo : function()
 		{
