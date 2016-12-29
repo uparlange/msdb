@@ -125,6 +125,7 @@
 		<template md-tab-label>
 			<i class="material-icons md-24">plus_one</i>
 		</template>
+		<div class="default-spacer"></div>
 		<div *ngFor="let group of model.data.versions.list; trackBy:model.trackByLabel">
 			<md-nav-list>
 				<md-list-item *ngFor="let version of group.data; trackBy:model.trackByLabel">
