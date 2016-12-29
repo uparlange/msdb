@@ -1,16 +1,17 @@
-define(["app:AbstractComponent", "app:AppUtils"], 
-function(AbstractComponent, AppUtils) 
+define(["app:AbstractComponent", "app:AppUtils", "app:WindowRef"], 
+function(AbstractComponent, AppUtils, WindowRef) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("gallery", {
 		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
 	})).Class({
 		extends:AbstractComponent,
-		constructor: [ng.core.ElementRef, 
-			function GalleryComponent (ElementRef)
+		constructor: [ng.core.ElementRef, WindowRef,
+			function GalleryComponent (ElementRef, WindowRef)
 			{
 				AbstractComponent.call(this);
 				
 				this._element = ElementRef.nativeElement;
+				this._window = WindowRef.nativeWindow;
 				
 				this._gallery = null;
 				
@@ -26,7 +27,7 @@ function(AbstractComponent, AppUtils)
 				this._refreshMasonry();
 			};
 			
-			window.addEventListener("resize", this._windowResizeHandler);
+			this._window.addEventListener("resize", this._windowResizeHandler);
 		},
 		onDestroy:function()
 		{
@@ -40,7 +41,7 @@ function(AbstractComponent, AppUtils)
 				this._masonry.destroy();
 			}
 			
-			window.removeEventListener("resize", this._windowResizeHandler);
+			this._window.removeEventListener("resize", this._windowResizeHandler);
 		},
 		trackByName:function(index, item)
 		{
