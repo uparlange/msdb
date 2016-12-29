@@ -7,16 +7,20 @@ function(AbstractDirective)
 		outputs:["onEvent"]
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, 
-			function VideoDirective (ElementRef)
+		constructor: [ng.core.ElementRef, ng.core.Renderer,
+			function VideoDirective (ElementRef, Renderer)
 			{
 				AbstractDirective.call(this);
 				
 				this._element = ElementRef.nativeElement;
+				this._renderer = Renderer;
 				
 				this.onEvent = new ng.core.EventEmitter();
+
+				this._elementErrorHandler = null;
+				this._elementLoadedmetadataHandler = null;
 				
-				this._onEventHandler = (event) =>
+				this._onElementEventHandler = (event) =>
 				{
 					this.onEvent.emit(event);
 				};
@@ -24,23 +28,23 @@ function(AbstractDirective)
 		],
 		onInit:function()
 		{
-			this._element.addEventListener("error", this._onEventHandler);
-			this._element.addEventListener("loadedmetadata", this._onEventHandler);
+			this._elementErrorHandler = this._renderer.listen(this._element, "error", this._onElementEventHandler);
+			this._elementLoadedmetadataHandler = this._renderer.listen(this._element, "loadedmetadata", this._onElementEventHandler);
 		},
 		onChanges: function (event)
 		{
 			if(event.hasOwnProperty("source"))
 			{
-				if(event.source.currentValue !== null && this._element.src !== event.source.currentValue)
+				if(typeof event.source.currentValue === "string")
 				{
-					this._element.src = event.source.currentValue;
+					this._renderer.setElementProperty(this._element, "src", event.source.currentValue);
 				}
 			}
 		},
 		onDestroy:function()
 		{
-			this._element.removeEventListener("error", this._onEventHandler);
-			this._element.removeEventListener("loadedmetadata", this._onEventHandler);
+			this._elementErrorHandler();
+			this._elementLoadedmetadataHandler();
 		}
 	});
 });
