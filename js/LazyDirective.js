@@ -6,29 +6,29 @@ function(AbstractDirective, LazyManager)
 		inputs: ["lazySrc"]
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, LazyManager, 
-			function LazyDirective (ElementRef, LazyManager)
+		constructor: [ng.core.ElementRef, ng.core.Renderer, LazyManager, 
+			function LazyDirective (ElementRef, Renderer, LazyManager)
 			{
 				AbstractDirective.call(this);
 				
 				this._element = ElementRef.nativeElement;
+				this._renderer = Renderer;
 				this._lazyManager = LazyManager;
 			}
 		],
 		onInit:function()
 		{
-			this._element.classList.add("b-lazy");
-			this._element.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+			this._renderer.setElementClass(this._element, "b-lazy", true);
+			this._renderer.setElementProperty(this._element, "src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
 		},
 		onChanges: function (event)
 		{
 			if(event.hasOwnProperty("lazySrc"))
 			{
-				const lazySrc = event.lazySrc.currentValue || null;
-				if(lazySrc !== null && this._element.src !== lazySrc)
+				if(typeof event.lazySrc.currentValue === "string")
 				{
-					this._element.dataset.src = lazySrc;
-					
+					this._renderer.setElementAttribute(this._element, "data-src", event.lazySrc.currentValue);
+
 					this._lazyManager.register(this._element);
 				}
 			}
