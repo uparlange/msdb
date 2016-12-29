@@ -1,20 +1,22 @@
-define(["app:AbstractEventManager"], 
-function (AbstractEventManager) 
+define(["app:AbstractEventManager", "app:WindowRef"], 
+function (AbstractEventManager, WindowRef) 
 {
 	return ng.core.Class({
 		extends:AbstractEventManager,
-        constructor: [
-			function ConnectionManager ()
+        constructor: [WindowRef,
+			function ConnectionManager (WindowRef)
 			{
 				AbstractEventManager.call(this);
+
+				this._window = WindowRef.nativeWindow;
 				
-				this.online = window.navigator.onLine;
+				this.online = this._window.navigator.onLine;
 				
-				window.addEventListener("offline", (e) => 
+				this._window.addEventListener("offline", (e) => 
 				{ 
 					this._changeHandler();
 				});
-				window.addEventListener("online", (e) => 
+				this._window.addEventListener("online", (e) => 
 				{ 
 					this._changeHandler();
 				});
@@ -22,7 +24,7 @@ function (AbstractEventManager)
 		],
 		_changeHandler:function()
 		{
-			this.online = window.navigator.onLine;
+			this.online = this._window.navigator.onLine;
 			this.emit("change", this.online);
 		}
 	});	
