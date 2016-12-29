@@ -64,7 +64,7 @@ define(function()
 				},
 				_log:function(methodName, message)
 				{
-					if (window.Worker) 
+					if (Worker) 
 					{
 						if(_consoleWorker === null)
 						{
