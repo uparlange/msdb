@@ -5,15 +5,18 @@ function(AbstractDirective, RouterManager)
 		selector: "[href]"
 	}).Class({
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, RouterManager,
-			function HrefDirective (ElementRef, RouterManager)
+		constructor: [ng.core.ElementRef, ng.core.Renderer, RouterManager,
+			function HrefDirective (ElementRef, Renderer, RouterManager)
 			{
 				AbstractDirective.call(this);
 				
 				this._element = ElementRef.nativeElement;
+				this._renderer = Renderer;
 				this._routerManager = RouterManager;
+
+				this._elementClickHandler = null;
 				
-				this._onClickHandler = () =>
+				this._onElementClickHandler = () =>
 				{
 					this._routerManager.saveCurrentViewScrollPosition();
 				};
@@ -21,11 +24,11 @@ function(AbstractDirective, RouterManager)
 		],
 		onInit:function()
 		{
-			this._element.addEventListener("click", this._onClickHandler);
+			this._elementClickHandler = this._renderer.listen(this._element, "click", this._onElementClickHandler);
 		},
 		onDestroy:function()
 		{
-			this._element.removeEventListener("click", this._onClickHandler);
+			this._elementClickHandler();
 		}
 	});
 });
