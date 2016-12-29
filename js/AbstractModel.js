@@ -18,15 +18,18 @@ function(AbstractClass, AppUtils)
 		},
 		init:function(params)
 		{
-			this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
+			if(this._connectionManagerChangeSubscriber === null)
 			{
-				this.params.online = online;
-
-				if(online)
+				this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) =>
 				{
-					this._callRefreshMethod();
-				}
-			});
+					this.params.online = online;
+
+					if(online)
+					{
+						this._callRefreshMethod();
+					}
+				});
+			}
 			
 			const currentParams = this.params;
 			const newParams = Object.assign({online:this._connectionManager.online}, params);
@@ -46,7 +49,6 @@ function(AbstractClass, AppUtils)
 			
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
 			this._connectionManager = null;
-			
 			this._connectionManagerChangeSubscriber = null;
 			
 			this._msdbService = null;
