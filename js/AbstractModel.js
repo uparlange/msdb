@@ -22,8 +22,6 @@ function(AbstractClass, AppUtils)
 			{
 				this.params.online = online;
 
-				this._callConnectionChangeMethod();
-
 				if(online)
 				{
 					this._callRefreshMethod();
@@ -47,7 +45,6 @@ function(AbstractClass, AppUtils)
 			this._callDestroyMethod();
 			
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
-			
 			this._connectionManager = null;
 			
 			this._connectionManagerChangeSubscriber = null;
@@ -94,15 +91,6 @@ function(AbstractClass, AppUtils)
 				this.getLogger().info("onRefresh");
 				
 				this.onRefresh();
-			}
-		},
-		_callConnectionChangeMethod:function()
-		{
-			if(typeof this.onConnectionChange === "function")
-			{
-				this.getLogger().info("onConnectionChange");
-				
-				this.onConnectionChange(this.params.online);
 			}
 		},
 		_callDestroyMethod:function()
