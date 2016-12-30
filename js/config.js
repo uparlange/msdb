@@ -11,7 +11,7 @@ SystemJS.config(
 	}
 });
 
-GlobalConfig = {};
+window.GlobalConfig = {};
 
 if(window.location.search.indexOf("debug") === -1)
 {
