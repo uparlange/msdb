@@ -1,5 +1,5 @@
-define(["app:AbstractManager"],
-function (AbstractManager) 
+define(["app:AbstractManager", "app:AppUtils"],
+function (AbstractManager, AppUtils) 
 {
 	return ng.core.Class({
 		extends:AbstractManager,
@@ -8,7 +8,7 @@ function (AbstractManager)
 			{
 				AbstractManager.call(this);
 				
-				this._url = "https://localhost:3000";
+				this._url = AppUtils.getSocketUrl();
 				
 				this._eventEmitters = {};
 				
@@ -69,7 +69,6 @@ function (AbstractManager)
 			if(this._socket === null)
 			{
 				this._socket = io(this._url, {
-					secure: true,
 					reconnection:false
 				});
 				this._socket.on("connect", () => 

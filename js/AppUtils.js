@@ -29,7 +29,7 @@ define(function ()
 		},
 		getGameFolder:function(game)
 		{
-			return this._getBaseUrl() + "games/" + game.name;
+			return this._getBaseClientUrl() + "games/" + game.name;
 		},
 		getGameVideoUrl:function(game)
 		{
@@ -37,7 +37,7 @@ define(function ()
 		},
 		getServiceUrl:function(serviceName)
 		{
-			return this._getBaseUrl() + "php/services/" + serviceName + ".php";
+			return this._getBaseClientUrl() + "php/services/" + serviceName + ".php";
 		},
 		getModuleName:function(moduleName)
 		{
@@ -46,6 +46,14 @@ define(function ()
 		isDesktopMode:function()
 		{
 			return window.hasOwnProperty("nw");
+		},
+		getServerPort:function()
+		{
+			return 3000;
+		},
+		getSocketUrl:function()
+		{
+			return this._getBaseServerUrl() + ":" + this.getServerPort();
 		},
 		_getUnitLabel:function(value, steps, stepMultiplier)
 		{
@@ -64,7 +72,11 @@ define(function ()
 			});
 			return (Math.round(value / step.value * 100) / 100) + " " + step.unit;
 		},
-		_getBaseUrl:function()
+		_getBaseServerUrl:function()
+		{
+			return "http://localhost";
+		},
+		_getBaseClientUrl:function()
 		{
 			let path = "https://msdb.lapli.fr/";
 			if(!GlobalConfig.PRODUCTION)

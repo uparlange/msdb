@@ -1,5 +1,5 @@
-define(["app:LogUtils"],
-function (LogUtils) 
+define(["app:AppUtils", "app:LogUtils"],
+function (AppUtils, LogUtils) 
 {
     return {
         init:function()
@@ -9,20 +9,11 @@ function (LogUtils)
             const fs = require("fs");
             const express = require("express");
             const expressInstance = express();
-            const https = require("https");
-            const serverOptions = {
-                key: fs.readFileSync("./data/certificate/server.key"),
-                cert: fs.readFileSync("./data/certificate/server.crt")
-            };
-            const httpInstance = https.createServer(serverOptions, expressInstance);
+            const http = require("http");
+            const httpInstance = http.createServer(expressInstance);
             const io = require("socket.io");
             const ioInstance = io(httpInstance);
             const bodyParser = require("body-parser");
-            const chokidar = require("chokidar");
-            const multer  = require("multer");
-            const multerInstance = multer({
-                dest:"./uploads/"
-            });
 
             expressInstance.use(function(request, response, next) 
             {
@@ -33,9 +24,10 @@ function (LogUtils)
             expressInstance.use(bodyParser.json()); 
             expressInstance.use(bodyParser.urlencoded({extended:true}));
 
-            httpInstance.listen(3000, function()
+            const serverPort = AppUtils.getServerPort();
+            httpInstance.listen(serverPort, function()
             {
-                this._getLogger().info("(EXPRESS) Listening on port " + 3000);
+                this._getLogger().info("(EXPRESS) Listening on port " + serverPort);
             });
 
             ioInstance.on("connection", (socket) =>
@@ -64,32 +56,32 @@ function (LogUtils)
         {
             return require("./data/config.json");
         },
-        _initMame:function(mameDirectory, mameFileName, callback)
+        _initMame:function(mameDirectory, mameFileName)
         {
+            const eventEmitter = new ng.core.EventEmitter();
+
+            const mameIni = mameDirectory + "\\mame.ini"; 
             const fs = require("fs");
-            var mameIni = mameDirectory + "\\mame.ini"; 
             if(fs.existsSync(mameIni))
             {
-                // create mame.ini
                 cmd = "cd " + mameDirectory + " & " + mameFileName;
                 cmd += " -cc";
-                this._execCmd(cmd, () =>
+                this._execCmd(cmd).subscribe(() =>
                 {
-                    // read mame.ini
-                    var params = {};
-                    var result = fs.readFileSync(mameIni, "utf8");
-                    var all_lines_array = result.split("\r\n");
+                    let source = fs.readFileSync(mameIni, "utf8");
+                    const params = {};
+                    const all_lines_array = source.split("\r\n");
                     all_lines_array.forEach(function(line, index, array) 
                     {
                         if(line.length > 0 && line.indexOf("#") === -1)
                         {
-                            var key = line.substring(0, line.indexOf(" "));
-                            var value = line.substring(line.lastIndexOf(" ") + 1);
+                            const key = line.substring(0, line.indexOf(" "));
+                            const value = line.substring(line.lastIndexOf(" ") + 1);
                             params[key] = value;
                         }
                     });
-                    // update default values
-                    // http://www.gamoover.net/tuto/am%C3%A9liorer-le-rendu-de-mame-sur-un-lcd
+
+                    /* http://www.gamoover.net/tuto/am%C3%A9liorer-le-rendu-de-mame-sur-un-lcd */
                     params.multithreading = "1";
                     params.video = "d3d";
                     params.keepaspect = "1";
@@ -98,24 +90,33 @@ function (LogUtils)
                     params.effect = "scanlines";
                     params.waitvsync = "1"
                     params.syncrefresh = "1"
-                    // save file
-                    result = "";
-                    for(var index in params)
+
+                    dest = "";
+                    for(let attr in params)
                     {
-                        result += index + " " + params[index] + "\r\n";
+                        dest += attr + " " + params[attr] + "\r\n";
                     }
-                    fs.writeFileSync(mameIni, result);
-                    callback();
+                    fs.writeFileSync(mameIni, dest);
+                    eventEmitter.emit();
                 });
             }
             else
             {
+                setTimeout(() =>
+                {
+                    eventEmitter.emit();
+                },0);
                 callback();
             }
+
+            return eventEmitter;
         },
-        _execCmd:function(cmd, callback)
+        _execCmd:function(cmd)
         {
+            const eventEmitter = new ng.core.EventEmitter();
+
             this._getLogger().info("(CMD) Execute '" + cmd + "'");
+            
             const child_process = require("child_process");
             child_process.exec(cmd, (error, stdout, stderr) =>
             {
@@ -131,26 +132,26 @@ function (LogUtils)
                 {
                     this._getLogger().error("(CMD) " + stderr);
                 }
-                if(callback)
-                {
-                    callback();
-                }
+                eventEmitter.emit();
             });
+
+            return eventEmitter;
         },
         _playGameHandler:function(name)
         {
             this._getLogger().info("(MAME) Launch game " + name);
+
             const fs = require("fs");
-            const configuration = this._getConfiguration();
+            const configuration = this._getConfiguration();   
             const mameDirectory = configuration.MAME_DIRECTORY;
             let mameFileName = "mame64.exe";
             if(!fs.existsSync(mameDirectory + "\\" + mameFileName))
             {
                 mameFileName = "mame.exe";
             }
-            this._initMame(mameDirectory, mameFileName, () =>
+            this._initMame(mameDirectory, mameFileName).subscribe(() =>
             {
-                var cmd = "cd " + mameDirectory + " & " + mameFileName + " " + name; 
+                let cmd = "cd " + mameDirectory + " & " + mameFileName + " " + name; 
                 if(configuration.AUTOSAVE)
                 {
                     cmd += " -autosave";
