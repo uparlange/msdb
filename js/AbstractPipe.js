@@ -11,7 +11,7 @@ function (AbstractClass)
 		{
 			if(typeof this.onDestroy === "function")
 			{
-				this.getLogger().info("onDestroy");
+				this.getLogger().debug("onDestroy");
 				
 				this.onDestroy();
 			}

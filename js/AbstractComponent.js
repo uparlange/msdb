@@ -11,7 +11,7 @@ function (AbstractDirective)
 		{
 			if(typeof this.afterContentInit === "function")
 			{
-				this.getLogger().info("afterContentInit");
+				this.getLogger().debug("afterContentInit");
 				
 				this.afterContentInit();
 			}
@@ -20,7 +20,7 @@ function (AbstractDirective)
 		{
 			if(typeof this.afterContentChecked === "function")
 			{
-				this.getLogger().info("afterContentChecked");
+				this.getLogger().debug("afterContentChecked");
 				
 				this.afterContentChecked();
 			}
@@ -29,7 +29,7 @@ function (AbstractDirective)
 		{
 			if(typeof this.afterViewInit === "function")
 			{
-				this.getLogger().info("afterViewInit");
+				this.getLogger().debug("afterViewInit");
 				
 				this.afterViewInit();
 			}
@@ -38,7 +38,7 @@ function (AbstractDirective)
 		{
 			if(typeof this.afterViewChecked === "function")
 			{
-				this.getLogger().info("afterViewChecked");
+				this.getLogger().debug("afterViewChecked");
 				
 				this.afterViewChecked();
 			}

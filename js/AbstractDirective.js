@@ -18,7 +18,7 @@ function (AbstractClass)
 		{
 			if(typeof this.onInit === "function")
 			{
-				this.getLogger().info("onInit");
+				this.getLogger().debug("onInit");
 				
 				this.onInit();
 			}
@@ -27,7 +27,7 @@ function (AbstractClass)
 		{
 			if(typeof this.doCheck === "function")
 			{
-				this.getLogger().info("doCheck");
+				this.getLogger().debug("doCheck");
 				
 				this.doCheck();
 			}
@@ -36,7 +36,7 @@ function (AbstractClass)
 		{
 			if(typeof this.onDestroy === "function")
 			{
-				this.getLogger().info("onDestroy");
+				this.getLogger().debug("onDestroy");
 				
 				this.onDestroy();
 			}

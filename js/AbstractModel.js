@@ -81,7 +81,7 @@ function(AbstractClass, AppUtils)
 		{
 			if(typeof this.onInit === "function")
 			{
-				this.getLogger().info("onInit");
+				this.getLogger().debug("onInit");
 				
 				this.onInit();
 			}
@@ -90,7 +90,7 @@ function(AbstractClass, AppUtils)
 		{
 			if(typeof this.onRefresh === "function")
 			{
-				this.getLogger().info("onRefresh");
+				this.getLogger().debug("onRefresh");
 				
 				this.onRefresh();
 			}
@@ -99,7 +99,7 @@ function(AbstractClass, AppUtils)
 		{
 			if(typeof this.onDestroy === "function")
 			{
-				this.getLogger().info("onDestroy");
+				this.getLogger().debug("onDestroy");
 				
 				this.onDestroy();
 			}
