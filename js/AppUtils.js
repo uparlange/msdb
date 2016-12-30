@@ -78,15 +78,10 @@ define(function ()
 		},
 		_getBaseClientUrl:function()
 		{
-			let path = "https://msdb.lapli.fr/";
-			if(!GlobalConfig.PRODUCTION)
+			let path = "";
+			if(!GlobalConfig.PRODUCTION || this.isDesktopMode())
 			{
-				path = window.location.protocol + "//" + window.location.host + window.location.pathname;
-				path = path.replace("msdb3", "msdb2");
-				if(path.indexOf("dist") === -1)
-				{
-					path += "dist/";
-				}
+				path = "https://msdb.lapli.fr/";
 			}
 			return path;
 		}

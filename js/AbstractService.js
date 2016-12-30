@@ -13,7 +13,10 @@ function (AbstractClass)
 		},
 		httpGet:function(url, params, defaultValue)
 		{
-			const source = this._http.get(url,{search:params});
+			const source = this._http.get(url,{
+				search:params,
+				withCredentials: true
+			});
 
 			return this._httpCall(source, defaultValue);
 		},
