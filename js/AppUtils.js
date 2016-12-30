@@ -43,6 +43,10 @@ define(function ()
 		{
 			return "app:" + moduleName + "#module";
 		},
+		isDesktopMode:function()
+		{
+			return window.hasOwnProperty("nw");
+		},
 		_getUnitLabel:function(value, steps, stepMultiplier)
 		{
 			let step = null;
@@ -62,10 +66,10 @@ define(function ()
 		},
 		_getBaseUrl:function()
 		{
-			let path = "";
+			let path = "https://msdb.lapli.fr/";
 			if(!GlobalConfig.PRODUCTION)
 			{
-				path = location.protocol + "//" + location.host + location.pathname;
+				path = window.location.protocol + "//" + window.location.host + window.location.pathname;
 				path = path.replace("msdb3", "msdb2");
 				if(path.indexOf("dist") === -1)
 				{
