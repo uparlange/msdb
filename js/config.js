@@ -13,10 +13,10 @@ SystemJS.config(
 
 GlobalConfig = {};
 
-if(location.search.indexOf("debug") === -1)
+if(window.location.search.indexOf("debug") === -1)
 {
 	GlobalConfig.PRODUCTION = true;
-	GlobalConfig.LOG_LEVEL = "off";
+	GlobalConfig.LOG_LEVEL = "info";
 }
 else
 {
