@@ -4,9 +4,10 @@ function (AppUtils, LogUtils)
     return {
         init:function()
         {
-            this._logger = LogUtils.getLogger("Server");
+            this._logger = LogUtils.getLogger("Player");
 
-            const fs = require("fs");
+            this._fs = require("fs");
+
             const express = require("express");
             const expressInstance = express();
             const http = require("http");
@@ -15,16 +16,9 @@ function (AppUtils, LogUtils)
             const ioInstance = io(httpInstance);
             const bodyParser = require("body-parser");
 
-            expressInstance.use(function(request, response, next) 
-            {
-                response.header("Access-Control-Allow-Origin", "*");
-                response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-                next();
-            });
             expressInstance.use(bodyParser.json()); 
-            expressInstance.use(bodyParser.urlencoded({extended:true}));
 
-            const serverPort = AppUtils.getServerPort();
+            const serverPort = AppUtils.getSocketPort();
             httpInstance.listen(serverPort, function()
             {
                 this._getLogger().info("(EXPRESS) Listening on port " + serverPort);
@@ -34,17 +28,25 @@ function (AppUtils, LogUtils)
             {
                 this._getLogger().info("(SOCKET.IO) User (" + socket.id + ") connected");
 
-                socket.on("GET_MY_GAMES", (name, callback) => 
+                socket.on("GET_MY_GAMES", (params, callback) => 
                 {
-                    this._getMyGamesHandler(name, callback);
+                    this._getMyGames(params, callback);
                 });
-                socket.on("IS_ROM_AVAILABLE", (name, callback) =>
+                socket.on("IS_ROM_AVAILABLE", (params, callback) =>
                 {
-                    this._isRomAvailableHandler(name, callback);
+                    this._isRomAvailable(params, callback);
                 });
-                socket.on("PLAY_GAME", (name) => 
+                socket.on("PLAY_GAME", (params, callback) => 
                 {
-                    this._playGameHandler(name);
+                    this._playGame(params, callback);
+                });
+                socket.on("GET_CONFIGURATION", (params, callback) => 
+                {
+                    this._getConfiguration(callback);
+                });
+                socket.on("SAVE_CONFIGURATION", (params, callback) => 
+                {
+                    this._saveConfiguration(params, callback);
                 });
             });
         },
@@ -52,23 +54,45 @@ function (AppUtils, LogUtils)
         {
             return this._logger;
         },
-        _getConfiguration:function()
+        _saveConfiguration:function(config, callback)
         {
-            return require("./data/config.json");
+            const configFile = AppUtils.getConfigFileUrl();
+            this._fs.writeFileSync(configFile, JSON.stringify(config));
+            callback();
+        },
+        _getConfiguration:function(callback)
+        {
+            let config = null;
+            try
+            {
+                const configFile = AppUtils.getConfigFileUrl();
+                config = JSON.parse(this._fs.readFileSync(configFile));
+            } catch(e) {
+                this._getLogger().info("(CONFIG) No configuration file found !");
+            }
+            if(config === null)
+            {
+                config = {
+                    "mameDirectory":null,
+                    "romsDirectory":null,
+                    "autosave":true,
+                    "joystick":true
+                };
+            }
+            callback(config);
         },
         _initMame:function(mameDirectory, mameFileName)
         {
             const eventEmitter = new ng.core.EventEmitter();
 
             const mameIni = mameDirectory + "\\mame.ini"; 
-            const fs = require("fs");
-            if(fs.existsSync(mameIni))
+            if(this._fs.existsSync(mameIni))
             {
                 cmd = "cd " + mameDirectory + " & " + mameFileName;
                 cmd += " -cc";
                 this._execCmd(cmd).subscribe(() =>
                 {
-                    let source = fs.readFileSync(mameIni, "utf8");
+                    let source = this._fs.readFileSync(mameIni, "utf8");
                     const params = {};
                     const all_lines_array = source.split("\r\n");
                     all_lines_array.forEach(function(line, index, array) 
@@ -96,7 +120,7 @@ function (AppUtils, LogUtils)
                     {
                         dest += attr + " " + params[attr] + "\r\n";
                     }
-                    fs.writeFileSync(mameIni, dest);
+                    this._fs.writeFileSync(mameIni, dest);
                     eventEmitter.emit();
                 });
             }
@@ -137,67 +161,70 @@ function (AppUtils, LogUtils)
 
             return eventEmitter;
         },
-        _playGameHandler:function(name)
+        _playGame:function(name, callback)
         {
             this._getLogger().info("(MAME) Launch game " + name);
 
-            const fs = require("fs");
-            const configuration = this._getConfiguration();   
-            const mameDirectory = configuration.MAME_DIRECTORY;
-            let mameFileName = "mame64.exe";
-            if(!fs.existsSync(mameDirectory + "\\" + mameFileName))
+            this._getConfiguration((configuration) =>
             {
-                mameFileName = "mame.exe";
-            }
-            this._initMame(mameDirectory, mameFileName).subscribe(() =>
+                const mameDirectory = configuration.mameDirectory;
+                let mameFileName = "mame64.exe";
+                if(!this._fs.existsSync(mameDirectory + "\\" + mameFileName))
+                {
+                    mameFileName = "mame.exe";
+                }
+                this._initMame(mameDirectory, mameFileName).subscribe(() =>
+                {
+                    let cmd = "cd " + mameDirectory + " & " + mameFileName + " " + name; 
+                    if(configuration.autosave)
+                    {
+                        cmd += " -autosave";
+                    }
+                    if(configuration.joystick)
+                    {
+                        cmd += " -joystick";
+                    }
+                    this._execCmd(cmd);
+                });
+
+                callback();
+            });   
+        },
+        _getMyGames:function(name, callback)
+        {
+            this._getConfiguration((configuration) =>
             {
-                let cmd = "cd " + mameDirectory + " & " + mameFileName + " " + name; 
-                if(configuration.AUTOSAVE)
-                {
-                    cmd += " -autosave";
-                }
-                if(configuration.JOYSTICK)
-                {
-                    cmd += " -joystick";
-                }
-                this._execCmd(cmd);
+                const path = require("path");
+                const games = [];	
+                try {
+                    const files = this._fs.readdirSync(configuration.romsDirectory);
+                    files.forEach((file, index, array) => 
+                    {
+                        const fileInfos = path.parse(file);
+                        if(fileInfos.ext === ".zip")
+                        {
+                            games.push(fileInfos.name);
+                        }
+                    });
+                } catch(e) {}
+                callback(games);
             });
         },
-        _getMyGamesHandler:function(name, callback)
+        _isRomAvailable:function(name, callback)
         {
-            const fs = require("fs");
-            const path = require("path");
-            const configuration = this._getConfiguration();
-            const games = [];	
-            try {
-                const files = fs.readdirSync(configuration.ROMS_DIRECTORY);
-                files.forEach((file, index, array) => 
-                {
-                    const fileInfos = path.parse(file);
-                    if(fileInfos.ext === ".zip")
-                    {
-                        games.push(fileInfos.name);
-                    }
-                });
-            } catch(e) {
-
-            }
-            callback(games);
-        },
-        _isRomAvailableHandler:function(name, callback)
-        {
-            const fs = require("fs");
-            const configuration = this._getConfiguration();
-            const result = {
-                name:name,
-                available:false
-            };
-            const gameFilename = configuration.ROMS_DIRECTORY + "\\" + name + ".zip";
-            if(fs.existsSync(gameFilename))
+            this._getConfiguration((configuration) =>
             {
-                result.available = true;
-            }
-            callback(result);
+                const result = {
+                    name:name,
+                    available:false
+                };
+                const gameFilename = configuration.romsDirectory + "\\" + name + ".zip";
+                if(this._fs.existsSync(gameFilename))
+                {
+                    result.available = true;
+                }
+                callback(result);
+            });
         }
     };
 });
