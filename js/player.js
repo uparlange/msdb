@@ -19,7 +19,7 @@ function (AppUtils, LogUtils)
             expressInstance.use(bodyParser.json()); 
 
             const serverPort = AppUtils.getSocketPort();
-            httpInstance.listen(serverPort, function()
+            httpInstance.listen(serverPort, () =>
             {
                 this._getLogger().info("(EXPRESS) Listening on port " + serverPort);
             });
@@ -95,7 +95,7 @@ function (AppUtils, LogUtils)
                     let source = this._fs.readFileSync(mameIni, "utf8");
                     const params = {};
                     const all_lines_array = source.split("\r\n");
-                    all_lines_array.forEach(function(line, index, array) 
+                    all_lines_array.forEach((line, index, array) => 
                     {
                         if(line.length > 0 && line.indexOf("#") === -1)
                         {
