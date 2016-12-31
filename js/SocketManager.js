@@ -73,31 +73,41 @@ function (AbstractManager, AppUtils, EventManager)
 		_getSocket:function()
 		{
 			const eventEmitter = new ng.core.EventEmitter();
-			
-			if(this._socket === null)
+
+			if(AppUtils.isDesktopMode())
 			{
-				this._socket = io(this._url, {
-					reconnection:false
-				});
-				this._socket.on("connect", () => 
+				if(this._socket === null)
 				{
-					eventEmitter.emit(this._socket);
-				});
-				this._socket.on("connect_error", () => 
+					this._socket = io(this._url, {
+						reconnection:false
+					});
+					this._socket.on("connect", () => 
+					{
+						eventEmitter.emit(this._socket);
+					});
+					this._socket.on("connect_error", () => 
+					{
+						this._socket = null;
+						
+						eventEmitter.emit(this._socket);
+					});
+				}
+				else
 				{
-					this._socket = null;
-					
-					eventEmitter.emit(this._socket);
-				});
+					setTimeout(() =>
+					{
+						eventEmitter.emit(this._socket);
+					},0);
+				}
 			}
 			else
 			{
 				setTimeout(() =>
 				{
-					eventEmitter.emit(this._socket);
+					eventEmitter.emit(null);
 				},0);
 			}
-			
+
 			return eventEmitter;
 		}
     });
