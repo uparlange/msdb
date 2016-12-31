@@ -135,12 +135,12 @@ function(AbstractComponent, AppUtils, WindowRef)
 		},
 		_getGalleryContainer:function()
 		{
-			// TODO get reference in other way ?
+			/* TODO get reference in other way ? */
 			return this._element.getElementsByClassName("gallery")[0];
 		},
 		_getPhotoSwipeContainer:function()
 		{
-			// TODO get reference in other way ?
+			/* TODO get reference in other way ? */
 			return this._element.getElementsByClassName("pswp")[0];
 		},
 		_getColWidth:function()
