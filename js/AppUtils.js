@@ -47,13 +47,17 @@ define(function ()
 		{
 			return window.hasOwnProperty("nw");
 		},
-		getServerPort:function()
+		getSocketPort:function()
 		{
 			return 3000;
 		},
 		getSocketUrl:function()
 		{
-			return this._getBaseServerUrl() + ":" + this.getServerPort();
+			return this._getBaseServerUrl() + ":" + this.getSocketPort();
+		},
+		getConfigFileUrl:function()
+		{
+			return "./data/config.json";
 		},
 		_getUnitLabel:function(value, steps, stepMultiplier)
 		{
