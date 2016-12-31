@@ -32,7 +32,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				{
 					this._initMenuBar();
 
-					SystemJS.import("js/server.js").then(function(server) {
+					SystemJS.import("js/player.js").then(function(server) {
 						server.init();
 					});
 				}
@@ -69,7 +69,10 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				}
 			}));
 			displaySubMenu.append(new nw.MenuItem({
-				label:"Configuration"
+				label:"Configuration",
+				click:() => {
+					this._showView("/config");
+				}
 			}));
 			menu.append(new nw.MenuItem({
 				label:"Afficher",
