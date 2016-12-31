@@ -109,7 +109,7 @@ function (AbstractManager)
 			}
 			else
 			{
-				setTimeout(function ()
+				setTimeout(() =>
                 {
                     eventEmitter.emit();
                 }, 0);
