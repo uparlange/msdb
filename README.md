@@ -15,7 +15,7 @@ This application has been developped using
 * Clone repository
 * Execute 'npm install' command to get dependencies 
 
-## Test in brower ##
+## Test browser version ##
 * Execute 'npm run web' command to launch web server
 * Launch your favorite brower
 * Go to http://localhost/?debug=true
