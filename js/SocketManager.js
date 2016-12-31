@@ -1,12 +1,14 @@
-define(["app:AbstractManager", "app:AppUtils"],
-function (AbstractManager, AppUtils) 
+define(["app:AbstractManager", "app:AppUtils", "app:EventManager"],
+function (AbstractManager, AppUtils, EventManager) 
 {
 	return ng.core.Class({
 		extends:AbstractManager,
-        constructor: [
-			function SocketManager ()
+        constructor: [EventManager,
+			function SocketManager (EventManager)
 			{
 				AbstractManager.call(this);
+
+				this._eventManager = EventManager;
 				
 				this._url = AppUtils.getSocketUrl();
 				
@@ -41,21 +43,27 @@ function (AbstractManager, AppUtils)
 		{
 			eventSubscriber.unsubscribe();
 		},
-		emit:function (eventName, value)
+		emit:function (eventName, params)
         {
 			const eventEmitter = new ng.core.EventEmitter();
 			
+			this._eventManager.emit("HTTP_BEGIN");
+
 			this._getSocket().subscribe((socket) =>
 			{
 				if(socket !== null)
 				{
-					socket.emit(eventName, value, (data) =>
+					socket.emit(eventName, params, (result) =>
 					{
-						 eventEmitter.emit(data);
+						this._eventManager.emit("HTTP_END");
+
+						 eventEmitter.emit(result);
 					});
 				}
 				else
 				{
+					this._eventManager.emit("HTTP_END");
+
 					eventEmitter.emit(null);
 				}
 			});
