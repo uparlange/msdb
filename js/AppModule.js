@@ -23,7 +23,8 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 					{path: "search", loadChildren:AppUtils.getModuleName("SearchModule")},
 					{path: "detail", loadChildren:AppUtils.getModuleName("DetailModule")},
 					{path: "result", loadChildren:AppUtils.getModuleName("ResultModule")},
-					{path: "mygames", loadChildren:AppUtils.getModuleName("MyGamesModule")}
+					{path: "mygames", loadChildren:AppUtils.getModuleName("MyGamesModule")},
+					{path: "config", loadChildren:AppUtils.getModuleName("ConfigModule")}
 				], {useHash:true})
 			],
 			declarations:[
