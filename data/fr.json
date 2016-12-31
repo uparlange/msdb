@@ -83,5 +83,6 @@
 	"L10N_MAME_DIRECTORY": "Dossier de mame",
 	"L10N_ROMS_DIRECTORY": "Dossier des roms",
 	"L10N_AUTOSAVE": "Sauvegarde auto",
-	"L10N_JOYSTICK": "Joystick"
+	"L10N_JOYSTICK": "Joystick",
+	"L10N_COMMUNITY": "Communauté"
 }
