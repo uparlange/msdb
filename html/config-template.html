@@ -1,0 +1,37 @@
+<md-card>
+	<md-card-title>
+		{{'L10N_CONFIGURATION'|translate}}
+	</md-card-title>
+</md-card>
+<div class="default-spacer"></div>
+<md-card>
+	<md-card-content>
+		<md-input-container>
+			<input md-input [(ngModel)]="model.data.newValue.mameDirectory" placeholder="{{'L10N_MAME_DIRECTORY'|translate}}" (keyup)="model.checkFormChanges()" (change)="model.checkFormChanges()">
+		</md-input-container>
+		<md-input-container>
+			<input md-input [(ngModel)]="model.data.newValue.romsDirectory" disabled placeholder="{{'L10N_ROMS_DIRECTORY'|translate}}">
+		</md-input-container>
+		<div>
+			<md-checkbox [(ngModel)]="model.data.newValue.autosave" (change)="model.checkFormChanges()">
+				{{'L10N_AUTOSAVE'|translate}}
+			</md-checkbox>
+		</div>
+		<div>
+			<md-checkbox [(ngModel)]="model.data.newValue.joystick" (change)="model.checkFormChanges()">
+				{{'L10N_JOYSTICK'|translate}}
+			</md-checkbox>
+		</div>
+	</md-card-content>
+</md-card>
+<div class="default-spacer"></div>
+<md-card>
+	<md-card-content>
+		<button md-raised-button color="primary" (click)="model.save()" [disabled]="!model.data.enabled">
+			{{'L10N_SAVE'|translate}}
+		</button>
+		<button md-raised-button color="accent" (click)="model.cancel()" [disabled]="!model.data.enabled">
+			{{'L10N_CANCEL'|translate}}
+		</button>
+	</md-card-content>
+</md-card>
