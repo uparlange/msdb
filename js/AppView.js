@@ -32,7 +32,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				{
 					this._initMenuBar();
 
-					SystemJS.import("js/player.js").then(function(server) {
+					SystemJS.import("js/player.js").then((server) => {
 						server.init();
 					});
 				}
