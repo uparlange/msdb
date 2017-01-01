@@ -47,39 +47,53 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		},
 		_initMenuBar:function()
 		{
-			const menu = new nw.Menu({type:"menubar"});
-				
-			const fileSubMenu = new nw.Menu();
-			fileSubMenu.append(new nw.MenuItem({
-				label:"Quitter",
-				click:() => {
-					nw.App.quit();
-				}
-			}));
-			menu.append(new nw.MenuItem({
-				label:"Fichier",
-				submenu:fileSubMenu
-			}));
+			const pkg = require("./package.json");
 
-			const displaySubMenu = new nw.Menu();
-			displaySubMenu.append(new nw.MenuItem({
-				label:"Mes jeux",
-				click:() => {
-					this._showView("/mygames");
-				}
-			}));
-			displaySubMenu.append(new nw.MenuItem({
-				label:"Configuration",
-				click:() => {
-					this._showView("/config");
-				}
-			}));
-			menu.append(new nw.MenuItem({
-				label:"Afficher",
-				submenu:displaySubMenu
-			}));
+			this._translateManager.getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIG", "L10N_DISPLAY"]).subscribe((translations) => 
+			{
+				const menu = new nw.Menu({type:"menubar"});
+					
+				const fileSubMenu = new nw.Menu();
+				fileSubMenu.append(new nw.MenuItem({
+					label:translations.L10N_QUIT,
+					click:() => {
+						nw.App.quit();
+					}
+				}));
+				menu.append(new nw.MenuItem({
+					label:translations.L10N_FILE,
+					submenu:fileSubMenu
+				}));
 
-			nw.Window.get().menu = menu;
+				const displaySubMenu = new nw.Menu();
+				displaySubMenu.append(new nw.MenuItem({
+					label:translations.L10N_MY_GAMES,
+					click:() => {
+						this._showView("/mygames");
+					}
+				}));
+				displaySubMenu.append(new nw.MenuItem({
+					label:translations.L10N_CONFIG,
+					click:() => {
+						this._showView("/config");
+					}
+				}));
+				menu.append(new nw.MenuItem({
+					label:translations.L10N_DISPLAY,
+					submenu:displaySubMenu
+				}));
+
+				const infoSubMenu = new nw.Menu();
+				infoSubMenu.append(new nw.MenuItem({
+					label:"v"+pkg.version
+				}));
+				menu.append(new nw.MenuItem({
+					label:"?",
+					submenu:infoSubMenu
+				}));
+
+				nw.Window.get().menu = menu;
+			});
 		},
 		_initToaster:function()
 		{
