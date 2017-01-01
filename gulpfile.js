@@ -19,6 +19,7 @@ const htmlparser = require('htmlparser2');
 const mergeStream = require('merge-stream');
 const imagemin = require('gulp-imagemin');
 const change = require('gulp-change');
+const zip = require('gulp-zip');
 
 // -------------------------------------------------
 // VARIABLES
@@ -26,7 +27,8 @@ const change = require('gulp-change');
 
 const pkg = require('./package.json');
 const resources = {
-    copy: [],
+    copy4web: [],
+    copy4desktop: [],
     js: [],
     css: [],
     html: [],
@@ -76,11 +78,17 @@ gulp.task('generate-manifest', (callback) => {
     callback();
 });
 
+gulp.task('generate-release', () => {
+    return gulp.src('dist/**/*')
+        .pipe(zip(pkg.name + '-' + pkg.version + '.nw'))
+        .pipe(gulp.dest('release'));
+});
+
 // IMAGES
 
 gulp.task('add-image-resources', (callback) => {
     resources.image.push({
-        src: './images/*.*',
+        src: './images/**/*',
         dest: './dist/images'
     });
     callback();
@@ -119,7 +127,7 @@ gulp.task('add-html-resources', (callback) => {
     });
     // templates
     resources.html.push({
-        src: './html/*.html',
+        src: './html/**/*.html',
         dest: './dist/html'
     });
     callback();
@@ -149,7 +157,7 @@ gulp.task('generate-theme', () => {
 
 gulp.task('add-css-resources', (callback) => {
     resources.css.push({
-        src: './css/*.css',
+        src: './css/**/*.css',
         dest: './dist/css'
     });
     callback();
@@ -172,21 +180,21 @@ gulp.task('minify-css-resources', () => {
 // JS
 
 gulp.task('lint-js', () => {
-    return gulp.src(['./js/*.js'])
+    return gulp.src(['./js/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
 });
 
 gulp.task('babel-js', () => {
-    return gulp.src('./js/*.js')
+    return gulp.src('./js/**/*.js')
         .pipe(babel())
         .pipe(gulp.dest('./dist/tmp/babel'));
 });
 
 gulp.task('add-js-resources', (callback) => {
     resources.html.push({
-        src: './dist/tmp/babel/*.js',
+        src: './dist/tmp/babel/**/*.js',
         dest: './dist/js'
     });
     callback();
@@ -209,6 +217,7 @@ gulp.task('minify-js-resources', () => {
 // RESOURCES
 
 gulp.task('prepare-node-modules', (callback) => {
+    const urls = [];
     const parser = new htmlparser.Parser({
         onopentag: (tagname, attributes) => {
             let attribute = null;
@@ -222,11 +231,12 @@ gulp.task('prepare-node-modules', (callback) => {
             }
             if (attributes[attribute] !== undefined && attributes[attribute].indexOf('node_modules') !== -1) {
                 const url = attributes[attribute];
+                urls.push(url);
                 const dest = 'dist/' + url.substring(0, url.lastIndexOf("/"));
                 const begin = url.lastIndexOf("/") + 1;
                 const name = url.substring(begin);
                 if (name.indexOf('.min') !== -1) {
-                    resources.copy.push({
+                    resources.copy4web.push({
                         src: url,
                         dest: dest
                     });
@@ -248,36 +258,74 @@ gulp.task('prepare-node-modules', (callback) => {
         });
     parser.write(fs.readFileSync('index.html', 'utf8'));
     parser.end();
+
+    const addDependency = function (dependency) {
+        const folder = './node_modules/' + dependency;
+
+        resources.copy4desktop.push({
+            src: folder + '/**/*',
+            dest: './dist/node_modules/' + dependency
+        });
+
+        const pkg2 = require(folder + '/package.json');
+        for (let dependency in pkg2.dependencies) {
+            addDependency(dependency);
+        }
+    };
+
+    const files = [];
+    for (let dependency in pkg.dependencies) {
+        let toAdd = true;
+        urls.forEach(function (url) {
+            if (url.indexOf('/' + dependency + '/') !== -1) {
+                toAdd = false;
+                return;
+            }
+        });
+        if (toAdd) {
+            addDependency(dependency);
+        }
+    }
+
     callback();
 });
 
 gulp.task('prepare-copy-resources', (callback) => {
     // package
-    resources.copy.push({
+    resources.copy4web.push({
         src: './package.json',
         dest: './dist'
     });
     // data
-    resources.copy.push({
-        src: './data/*.*',
+    resources.copy4web.push({
+        src: './data/**/*',
         dest: './dist/data'
     });
     // material-design-icons
-    resources.copy.push({
-        src: './node_modules/material-design-icons/iconfont/*.{eot,woff2,woff,ttf}',
+    resources.copy4web.push({
+        src: './node_modules/material-design-icons/iconfont/**/*.{eot,woff2,woff,ttf}',
         dest: './dist/node_modules/material-design-icons/iconfont'
     });
     // photoswipe_default_skin
-    resources.copy.push({
-        src: './node_modules/photoswipe/dist/default-skin/*.*',
+    resources.copy4web.push({
+        src: './node_modules/photoswipe/dist/default-skin/**/*',
         dest: './dist/node_modules/photoswipe/dist/default-skin'
     });
     callback();
 });
 
-gulp.task('copy-resources', () => {
+gulp.task('copy-web-resources', () => {
     const streams = mergeStream();
-    resources.copy.forEach((element, index, array) => {
+    resources.copy4web.forEach((element, index, array) => {
+        streams.add(gulp.src(element.src)
+            .pipe(gulp.dest(element.dest)));
+    });
+    return streams;
+});
+
+gulp.task('copy-desktop-resources', () => {
+    const streams = mergeStream();
+    resources.copy4desktop.forEach((element, index, array) => {
         streams.add(gulp.src(element.src)
             .pipe(gulp.dest(element.dest)));
     });
@@ -290,10 +338,18 @@ gulp.task('prepare-resources', (callback) => {
     runSequence(['prepare-node-modules', 'prepare-copy-resources', 'prepare-css-resources', 'prepare-html-resources', 'prepare-js-resources', 'prepare-image-resources'], callback);
 });
 
-gulp.task('manage-resources', (callback) => {
-    runSequence(['copy-resources', 'minify-css-resources', 'minify-html-resources', 'minify-js-resources', 'optimize-image-resources'], callback);
+gulp.task('manage-web-resources', (callback) => {
+    runSequence(['copy-web-resources', 'minify-css-resources', 'minify-html-resources', 'minify-js-resources', 'optimize-image-resources'], callback);
+});
+
+gulp.task('build-web', (callback) => {
+    runSequence('clean-dist', 'prepare-resources', 'manage-web-resources', 'clean-tmp', 'generate-manifest', callback);
+});
+
+gulp.task('build-desktop', (callback) => {
+    runSequence('build-web', 'copy-desktop-resources', 'generate-release', callback);
 });
 
 gulp.task('default', (callback) => {
-    runSequence('clean-dist', 'prepare-resources', 'manage-resources', 'clean-tmp', 'generate-manifest', callback);
+    runSequence('build-web', callback);
 });
