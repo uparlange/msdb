@@ -26,6 +26,8 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				
 				this._updateManager.init();
 
+				this._initBackground();
+
 				this._initToaster();
 
 				if(AppUtils.isDesktopMode())
@@ -38,6 +40,14 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				}
 			}
 		],
+		_initBackground:function()
+		{
+			/* TODO find better way */
+			const body = document.getElementsByTagName("body")[0];
+			body.style.size = "100% 100%";
+			body.style.backgroundAttachment = "fixed";
+			body.style.backgroundImage = "url('images/background.jpg')";
+		},
 		_showView:function(view)
 		{
 			this._ngZone.run(() =>
