@@ -54,10 +54,15 @@ function (AppUtils, LogUtils)
         {
             return this._logger;
         },
+        _getConfigFile:function()
+        {
+            const os = require("os");
+            const pkg = require("./package.json");
+            return os.homedir() + "\\" + pkg.name + ".json";
+        },
         _saveConfiguration:function(config, callback)
         {
-            const configFile = AppUtils.getConfigFileUrl();
-            this._fs.writeFileSync(configFile, JSON.stringify(config));
+            this._fs.writeFileSync(this._getConfigFile(), JSON.stringify(config));
             callback();
         },
         _getConfiguration:function(callback)
@@ -65,8 +70,7 @@ function (AppUtils, LogUtils)
             let config = null;
             try
             {
-                const configFile = AppUtils.getConfigFileUrl();
-                config = JSON.parse(this._fs.readFileSync(configFile));
+                config = JSON.parse(this._fs.readFileSync(this._getConfigFile()));
             } catch(e) {
                 this._getLogger().info("(CONFIG) No configuration file found !");
             }
@@ -75,8 +79,8 @@ function (AppUtils, LogUtils)
                 config = {
                     "mameDirectory":null,
                     "romsDirectory":null,
-                    "autosave":true,
-                    "joystick":true
+                    "autosave":false,
+                    "joystick":false
                 };
             }
             callback(config);

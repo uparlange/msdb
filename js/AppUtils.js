@@ -55,10 +55,6 @@ define(function ()
 		{
 			return this._getBaseServerUrl() + ":" + this.getSocketPort();
 		},
-		getConfigFileUrl:function()
-		{
-			return "./data/config.json";
-		},
 		_getUnitLabel:function(value, steps, stepMultiplier)
 		{
 			let step = null;
@@ -88,6 +84,7 @@ define(function ()
 				path = "https://msdb.lapli.fr/";
 			}
 			return path;
+			//return "http://localhost/projects/msdb2/dist/";
 		}
 	};
 });
