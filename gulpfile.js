@@ -20,6 +20,7 @@ const mergeStream = require('merge-stream');
 const imagemin = require('gulp-imagemin');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
+const karma = require('karma');
 
 // -------------------------------------------------
 // VARIABLES
@@ -332,6 +333,21 @@ gulp.task('copy-desktop-resources', () => {
     return streams;
 });
 
+// TEST
+
+gulp.task('test', function (callback) {
+    new karma.Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, callback).start();
+});
+
+gulp.task('tdd', function (callback) {
+    new karma.Server({
+        configFile: __dirname + '/karma.conf.js'
+    }, callback).start();
+});
+
 // MAIN
 
 gulp.task('prepare-resources', (callback) => {
@@ -349,6 +365,8 @@ gulp.task('build-web', (callback) => {
 gulp.task('build-desktop', (callback) => {
     runSequence('build-web', 'copy-desktop-resources', 'generate-release', callback);
 });
+
+gulp.task('tests', ['tdd']);
 
 gulp.task('default', (callback) => {
     runSequence('build-web', callback);
