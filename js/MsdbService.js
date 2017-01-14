@@ -11,6 +11,8 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 				this._cacheManager = CacheManager;
 				
 				this._mameInfos = null;
+
+				this._token = null;
 			}
 		],
 		getMameInfos : function()
@@ -123,7 +125,15 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 				{
 					if(this._initialized())
 					{
-						this.httpGet(config.url, config.params).subscribe((result) =>
+						const headers = new ng.http.Headers();
+						headers.append("Authorization", this._token);
+
+						const params = {
+							search:config.params,
+							headers:headers
+						}
+
+						this.httpGet(config.url, params).subscribe((result) =>
 						{
 							value = this._getData(result);
 							
@@ -177,11 +187,13 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 				const url = AppUtils.getServiceUrl("init");
 				this.httpGet(url).subscribe((result) =>
 				{
-					this._mameInfos = this._getData(result);
-					
-					if(this._mameInfos !== null)
+					const data = this._getData(result);
+
+					if(data !== null) 
 					{
-						this._cacheManager.setDefaultNs(this._mameInfos.build);
+						this._token = data.token;
+						this._mameInfos = data.mameInfos;
+						this._cacheManager.setDefaultNs(data.mameInfos.build);
 					}
 					
 					eventEmitter.emit();

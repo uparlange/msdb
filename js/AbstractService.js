@@ -3,20 +3,17 @@ function (AbstractClass)
 {
 	return ng.core.Class({
 		extends:AbstractClass,
-		constructor:function AbstractService (http, eventManager)
+		constructor:function AbstractService (Http, EventManager)
 		{
 			AbstractClass.call(this);
 			
-			this._http = http;
+			this._http = Http;
 			
-			this._eventManager = eventManager;
+			this._eventManager = EventManager;
 		},
 		httpGet:function(url, params, defaultValue)
 		{
-			const source = this._http.get(url,{
-				search:params,
-				withCredentials: true
-			});
+			const source = this._http.get(url, params);
 
 			return this._httpCall(source, defaultValue);
 		},
