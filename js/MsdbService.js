@@ -125,13 +125,10 @@ function(AbstractService, EventManager, CacheManager, AppUtils)
 				{
 					if(this._initialized())
 					{
-						const headers = new ng.http.Headers();
-						headers.append("Authorization", this._token);
-
 						const params = {
-							search:config.params,
-							headers:headers
-						}
+							search:config.params || new ng.http.URLSearchParams()
+						};
+						params.search.set("token", this._token);
 
 						this.httpGet(config.url, params).subscribe((result) =>
 						{
