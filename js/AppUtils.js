@@ -16,9 +16,9 @@ define(function ()
 			return Object.assign({}, defaultParams, params);
 		},
 		getSizeLabel: function (value)
-  		{
+		{
 			return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
-  		},   
+		},   
 		getFrequencyLabel: function (value)
 		{
 			return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
@@ -58,7 +58,7 @@ define(function ()
 		_getUnitLabel:function(value, steps, stepMultiplier)
 		{
 			let step = null;
-			steps.forEach((item, index, array) =>
+			steps.forEach((item, index) =>
 			{
 				const stepValue = Math.pow(stepMultiplier, index);
 				if(value >= stepValue)

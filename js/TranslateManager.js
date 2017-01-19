@@ -65,7 +65,7 @@ function (AbstractManager)
         _getValues: function (params)
         {
 			const values = {};
-			params.forEach((element, index, array) => 
+			params.forEach((element) => 
 			{
                 values[element] = this._getValue(element);
             });
@@ -81,7 +81,7 @@ function (AbstractManager)
         },
 		_checkPendingRequests:function()
 		{
-			this._pendingRequests.forEach((request, index, array) => 
+			this._pendingRequests.forEach((request) => 
 			{
 				const values = this._getValues(request.params);
 				request.eventEmitter.emit(values);

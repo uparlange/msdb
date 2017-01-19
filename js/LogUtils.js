@@ -79,7 +79,8 @@ define(function()
 					}
 					else
 					{
-						console[methodName](className, message);
+						const Console = console;
+						Console[methodName](className, message);
 					}
 				}
 			};

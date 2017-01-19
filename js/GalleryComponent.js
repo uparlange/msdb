@@ -81,7 +81,7 @@ function(AbstractComponent, AppUtils, WindowRef)
 		openImage:function(image)
 		{
 			const provider = this._getAllowedImageProvider();
-			provider.forEach((element, index, array) =>
+			provider.forEach((element, index) =>
 			{
 				if(element.name === image.name)
 				{
@@ -97,7 +97,7 @@ function(AbstractComponent, AppUtils, WindowRef)
 		_getAllowedImageProvider:function()
 		{
 			const images = [];
-			this.provider.forEach((image, index, array) =>
+			this.provider.forEach((image) =>
 			{
 				if(this.imageAllowed(image))
 				{

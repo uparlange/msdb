@@ -92,14 +92,14 @@ function (AppUtils, LogUtils)
             const mameIni = mameDirectory + "\\mame.ini"; 
             if(this._fs.existsSync(mameIni))
             {
-                cmd = "cd " + mameDirectory + " & " + mameFileName;
+                let cmd = "cd " + mameDirectory + " & " + mameFileName;
                 cmd += " -cc";
                 this._execCmd(cmd).subscribe(() =>
                 {
                     let source = this._fs.readFileSync(mameIni, "utf8");
                     const params = {};
                     const all_lines_array = source.split("\r\n");
-                    all_lines_array.forEach((line, index, array) => 
+                    all_lines_array.forEach((line) => 
                     {
                         if(line.length > 0 && line.indexOf("#") === -1)
                         {
@@ -119,7 +119,7 @@ function (AppUtils, LogUtils)
                     params.waitvsync = "1"
                     params.syncrefresh = "1"
 
-                    dest = "";
+                    let dest = "";
                     for(let attr in params)
                     {
                         dest += attr + " " + params[attr] + "\r\n";
@@ -134,7 +134,6 @@ function (AppUtils, LogUtils)
                 {
                     eventEmitter.emit();
                 },0);
-                callback();
             }
 
             return eventEmitter;
@@ -202,7 +201,7 @@ function (AppUtils, LogUtils)
                 const games = [];	
                 try {
                     const files = this._fs.readdirSync(configuration.romsDirectory);
-                    files.forEach((file, index, array) => 
+                    files.forEach((file) => 
                     {
                         const fileInfos = path.parse(file);
                         if(fileInfos.ext === ".zip")
@@ -210,7 +209,9 @@ function (AppUtils, LogUtils)
                             games.push(fileInfos.name);
                         }
                     });
-                } catch(e) {}
+                } catch(e) {
+                    /* dont't act */
+                }
                 callback(games);
             });
         },

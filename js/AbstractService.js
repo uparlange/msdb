@@ -33,7 +33,7 @@ function (AbstractClass)
 				this._eventManager.emit("HTTP_END");
 
 				eventEmitter.emit(result.json());
-			},(error) =>
+			},() =>
 			{
 				this._eventManager.emit("HTTP_END");
 

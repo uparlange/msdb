@@ -39,7 +39,7 @@ function (AbstractEventManager)
 				newValue:value
 			});
 		},
-		_getDefaultNs:function(key)
+		_getDefaultNs:function()
 		{
 			return this._getItem(this._defaultNs);
 		},

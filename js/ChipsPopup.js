@@ -14,7 +14,7 @@ function(AbstractPopup, DetailModel, AppUtils)
 		{
 			const map = {};
 			const provider = [];
-			this.model.data.game.chips.forEach((item, index, array) => 
+			this.model.data.game.chips.forEach((item) => 
 			{
                 if(map[item.type] === undefined)
 				{

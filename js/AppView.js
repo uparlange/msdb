@@ -7,9 +7,9 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 	{
 		extends:AbstractView,
 		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.MdSnackBar, TranslateManager, 
-					  ConnectionManager, UpdateManager, RouterManager, ng.router.Router, ng.core.NgZone,
+					ConnectionManager, UpdateManager, RouterManager, ng.router.Router, ng.core.NgZone,
 			function AppView (AppModel, ActivatedRoute, ViewContainerRef, MdSnackBar, TranslateManager, 
-							  ConnectionManager, UpdateManager, RouterManager, Router, NgZone)
+							ConnectionManager, UpdateManager, RouterManager, Router, NgZone)
 			{
 				AbstractView.call(this, AppModel, ActivatedRoute);
 

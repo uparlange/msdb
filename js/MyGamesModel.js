@@ -32,7 +32,7 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 					{
 						const allGames = [];
 						const allBios = [];
-						games.forEach((game, index, array) =>
+						games.forEach((game) =>
 						{
 							if(game.isbios === "no")
 							{

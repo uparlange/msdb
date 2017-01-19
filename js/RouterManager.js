@@ -80,7 +80,7 @@ function (AbstractManager, CacheManager, AppUtils)
 		{
 			if(this._mutationObserver === null)
 			{
-				this._mutationObserver = new MutationObserver((mutations) => 
+				this._mutationObserver = new MutationObserver(() => 
 				{
 					if(this._creationCompleteTimeout !== null)
 					{

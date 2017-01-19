@@ -16,7 +16,7 @@ function(AbstractPopup, DetailModel, AppUtils)
 		{
 			const map = {};
 			const provider = [];
-			this.model.data.game.dipswitchs.forEach((item, index, array) => 
+			this.model.data.game.dipswitchs.forEach((item) => 
 			{
                 if(map[item.tag] === undefined)
 				{

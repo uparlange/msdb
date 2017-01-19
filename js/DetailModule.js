@@ -2,8 +2,8 @@ define(["app:AbstractModule", "app:CommonModule", "app:DetailView", "app:DetailM
 		"app:RomsPopup", "app:ClonesPopup", "app:VideoDirective", "app:GalleryComponent", "app:DipSwitchsPopup", 
 		"app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup", "app:DeviceRefsPopup"], 
 function(AbstractModule, CommonModule, DetailView, DetailModel, DriverPopup, 
-		 RomsPopup, ClonesPopup, VideoDirective, GalleryComponent, DipSwitchsPopup, 
-		 ChipsPopup, BiossetsPopup, PortsPopup, DeviceRefsPopup)
+		RomsPopup, ClonesPopup, VideoDirective, GalleryComponent, DipSwitchsPopup, 
+		ChipsPopup, BiossetsPopup, PortsPopup, DeviceRefsPopup)
 {
 	return {
 		module:ng.core.NgModule({

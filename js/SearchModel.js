@@ -148,7 +148,7 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 						this.data.count = data.length;
 
 						const groups = {};
-						data.forEach((item, index, array) => 
+						data.forEach((item) => 
 						{
 							let group = null;
 							const letter = item.label[0].toUpperCase();
@@ -205,7 +205,7 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 				byIndex:function(value)
 				{
 					let tab = null;
-					this._tabs.forEach((item, index, array) => 
+					this._tabs.forEach((item) => 
 					{
 						if(item.index === value)
 						{
@@ -218,7 +218,7 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 				byType:function(value)
 				{
 					let tab = null;
-					this._tabs.forEach((item, index, array) => 
+					this._tabs.forEach((item) => 
 					{
 						if(item.type === value)
 						{

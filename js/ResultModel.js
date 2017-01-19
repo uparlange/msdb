@@ -20,7 +20,7 @@ function(AbstractModel, MsdbService, ConnectionManager)
 					this.data.count = data.length;
 					
 					const groups = {};
-					data.forEach((item, index, array) => 
+					data.forEach((item) => 
 					{
 						let group = null;
 						const letter = item.description[0].toUpperCase();

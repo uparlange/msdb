@@ -57,7 +57,7 @@ function (AbstractManager, AppUtils, EventManager)
 					{
 						this._eventManager.emit("HTTP_END");
 
-						 eventEmitter.emit(result);
+						eventEmitter.emit(result);
 					});
 				}
 				else

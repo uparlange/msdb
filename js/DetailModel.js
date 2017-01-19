@@ -69,7 +69,7 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 			let size = 0;
 			if(this.data.game.roms !== undefined)
 			{
-				this.data.game.roms.forEach((element, index, array) =>
+				this.data.game.roms.forEach((element) =>
 				{
 					size += parseInt(element.size);
 				});

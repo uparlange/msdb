@@ -2,8 +2,8 @@ define(["app:AbstractView", "app:DetailModel", "app:DriverPopup", "app:RomsPopup
 		"app:DipSwitchsPopup", "app:AppUtils", "app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup",
 		"app:DeviceRefsPopup"], 
 function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup, 
-		 DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
-		 DeviceRefsPopup) 
+		DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
+		DeviceRefsPopup) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
 	{
@@ -66,7 +66,7 @@ function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup,
 				
 				this._dialogRef = this._mdDialog.open(clazz, config);
 				
-				this._dialogRef.afterClosed().subscribe((result) =>
+				this._dialogRef.afterClosed().subscribe(() =>
 				{
 					this._dialogRef = null;
 				});

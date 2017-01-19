@@ -12,11 +12,11 @@ function (AbstractEventManager, WindowRef)
 				
 				this.online = this._window.navigator.onLine;
 				
-				this._window.addEventListener("offline", (e) => 
+				this._window.addEventListener("offline", () => 
 				{ 
 					this._changeHandler();
 				});
-				this._window.addEventListener("online", (e) => 
+				this._window.addEventListener("online", () => 
 				{ 
 					this._changeHandler();
 				});

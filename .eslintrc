@@ -1,5 +1,26 @@
 {
     "parserOptions": {
         "ecmaVersion": 6
+    },
+    "extends": [
+        "eslint:recommended"
+    ],
+    "env": {
+        "node": true,
+        "amd": true,
+        "browser": true
+    },
+    "globals": {
+        "ng": true,
+        "nw": true,
+        "SystemJS": true,
+        "Blazy": true,
+        "GlobalConfig": true,
+        "io": true,
+        "Masonry": true,
+        "PhotoSwipe": true,
+        "PhotoSwipeUI_Default": true,
+        "MobileDetect": true,
+        "onmessage": true
     }
 }

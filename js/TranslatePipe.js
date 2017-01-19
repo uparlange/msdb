@@ -23,7 +23,7 @@ function(AbstractPipe, TranslateManager)
 				this.tranlateValue = null;
 			}
 		],
-		transform:function(value, attr) 
+		transform:function(value) 
 		{
 			if(this.tranlateKey !== value)
 			{

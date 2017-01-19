@@ -3,9 +3,9 @@ define(["app:AbstractModule", "app:CommonModule", "app:AppView", "app:MsdbServic
 		"app:ConnectionManager", "app:LazyManager", "app:CacheManager", "app:UpdateManager", "app:RouterManager",
 		"app:WindowRef"], 
 function(AbstractModule, CommonModule, AppView, MsdbService, AppModel, 
-		 AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
-		 ConnectionManager, LazyManager, CacheManager, UpdateManager, RouterManager,
-		 WindowRef) 
+		AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager, 
+		ConnectionManager, LazyManager, CacheManager, UpdateManager, RouterManager,
+		WindowRef) 
 {
 	if(GlobalConfig.PRODUCTION)
 	{
@@ -24,7 +24,8 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 					{path: "detail", loadChildren:AppUtils.getModuleName("DetailModule")},
 					{path: "result", loadChildren:AppUtils.getModuleName("ResultModule")},
 					{path: "mygames", loadChildren:AppUtils.getModuleName("MyGamesModule")},
-					{path: "config", loadChildren:AppUtils.getModuleName("ConfigModule")}
+					{path: "config", loadChildren:AppUtils.getModuleName("ConfigModule")},
+					{path: "bot", loadChildren:AppUtils.getModuleName("BotModule")}
 				], {useHash:true})
 			],
 			declarations:[
