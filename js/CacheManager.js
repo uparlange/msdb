@@ -53,13 +53,23 @@ function (AbstractEventManager)
 		},
 		_getItem:function(key, defaultValue)
 		{
+			let result = null;
+
 			if(defaultValue === undefined)
 			{
 				defaultValue = null;
 			}
 			const calculatedKey = this._getApplicationKey(key);
 			const value = localStorage.getItem(calculatedKey);
-			return JSON.parse(value) || defaultValue;
+			try
+			{
+				result = JSON.parse(value)
+			}
+			catch(e)
+			{
+				/* dont't act */
+			}
+			return result || defaultValue;
 		},
 		_setItem:function(key, value)
 		{
