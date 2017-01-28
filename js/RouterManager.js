@@ -1,4 +1,4 @@
-define(["app:AbstractManager", "app:CacheManager", "app:AppUtils"],
+define(["AbstractManager", "CacheManager", "AppUtils"],
 function (AbstractManager, CacheManager, AppUtils) 
 {
 	return ng.core.Class({

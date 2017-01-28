@@ -1,6 +1,6 @@
-define(["app:AbstractView", "app:DetailModel", "app:DriverPopup", "app:RomsPopup", "app:ClonesPopup", 
-		"app:DipSwitchsPopup", "app:AppUtils", "app:ChipsPopup", "app:BiossetsPopup", "app:PortsPopup",
-		"app:DeviceRefsPopup"], 
+define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup", 
+		"DipSwitchsPopup", "AppUtils", "ChipsPopup", "BiossetsPopup", "PortsPopup",
+		"DeviceRefsPopup"], 
 function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup, 
 		DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
 		DeviceRefsPopup) 

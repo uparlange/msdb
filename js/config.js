@@ -1,11 +1,8 @@
 SystemJS.config(
 {
-	paths : {
-		"app:" : "js/",
-		"npm:" : "node_modules/"
-	},
+	baseURL: "js",
 	packages : {
-		"app:" : {
+		"." : {
 			defaultExtension : "js"
 		}
 	}

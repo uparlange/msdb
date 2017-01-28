@@ -1,4 +1,4 @@
-define(["app:AbstractDirective"],
+define(["AbstractDirective"],
 function (AbstractDirective) 
 {
 	return ng.core.Class({

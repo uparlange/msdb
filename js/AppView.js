@@ -1,5 +1,5 @@
-define(["app:AbstractView", "app:AppModel", "app:AppUtils", "app:TranslateManager", "app:ConnectionManager",
-		"app:UpdateManager", "app:RouterManager"], 
+define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionManager",
+		"UpdateManager", "RouterManager"], 
 function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		UpdateManager, RouterManager) 
 {
@@ -34,7 +34,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				{
 					this._initMenuBar();
 
-					SystemJS.import("js/player.js").then((server) => {
+					SystemJS.import("Player").then((server) => {
 						server.init();
 					});
 				}

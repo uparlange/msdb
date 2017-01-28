@@ -1,4 +1,4 @@
-define(["app:AbstractManager", "app:TranslateManager", "app:WindowRef"],
+define(["AbstractManager", "TranslateManager", "WindowRef"],
 function (AbstractManager, TranslateManager, WindowRef) 
 {
 	return ng.core.Class({

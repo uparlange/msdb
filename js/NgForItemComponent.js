@@ -1,4 +1,4 @@
-define(["app:AbstractComponent", "app:AppUtils"], 
+define(["AbstractComponent", "AppUtils"], 
 function(AbstractComponent, AppUtils)
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("ngForItem", {

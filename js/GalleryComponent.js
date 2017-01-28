@@ -1,4 +1,4 @@
-define(["app:AbstractComponent", "app:AppUtils", "app:WindowRef"], 
+define(["AbstractComponent", "AppUtils", "WindowRef"], 
 function(AbstractComponent, AppUtils, WindowRef) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("gallery", {

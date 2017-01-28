@@ -1,4 +1,4 @@
-define(["app:AbstractDirective", "app:LazyManager"], 
+define(["AbstractDirective", "LazyManager"], 
 function(AbstractDirective, LazyManager) 
 {
 	return ng.core.Directive({

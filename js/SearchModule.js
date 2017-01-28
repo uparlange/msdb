@@ -1,4 +1,4 @@
-define(["app:AbstractModule", "app:CommonModule", "app:SearchView", "app:SearchModel"], 
+define(["AbstractModule", "CommonModule", "SearchView", "SearchModel"], 
 function(AbstractModule, CommonModule, SearchView, SearchModel)
 {
 	return {

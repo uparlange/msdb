@@ -1,4 +1,4 @@
-define(["app:LogUtils"],
+define(["LogUtils"],
 function (LogUtils) 
 {
 	return ng.core.Class({

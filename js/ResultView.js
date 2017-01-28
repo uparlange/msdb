@@ -1,4 +1,4 @@
-define(["app:AbstractView", "app:ResultModel", "app:AppUtils"], 
+define(["AbstractView", "ResultModel", "AppUtils"], 
 function(AbstractView, ResultModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("result")).Class(

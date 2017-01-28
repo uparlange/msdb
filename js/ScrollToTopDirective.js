@@ -1,4 +1,4 @@
-define(["app:AbstractDirective", "app:WindowRef"],
+define(["AbstractDirective", "WindowRef"],
 function(AbstractDirective, WindowRef) 
 {
 	return ng.core.Directive({

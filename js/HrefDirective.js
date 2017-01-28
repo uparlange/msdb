@@ -1,4 +1,4 @@
-define(["app:AbstractDirective", "app:RouterManager"], 
+define(["AbstractDirective", "RouterManager"], 
 function(AbstractDirective, RouterManager) 
 {
 	return ng.core.Directive({

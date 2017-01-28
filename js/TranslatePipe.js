@@ -1,4 +1,4 @@
-define(["app:AbstractPipe", "app:TranslateManager"], 
+define(["AbstractPipe", "TranslateManager"], 
 function(AbstractPipe, TranslateManager) 
 {
 	return ng.core.Pipe({

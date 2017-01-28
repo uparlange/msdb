@@ -1,4 +1,4 @@
-define(["app:AbstractView", "app:BotModel", "app:AppUtils"], 
+define(["AbstractView", "BotModel", "AppUtils"], 
 function(AbstractView, BotModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("bot")).Class(

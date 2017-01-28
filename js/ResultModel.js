@@ -1,4 +1,4 @@
-define(["app:AbstractModel", "app:MsdbService", "app:ConnectionManager"], 
+define(["AbstractModel", "MsdbService", "ConnectionManager"], 
 function(AbstractModel, MsdbService, ConnectionManager) 
 {
 	return ng.core.Class({

@@ -1,4 +1,4 @@
-define(["app:AbstractManager"],
+define(["AbstractManager"],
 function (AbstractManager) 
 {
 	return ng.core.Class({

@@ -1,4 +1,4 @@
-define(["app:AbstractView", "app:SearchModel", "app:AppUtils"], 
+define(["AbstractView", "SearchModel", "AppUtils"], 
 function(AbstractView, SearchModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("search")).Class(

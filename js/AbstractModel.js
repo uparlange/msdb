@@ -1,4 +1,4 @@
-define(["app:AbstractClass", "app:AppUtils"],  
+define(["AbstractClass", "AppUtils"],  
 function(AbstractClass, AppUtils) 
 {
 	return ng.core.Class({

@@ -1,4 +1,4 @@
-define(["app:AppUtils", "app:LogUtils"],
+define(["AppUtils", "LogUtils"],
 function (AppUtils, LogUtils) 
 {
     return {

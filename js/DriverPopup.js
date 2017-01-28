@@ -1,4 +1,4 @@
-define(["app:AbstractPopup", "app:DetailModel", "app:AppUtils"], 
+define(["AbstractPopup", "DetailModel", "AppUtils"], 
 function(AbstractPopup, DetailModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("driver")).Class(

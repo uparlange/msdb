@@ -1,4 +1,4 @@
-define(["app:AbstractComponent"],
+define(["AbstractComponent"],
 function(AbstractComponent) 
 {
 	return ng.core.Class({

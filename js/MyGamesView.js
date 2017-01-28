@@ -1,4 +1,4 @@
-define(["app:AbstractView", "app:MyGamesModel", "app:AppUtils"], 
+define(["AbstractView", "MyGamesModel", "AppUtils"], 
 function(AbstractView, MyGamesModel, AppUtils) 
 {
 	return ng.core.Component(AppUtils.getComponentConfiguration("myGames")).Class(

@@ -1,4 +1,4 @@
-define(["app:AbstractEventManager", "app:WindowRef"], 
+define(["AbstractEventManager", "WindowRef"], 
 function (AbstractEventManager, WindowRef) 
 {
 	return ng.core.Class({

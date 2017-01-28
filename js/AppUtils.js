@@ -41,7 +41,7 @@ define(function ()
 		},
 		getModuleName:function(moduleName)
 		{
-			return "app:" + moduleName + "#module";
+			return "" + moduleName + "#module";
 		},
 		isDesktopMode:function()
 		{
