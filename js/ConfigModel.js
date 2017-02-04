@@ -32,9 +32,13 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 		checkFormChanges:function()
 		{
 			this.data.newValue.romsDirectory = (typeof this.data.newValue.mameDirectory === "string" && this.data.newValue.mameDirectory.length > 0) ? this.data.newValue.mameDirectory + "\\roms" : null;
-		
+			
+			this.data.enabled = this.hasChanges();
+		},
+		hasChanges:function()
+		{
 			const newValue = JSON.stringify(this.data.newValue);
-			this.data.enabled = (this.data.oldValue !== newValue);
+			return  (this.data.oldValue !== newValue);
 		},
 		_getConfiguration:function()
 		{

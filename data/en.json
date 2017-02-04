@@ -88,5 +88,6 @@
 	"L10N_QUIT": "Quit",
 	"L10N_FILE": "File",
 	"L10N_CONFIG": "Configuration",
-	"L10N_DISPLAY": "Display"
+	"L10N_DISPLAY": "Display",
+	"L10N_CONFIRM_QUIT": "Are you sure you want to leave? ""
 }

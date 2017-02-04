@@ -4,10 +4,14 @@ function (AppUtils, LogUtils)
     return {
         init:function()
         {
-            this._logger = LogUtils.getLogger("Player");
+            this._logger = LogUtils.getLogger("Nw");
 
             this._fs = require("fs");
 
+            this._initServer();
+        },
+        _initServer:function()
+        {
             const express = require("express");
             const expressInstance = express();
             const http = require("http");

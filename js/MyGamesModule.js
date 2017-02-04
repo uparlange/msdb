@@ -1,19 +1,20 @@
-define(["AbstractModule", "CommonModule", "MyGamesView", "MyGamesModel"], 
-function(AbstractModule, CommonModule, MyGamesView, MyGamesModel)
+define(["AbstractModule", "CommonModule", "MyGamesView", "MyGamesModel", "MyGamesCanActivate"], 
+function(AbstractModule, CommonModule, MyGamesView, MyGamesModel, MyGamesCanActivate)
 {
 	return {
 		module:ng.core.NgModule({
 			imports:[
 				CommonModule,
 				ng.router.RouterModule.forChild([
-					{path: "", component: MyGamesView}
+					{path: "", component: MyGamesView, canActivate:[MyGamesCanActivate]}
 				])
 			],
 			declarations:[
 				MyGamesView
 			],
 			providers:[
-				MyGamesModel
+				MyGamesModel,
+				MyGamesCanActivate
 			]
 		}).Class({
 			extends:AbstractModule,

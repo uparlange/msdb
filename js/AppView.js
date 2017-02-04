@@ -3,7 +3,9 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		UpdateManager, RouterManager) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("app")).Class(
+	const conf = AppUtils.getComponentConfiguration("app");
+
+	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
 		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.MdSnackBar, TranslateManager, 
@@ -30,23 +32,19 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 
 				this._initToaster();
 
-				if(AppUtils.isDesktopMode())
+				if(AppUtils.runInNw())
 				{
-					this._initMenuBar();
-
-					SystemJS.import("Player").then((server) => {
-						server.init();
-					});
+					this._initNw();
 				}
 			}
 		],
-		_initBackground:function()
+		_initNw:function()
 		{
-			/* TODO find better way */
-			const body = document.getElementsByTagName("body")[0];
-			body.style.size = "100% 100%";
-			body.style.backgroundAttachment = "fixed";
-			body.style.backgroundImage = "url('images/background.jpg')";
+			this._initMenuBar();
+
+			SystemJS.import("Nw").then((Nw) => {
+				Nw.init();
+			});
 		},
 		_showView:function(view)
 		{
@@ -104,6 +102,14 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 
 				nw.Window.get().menu = menu;
 			});
+		},
+		_initBackground:function()
+		{
+			/* TODO find better way */
+			const body = document.getElementsByTagName("body")[0];
+			body.style.size = "100% 100%";
+			body.style.backgroundAttachment = "fixed";
+			body.style.backgroundImage = "url('images/background.jpg')";
 		},
 		_initToaster:function()
 		{

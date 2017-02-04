@@ -74,7 +74,7 @@ function (AbstractManager, AppUtils, EventManager)
 		{
 			const eventEmitter = new ng.core.EventEmitter();
 
-			if(AppUtils.isDesktopMode())
+			if(AppUtils.runInNw())
 			{
 				if(this._socket === null)
 				{

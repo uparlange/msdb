@@ -43,7 +43,7 @@ define(function ()
 		{
 			return "" + moduleName + "#module";
 		},
-		isDesktopMode:function()
+		runInNw:function()
 		{
 			return window.hasOwnProperty("nw");
 		},
@@ -79,7 +79,7 @@ define(function ()
 		_getBaseClientUrl:function()
 		{
 			let path = "";
-			if(!GlobalConfig.PRODUCTION || this.isDesktopMode())
+			if(!GlobalConfig.PRODUCTION || this.runInNw())
 			{
 				path = "https://msdb.lapli.fr/";
 			}

@@ -1,19 +1,23 @@
-define(["AbstractModule", "CommonModule", "ConfigView", "ConfigModel"], 
-function(AbstractModule, CommonModule, ConfigView, ConfigModel)
+define(["AbstractModule", "CommonModule", "ConfigView", "ConfigModel", "ConfigCanActivate",
+		"ConfigCanDeactivate"], 
+function(AbstractModule, CommonModule, ConfigView, ConfigModel, ConfigCanActivate,
+		ConfigCanDeactivate)
 {
 	return {
 		module:ng.core.NgModule({
 			imports:[
 				CommonModule,
 				ng.router.RouterModule.forChild([
-					{path: "", component: ConfigView}
+					{path: "", component: ConfigView, canActivate:[ConfigCanActivate], canDeactivate:[ConfigCanDeactivate]}
 				])
 			],
 			declarations:[
 				ConfigView
 			],
 			providers:[
-				ConfigModel
+				ConfigModel,
+				ConfigCanActivate,
+				ConfigCanDeactivate
 			]
 		}).Class({
 			extends:AbstractModule,
