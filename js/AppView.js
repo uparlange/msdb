@@ -3,7 +3,9 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		UpdateManager, RouterManager) 
 {
-	const conf = AppUtils.getComponentConfiguration("body");
+	const conf = AppUtils.getComponentConfiguration("app", {
+		selector:"body"
+	});
 
 	return ng.core.Component(conf).Class(
 	{
