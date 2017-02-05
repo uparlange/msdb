@@ -1,7 +1,9 @@
 define(["AbstractView", "SearchModel", "AppUtils"], 
 function(AbstractView, SearchModel, AppUtils) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("search")).Class(
+	const conf = AppUtils.getComponentConfiguration("search");
+
+	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
 		constructor: [SearchModel, ng.router.ActivatedRoute, 

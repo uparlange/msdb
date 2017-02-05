@@ -1,10 +1,13 @@
 define(["AbstractPipe", "TranslateManager"], 
 function(AbstractPipe, TranslateManager) 
 {
-	return ng.core.Pipe({
+	const conf = {
 		name:"translate",
 		pure: false
-	}).Class({
+	};
+
+	return ng.core.Pipe(conf).Class(
+	{
 		extends:AbstractPipe,
 		constructor: [TranslateManager, 
 			function TranslatePipe (TranslateManager)

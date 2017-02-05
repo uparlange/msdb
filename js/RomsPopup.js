@@ -1,7 +1,9 @@
 define(["AbstractPopup", "DetailModel", "AppUtils"], 
 function(AbstractPopup, DetailModel, AppUtils) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("roms")).Class(
+	const conf = AppUtils.getComponentConfiguration("roms");
+
+	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractPopup,
 		constructor: [DetailModel, ng.material.MdDialogRef, 

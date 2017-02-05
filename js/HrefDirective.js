@@ -1,9 +1,10 @@
-define(["AbstractDirective", "RouterManager"], 
-function(AbstractDirective, RouterManager) 
+define(["AbstractDirective", "RouterManager", "AppUtils"], 
+function(AbstractDirective, RouterManager, AppUtils) 
 {
-	return ng.core.Directive({
-		selector: "[href]"
-	}).Class({
+	const conf = AppUtils.getDirectiveConfiguration("[href]");
+
+	return ng.core.Directive(conf).Class(
+	{
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ng.core.Renderer, RouterManager,
 			function HrefDirective (ElementRef, Renderer, RouterManager)

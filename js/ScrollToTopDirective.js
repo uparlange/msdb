@@ -1,9 +1,10 @@
-define(["AbstractDirective", "WindowRef"],
-function(AbstractDirective, WindowRef) 
+define(["AbstractDirective", "WindowRef", "AppUtils"],
+function(AbstractDirective, WindowRef, AppUtils) 
 {
-	return ng.core.Directive({
-		selector: "[scrollToTop]"
-	}).Class({
+	const conf = AppUtils.getDirectiveConfiguration("[scrollToTop]");
+
+	return ng.core.Directive(conf).Class(
+	{
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ng.core.Renderer, WindowRef,
 			function ScrollToTopDirective (ElementRef, Renderer, WindowRef)

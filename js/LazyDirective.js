@@ -1,10 +1,12 @@
-define(["AbstractDirective", "LazyManager"], 
-function(AbstractDirective, LazyManager) 
+define(["AbstractDirective", "LazyManager", "AppUtils"], 
+function(AbstractDirective, LazyManager, AppUtils) 
 {
-	return ng.core.Directive({
-		selector: "[lazySrc]",
+	const conf = AppUtils.getDirectiveConfiguration("[lazySrc]", {
 		inputs: ["lazySrc"]
-	}).Class({
+	});
+
+	return ng.core.Directive(conf).Class(
+	{
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ng.core.Renderer, LazyManager, 
 			function LazyDirective (ElementRef, Renderer, LazyManager)

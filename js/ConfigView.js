@@ -1,7 +1,9 @@
 define(["AbstractView", "ConfigModel", "AppUtils"], 
 function(AbstractView, ConfigModel, AppUtils) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("config")).Class(
+	const conf = AppUtils.getComponentConfiguration("config");
+
+	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
 		constructor: [ConfigModel, ng.router.ActivatedRoute, 

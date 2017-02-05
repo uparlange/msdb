@@ -1,11 +1,13 @@
-define(["AbstractDirective"],
-function(AbstractDirective)
+define(["AbstractDirective", "AppUtils"],
+function(AbstractDirective, AppUtils)
 {
-	return ng.core.Directive({
-		selector: "video",
+	const conf = AppUtils.getDirectiveConfiguration("video", {
 		inputs:["source"],
 		outputs:["onEvent"]
-	}).Class({
+	});
+
+	return ng.core.Directive(conf).Class(
+	{
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ng.core.Renderer,
 			function VideoDirective (ElementRef, Renderer)

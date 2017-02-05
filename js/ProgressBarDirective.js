@@ -1,9 +1,10 @@
-define(["AbstractDirective", "EventManager"], 
-function(AbstractDirective, EventManager) 
+define(["AbstractDirective", "EventManager", "AppUtils"], 
+function(AbstractDirective, EventManager, AppUtils) 
 {
-	return ng.core.Directive({
-		selector: "md-progress-bar"
-	}).Class({
+	const conf = AppUtils.getDirectiveConfiguration("md-progress-bar");
+
+	return ng.core.Directive(conf).Class(
+	{
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ng.core.Renderer, EventManager, 
 			function ProgressBarDirective (ElementRef, Renderer, EventManager)

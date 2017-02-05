@@ -1,7 +1,9 @@
 define(["AbstractView", "BotModel", "AppUtils"], 
 function(AbstractView, BotModel, AppUtils) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("bot")).Class(
+	const conf = AppUtils.getComponentConfiguration("bot");
+
+	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
 		constructor: [BotModel, ng.router.ActivatedRoute, 

@@ -1,9 +1,10 @@
-define(["AbstractDirective"],
-function(AbstractDirective)
+define(["AbstractDirective", "AppUtils"],
+function(AbstractDirective, AppUtils)
 {
-	return ng.core.Directive({
-		selector: "form"
-	}).Class({
+	const conf = AppUtils.getDirectiveConfiguration("form");
+
+	return ng.core.Directive(conf).Class(
+	{
 		extends:AbstractDirective,
 		constructor: [ng.core.ElementRef, ng.core.Renderer,
 			function FormDirective (ElementRef, Renderer)

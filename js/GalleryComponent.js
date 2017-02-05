@@ -1,9 +1,12 @@
 define(["AbstractComponent", "AppUtils", "WindowRef"], 
 function(AbstractComponent, AppUtils, WindowRef) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("gallery", {
+	const conf = AppUtils.getComponentConfiguration("gallery", {
 		inputs:["folder", "provider", "colcount", "gap", "excludedExtensions"]
-	})).Class({
+	});
+
+	return ng.core.Component(conf).Class(
+	{
 		extends:AbstractComponent,
 		constructor: [ng.core.ElementRef, ng.core.Renderer, WindowRef,
 			function GalleryComponent (ElementRef, Renderer, WindowRef)

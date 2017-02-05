@@ -1,10 +1,13 @@
 define(["AbstractComponent", "AppUtils"], 
 function(AbstractComponent, AppUtils)
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("ngForItem", {
+	const conf = AppUtils.getComponentConfiguration("ngForItem", {
 		inputs:["last"],
 		outputs:["onLast"]
-	})).Class({
+	});
+
+	return ng.core.Component(conf).Class(
+	{
 		extends:AbstractComponent,
 		constructor: [
 			function NgForItemComponent ()

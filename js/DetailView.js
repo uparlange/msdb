@@ -5,7 +5,9 @@ function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup,
 		DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
 		DeviceRefsPopup) 
 {
-	return ng.core.Component(AppUtils.getComponentConfiguration("detail")).Class(
+	const conf = AppUtils.getComponentConfiguration("detail");
+
+	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
 		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog, 

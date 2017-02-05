@@ -6,12 +6,19 @@ define(function ()
 		{
 			return this._md;
 		},
-		getComponentConfiguration:function(componentName, params)
+		getDirectiveConfiguration:function(selector, params)
 		{
 			const defaultParams = {
-				selector: componentName,
-				templateUrl: "html/" + componentName + "-template" + ".html",
-				styleUrls: ["css/" + componentName + "-template.css"]
+				selector: selector
+			};
+			return Object.assign({}, defaultParams, params);
+		},
+		getComponentConfiguration:function(selector, params)
+		{
+			const defaultParams = {
+				selector: selector,
+				templateUrl: "html/" + selector + "-template" + ".html",
+				styleUrls: ["css/" + selector + "-template.css"]
 			};
 			return Object.assign({}, defaultParams, params);
 		},
