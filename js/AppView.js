@@ -3,15 +3,17 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		UpdateManager, RouterManager) 
 {
-	const conf = AppUtils.getComponentConfiguration("app");
+	const conf = AppUtils.getComponentConfiguration("body");
 
 	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
 		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.MdSnackBar, TranslateManager, 
-					ConnectionManager, UpdateManager, RouterManager, ng.router.Router, ng.core.NgZone,
+					ConnectionManager, UpdateManager, RouterManager, ng.router.Router, ng.core.NgZone, ng.core.ElementRef, 
+					ng.core.Renderer,
 			function AppView (AppModel, ActivatedRoute, ViewContainerRef, MdSnackBar, TranslateManager, 
-							ConnectionManager, UpdateManager, RouterManager, Router, NgZone)
+							ConnectionManager, UpdateManager, RouterManager, Router, NgZone, ElementRef, 
+							Renderer)
 			{
 				AbstractView.call(this, AppModel, ActivatedRoute);
 
@@ -23,6 +25,8 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 				this._routerManager = RouterManager;
 				this._router = Router;
 				this._ngZone = NgZone;
+				this._element = ElementRef.nativeElement;
+				this._renderer = Renderer;
 
 				this._routerManager.init();
 				
@@ -105,11 +109,9 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		},
 		_initBackground:function()
 		{
-			/* TODO find better way */
-			const body = document.getElementsByTagName("body")[0];
-			body.style.size = "100% 100%";
-			body.style.backgroundAttachment = "fixed";
-			body.style.backgroundImage = "url('images/background.jpg')";
+			this._renderer.setElementStyle(this._element, "size", "100% 100%");
+			this._renderer.setElementStyle(this._element, "backgroundAttachment", "fixed");
+			this._renderer.setElementStyle(this._element, "backgroundImage", "url('images/background.jpg')");
 		},
 		_initToaster:function()
 		{
