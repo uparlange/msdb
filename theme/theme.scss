@@ -3,21 +3,21 @@
 
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
-@include md-core();
+@include mat-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$primary: md-palette($md-deep-orange);
-$accent:  md-palette($md-blue);
+$msdb-app-primary: mat-palette($mat-deep-orange);
+$msdb-app-accent:  mat-palette($mat-blue);
 
 // The warn palette is optional (defaults to red).
-$warn:    md-palette($md-red);
+$msdb-app-warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$theme: md-light-theme($primary, $accent, $warn);
+$msdb-app-theme: mat-light-theme($msdb-app-primary, $msdb-app-accent, $msdb-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($theme);
+@include angular-material-theme($msdb-app-theme);

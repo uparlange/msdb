@@ -80,19 +80,19 @@ md-toolbar-row
 	margin-left: 10px !important;
 }
 
-.md-toolbar-layout
+.mat-toolbar-layout
 {
 	height:100% !important;
+}
+
+.mat-tab-label
+{
+	min-width:0px !important;
 }
 
 .default-spacer
 {
 	height:10px;
-}
-
-.md-tab-label
-{
-	min-width:0px !important;
 }
 
 .material-icons
