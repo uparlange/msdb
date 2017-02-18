@@ -21,7 +21,7 @@ function(AbstractDirective, AppUtils)
 				
 				this.onEvent = new ng.core.EventEmitter();
 
-				this.src = "";
+				this.src = undefined;
 			}
 		],
 		onError:function(event)
