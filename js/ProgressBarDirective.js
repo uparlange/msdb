@@ -1,22 +1,26 @@
 define(["AbstractDirective", "EventManager", "AppUtils"], 
 function(AbstractDirective, EventManager, AppUtils) 
 {
-	const conf = AppUtils.getDirectiveConfiguration("md-progress-bar");
+	const conf = AppUtils.getDirectiveConfiguration("md-progress-bar", {
+		host:{
+			"[style.display]":"display"
+		}
+	});
 
 	return ng.core.Directive(conf).Class(
 	{
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, ng.core.Renderer, EventManager, 
-			function ProgressBarDirective (ElementRef, Renderer, EventManager)
+		constructor: [EventManager, 
+			function ProgressBarDirective (EventManager)
 			{
 				AbstractDirective.call(this);
-				
-				this._element = ElementRef.nativeElement;
-				this._renderer = Renderer;
+
 				this._eventManager = EventManager;
 				
 				this._httpBegintEventEmitter = null;
 				this._httpEndEventEmitter = null;
+
+				this.display = "none";
 				
 				this._counter = 0;
 			}
@@ -49,11 +53,11 @@ function(AbstractDirective, EventManager, AppUtils)
 		},
 		_hide:function()
 		{
-			this._renderer.setElementStyle(this._element, "display", "none");
+			this.display = "none";
 		},
 		_show:function()
 		{
-			this._renderer.setElementStyle(this._element, "display", "block");
+			this.display = "block";
 		}
 	});	
 });	

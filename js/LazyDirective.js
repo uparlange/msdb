@@ -2,42 +2,40 @@ define(["AbstractDirective", "LazyManager", "AppUtils"],
 function(AbstractDirective, LazyManager, AppUtils) 
 {
 	const conf = AppUtils.getDirectiveConfiguration("[lazySrc]", {
-		inputs: ["lazySrc"]
+		inputs: ["lazySrc"],
+		host:{
+			"[class.b-lazy]":"true",
+			"[attr.src]":"src",
+			"[attr.data-src]":"dataSrc"
+		}
 	});
 
 	return ng.core.Directive(conf).Class(
 	{
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, ng.core.Renderer, LazyManager, 
-			function LazyDirective (ElementRef, Renderer, LazyManager)
+		constructor: [LazyManager, 
+			function LazyDirective (LazyManager)
 			{
 				AbstractDirective.call(this);
 				
-				this._element = ElementRef.nativeElement;
-				this._renderer = Renderer;
 				this._lazyManager = LazyManager;
+
+				this.dataSrc = null;
+
+				this.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 			}
 		],
-		onInit:function()
-		{
-			this._renderer.setElementClass(this._element, "b-lazy", true);
-			this._renderer.setElementProperty(this._element, "src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
-		},
 		onChanges: function (event)
 		{
 			if(event.hasOwnProperty("lazySrc"))
 			{
 				if(typeof event.lazySrc.currentValue === "string")
 				{
-					this._renderer.setElementAttribute(this._element, "data-src", event.lazySrc.currentValue);
+					this.dataSrc = event.lazySrc.currentValue;
 
-					this._lazyManager.register(this._element);
+					this._lazyManager.refresh();
 				}
 			}
-		},
-		onDestroy: function()
-		{
-			this._lazyManager.unRegister(this._element);
 		}
 	});
 });

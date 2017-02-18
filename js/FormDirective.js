@@ -1,23 +1,22 @@
 define(["AbstractDirective", "AppUtils"],
 function(AbstractDirective, AppUtils)
 {
-	const conf = AppUtils.getDirectiveConfiguration("form");
+	const conf = AppUtils.getDirectiveConfiguration("form", {
+		host: {
+			"[attr.action]":"action"
+		}
+	});
 
 	return ng.core.Directive(conf).Class(
 	{
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, ng.core.Renderer,
-			function FormDirective (ElementRef, Renderer)
+		constructor: [
+			function FormDirective ()
 			{
 				AbstractDirective.call(this);
-				
-				this._element = ElementRef.nativeElement;
-				this._renderer = Renderer;
+
+				this.action = "javascript:void(0);"
 			}
-		],
-		onInit:function()
-		{
-			this._renderer.setElementProperty(this._element, "action", "javascript:void(0);");
-		}
+		]
 	});
 });

@@ -3,35 +3,34 @@ function(AbstractDirective, AppUtils)
 {
 	const conf = AppUtils.getDirectiveConfiguration("video", {
 		inputs:["source"],
-		outputs:["onEvent"]
+		outputs:["onEvent"],
+		host:{
+			"[attr.src]":"src",
+			"(error)":"onError($event)",
+			"(loadedmetadata)":"onLoadedmetadata($event)"
+		}
 	});
 
 	return ng.core.Directive(conf).Class(
 	{
 		extends:AbstractDirective,
-		constructor: [ng.core.ElementRef, ng.core.Renderer,
-			function VideoDirective (ElementRef, Renderer)
+		constructor: [
+			function VideoDirective ()
 			{
 				AbstractDirective.call(this);
 				
-				this._element = ElementRef.nativeElement;
-				this._renderer = Renderer;
-				
 				this.onEvent = new ng.core.EventEmitter();
 
-				this._elementErrorHandler = null;
-				this._elementLoadedmetadataHandler = null;
-				
-				this._onElementEventHandler = (event) =>
-				{
-					this.onEvent.emit(event);
-				};
+				this.src = "";
 			}
 		],
-		onInit:function()
+		onError:function(event)
 		{
-			this._elementErrorHandler = this._renderer.listen(this._element, "error", this._onElementEventHandler);
-			this._elementLoadedmetadataHandler = this._renderer.listen(this._element, "loadedmetadata", this._onElementEventHandler);
+			this.onEvent.emit(event);
+		},
+		onLoadedmetadata:function(event)
+		{
+			this.onEvent.emit(event);
 		},
 		onChanges: function (event)
 		{
@@ -39,14 +38,9 @@ function(AbstractDirective, AppUtils)
 			{
 				if(typeof event.source.currentValue === "string")
 				{
-					this._renderer.setElementProperty(this._element, "src", event.source.currentValue);
+					this.src = event.source.currentValue;
 				}
 			}
-		},
-		onDestroy:function()
-		{
-			this._elementErrorHandler();
-			this._elementLoadedmetadataHandler();
 		}
 	});
 });

@@ -13,7 +13,7 @@ function (AbstractManager)
 				this._timeoutInterval = null;
 			}
 		],
-		register:function()
+		refresh:function()
 		{
 			if(this._timeoutInterval !== null)
 			{
@@ -23,10 +23,6 @@ function (AbstractManager)
 			{ 
 				this._blazy.revalidate();
 			}, 50);
-		},
-		unRegister:function()
-		{
-			
 		}
     });
 });
