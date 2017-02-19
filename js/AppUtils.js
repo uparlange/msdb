@@ -48,7 +48,7 @@ define(function ()
 		},
 		getModuleName:function(moduleName)
 		{
-			return "" + moduleName + "#module";
+			return moduleName + "#module";
 		},
 		runInNw:function()
 		{

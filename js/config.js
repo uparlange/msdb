@@ -1,13 +1,3 @@
-SystemJS.config(
-{
-	baseURL: "js",
-	packages : {
-		"." : {
-			defaultExtension : "js"
-		}
-	}
-});
-
 window.GlobalConfig = {};
 
 if(window.location.search.indexOf("debug") === -1)

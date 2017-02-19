@@ -21,6 +21,7 @@ const imagemin = require('gulp-imagemin');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
 const karma = require('karma');
+const Builder = require('systemjs-builder');
 
 // -------------------------------------------------
 // VARIABLES
@@ -188,21 +189,65 @@ gulp.task('lint-js', () => {
 });
 
 gulp.task('babel-js', () => {
-    return gulp.src('./js/**/*.js')
+    return gulp.src('./dist/tmp/system/**/*.js')
         .pipe(babel())
         .pipe(gulp.dest('./dist/tmp/babel'));
 });
 
+gulp.task('build-js', (callback) => {
+    const builder = new Builder();
+    builder.loadConfigSync('js/system.config.js');
+    const files = [];
+    let processedFileCount = 0;
+    fs.readdirSync('js').forEach((item) => {
+        if (item !== "." && item !== "..") {
+            if (item.indexOf('Abstract') === -1 && item.indexOf('Module') !== -1) {
+                files.push(item);
+            }
+        }
+    });
+    files.forEach((item) => {
+        builder
+            .bundle(item, 'dist/tmp/system/' + item)
+            .then(function () {
+                processedFileCount++;
+                if (files.length === processedFileCount) {
+                    callback();
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+});
+
 gulp.task('add-js-resources', (callback) => {
-    resources.html.push({
+    resources.js.push({
         src: './dist/tmp/babel/**/*.js',
+        dest: './dist/js'
+    });
+    resources.js.push({
+        src: './js/config.js',
+        dest: './dist/js'
+    });
+    resources.js.push({
+        src: './js/system.config.js',
+        dest: './dist/js'
+    });
+    resources.js.push({
+        src: './js/LogWorker.js',
+        dest: './dist/js'
+    });
+    // add to copy4desktop
+    resources.copy4desktop.push({
+        src: './js/Nw.js',
         dest: './dist/js'
     });
     callback();
 });
 
 gulp.task('prepare-js-resources', (callback) => {
-    runSequence('lint-js', 'babel-js', 'add-js-resources', callback);
+    runSequence('lint-js', 'build-js', 'babel-js', 'add-js-resources', callback);
 });
 
 gulp.task('minify-js-resources', () => {
