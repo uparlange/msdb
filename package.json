@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "3.7.1",
+  "version": "3.7.3",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -30,6 +30,7 @@
     "@angular/compiler": "4.0.0-rc.1",
     "@angular/core": "4.0.0-rc.1",
     "@angular/http": "4.0.0-rc.1",
+    "@angular/animations": "4.0.0-rc.1",
     "@angular/platform-browser": "4.0.0-rc.1",
     "@angular/platform-browser-dynamic": "4.0.0-rc.1",
     "@angular/forms": "4.0.0-rc.1",

@@ -17,6 +17,7 @@ function(AbstractModule, CommonModule, AppView, MsdbService, AppModel,
 			imports:[
 				CommonModule,
 				ng.platformBrowser.BrowserModule,
+				ng.platformBrowser.animations.BrowserAnimationsModule,
 				ng.router.RouterModule.forRoot([
 					{path: "", redirectTo: "home", pathMatch: "full"},
 					{path: "home", loadChildren:AppUtils.getModuleName("HomeModule")},
