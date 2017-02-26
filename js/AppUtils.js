@@ -91,7 +91,7 @@ define(function ()
 				path = "https://msdb.lapli.fr/";
 			}
 			return path;
-			/* return "http://localhost/projects/msdb2/dist/"; */
+			/* return "http://localhost/msdb2/dist/"; */
 		}
 	};
 });

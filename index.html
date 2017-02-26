@@ -11,6 +11,8 @@
 		<meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-title" content="MSDB">
+		<meta name="description" content="MAME 'Multiple Arcade Machine Emulator' est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Pour vérifier que votre jeu préféré est disponible, allez faire une recherche sur MSDB !">
+		<meta name="keywords" content="mame database, arcade database, arcade, database, mame, mess, games, jeux, emulation">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<!-- application icons -->
 		<link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
@@ -44,8 +46,8 @@
 		<script src="node_modules/core-js/client/shim.min.js"></script>
         <script src="node_modules/zone.js/dist/zone.min.js"></script>
         <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
-		<!-- bugs 4.0.0-beta.8 - #14603 #14298 -->
-		<script>window.rxjs_observable_merge=Rx.Observable;window.rxjs_operator_share=Rx.Observable.prototype;Rx.Symbol.$$observable=Rx.Symbol.observable;window.rxjs_symbol_observable=Rx.Symbol;</script>
+		<!-- bugs 4.0.0-rc.1 -->
+		<script>Rx.Symbol.$$observable=Rx.Symbol.observable;window.rxjsObservable=Rx;window.rxjsSymbolObservable=Rx.Symbol;window.rxjsObservableMerge=Rx.Observable;window.rxjsOperatorShare=Rx.Observable.prototype;</script>
 		<!-- angular 2 -->
 		<script src="node_modules/@angular/core/bundles/core.umd.min.js"></script>
         <script src="node_modules/@angular/common/bundles/common.umd.min.js"></script>
