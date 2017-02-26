@@ -44,6 +44,8 @@
 		<script src="node_modules/core-js/client/shim.min.js"></script>
         <script src="node_modules/zone.js/dist/zone.min.js"></script>
         <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
+		<!-- bugs 4.0.0-beta.8 - #14603 #14298 -->
+		<script>window.rxjs_observable_merge=Rx.Observable;window.rxjs_operator_share=Rx.Observable.prototype;Rx.Symbol.$$observable=Rx.Symbol.observable;window.rxjs_symbol_observable=Rx.Symbol;</script>
 		<!-- angular 2 -->
 		<script src="node_modules/@angular/core/bundles/core.umd.min.js"></script>
         <script src="node_modules/@angular/common/bundles/common.umd.min.js"></script>
@@ -67,7 +69,7 @@
 		<!-- mobile-detect -->
 		<script src="node_modules/mobile-detect/mobile-detect.min.js"></script>
 		<!-- system -->
-		<script src="node_modules/systemjs/dist/system.js"></script>
+		<script src="node_modules/systemjs/dist/system.src.js"></script>
 		<script src="js/system.config.js"></script>
 		<!-- config -->
 		<script src="js/config.js"></script>

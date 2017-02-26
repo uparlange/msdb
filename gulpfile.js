@@ -201,8 +201,10 @@ gulp.task('build-js', (callback) => {
     let processedFileCount = 0;
     fs.readdirSync('js').forEach((item) => {
         if (item !== "." && item !== "..") {
-            if (item.indexOf('Abstract') === -1 && item.indexOf('Module') !== -1) {
-                files.push(item);
+            if (item.indexOf('Module') !== -1) {
+                if (item.indexOf('Abstract') === -1 && item.indexOf('Common') === -1) {
+                    files.push(item);
+                }
             }
         }
     });
@@ -222,6 +224,7 @@ gulp.task('build-js', (callback) => {
 });
 
 gulp.task('add-js-resources', (callback) => {
+    // web
     resources.js.push({
         src: './dist/tmp/babel/**/*.js',
         dest: './dist/js'
@@ -238,7 +241,7 @@ gulp.task('add-js-resources', (callback) => {
         src: './js/LogWorker.js',
         dest: './dist/js'
     });
-    // add to copy4desktop
+    // desktop
     resources.copy4desktop.push({
         src: './js/Nw.js',
         dest: './dist/js'
