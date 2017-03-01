@@ -1,16 +1,18 @@
-define(["AbstractClass", "AppUtils"],  
-function(AbstractClass, AppUtils) 
+define(["AbstractEventManager", "AppUtils"],  
+function(AbstractEventManager, AppUtils) 
 {
 	return ng.core.Class({
-		extends:AbstractClass,
-		constructor:function AbstractModel (MsdbService, ConnectionManager)
+		extends:AbstractEventManager,
+		constructor:function AbstractModel (MsdbService, ConnectionManager, Title)
 		{
-			AbstractClass.call(this);
+			AbstractEventManager.call(this);
 			
 			this._msdbService = MsdbService;
 			this._connectionManager = ConnectionManager;
+			this._title = Title;
 			
 			this._connectionManagerChangeSubscriber = null;
+			this._titleChangeSubscriber = null;
 			
 			this.params = {};
 			
@@ -30,6 +32,12 @@ function(AbstractClass, AppUtils)
 					}
 				});
 			}
+
+			this._setTitle();
+			this._titleChangeSubscriber = this.on("titleChange").subscribe((title) => 
+			{
+				this._setTitle(title);
+			});
 			
 			const currentParams = this.params;
 			const newParams = Object.assign({online:this._connectionManager.online}, params);
@@ -50,6 +58,9 @@ function(AbstractClass, AppUtils)
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
 			this._connectionManager = null;
 			this._connectionManagerChangeSubscriber = null;
+
+			this.off(this._titleChangeSubscriber);
+			this._titleChangeSubscriber = null;
 			
 			this._msdbService = null;
 			
@@ -107,6 +118,15 @@ function(AbstractClass, AppUtils)
 			{
 				this.getLogger().warn("onDestroy?");
 			}
+		},
+		_setTitle : function(value)
+		{
+			let title = "Mame Smart Database";
+			if(typeof value === "string")
+			{
+				title += " - " + value;
+			} 
+			this._title.setTitle(title);
 		}
 	});			
 });

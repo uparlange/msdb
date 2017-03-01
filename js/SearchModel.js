@@ -3,10 +3,10 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, CacheManager, ng.router.Router,
-			function SearchModel(MsdbService, ConnectionManager, CacheManager, Router)
+		constructor:[MsdbService, ConnectionManager, ng.platformBrowser.Title, CacheManager, ng.router.Router,
+			function SearchModel(MsdbService, ConnectionManager, Title, CacheManager, Router)
 			{
-				AbstractModel.call(this, MsdbService, ConnectionManager);
+				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
 				
 				this._cacheManager = CacheManager;
 				this._router = Router;
@@ -24,20 +24,6 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 			const tabInfo = this._tabsInfo.byType(type);
 			
 			this._cacheManager.setItem("searchLastType", tabInfo.type);
-
-			/*
-			const tabs = this._tabsInfo.getTabs();
-			tabs.forEach((element, index, array) => 
-			{
-				if(index > 0 && index != tabInfo.index)
-				{
-					this.data[element.type] = {
-						list : null,
-						count : 0
-					};
-				}
-			});
-			*/
 			
 			const methodeName = "_load" + type[0].toUpperCase() + type.substring(1);
 			this[methodeName]().subscribe(() =>

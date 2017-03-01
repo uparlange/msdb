@@ -3,10 +3,10 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor: [MsdbService, ConnectionManager, SocketManager, 
-			function DetailModel (MsdbService, ConnectionManager, SocketManager)
+		constructor: [MsdbService, ConnectionManager, ng.platformBrowser.Title, SocketManager, 
+			function DetailModel (MsdbService, ConnectionManager, Title, SocketManager)
 			{
-				AbstractModel.call(this, MsdbService, ConnectionManager);
+				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
 				
 				this._socketManager = SocketManager;
 				
@@ -35,6 +35,9 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 				}
 				
 				this.data.game = data;
+
+				const title = this.data.game.description + " - " + this.data.game.name;
+				this.emit("titleChange", title);
 				
 				this._msdbService.search("clones", this.params.name).subscribe((data) => 
 				{

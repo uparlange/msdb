@@ -3,10 +3,10 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor: [MsdbService, ConnectionManager, CacheManager,
-			function AppModel (MsdbService, ConnectionManager, CacheManager)
+		constructor: [MsdbService, ConnectionManager, ng.platformBrowser.Title, CacheManager,
+			function AppModel (MsdbService, ConnectionManager, Title, CacheManager)
 			{
-				AbstractModel.call(this, MsdbService, ConnectionManager);
+				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
 
 				this._cacheManager = CacheManager;
 				

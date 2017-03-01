@@ -3,10 +3,10 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 {
 	return ng.core.Class({
 		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, SocketManager,
-			function HomeModel (MsdbService, ConnectionManager, SocketManager)
+		constructor:[MsdbService, ConnectionManager, ng.platformBrowser.Title, SocketManager,
+			function HomeModel (MsdbService, ConnectionManager, Title, SocketManager)
 			{
-				AbstractModel.call(this, MsdbService, ConnectionManager);
+				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
 				
 				this._socketManager = SocketManager;
 			}
