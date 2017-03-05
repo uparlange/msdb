@@ -21,6 +21,7 @@
         "PhotoSwipe": true,
         "PhotoSwipeUI_Default": true,
         "MobileDetect": true,
-        "onmessage": true
+        "onmessage": true,
+        "Promise": true
     }
 }
