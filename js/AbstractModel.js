@@ -1,18 +1,17 @@
-define(["AbstractEventManager", "AppUtils"],  
-function(AbstractEventManager, AppUtils) 
+define(["AbstractClass", "AppUtils"],  
+function(AbstractClass, AppUtils) 
 {
 	return ng.core.Class({
-		extends:AbstractEventManager,
+		extends:AbstractClass,
 		constructor:function AbstractModel (MsdbService, ConnectionManager, Title)
 		{
-			AbstractEventManager.call(this);
+			AbstractClass.call(this);
 			
 			this._msdbService = MsdbService;
 			this._connectionManager = ConnectionManager;
 			this._title = Title;
 			
 			this._connectionManagerChangeSubscriber = null;
-			this._titleChangeSubscriber = null;
 			
 			this.params = {};
 			
@@ -34,10 +33,6 @@ function(AbstractEventManager, AppUtils)
 			}
 
 			this._setTitle();
-			this._titleChangeSubscriber = this.on("titleChange").subscribe((title) => 
-			{
-				this._setTitle(title);
-			});
 			
 			const currentParams = this.params;
 			const newParams = Object.assign({online:this._connectionManager.online}, params);
@@ -58,9 +53,6 @@ function(AbstractEventManager, AppUtils)
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
 			this._connectionManager = null;
 			this._connectionManagerChangeSubscriber = null;
-
-			this.off(this._titleChangeSubscriber);
-			this._titleChangeSubscriber = null;
 			
 			this._msdbService = null;
 			

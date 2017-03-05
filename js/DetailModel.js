@@ -37,7 +37,7 @@ function(AbstractModel, MsdbService, ConnectionManager, SocketManager)
 				this.data.game = data;
 
 				const title = this.data.game.description + " - " + this.data.game.name;
-				this.emit("titleChange", title);
+				this._setTitle(title);
 				
 				this._msdbService.search("clones", this.params.name).subscribe((data) => 
 				{
