@@ -13,20 +13,24 @@ function(AbstractClass, TranslateManager)
 		],
 		canDeactivate:function(component)
 		{
-			return new Promise((resolve) => 
+			const eventEmitter = new ng.core.EventEmitter();
+
+			setTimeout(() =>
 			{
 				if(component.model.hasChanges())
 				{
 					this._translateManager.getValues(["L10N_CONFIRM_QUIT"]).subscribe((translations) =>
 					{
-						resolve(window.confirm(translations.L10N_CONFIRM_QUIT));
+						eventEmitter.emit(window.confirm(translations.L10N_CONFIRM_QUIT));
 					});
 				}
 				else
 				{
-					resolve(true);
+					eventEmitter.emit(true);
 				}
-			});
+			},0);
+			
+			return eventEmitter;
 		}
 	});		
 });
