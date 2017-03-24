@@ -51,14 +51,7 @@ function(AbstractClass, AppUtils)
 			this._callDestroyMethod();
 			
 			this._connectionManager.off(this._connectionManagerChangeSubscriber);
-			this._connectionManager = null;
 			this._connectionManagerChangeSubscriber = null;
-			
-			this._msdbService = null;
-			
-			this.params = null;
-			
-			this.data = null;
 		},
 		getGameIconUrl : function(game)
 		{
