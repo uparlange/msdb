@@ -7,9 +7,9 @@
 <div class="default-spacer"></div>
 <md-tab-group [selectedIndex]="model.data.selectedIndex" (selectChange)="model.tabChanged($event)">
 	<md-tab>
-		<template md-tab-label>
+		<ng-template md-tab-label>
 			<i class="material-icons md-24">search</i>
-		</template>
+		</ng-template>
 		<div class="default-spacer"></div>
 		<form #descriptionForm="ngForm">
 			<md-input-container>
@@ -24,9 +24,9 @@
 		</form>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>
+		<ng-template md-tab-label>
 			<i class="material-icons md-24">folder_open</i>
-		</template>
+		</ng-template>
 		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.categories.list.length > 1">
 				<div class="default-spacer"></div>
@@ -48,9 +48,9 @@
 		</div>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>
+		<ng-template md-tab-label>
 			<i class="material-icons md-24">list</i>
-		</template>
+		</ng-template>
 		<div *ngFor="let group of model.data.series.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.series.list.length > 1">
 				<div class="default-spacer"></div>
@@ -72,9 +72,9 @@
 		</div>
 	</md-tab>	
 	<md-tab>
-		<template md-tab-label>
+		<ng-template md-tab-label>
 			<i class="material-icons md-24">today</i>
-		</template>
+		</ng-template>
 		<div *ngFor="let group of model.data.years.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.years.list.length > 1">
 				<div class="default-spacer"></div>
@@ -98,9 +98,9 @@
 		</div>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>
+		<ng-template md-tab-label>
 			<i class="material-icons md-24">business</i>
-		</template>
+		</ng-template>
 		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy:model.trackByLabel">
 			<div *ngIf="model.data.manufacturers.list.length > 1">
 				<div class="default-spacer"></div>
@@ -122,9 +122,9 @@
 		</div>
 	</md-tab>
 	<md-tab>
-		<template md-tab-label>
+		<ng-template md-tab-label>
 			<i class="material-icons md-24">plus_one</i>
-		</template>
+		</ng-template>
 		<div class="default-spacer"></div>
 		<div *ngFor="let group of model.data.versions.list; trackBy:model.trackByLabel">
 			<md-nav-list>
