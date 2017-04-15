@@ -9,6 +9,19 @@ This application has been developped using
 * Angular Material 2 (https://github.com/angular/material2)
 * And others libraries, see package.json for dependencies (https://github.com/uparlange/msdb/blob/master/package.json)
 
+# Execute application #
+
+## Install NW.js ##
+* Download lastest normal version of NW.js (https://nwjs.io/)
+* Unzip content in "C:\Program Files\nwjs"
+
+## Download application ##
+* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-3.7.8
+
+## Launch application ##
+* Double click on the application (.nw file)
+* Select "nw.exe" from "C:\Program Files\nwjs" as default reader for "*.nw" files
+
 # Test localy #
 
 ## Pre-requisites ##

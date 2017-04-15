@@ -2,5 +2,4 @@
 /.sass-cache/
 /dist/
 /.vscode/
-/release/
 /data/config.json
