@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "3.8.2",
+  "version": "3.8.3",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -17,7 +17,8 @@
   "window": {
     "title": "Mame Smart Database",
     "width": 500,
-    "height": 700
+    "height": 700,
+    "icon": "images/favicon-192x192.png"
   },
   "scripts": {
     "web": "node ./server.js",
