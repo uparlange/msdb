@@ -119,7 +119,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		{
 			this._connectionManager.on("change").subscribe((online) =>
 			{
-				const config = new ng.material.MdSnackBarConfig();
+				const config = new ng.material.material.MdSnackBarConfig();
 				config.duration = 1500;
 				config.viewContainerRef = this._viewContainerRef;
 
