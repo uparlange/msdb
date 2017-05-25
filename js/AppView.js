@@ -10,7 +10,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
-		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.MdSnackBar, TranslateManager, 
+		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.material.MdSnackBar, TranslateManager, 
 					ConnectionManager, UpdateManager, RouterManager, ng.router.Router, ng.core.NgZone, ng.core.ElementRef, 
 					ng.core.Renderer,
 			function AppView (AppModel, ActivatedRoute, ViewContainerRef, MdSnackBar, TranslateManager, 

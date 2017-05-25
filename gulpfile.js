@@ -51,12 +51,27 @@ gulp.task('clean-tmp', () => {
     return del(['./dist/tmp']);
 });
 
+gulp.task('generate-debug-sw', (callback) => {
+    const files = [];
+    const folders = ['css', 'data', 'html', 'images', 'js'];
+    folders.forEach(function (folder) {
+        fs.readdirSync('./' + folder).forEach((item, index, array) => {
+            files.push('"' + folder + '/' + item + '"');
+        });
+    });
+    files.push('"index.html"');
+    let sw = fs.readFileSync('./build/sw.js', 'utf8');
+    sw = sw.replace(/TEMPLATE_VERSION/g, pkg.version);
+    sw = sw.replace(/TEMPLATE_FILES/g, files.join(','));
+    fs.writeFileSync('sw.js', sw, 'utf8');
+});
+
 gulp.task('generate-manifest', (callback) => {
     const baseDir = './dist';
     const path = baseDir + '/manifest.cache';
     const readDir = (dir) => {
         fs.readdirSync(dir).forEach((item, index, array) => {
-            if (item !== "." && item !== "..") {
+            if (item !== '.' && item !== '..') {
                 const path = dir + '/' + item;
                 const stats = fs.statSync(path);
                 if (stats.isDirectory()) {
@@ -200,7 +215,7 @@ gulp.task('build-js', (callback) => {
     const files = [];
     let processedFileCount = 0;
     fs.readdirSync('js').forEach((item) => {
-        if (item !== "." && item !== "..") {
+        if (item !== '.' && item !== '..') {
             if (item.indexOf('Module') !== -1) {
                 if (item.indexOf('Abstract') === -1 && item.indexOf('Common') === -1) {
                     files.push(item);
@@ -281,8 +296,8 @@ gulp.task('prepare-node-modules', (callback) => {
             if (attributes[attribute] !== undefined && attributes[attribute].indexOf('node_modules') !== -1) {
                 const url = attributes[attribute];
                 urls.push(url);
-                const dest = 'dist/' + url.substring(0, url.lastIndexOf("/"));
-                const begin = url.lastIndexOf("/") + 1;
+                const dest = 'dist/' + url.substring(0, url.lastIndexOf('/'));
+                const begin = url.lastIndexOf('/') + 1;
                 const name = url.substring(begin);
                 if (name.indexOf('.min') !== -1) {
                     resources.copy4web.push({
