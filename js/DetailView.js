@@ -10,7 +10,7 @@ function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup,
 	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
-		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.material.MdDialog, 
+		constructor: [DetailModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef, ng.material.MdDialog, 
 			function DetailView (DetailModel, ActivatedRoute, ViewContainerRef, MdDialog)
 			{
 				AbstractView.call(this, DetailModel, ActivatedRoute);
@@ -62,7 +62,7 @@ function(AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup,
 		{
 			if(this._dialogRef === null)
 			{
-				const config = new ng.material.material.MdDialogConfig();
+				const config = new ng.material.MdDialogConfig();
 				config.disableClose = true;
 				config.viewContainerRef = this._viewContainerRef;
 				

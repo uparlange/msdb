@@ -6,7 +6,7 @@ function(AbstractPopup, DetailModel, AppUtils)
 	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractPopup,
-		constructor: [DetailModel, ng.material.material.MdDialogRef, 
+		constructor: [DetailModel, ng.material.MdDialogRef, 
 			function PortsPopup (DetailModel, MdDialogRef)
 			{
 				AbstractPopup.call(this, DetailModel, MdDialogRef);

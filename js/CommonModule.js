@@ -8,7 +8,7 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
-			ng.material.material.MaterialModule
+			ng.material.MaterialModule
 		],
 		declarations:[
 			TranslatePipe,
@@ -22,7 +22,7 @@ function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, Scrol
 			ng.common.CommonModule,
 			ng.http.HttpModule,
 			ng.forms.FormsModule,
-			ng.material.material.MaterialModule,
+			ng.material.MaterialModule,
 			TranslatePipe,
 			NgForItemComponent,
 			LazyDirective,

@@ -10,7 +10,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 	return ng.core.Component(conf).Class(
 	{
 		extends:AbstractView,
-		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.material.MdSnackBar, TranslateManager, 
+		constructor: [AppModel, ng.router.ActivatedRoute, ng.core.ViewContainerRef,  ng.material.MdSnackBar, TranslateManager, 
 					ConnectionManager, UpdateManager, RouterManager, ng.router.Router, ng.core.NgZone, ng.core.ElementRef, 
 					ng.core.Renderer,
 			function AppView (AppModel, ActivatedRoute, ViewContainerRef, MdSnackBar, TranslateManager, 
@@ -119,7 +119,7 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		{
 			this._connectionManager.on("change").subscribe((online) =>
 			{
-				const config = new ng.material.material.MdSnackBarConfig();
+				const config = new ng.material.MdSnackBarConfig();
 				config.duration = 1500;
 				config.viewContainerRef = this._viewContainerRef;
 
