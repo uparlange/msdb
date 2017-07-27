@@ -111,9 +111,9 @@ function(AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
 		},
 		_initBackground:function()
 		{
-			this._renderer.setElementStyle(this._element, "size", "100% 100%");
-			this._renderer.setElementStyle(this._element, "backgroundAttachment", "fixed");
-			this._renderer.setElementStyle(this._element, "backgroundImage", "url('images/background.jpg')");
+			this._renderer.setElementStyle(this._element, "background-size", "100% 100%");
+			this._renderer.setElementStyle(this._element, "background-attachment", "fixed");
+			this._renderer.setElementStyle(this._element, "background-image", "url('images/background.jpg')");
 		},
 		_initToaster:function()
 		{

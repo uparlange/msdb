@@ -51,7 +51,7 @@ function(AbstractModel, MsdbService, ConnectionManager, CacheManager)
 			version = version.replace("0.00", "0");
 			version = version.replace("0.0", "0");
 			version = version.replace("0.", "0");
-			return version;
+			return version.toLowerCase();
 		},
 		changeLogAvailable:function(value)
 		{

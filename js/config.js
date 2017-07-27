@@ -3,7 +3,7 @@ window.GlobalConfig = {};
 if(window.location.search.indexOf("debug") === -1)
 {
 	GlobalConfig.PRODUCTION = true;
-	GlobalConfig.LOG_LEVEL = "info";
+	GlobalConfig.LOG_LEVEL = "error";
 }
 else
 {
