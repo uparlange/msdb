@@ -1,13 +1,10 @@
-define(["AbstractEventManager"], 
-function (AbstractEventManager) 
-{
-	return ng.core.Class({
-		extends:AbstractEventManager,
-		constructor:[
-			function EventManager ()
-			{
+define(["AppUtils", "AbstractEventManager"],
+	function (AppUtils, AbstractEventManager) {
+		return AppUtils.getClass({
+			extends: AbstractEventManager,
+			constructor: function EventManager() {
 				AbstractEventManager.call(this);
 			}
-		]
-	});			
-});
+		});
+	}
+);

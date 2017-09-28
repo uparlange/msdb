@@ -1,15 +1,11 @@
-define(["AbstractClass"],
-function (AbstractClass) 
-{
-	return ng.core.Class({
-		extends:AbstractClass,
-        constructor: [
-			function WindowRef ()
-			{
+define(["AppUtils", "AbstractClass"],
+	function (AppUtils, AbstractClass) {
+		return AppUtils.getClass({
+			extends: AbstractClass,
+			constructor: function WindowRef() {
 				AbstractClass.call(this);
-
-                this.nativeWindow = window;
+				this.nativeWindow = window;
 			}
-		]
-    });
-});
+		});
+	}
+);

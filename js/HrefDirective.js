@@ -1,26 +1,27 @@
-define(["AbstractDirective", "RouterManager", "AppUtils"], 
-function(AbstractDirective, RouterManager, AppUtils) 
-{
-	const conf = AppUtils.getDirectiveConfiguration("[href]", {
-		host: {
-			"(click)":"onClick($event)"
-		}
-	});
-
-	return ng.core.Directive(conf).Class(
-	{
-		extends:AbstractDirective,
-		constructor: [RouterManager,
-			function HrefDirective (RouterManager)
-			{
+define(["AbstractDirective", "RouterManager", "AppUtils"],
+	function (AbstractDirective, RouterManager, AppUtils) {
+		return AppUtils.getClass({
+			extends: AbstractDirective,
+			constructor: function HrefDirective(RouterManager) {
 				AbstractDirective.call(this);
-				
 				this._routerManager = RouterManager;
+			},
+			parameters: [
+				[RouterManager]
+			],
+			annotations: [
+				new ng.core.Directive({
+					selector: "[href]",
+					host: {
+						"(click)": "onClick($event)"
+					}
+				})
+			],
+			functions: {
+				onClick: function () {
+					this._routerManager.saveCurrentViewScrollPosition();
+				}
 			}
-		],
-		onClick:function() 
-		{
-			this._routerManager.saveCurrentViewScrollPosition();
-		}
-	});
-});
+		});
+	}
+);

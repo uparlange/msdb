@@ -1,16 +1,16 @@
-define(["AbstractPopup", "DetailModel", "AppUtils"], 
-function(AbstractPopup, DetailModel, AppUtils) 
-{
-	const conf = AppUtils.getComponentConfiguration("roms");
-
-	return ng.core.Component(conf).Class(
-	{
-		extends:AbstractPopup,
-		constructor: [DetailModel, ng.material.MdDialogRef, 
-			function RomsPopup (DetailModel, MdDialogRef)
-			{
+define(["AbstractPopup", "DetailModel", "AppUtils"],
+	function (AbstractPopup, DetailModel, AppUtils) {
+		return AppUtils.getClass({
+			extends: AbstractPopup,
+			constructor: function RomsPopup(DetailModel, MdDialogRef) {
 				AbstractPopup.call(this, DetailModel, MdDialogRef);
-			}
-		]
-	});	
-});
+			},
+			parameters: [
+				[DetailModel], [ng.material.MdDialogRef]
+			],
+			annotations: [
+				new ng.core.Component(AppUtils.getComponentConfiguration("roms"))
+			]
+		});
+	}
+);

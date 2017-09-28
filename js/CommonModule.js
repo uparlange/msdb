@@ -1,42 +1,40 @@
 define(["AbstractModule", "TranslatePipe", "NgForItemComponent", "LazyDirective", "ScrollToTopDirective",
-		"FormDirective", "HrefDirective"], 
-function(AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective,
-		FormDirective, HrefDirective)
-{
-	return ng.core.NgModule({
-		imports:[
-			ng.common.CommonModule,
-			ng.http.HttpModule,
-			ng.forms.FormsModule,
-			ng.material.MaterialModule
-		],
-		declarations:[
-			TranslatePipe,
-			NgForItemComponent,
-			LazyDirective,
-			ScrollToTopDirective,
-			FormDirective,
-			HrefDirective
-		],
-		exports:[
-			ng.common.CommonModule,
-			ng.http.HttpModule,
-			ng.forms.FormsModule,
-			ng.material.MaterialModule,
-			TranslatePipe,
-			NgForItemComponent,
-			LazyDirective,
-			ScrollToTopDirective,
-			FormDirective,
-			HrefDirective
-		]
-	}).Class({
-		extends:AbstractModule,
-		constructor:[
-			function CommonModule()
-			{
+	"HrefDirective", "MaterialModule", "AppUtils"],
+	function (AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective,
+		HrefDirective, MaterialModule, AppUtils) {
+		return AppUtils.getClass({
+			extends: AbstractModule,
+			constructor: function CommonModule() {
 				AbstractModule.call(this);
-			}
-		]
-	});
-});
+			},
+			annotations: [
+				new ng.core.NgModule({
+					imports: [
+						ng.common.CommonModule,
+						ng.http.HttpModule,
+						ng.forms.FormsModule,
+						MaterialModule
+					],
+					declarations: [
+						TranslatePipe,
+						NgForItemComponent,
+						LazyDirective,
+						ScrollToTopDirective,
+						HrefDirective
+					],
+					exports: [
+						ng.common.CommonModule,
+						ng.http.HttpModule,
+						ng.forms.FormsModule,
+						MaterialModule,
+						TranslatePipe,
+						NgForItemComponent,
+						LazyDirective,
+						ScrollToTopDirective,
+						HrefDirective
+					]
+				})
+			]
+		});
+	}
+);

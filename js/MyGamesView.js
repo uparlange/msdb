@@ -1,16 +1,16 @@
-define(["AbstractView", "MyGamesModel", "AppUtils"], 
-function(AbstractView, MyGamesModel, AppUtils) 
-{
-	const conf = AppUtils.getComponentConfiguration("myGames");
-
-	return ng.core.Component(conf).Class(
-	{
-		extends:AbstractView,
-		constructor: [MyGamesModel, ng.router.ActivatedRoute, 
-			function MyGamesView (MyGamesModel, ActivatedRoute)
-			{
+define(["AbstractView", "MyGamesModel", "AppUtils"],
+	function (AbstractView, MyGamesModel, AppUtils) {
+		return AppUtils.getClass({
+			extends: AbstractView,
+			constructor: function MyGamesView(MyGamesModel, ActivatedRoute) {
 				AbstractView.call(this, MyGamesModel, ActivatedRoute);
-			}
-		]
-	});		
-});
+			},
+			parameters: [
+				[MyGamesModel], [ng.router.ActivatedRoute]
+			],
+			annotations: [
+				new ng.core.Component(AppUtils.getComponentConfiguration("myGames"))
+			]
+		});
+	}
+);

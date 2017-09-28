@@ -21,7 +21,6 @@ const imagemin = require('gulp-imagemin');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
 const karma = require('karma');
-const Builder = require('systemjs-builder');
 
 // -------------------------------------------------
 // VARIABLES
@@ -49,21 +48,6 @@ gulp.task('clean-dist', () => {
 
 gulp.task('clean-tmp', () => {
     return del(['./dist/tmp']);
-});
-
-gulp.task('generate-debug-sw', (callback) => {
-    const files = [];
-    const folders = ['css', 'data', 'html', 'images', 'js'];
-    folders.forEach(function (folder) {
-        fs.readdirSync('./' + folder).forEach((item, index, array) => {
-            files.push('"' + folder + '/' + item + '"');
-        });
-    });
-    files.push('"index.html"');
-    let sw = fs.readFileSync('./build/sw.js', 'utf8');
-    sw = sw.replace(/TEMPLATE_VERSION/g, pkg.version);
-    sw = sw.replace(/TEMPLATE_FILES/g, files.join(','));
-    fs.writeFileSync('sw.js', sw, 'utf8');
 });
 
 gulp.task('generate-manifest', (callback) => {
@@ -204,68 +188,21 @@ gulp.task('lint-js', () => {
 });
 
 gulp.task('babel-js', () => {
-    return gulp.src('./dist/tmp/system/**/*.js')
+    return gulp.src('./js/**/*.js')
         .pipe(babel())
         .pipe(gulp.dest('./dist/tmp/babel'));
 });
 
-gulp.task('build-js', (callback) => {
-    const builder = new Builder();
-    builder.loadConfigSync('js/system.config.js');
-    const files = [];
-    let processedFileCount = 0;
-    fs.readdirSync('js').forEach((item) => {
-        if (item !== '.' && item !== '..') {
-            if (item.indexOf('Module') !== -1) {
-                if (item.indexOf('Abstract') === -1 && item.indexOf('Common') === -1) {
-                    files.push(item);
-                }
-            }
-        }
-    });
-    files.forEach((item) => {
-        builder
-            .bundle(item, 'dist/tmp/system/' + item)
-            .then(function () {
-                processedFileCount++;
-                if (files.length === processedFileCount) {
-                    callback();
-                }
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    });
-});
-
 gulp.task('add-js-resources', (callback) => {
-    // web
     resources.js.push({
         src: './dist/tmp/babel/**/*.js',
-        dest: './dist/js'
-    });
-    resources.js.push({
-        src: './js/config.js',
-        dest: './dist/js'
-    });
-    resources.js.push({
-        src: './js/system.config.js',
-        dest: './dist/js'
-    });
-    resources.js.push({
-        src: './js/LogWorker.js',
-        dest: './dist/js'
-    });
-    // desktop
-    resources.copy4desktop.push({
-        src: './js/Nw.js',
         dest: './dist/js'
     });
     callback();
 });
 
 gulp.task('prepare-js-resources', (callback) => {
-    runSequence('lint-js', 'build-js', 'babel-js', 'add-js-resources', callback);
+    runSequence('lint-js', 'babel-js', 'add-js-resources', callback);
 });
 
 gulp.task('minify-js-resources', () => {

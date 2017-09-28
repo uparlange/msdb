@@ -1,9 +1,8 @@
-SystemJS.config(
-{
+SystemJS.config({
 	baseURL: "js",
-	packages : {
-		"." : {
-			defaultExtension : "js"
+	packages: {
+		".": {
+			defaultExtension: "js"
 		}
 	}
 });

@@ -1,82 +1,101 @@
 <!DOCTYPE html>
-<html lang="fr"  manifest="manifest.cache">
-	<head>
-		<title>Mame Smart Database</title>
-		<!-- application metas -->
-		<meta charset="utf-8">
-		<meta name="google-site-verification" content="Y4TPxcALP0EtLWK34DKeZ9J_de9e6Fksv0IH-2thtWQ" />
-		<meta name="author" content="Ugo Parlange">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-title" content="MSDB">
-		<meta name="description" content="MAME 'Multiple Arcade Machine Emulator' est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Pour vérifier que votre jeu préféré est disponible, allez faire une recherche sur MSDB !">
-		<meta name="keywords" content="mame database, arcade database, mame db, mamedb, db, arcade, database, mame, mess, games, jeux, emulation">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<!-- application icons -->
-		<link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png">
-		<link rel="apple-touch-icon" sizes="60x60" href="images/apple-touch-icon-60x60.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon-180x180.png">
-		<link rel="shortcut icon" href="images/favicon.ico">
-		<link rel="icon" type="image/png" href="images/favicon-192x192.png" sizes="192x192">
-		<link rel="icon" type="image/png" href="images/favicon-160x160.png" sizes="160x160">
-		<link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96">
-		<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
-		<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
-		<meta name="msapplication-TileColor" content="#2d89ef">
-		<meta name="msapplication-TileImage" content="images/mstile-144x144.png">
-		<meta name="msapplication-config" content="images/browserconfig.xml">
-		<!-- photoswipe -->
-		<link rel="stylesheet" href="node_modules/photoswipe/dist/photoswipe.css">
-		<link rel="stylesheet" href="node_modules/photoswipe/dist/default-skin/default-skin.css">
-		<!-- angular material 2 -->
-		<link rel="stylesheet" href="css/theme.css">
-		<!-- application common -->
-		<link rel="stylesheet" href="css/common.css">
-	</head>
-	<body version="APP_VERSION">
-		<!-- angular 2 dependencies -->
-		<script src="node_modules/core-js/client/shim.min.js"></script>
-        <script src="node_modules/zone.js/dist/zone.min.js"></script>
-        <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
-		<!-- angular 2 -->
-		<script src="node_modules/@angular/core/bundles/core.umd.min.js"></script>
-        <script src="node_modules/@angular/common/bundles/common.umd.min.js"></script>
-		<script src="node_modules/@angular/animations/bundles/animations.umd.min.js"></script>
-		<script src="node_modules/@angular/animations/bundles/animations-browser.umd.min.js"></script>
-		<script src="node_modules/@angular/compiler/bundles/compiler.umd.min.js"></script>
-		<script src="node_modules/@angular/platform-browser/bundles/platform-browser.umd.min.js"></script>
-		<script src="node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.min.js"></script>
-        <script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js"></script>
-        <script src="node_modules/@angular/router/bundles/router.umd.min.js"></script>
-		<script src="node_modules/@angular/http/bundles/http.umd.min.js"></script>
-		<script src="node_modules/@angular/forms/bundles/forms.umd.min.js"></script>
-		<!-- angular material 2 -->
-		<script src="node_modules/@angular/cdk/bundles/cdk.umd.min.js"></script>
-		<script src="node_modules/@angular/material/bundles/material.umd.min.js"></script>
-		<!-- photoswipe -->
-		<script src="node_modules/photoswipe/dist/photoswipe.min.js"></script>
-		<script src="node_modules/photoswipe/dist/photoswipe-ui-default.min.js"></script>
-		<!-- masonry-layout -->
-		<script src="node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
-		<!-- socket io -->
-		<script src="node_modules/socket.io-client/dist/socket.io.js"></script>
-		<!-- blazy -->
-		<script src="node_modules/blazy/blazy.min.js"></script>
-		<!-- mobile-detect -->
-		<script src="node_modules/mobile-detect/mobile-detect.min.js"></script>
-		<!-- system -->
-		<script src="node_modules/systemjs/dist/system.src.js"></script>
-		<script src="js/system.config.js"></script>
-		<!-- config -->
-		<script src="js/config.js"></script>
-		<!-- start -->
-		<script>SystemJS.import("AppModule.js");</script>
-	</body>
+<html lang="fr" manifest="manifest.cache">
+
+<head>
+	<title>Mame Smart Database</title>
+	<!-- application metas -->
+	<meta charset="utf-8">
+	<meta name="google-site-verification" content="Y4TPxcALP0EtLWK34DKeZ9J_de9e6Fksv0IH-2thtWQ" />
+	<meta name="author" content="Ugo Parlange">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="MSDB">
+	<meta name="description" content="MAME 'Multiple Arcade Machine Emulator' est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Pour vérifier que votre jeu préféré est disponible, allez faire une recherche sur MSDB !">
+	<meta name="keywords" content="mame database, arcade database, mame db, mamedb, db, arcade, database, mame, mess, games, jeux, emulation">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<!-- application icons -->
+	<link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="images/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon-180x180.png">
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="icon" type="image/png" href="images/favicon-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="images/favicon-160x160.png" sizes="160x160">
+	<link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+	<meta name="msapplication-TileColor" content="#2d89ef">
+	<meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+	<meta name="msapplication-config" content="images/browserconfig.xml">
+	<!-- photoswipe -->
+	<link rel="stylesheet" href="node_modules/photoswipe/dist/photoswipe.css">
+	<link rel="stylesheet" href="node_modules/photoswipe/dist/default-skin/default-skin.css">
+	<!-- angular material 2 -->
+	<link rel="stylesheet" href="css/theme.css">
+	<!-- application common -->
+	<link rel="stylesheet" href="css/common.css">
+</head>
+
+<body version="APP_VERSION">
+	<!-- angular 2 dependencies -->
+	<script src="node_modules/core-js/client/shim.min.js"></script>
+	<script src="node_modules/zone.js/dist/zone.min.js"></script>
+	<script src="node_modules/rxjs/bundles/Rx.min.js"></script>
+	<!-- angular 2 -->
+	<script src="node_modules/@angular/core/bundles/core.umd.min.js"></script>
+	<script src="node_modules/@angular/common/bundles/common.umd.min.js"></script>
+	<script src="node_modules/@angular/animations/bundles/animations.umd.min.js"></script>
+	<script src="node_modules/@angular/animations/bundles/animations-browser.umd.min.js"></script>
+	<script src="node_modules/@angular/compiler/bundles/compiler.umd.min.js"></script>
+	<script src="node_modules/@angular/platform-browser/bundles/platform-browser.umd.min.js"></script>
+	<script src="node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.min.js"></script>
+	<script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js"></script>
+	<script src="node_modules/@angular/router/bundles/router.umd.min.js"></script>
+	<script src="node_modules/@angular/http/bundles/http.umd.min.js"></script>
+	<script src="node_modules/@angular/forms/bundles/forms.umd.min.js"></script>
+	<!-- angular material 2 dependencies -->
+	<script src="node_modules/@angular/cdk/bundles/cdk.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-platform.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-collections.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-keycodes.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-observers.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-rxjs.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-portal.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-scrolling.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-a11y.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-bidi.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-coercion.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-overlay.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-table.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-stepper.umd.min.js"></script>
+	<!-- angular material 2 -->
+	<script src="node_modules/@angular/material/bundles/material.umd.min.js"></script>
+	<!-- photoswipe -->
+	<script src="node_modules/photoswipe/dist/photoswipe.min.js"></script>
+	<script src="node_modules/photoswipe/dist/photoswipe-ui-default.min.js"></script>
+	<!-- masonry-layout -->
+	<script src="node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
+	<!-- socket io -->
+	<script src="node_modules/socket.io-client/dist/socket.io.slim.js"></script>
+	<!-- blazy -->
+	<script src="node_modules/blazy/blazy.min.js"></script>
+	<!-- mobile-detect -->
+	<script src="node_modules/mobile-detect/mobile-detect.min.js"></script>
+	<!-- system -->
+	<script src="node_modules/systemjs/dist/system.src.js"></script>
+	<script src="js/system.config.js"></script>
+	<!-- config -->
+	<script src="js/config.js"></script>
+	<!-- start -->
+	<script>
+		SystemJS.import("AppModule");
+	</script>
+</body>
+
 </html>

@@ -6,12 +6,17 @@
 <div class="default-spacer"></div>
 <md-card>
 	<md-card-content>
-		<md-input-container>
-			<input mdInput [(ngModel)]="model.data.newValue.mameDirectory" placeholder="{{'L10N_MAME_DIRECTORY'|translate}}" (keyup)="model.checkFormChanges()" (change)="model.checkFormChanges()">
-		</md-input-container>
-		<md-input-container>
-			<input mdInput [(ngModel)]="model.data.newValue.romsDirectory" disabled placeholder="{{'L10N_ROMS_DIRECTORY'|translate}}">
-		</md-input-container>
+		<div>
+			<md-form-field class="full-width">
+				<input mdInput [(ngModel)]="model.data.newValue.mameDirectory" placeholder="{{'L10N_MAME_DIRECTORY'|translate}}" (keyup)="model.checkFormChanges()"
+				 (change)="model.checkFormChanges()">
+			</md-form-field>
+		</div>
+		<div>
+			<md-form-field class="full-width">
+				<input mdInput [(ngModel)]="model.data.newValue.romsDirectory" disabled placeholder="{{'L10N_ROMS_DIRECTORY'|translate}}">
+			</md-form-field>
+		</div>
 		<div>
 			<md-checkbox [(ngModel)]="model.data.newValue.autosave" (change)="model.checkFormChanges()">
 				{{'L10N_AUTOSAVE'|translate}}

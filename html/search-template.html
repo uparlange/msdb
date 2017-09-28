@@ -7,24 +7,24 @@
 <div class="default-spacer"></div>
 <md-tab-group [selectedIndex]="model.data.selectedIndex" (selectChange)="model.tabChanged($event)">
 	<md-tab>
-		<ng-template md-tab-label>
+		<ng-template mdTabLabel>
 			<i class="material-icons md-24">search</i>
 		</ng-template>
 		<div class="default-spacer"></div>
 		<form #descriptionForm="ngForm">
-			<md-input-container>
+			<md-form-field>
 				<input mdInput #descriptionInput pattern=".{3,}" required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description">
-			</md-input-container>
+			</md-form-field>
 			<button *ngIf="model.data.description.length > 0" (click)="model.data.description = '';descriptionInput.focus();" type="button" md-mini-fab>
 				<i class="material-icons md-24 md-light">clear</i>
 			</button>
-			<button *ngIf="descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" type="submit" md-mini-fab>
+			<button *ngIf="descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" md-mini-fab>
 				<i class="material-icons md-24 md-light">search</i>
 			</button>
 		</form>
 	</md-tab>
 	<md-tab>
-		<ng-template md-tab-label>
+		<ng-template mdTabLabel>
 			<i class="material-icons md-24">folder_open</i>
 		</ng-template>
 		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy:model.trackByLabel">
@@ -48,7 +48,7 @@
 		</div>
 	</md-tab>
 	<md-tab>
-		<ng-template md-tab-label>
+		<ng-template mdTabLabel>
 			<i class="material-icons md-24">list</i>
 		</ng-template>
 		<div *ngFor="let group of model.data.series.list; let index=index; trackBy:model.trackByLabel">
@@ -72,7 +72,7 @@
 		</div>
 	</md-tab>	
 	<md-tab>
-		<ng-template md-tab-label>
+		<ng-template mdTabLabel>
 			<i class="material-icons md-24">today</i>
 		</ng-template>
 		<div *ngFor="let group of model.data.years.list; let index=index; trackBy:model.trackByLabel">
@@ -98,7 +98,7 @@
 		</div>
 	</md-tab>
 	<md-tab>
-		<ng-template md-tab-label>
+		<ng-template mdTabLabel>
 			<i class="material-icons md-24">business</i>
 		</ng-template>
 		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy:model.trackByLabel">
@@ -122,7 +122,7 @@
 		</div>
 	</md-tab>
 	<md-tab>
-		<ng-template md-tab-label>
+		<ng-template mdTabLabel>
 			<i class="material-icons md-24">plus_one</i>
 		</ng-template>
 		<div class="default-spacer"></div>

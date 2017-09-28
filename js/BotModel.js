@@ -1,19 +1,20 @@
-define(["AbstractModel", "MsdbService", "ConnectionManager"], 
-function(AbstractModel, MsdbService, ConnectionManager) 
-{
-	return ng.core.Class({
-		extends:AbstractModel,
-		constructor:[MsdbService, ConnectionManager, ng.platformBrowser.Title,
-			function BotModel (MsdbService, ConnectionManager, Title)
-			{
+define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
+	function (AppUtils, AbstractModel, MsdbService, ConnectionManager) {
+		return AppUtils.getClass({
+			extends: AbstractModel,
+			constructor: function BotModel(MsdbService, ConnectionManager, Title) {
 				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			},
+			parameters: [
+				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
+			],
+			functions: {
+				_getInitData: function () {
+					return {
+
+					};
+				}
 			}
-		],
-		_getInitData : function()
-		{
-			return {
-				
-			};
-		}
-	});	
-});
+		});
+	}
+);
