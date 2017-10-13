@@ -1,46 +1,46 @@
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_MAME_KESAKO'|translate}}
-	</md-card-title>
-	<md-card-content class="justify">
+	</mat-card-title>
+	<mat-card-content class="justify">
 		{{'L10N_DESCRIPTION'|translate}}
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>
 <div class="default-spacer"></div>
-<md-card *ngIf="model.data.mame.build != null">
-	<md-card-title>
+<mat-card *ngIf="model.data.mame.build != null">
+	<mat-card-title>
 		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'mameversionadded',value:model.data.mame.version}">{{model.data.mame.version}}</a>
 		({{model.data.mame.gameCount}} {{'L10N_GAMES'|translate}})
-	</md-card-title>
-	<md-card-content>
+	</mat-card-title>
+	<mat-card-content>
 		<ul>
 			<li>Parent : {{model.data.mame.parentCount}}</li>
 			<li>Clone : {{model.data.mame.cloneCount}}</li>
 			<li>Bios : {{model.data.mame.biosCount}}</li>
 			<li>Device : {{model.data.mame.deviceCount}}</li>
 		</ul>
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>
 <div class="default-spacer"></div>
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_HOW_TO_PLAY'|translate}}
-	</md-card-title>
-	<md-card-content>
+	</mat-card-title>
+	<mat-card-content>
 		<ol>
 			<li><a routerLink="/search" [queryParams]="{type:model.data.searchLastType}">{{'L10N_FIND_GAME'|translate}}</a></li>
 			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a></li>
 			<li><a target="_blank" href="http://www.planetemu.net/roms/mame-roms">{{'L10N_DOWNLOAD_GAME'|translate}}</a></li>
 			<li>{{'L10N_HAVE_FUN'|translate}}</li>
 		</ol>
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>
 <div class="default-spacer"></div>
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_REFERENCES'|translate}}
-	</md-card-title>
-	<md-card-content>
+	</mat-card-title>
+	<mat-card-content>
 		<ul>
 			<li><a target="_blank" href="http://www.mame.net/">MAME Multiple Arcade Machine Emulator</a></li>
 			<li><a target="_blank" href="http://www.progettosnaps.net/">MAME progetto-SNAPS</a></li>
@@ -48,16 +48,16 @@
 			<li><a target="_blank" href="http://www.mameworld.info/">MAMEWorld</a></li>
 			<li><a target="_blank" href="http://www.planetemu.net/">Planet Emulation</a></li>
 		</ul>
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>
 <div class="default-spacer"></div>
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_COMMUNITY'|translate}}
-	</md-card-title>
-	<md-card-content>
+	</mat-card-title>
+	<mat-card-content>
 		<ul>
 			<li><a target="_blank" href="https://github.com/uparlange/msdb">Github</a></li>
 		</ul>
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>

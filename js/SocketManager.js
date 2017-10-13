@@ -6,7 +6,6 @@ define(["AbstractManager", "AppUtils", "EventManager"],
 				AbstractManager.call(this);
 				this._eventManager = EventManager;
 				this._url = AppUtils.getSocketUrl();
-				this._eventEmitters = {};
 				this._socket = null;
 			},
 			parameters: [
@@ -27,9 +26,6 @@ define(["AbstractManager", "AppUtils", "EventManager"],
 						}
 					});
 					return eventEmitter;
-				},
-				off: function (eventSubscriber) {
-					eventSubscriber.unsubscribe();
 				},
 				emit: function (eventName, params) {
 					const eventEmitter = new ng.core.EventEmitter();

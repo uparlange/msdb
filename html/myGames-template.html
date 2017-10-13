@@ -1,38 +1,38 @@
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_MY_GAMES'|translate}}
-	</md-card-title>
-</md-card>
+	</mat-card-title>
+</mat-card>
 <div *ngIf="model.data.allGames.length > 0">
 	<div class="default-spacer"></div>
-	<md-list>
-		<md-nav-list>
-			<a md-list-item *ngFor="let game of model.data.allGames; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:game.name}">
-				<img md-list-avatar [src]="model.getGameIconUrl(game)">
+	<mat-list>
+		<mat-nav-list>
+			<a mat-list-item *ngFor="let game of model.data.allGames; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:game.name}">
+				<img mat-list-avatar [src]="model.getGameIconUrl(game)">
 				<span class="sep"></span>
 				{{game.description}}
 			</a>
-		</md-nav-list>
-	</md-list>
+		</mat-nav-list>
+	</mat-list>
 </div>
 <div class="default-spacer"></div>
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_MY_BIOS'|translate}}
-		<button md-mini-fab scrollToTop>
-			<i class="material-icons md-24 md-light">arrow_drop_up</i>
+		<button mat-mini-fab scrollToTop>
+			<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
 		</button>
-	</md-card-title>
-</md-card>
+	</mat-card-title>
+</mat-card>
 <div *ngIf="model.data.allBios.length > 0">
 	<div class="default-spacer"></div>
-	<md-list>
-		<md-nav-list>
-			<a md-list-item *ngFor="let bios of model.data.allBios; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:bios.name}">
-				<img md-list-avatar [src]="model.getGameIconUrl(bios)">
+	<mat-list>
+		<mat-nav-list>
+			<a mat-list-item *ngFor="let bios of model.data.allBios; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:bios.name}">
+				<img mat-list-avatar [src]="model.getGameIconUrl(bios)">
 				<span class="sep"></span>
 				{{bios.description}}
 			</a>
-		</md-nav-list>
-	</md-list>
+		</mat-nav-list>
+	</mat-list>
 </div>

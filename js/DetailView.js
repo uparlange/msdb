@@ -13,7 +13,7 @@ define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup"
 				this._dialogRef = null;
 			},
 			parameters: [
-				[DetailModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MdDialog]
+				[DetailModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MatDialog]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("detail"))
@@ -48,7 +48,7 @@ define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup"
 				},
 				_openPopup: function (clazz) {
 					if (this._dialogRef === null) {
-						const config = new ng.material.MdDialogConfig();
+						const config = new ng.material.MatDialogConfig();
 						config.disableClose = true;
 						config.viewContainerRef = this._viewContainerRef;
 

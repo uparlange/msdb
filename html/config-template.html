@@ -1,42 +1,42 @@
-<md-card>
-	<md-card-title>
+<mat-card>
+	<mat-card-title>
 		{{'L10N_CONFIGURATION'|translate}}
-	</md-card-title>
-</md-card>
+	</mat-card-title>
+</mat-card>
 <div class="default-spacer"></div>
-<md-card>
-	<md-card-content>
+<mat-card>
+	<mat-card-content>
 		<div>
-			<md-form-field class="full-width">
-				<input mdInput [(ngModel)]="model.data.newValue.mameDirectory" placeholder="{{'L10N_MAME_DIRECTORY'|translate}}" (keyup)="model.checkFormChanges()"
+			<mat-form-field class="full-width">
+				<input matInput [(ngModel)]="model.data.newValue.mameDirectory" placeholder="{{'L10N_MAME_DIRECTORY'|translate}}" (keyup)="model.checkFormChanges()"
 				 (change)="model.checkFormChanges()">
-			</md-form-field>
+			</mat-form-field>
 		</div>
 		<div>
-			<md-form-field class="full-width">
-				<input mdInput [(ngModel)]="model.data.newValue.romsDirectory" disabled placeholder="{{'L10N_ROMS_DIRECTORY'|translate}}">
-			</md-form-field>
+			<mat-form-field class="full-width">
+				<input matInput [(ngModel)]="model.data.newValue.romsDirectory" disabled placeholder="{{'L10N_ROMS_DIRECTORY'|translate}}">
+			</mat-form-field>
 		</div>
 		<div>
-			<md-checkbox [(ngModel)]="model.data.newValue.autosave" (change)="model.checkFormChanges()">
+			<mat-checkbox [(ngModel)]="model.data.newValue.autosave" (change)="model.checkFormChanges()">
 				{{'L10N_AUTOSAVE'|translate}}
-			</md-checkbox>
+			</mat-checkbox>
 		</div>
 		<div>
-			<md-checkbox [(ngModel)]="model.data.newValue.joystick" (change)="model.checkFormChanges()">
+			<mat-checkbox [(ngModel)]="model.data.newValue.joystick" (change)="model.checkFormChanges()">
 				{{'L10N_JOYSTICK'|translate}}
-			</md-checkbox>
+			</mat-checkbox>
 		</div>
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>
 <div class="default-spacer"></div>
-<md-card>
-	<md-card-content>
-		<button md-raised-button color="primary" (click)="model.save()" [disabled]="!model.data.enabled">
+<mat-card>
+	<mat-card-content>
+		<button mat-raised-button color="primary" (click)="model.save()" [disabled]="!model.data.enabled">
 			{{'L10N_SAVE'|translate}}
 		</button>
-		<button md-raised-button color="accent" (click)="model.cancel()" [disabled]="!model.data.enabled">
+		<button mat-raised-button color="accent" (click)="model.cancel()" [disabled]="!model.data.enabled">
 			{{'L10N_CANCEL'|translate}}
 		</button>
-	</md-card-content>
-</md-card>
+	</mat-card-content>
+</mat-card>

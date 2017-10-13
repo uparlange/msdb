@@ -1,9 +1,9 @@
-define(["AppUtils", "AbstractEventManager", "WindowRef"],
-	function (AppUtils, AbstractEventManager, WindowRef) {
+define(["AppUtils", "AbstractManager", "WindowRef"],
+	function (AppUtils, AbstractManager, WindowRef) {
 		return AppUtils.getClass({
-			extends: AbstractEventManager,
+			extends: AbstractManager,
 			constructor: function ConnectionManager(WindowRef) {
-				AbstractEventManager.call(this);
+				AbstractManager.call(this);
 				this._window = WindowRef.nativeWindow;
 				this.online = this._window.navigator.onLine;
 				this._window.addEventListener("offline", () => {

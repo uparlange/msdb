@@ -25,6 +25,7 @@ define(["AppUtils", "AbstractManager", "TranslateManager", "WindowRef"],
 			],
 			functions: {
 				init: function () {
+					AbstractManager.prototype.init.call(this);
 					if (this._window.applicationCache.status === this._window.applicationCache.UPDATEREADY) {
 						this._askForReload();
 					}

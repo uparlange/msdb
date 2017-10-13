@@ -15,7 +15,7 @@ define(["AbstractDirective", "EventManager", "AppUtils"],
 			],
 			annotations: [
 				new ng.core.Directive({
-					selector: "md-progress-bar",
+					selector: "mat-progress-bar",
 					host: {
 						"[style.display]": "display"
 					}

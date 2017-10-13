@@ -1,7 +1,9 @@
-define(["AppUtils"],
-	function (AppUtils) {
+define(["AppUtils", "AbstractManager"],
+	function (AppUtils, AbstractManager) {
 		return AppUtils.getClass({
+			extends: AbstractManager,
 			constructor: function TranslateManager(Http) {
+				AbstractManager.call(this);
 				this.onLanguageChange = new ng.core.EventEmitter();
 				this._http = Http;
 				this._properties = {};
@@ -15,6 +17,7 @@ define(["AppUtils"],
 			],
 			functions: {
 				init: function (params) {
+					AbstractManager.prototype.init.call(this);
 					this._propertyFilePattern = params.propertyFilePattern;
 					this.setLanguage(params.language);
 				},

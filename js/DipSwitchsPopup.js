@@ -7,7 +7,7 @@ define(["AbstractPopup", "DetailModel", "AppUtils"],
 				this.provider = [];
 			},
 			parameters: [
-				[DetailModel], [ng.material.MdDialogRef]
+				[DetailModel], [ng.material.MatDialogRef]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("dipSwitchs"))

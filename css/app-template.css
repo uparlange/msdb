@@ -10,7 +10,7 @@
 	z-index:2;
 }
 
-.app-header md-toolbar
+.app-header mat-toolbar
 {
 	height: 64px;
 }
@@ -20,7 +20,7 @@
 	vertical-align:middle;
 }
 
-.app-header md-progress-bar
+.app-header mat-progress-bar
 {
 	position:absolute;
 	top:64px;

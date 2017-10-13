@@ -1,15 +1,15 @@
 <div class="app-header">
-	<md-toolbar color="primary">
-		<i class="app-network-status material-icons md-18 md-light">{{model.params.online ? 'network_wifi' : 'signal_wifi_off'}}</i>
+	<mat-toolbar color="primary">
+		<i class="app-network-status material-icons mat-18 mat-light">{{model.params.online ? 'network_wifi' : 'signal_wifi_off'}}</i>
 		<a routerLink="/home">
 			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
-		<button md-fab routerLink="/search" [queryParams]="{type:model.data.searchLastType}">
-			<i class="material-icons md-24 md-light">search</i>
+		<button mat-fab routerLink="/search" [queryParams]="{type:model.data.searchLastType}">
+			<i class="material-icons mat-24 mat-light">search</i>
 		</button>
-	</md-toolbar>
-	<md-progress-bar mode="indeterminate"></md-progress-bar>
+	</mat-toolbar>
+	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <div class="app-container">
 	<div class="app-container-header"></div>

@@ -6,7 +6,7 @@ define(["AbstractPopup", "DetailModel", "AppUtils"],
 				AbstractPopup.call(this, DetailModel, MdDialogRef);
 			},
 			parameters: [
-				[DetailModel], [ng.material.MdDialogRef]
+				[DetailModel], [ng.material.MatDialogRef]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("biossets"))

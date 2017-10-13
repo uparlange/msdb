@@ -1,11 +1,7 @@
-define(["AbstractModule", "CommonModule", "AppView", "MsdbService", "AppModel",
-	"AppUtils", "EventManager", "TranslateManager", "ProgressBarDirective", "SocketManager",
-	"ConnectionManager", "LazyManager", "CacheManager", "UpdateManager", "RouterManager",
-	"WindowRef"],
-	function (AbstractModule, CommonModule, AppView, MsdbService, AppModel,
-		AppUtils, EventManager, TranslateManager, ProgressBarDirective, SocketManager,
-		ConnectionManager, LazyManager, CacheManager, UpdateManager, RouterManager,
-		WindowRef) {
+define(["AppUtils", "AbstractModule", "CommonModule", "AppView", "AppModel",
+	"ProgressBarDirective", "GlobalModule"],
+	function (AppUtils, AbstractModule, CommonModule, AppView, AppModel,
+		ProgressBarDirective, GlobalModule) {
 		if (GlobalConfig.PRODUCTION) {
 			ng.core.enableProdMode();
 		}
@@ -18,6 +14,7 @@ define(["AbstractModule", "CommonModule", "AppView", "MsdbService", "AppModel",
 				new ng.core.NgModule({
 					imports: [
 						CommonModule,
+						GlobalModule,
 						ng.platformBrowser.BrowserModule,
 						ng.platformBrowser.animations.BrowserAnimationsModule,
 						ng.router.RouterModule.forRoot([
@@ -36,17 +33,7 @@ define(["AbstractModule", "CommonModule", "AppView", "MsdbService", "AppModel",
 						ProgressBarDirective
 					],
 					providers: [
-						MsdbService,
-						AppModel,
-						EventManager,
-						TranslateManager,
-						SocketManager,
-						ConnectionManager,
-						LazyManager,
-						CacheManager,
-						UpdateManager,
-						RouterManager,
-						WindowRef
+						AppModel
 					],
 					bootstrap: [
 						AppView

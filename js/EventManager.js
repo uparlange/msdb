@@ -1,9 +1,9 @@
-define(["AppUtils", "AbstractEventManager"],
-	function (AppUtils, AbstractEventManager) {
+define(["AppUtils", "AbstractManager"],
+	function (AppUtils, AbstractManager) {
 		return AppUtils.getClass({
-			extends: AbstractEventManager,
+			extends: AbstractManager,
 			constructor: function EventManager() {
-				AbstractEventManager.call(this);
+				AbstractManager.call(this);
 			}
 		});
 	}

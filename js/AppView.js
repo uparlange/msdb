@@ -1,12 +1,12 @@
 define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionManager",
-	"UpdateManager", "RouterManager"],
+	"UpdateManager", "RouterManager", "Shell"],
 	function (AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
-		UpdateManager, RouterManager) {
+		UpdateManager, RouterManager, Shell) {
 		return AppUtils.getClass({
 			extends: AbstractView,
 			constructor: function AppView(AppModel, ActivatedRoute, ViewContainerRef, MdSnackBar, TranslateManager,
 				ConnectionManager, UpdateManager, RouterManager, Router, NgZone,
-				ElementRef, Renderer) {
+				ElementRef, Renderer, Shell) {
 				AbstractView.call(this, AppModel, ActivatedRoute);
 				this._viewContainerRef = ViewContainerRef;
 				this._mdSnackBar = MdSnackBar;
@@ -18,11 +18,12 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 				this._ngZone = NgZone;
 				this._element = ElementRef.nativeElement;
 				this._renderer = Renderer;
+				this._shell = Shell;
 			},
 			parameters: [
-				[AppModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MdSnackBar], [TranslateManager],
+				[AppModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MatSnackBar], [TranslateManager],
 				[ConnectionManager], [UpdateManager], [RouterManager], [ng.router.Router], [ng.core.NgZone],
-				[ng.core.ElementRef], [ng.core.Renderer]
+				[ng.core.ElementRef], [ng.core.Renderer], [Shell]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("app", {
@@ -31,14 +32,7 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 			],
 			functions: {
 				onInit: function () {
-					this._routerManager.init();
-					this._updateManager.init();
-					const navigatorLang = navigator.language.split("-")[0];
-					const defaultLang = /(fr|en)/gi.test(navigatorLang) ? navigatorLang : "en";
-					this._translateManager.init({
-						propertyFilePattern: "/data/{locale}.json",
-						language: defaultLang
-					});
+					this._shell.init();
 					this._initBackground();
 					this._initToaster();
 					if (AppUtils.runInNw()) {
@@ -106,7 +100,7 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 				},
 				_initToaster: function () {
 					this._connectionManager.on("change").subscribe((online) => {
-						const config = new ng.material.MdSnackBarConfig();
+						const config = new ng.material.MatSnackBarConfig();
 						config.duration = 1500;
 						config.viewContainerRef = this._viewContainerRef;
 						const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";

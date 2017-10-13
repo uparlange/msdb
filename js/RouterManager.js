@@ -32,9 +32,6 @@ define(["AbstractManager", "CacheManager", "AppUtils"],
 				[ng.router.Router], [ng.common.Location], [CacheManager]
 			],
 			functions: {
-				init: function () {
-
-				},
 				saveCurrentViewScrollPosition: function () {
 					const scrollTop = this._bodyRef.scrollTop;
 					this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), scrollTop);
