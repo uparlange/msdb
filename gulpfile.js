@@ -18,6 +18,8 @@ const fs = require('fs');
 const htmlparser = require('htmlparser2');
 const mergeStream = require('merge-stream');
 const imagemin = require('gulp-imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
 const karma = require('karma');
@@ -351,7 +353,7 @@ gulp.task('tdd', function (callback) {
 // MAIN
 
 gulp.task('prepare-resources', (callback) => {
-    runSequence(['prepare-node-modules', 'prepare-copy-resources', 'prepare-css-resources', 'prepare-html-resources', 'prepare-js-resources', 'prepare-image-resources'], callback);
+    runSequence(['prepare-copy-resources', 'prepare-node-modules', 'prepare-css-resources', 'prepare-html-resources', 'prepare-js-resources', 'prepare-image-resources'], callback);
 });
 
 gulp.task('manage-web-resources', (callback) => {

@@ -3,27 +3,32 @@
 		<mat-card-title>
 			{{model.getSearchLabel(model.params.type)|translate}} "{{model.params.value}}"
 			<span *ngIf="model.data.count >= 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
+			<hr>
+			<mat-checkbox [(ngModel)]="showClone">Clone</mat-checkbox>
+			<mat-checkbox [(ngModel)]="showBios">Bios</mat-checkbox>
+			<mat-checkbox [(ngModel)]="showDevice">Device</mat-checkbox>
 		</mat-card-title>
 	</mat-card>
 	<div *ngFor="let group of model.data.list; let index=index; trackBy:model.trackByLabel">
 		<div *ngIf="model.data.list.length > 1">
 			<div class="default-spacer"></div>
-			<mat-card >
+			<mat-card>
 				<mat-card-title>
-					{{group.label}}
+					{{group.label}} ({{group.data.length}})
 					<button *ngIf="index > 0" mat-mini-fab scrollToTop>
 						<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
 					</button>
 				</mat-card-title>
 			</mat-card>
 		</div>
-		<div class="default-spacer"></div>
 		<mat-nav-list>
-			<a mat-list-item *ngFor="let game of group.data; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:game.name}">
-				<img mat-list-avatar [lazySrc]="model.getGameIconUrl(game)">
-				<span class="sep"></span>
-				{{game.description}}
-			</a>
+			<span *ngFor="let game of group.data; trackBy:model.trackByName">
+				<a mat-list-item *ngIf="canShowGame(game)" routerLink="/detail" [queryParams]="{name:game.name}">
+					<img mat-list-avatar [lazySrc]="model.getGameIconUrl(game)">
+					<span class="sep"></span>
+					{{game.description}}
+				</a>
+			</span>
 		</mat-nav-list>
 	</div>
 </div>
