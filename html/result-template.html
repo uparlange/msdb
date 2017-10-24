@@ -4,9 +4,9 @@
 			{{model.getSearchLabel(model.params.type)|translate}} "{{model.params.value}}"
 			<span *ngIf="model.data.count >= 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
 			<hr>
-			<mat-checkbox [(ngModel)]="showClone">Clone</mat-checkbox>
-			<mat-checkbox [(ngModel)]="showBios">Bios</mat-checkbox>
-			<mat-checkbox [(ngModel)]="showDevice">Device</mat-checkbox>
+			<mat-checkbox [(ngModel)]="model.showClone">Clone</mat-checkbox>
+			<mat-checkbox [(ngModel)]="model.showBios">Bios</mat-checkbox>
+			<mat-checkbox [(ngModel)]="model.showDevice">Device</mat-checkbox>
 		</mat-card-title>
 	</mat-card>
 	<div *ngFor="let group of model.data.list; let index=index; trackBy:model.trackByLabel">
@@ -23,7 +23,7 @@
 		</div>
 		<mat-nav-list>
 			<span *ngFor="let game of group.data; trackBy:model.trackByName">
-				<a mat-list-item *ngIf="canShowGame(game)" routerLink="/detail" [queryParams]="{name:game.name}">
+				<a mat-list-item *ngIf="model.canShowGame(game)" routerLink="/detail" [queryParams]="{name:game.name}">
 					<img mat-list-avatar [lazySrc]="model.getGameIconUrl(game)">
 					<span class="sep"></span>
 					{{game.description}}
