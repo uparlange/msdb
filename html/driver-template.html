@@ -17,21 +17,6 @@
 			<span [class]="model.getStatusClass(model.data.game.driver.emulation)">{{model.getStatusLabel(model.data.game.driver.emulation)|translate}}</span>
 		</mat-list-item>
 		<mat-list-item>
-			{{'L10N_COLOR'|translate}}
-			<span class="sep">:</span>
-			<span [class]="model.getStatusClass(model.data.game.driver.color)">{{model.getStatusLabel(model.data.game.driver.color)|translate}}</span>
-		</mat-list-item>
-		<mat-list-item>
-			{{'L10N_SOUND'|translate}}
-			<span class="sep">:</span>
-			<span [class]="model.getStatusClass(model.data.game.driver.sound)">{{model.getStatusLabel(model.data.game.driver.sound)|translate}}</span>
-		</mat-list-item>
-		<mat-list-item>
-			{{'L10N_GRAPHIC'|translate}}
-			<span class="sep">:</span>
-			<span [class]="model.getStatusClass(model.data.game.driver.graphic)">{{model.getStatusLabel(model.data.game.driver.graphic)|translate}}</span>
-		</mat-list-item>
-		<mat-list-item>
 			{{'L10N_SAVESTATE'|translate}}
 			<span class="sep">:</span>
 			{{model.getStatusLabel(model.data.game.driver.savestate)|translate}}

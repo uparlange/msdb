@@ -47,7 +47,7 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "Socket
 					return "label-" + status;
 				},
 				getStatusLabel: function (status) {
-					return "L10N_" + status.toUpperCase();
+					return (status != null) ? "L10N_" + status.toUpperCase() : null;
 				},
 				getGameSizeLabel: function () {
 					let size = 0;
