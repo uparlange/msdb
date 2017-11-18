@@ -51,9 +51,7 @@ define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup"
 						const config = new ng.material.MatDialogConfig();
 						config.disableClose = true;
 						config.viewContainerRef = this._viewContainerRef;
-
 						this._dialogRef = this._mdDialog.open(clazz, config);
-
 						this._dialogRef.afterClosed().subscribe(() => {
 							this._dialogRef = null;
 						});

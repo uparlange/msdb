@@ -9,7 +9,7 @@ define(["AppUtils", "AbstractClass"],
 			},
 			functions: {
 				httpGet: function (url, params, defaultValue) {
-					const source = this._http.get(url, params);
+					const source = this._http.get(url, { "params": params });
 					return this._httpCall(source, defaultValue);
 				},
 				_httpCall: function (source, defaultValue) {
@@ -20,7 +20,7 @@ define(["AppUtils", "AbstractClass"],
 					this._eventManager.emit("HTTP_BEGIN");
 					source.timeout(GlobalConfig.HTTP_REQUEST_TIMEOUT).subscribe((result) => {
 						this._eventManager.emit("HTTP_END");
-						eventEmitter.emit(result.json());
+						eventEmitter.emit(result);
 					}, () => {
 						this._eventManager.emit("HTTP_END");
 						eventEmitter.emit(defaultValue);

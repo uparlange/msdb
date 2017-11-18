@@ -2,14 +2,14 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 	function (AbstractService, EventManager, CacheManager, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractService,
-			constructor: function MsdbService(Http, EventManager, CacheManager) {
-				AbstractService.call(this, Http, EventManager);
+			constructor: function MsdbService(HttpClient, EventManager, CacheManager) {
+				AbstractService.call(this, HttpClient, EventManager);
 				this._cacheManager = CacheManager;
 				this._mameInfos = null;
 				this._token = null;
 			},
 			parameters: [
-				[ng.http.Http], [EventManager], [CacheManager]
+				[ng.common.http.HttpClient], [EventManager], [CacheManager]
 			],
 			functions: {
 				getMameInfos: function () {
@@ -20,11 +20,9 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 					return eventEmitter;
 				},
 				getDetail: function (name) {
-					const params = new ng.http.URLSearchParams();
-					params.set("name", name);
 					const config = {
 						url: AppUtils.getServiceUrl("detail"),
-						params: params,
+						params: new ng.common.http.HttpParams().set("name", name),
 						useCache: true
 					};
 					return this._callService(config);
@@ -32,11 +30,9 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 				search: function (type, value) {
 					const s = {};
 					s[type] = value;
-					const params = new ng.http.URLSearchParams();
-					params.set("params", JSON.stringify(s));
 					const config = {
 						url: AppUtils.getServiceUrl("search"),
-						params: params,
+						params: new ng.common.http.HttpParams().set("params", JSON.stringify(s)),
 						useCache: false
 					};
 					return this._callService(config);
@@ -91,10 +87,8 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 					else {
 						this._init().subscribe(() => {
 							if (this._initialized()) {
-								const params = {
-									search: config.params || new ng.http.URLSearchParams()
-								};
-								params.search.set("token", this._token);
+								let params = config.params || new ng.common.http.HttpParams();
+								params = params.set("token", this._token);
 								this.httpGet(config.url, params).subscribe((result) => {
 									value = this._getData(result);
 									if (config.useCache === true) {

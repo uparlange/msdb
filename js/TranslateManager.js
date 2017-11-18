@@ -13,7 +13,7 @@ define(["AppUtils", "AbstractManager"],
 				this._currentLang = null;
 			},
 			parameters: [
-				[ng.http.Http]
+				[ng.common.http.HttpClient]
 			],
 			functions: {
 				init: function (params) {
@@ -85,7 +85,7 @@ define(["AppUtils", "AbstractManager"],
 						this._loading = true;
 						const path = this._propertyFilePattern.replace("{locale}", this._currentLang);
 						this._http.get(path).subscribe((data) => {
-							this._properties[this._currentLang] = data.json();
+							this._properties[this._currentLang] = data;
 							this._loading = false;
 							this._checkPendingRequests();
 							eventEmitter.emit();
