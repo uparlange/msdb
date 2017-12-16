@@ -44,57 +44,57 @@
 
 <body version="APP_VERSION">
 	<!-- angular 2 dependencies -->
-	<script src="node_modules/core-js/client/shim.min.js"></script>
-	<script src="node_modules/zone.js/dist/zone.min.js"></script>
-	<script src="node_modules/rxjs/bundles/Rx.min.js"></script>
+	<script src="node_modules/core-js/client/shim.js"></script>
+	<script src="node_modules/zone.js/dist/zone.js"></script>
+	<script src="node_modules/rxjs/bundles/Rx.js"></script>
 	<!-- angular 2 fix -->
 	<script src="node_modules/tslib/tslib.js"></script>
 	<script>
-		// fix common-http.umd.min.js
+		// fix common-http.umd.js
 		tslib = { __extends: __extends };
 		Rx.Observable.prototype.of = Rx.Observable.of;
 	</script>
 	<!-- angular 2 -->
-	<script src="node_modules/@angular/compiler/bundles/compiler.umd.min.js"></script>
-	<script src="node_modules/@angular/core/bundles/core.umd.min.js"></script>
-	<script src="node_modules/@angular/common/bundles/common.umd.min.js"></script>
-	<script src="node_modules/@angular/common/bundles/common-http.umd.min.js"></script>
-	<script src="node_modules/@angular/animations/bundles/animations.umd.min.js"></script>
-	<script src="node_modules/@angular/animations/bundles/animations-browser.umd.min.js"></script>
-	<script src="node_modules/@angular/platform-browser/bundles/platform-browser.umd.min.js"></script>
-	<script src="node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.min.js"></script>
-	<script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js"></script>
-	<script src="node_modules/@angular/router/bundles/router.umd.min.js"></script>
-	<script src="node_modules/@angular/forms/bundles/forms.umd.min.js"></script>
+	<script src="node_modules/@angular/compiler/bundles/compiler.umd.js"></script>
+	<script src="node_modules/@angular/core/bundles/core.umd.js"></script>
+	<script src="node_modules/@angular/common/bundles/common.umd.js"></script>
+	<script src="node_modules/@angular/common/bundles/common-http.umd.js"></script>
+	<script src="node_modules/@angular/animations/bundles/animations.umd.js"></script>
+	<script src="node_modules/@angular/animations/bundles/animations-browser.umd.js"></script>
+	<script src="node_modules/@angular/platform-browser/bundles/platform-browser.umd.js"></script>
+	<script src="node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js"></script>
+	<script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js"></script>
+	<script src="node_modules/@angular/router/bundles/router.umd.js"></script>
+	<script src="node_modules/@angular/forms/bundles/forms.umd.js"></script>
 	<!-- angular material 2 dependencies -->
-	<script src="node_modules/@angular/cdk/bundles/cdk.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-platform.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-collections.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-keycodes.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-observers.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-portal.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-a11y.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-bidi.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-coercion.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-layout.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-scrolling.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-overlay.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-table.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-stepper.umd.min.js"></script>
-	<script src="node_modules/@angular/cdk/bundles/cdk-accordion.umd.min.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-platform.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-collections.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-keycodes.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-observers.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-portal.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-a11y.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-bidi.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-coercion.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-layout.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-scrolling.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-overlay.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-table.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-stepper.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-accordion.umd.js"></script>
 	<!-- angular material 2 -->
-	<script src="node_modules/@angular/material/bundles/material.umd.min.js"></script>
+	<script src="node_modules/@angular/material/bundles/material.umd.js"></script>
 	<!-- photoswipe -->
-	<script src="node_modules/photoswipe/dist/photoswipe.min.js"></script>
-	<script src="node_modules/photoswipe/dist/photoswipe-ui-default.min.js"></script>
+	<script src="node_modules/photoswipe/dist/photoswipe.js"></script>
+	<script src="node_modules/photoswipe/dist/photoswipe-ui-default.js"></script>
 	<!-- masonry-layout -->
-	<script src="node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
+	<script src="node_modules/masonry-layout/dist/masonry.pkgd.js"></script>
 	<!-- socket io -->
 	<script src="node_modules/socket.io-client/dist/socket.io.slim.js"></script>
 	<!-- blazy -->
-	<script src="node_modules/blazy/blazy.min.js"></script>
+	<script src="node_modules/blazy/blazy.js"></script>
 	<!-- mobile-detect -->
-	<script src="node_modules/mobile-detect/mobile-detect.min.js"></script>
+	<script src="node_modules/mobile-detect/mobile-detect.js"></script>
 	<!-- system -->
 	<script src="node_modules/systemjs/dist/system.src.js"></script>
 	<script src="js/system.config.js"></script>
