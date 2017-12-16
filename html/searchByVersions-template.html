@@ -1,0 +1,14 @@
+<mat-nav-list>
+    <mat-list-item *ngFor="let item of model.data.list; trackBy:model.trackByLabel">
+        <a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:item.label}">
+            {{item.label}} 
+        </a>
+        <span class="addition-count">(+{{item.data}})</span>
+        <a *ngIf="model.changeLogAvailable(item.label)" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(item.label)+'.txt'">
+            <i class="material-icons mat-24 mat-dark">track_changes</i>
+        </a>
+        <span *ngIf="!model.changeLogAvailable(item.label)">
+            <i class="material-icons mat-24 mat-dark mat-inactive">track_changes</i>
+        </span>
+    </mat-list-item>
+</mat-nav-list>

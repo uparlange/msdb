@@ -5,7 +5,7 @@
 			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
-		<button mat-fab routerLink="/search" [queryParams]="{type:model.data.searchLastType}">
+		<button mat-fab routerLink="/search/{{model.data.searchLastType}}">
 			<i class="material-icons mat-24 mat-light">search</i>
 		</button>
 	</mat-toolbar>

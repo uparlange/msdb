@@ -9,9 +9,9 @@
 			<mat-checkbox [(ngModel)]="model.showDevice">Device</mat-checkbox>
 		</mat-card-title>
 	</mat-card>
+	<div class="default-spacer"></div>
 	<div *ngFor="let group of model.data.list; let index=index; trackBy:model.trackByLabel">
 		<div *ngIf="model.data.list.length > 1">
-			<div class="default-spacer"></div>
 			<mat-card>
 				<mat-card-title>
 					{{group.label}} ({{group.data.length}})

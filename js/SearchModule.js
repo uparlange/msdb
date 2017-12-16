@@ -10,7 +10,18 @@ define(["AppUtils", "AbstractModule", "CommonModule", "SearchView", "SearchModel
 					imports: [
 						CommonModule,
 						ng.router.RouterModule.forChild([
-							{ path: "", component: SearchView }
+							{
+								path: "",
+								component: SearchView,
+								children: [
+									{ path: "description", loadChildren: AppUtils.getLazyModuleName("SearchByDescriptionModule") },
+									{ path: "categories", loadChildren: AppUtils.getLazyModuleName("SearchByCategoriesModule") },
+									{ path: "manufacturers", loadChildren: AppUtils.getLazyModuleName("SearchByManufacturersModule") },
+									{ path: "series", loadChildren: AppUtils.getLazyModuleName("SearchBySeriesModule") },
+									{ path: "years", loadChildren: AppUtils.getLazyModuleName("SearchByYearsModule") },
+									{ path: "versions", loadChildren: AppUtils.getLazyModuleName("SearchByVersionsModule") }
+								]
+							}
 						])
 					],
 					declarations: [

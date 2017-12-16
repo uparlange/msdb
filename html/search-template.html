@@ -1,146 +1,52 @@
 <mat-card>
 	<mat-card-title>
 		{{model.getSearchTabLabel(model.data.selectedIndex)|translate}}
-		<span *ngIf="model.data.count !== 0">( {{model.data.count}} )</span>
 	</mat-card-title>
 </mat-card>
 <div class="default-spacer"></div>
-<mat-tab-group [selectedIndex]="model.data.selectedIndex" (selectChange)="model.tabChanged($event)">
+<mat-tab-group (selectedTabChange)="model.tabChanged($event)" [(selectedIndex)]="model.data.selectedIndex">
 	<mat-tab>
 		<ng-template matTabLabel>
-			<i class="material-icons mat-24">search</i>
+			<a routerLink="/search/description">
+				<i class="material-icons mat-24">search</i>
+			</a>
 		</ng-template>
-		<div class="default-spacer"></div>
-		<form #descriptionForm="ngForm">
-			<mat-form-field>
-				<input matInput #descriptionInput pattern=".{3,}" required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description">
-			</mat-form-field>
-			<button *ngIf="model.data.description.length > 0" (click)="model.data.description = '';descriptionInput.focus();" type="button" mat-mini-fab>
-				<i class="material-icons mat-24 mat-light">clear</i>
-			</button>
-			<button *ngIf="descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" mat-mini-fab>
-				<i class="material-icons mat-24 mat-light">search</i>
-			</button>
-		</form>
 	</mat-tab>
 	<mat-tab>
 		<ng-template matTabLabel>
-			<i class="material-icons mat-24">folder_open</i>
+			<a routerLink="/search/categories">
+				<i class="material-icons mat-24">folder_open</i>
+			</a>
 		</ng-template>
-		<div *ngFor="let group of model.data.categories.list; let index=index; trackBy:model.trackByLabel">
-			<div *ngIf="model.data.categories.list.length > 1">
-				<div class="default-spacer"></div>
-				<mat-card >
-					<mat-card-title>
-						{{group.label}}
-						<button *ngIf="index > 0" mat-mini-fab scrollToTop>
-							<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
-						</button>
-					</mat-card-title>
-				</mat-card>
-			</div>
-			<div class="default-spacer"></div>
-			<mat-nav-list>
-				<a mat-list-item *ngFor="let category of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'category', value:category.label}">
-					{{category.label}}
-				</a>
-			</mat-nav-list>
-		</div>
 	</mat-tab>
 	<mat-tab>
 		<ng-template matTabLabel>
-			<i class="material-icons mat-24">list</i>
+			<a routerLink="/search/series">
+				<i class="material-icons mat-24">list</i>
+			</a>
 		</ng-template>
-		<div *ngFor="let group of model.data.series.list; let index=index; trackBy:model.trackByLabel">
-			<div *ngIf="model.data.series.list.length > 1">
-				<div class="default-spacer"></div>
-				<mat-card >
-					<mat-card-title>
-						{{group.label}}
-						<button *ngIf="index > 0" mat-mini-fab scrollToTop>
-							<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
-						</button>
-					</mat-card-title>
-				</mat-card>
-			</div>
-			<div class="default-spacer"></div>
-			<mat-nav-list>
-				<a mat-list-item *ngFor="let series of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'series', value:series.label}">
-					{{series.label}}
-				</a>
-			</mat-nav-list>
-		</div>
-	</mat-tab>	
-	<mat-tab>
-		<ng-template matTabLabel>
-			<i class="material-icons mat-24">today</i>
-		</ng-template>
-		<div *ngFor="let group of model.data.years.list; let index=index; trackBy:model.trackByLabel">
-			<div *ngIf="model.data.years.list.length > 1">
-				<div class="default-spacer"></div>
-				<mat-card >
-					<mat-card-title>
-						{{group.label}}
-						<button *ngIf="index > 0" mat-mini-fab scrollToTop>
-							<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
-						</button>
-					</mat-card-title>
-				</mat-card>
-			</div>
-			<div class="default-spacer"></div>
-			<mat-nav-list>
-				<a mat-list-item *ngFor="let year of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'year', value:year.label}">
-					{{year.label}}
-					<span class="fill-remaining-space"></span>
-					({{year.data}})
-				</a>
-			</mat-nav-list>
-		</div>
 	</mat-tab>
 	<mat-tab>
 		<ng-template matTabLabel>
-			<i class="material-icons mat-24">business</i>
+			<a routerLink="/search/years">
+				<i class="material-icons mat-24">today</i>
+			</a>
 		</ng-template>
-		<div *ngFor="let group of model.data.manufacturers.list; let index=index; trackBy:model.trackByLabel">
-			<div *ngIf="model.data.manufacturers.list.length > 1">
-				<div class="default-spacer"></div>
-				<mat-card >
-					<mat-card-title>
-						{{group.label}}
-						<button *ngIf="index > 0" mat-mini-fab scrollToTop>
-							<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
-						</button>
-					</mat-card-title>
-				</mat-card>
-			</div>
-			<div class="default-spacer"></div>
-			<mat-nav-list>
-				<a mat-list-item *ngFor="let manufacturer of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'manufacturer', value:manufacturer.label}">
-					{{manufacturer.label}}
-				</a>
-			</mat-nav-list>
-		</div>
 	</mat-tab>
 	<mat-tab>
 		<ng-template matTabLabel>
-			<i class="material-icons mat-24">plus_one</i>
+			<a routerLink="/search/manufacturers">
+				<i class="material-icons mat-24">business</i>
+			</a>
 		</ng-template>
-		<div class="default-spacer"></div>
-		<div *ngFor="let group of model.data.versions.list; trackBy:model.trackByLabel">
-			<mat-nav-list>
-				<mat-list-item *ngFor="let version of group.data; trackBy:model.trackByLabel">
-					<a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:version.label}">
-						{{version.label}} 
-					</a>
-					<span class="search-version-addition-count">(+{{version.data}})</span>
-					<a *ngIf="model.changeLogAvailable(version.label)" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(version.label)+'.txt'">
-						<i class="material-icons mat-24 mat-dark">track_changes</i>
-					</a>
-					<span *ngIf="!model.changeLogAvailable(version.label)">
-						<i class="material-icons mat-24 mat-dark mat-inactive">track_changes</i>
-					</span>
-				</mat-list-item>
-			</mat-nav-list>
-		</div>
+	</mat-tab>
+	<mat-tab>
+		<ng-template matTabLabel>
+			<a routerLink="/search/versions">
+				<i class="material-icons mat-24">plus_one</i>
+			</a>
+		</ng-template>
 	</mat-tab>
 </mat-tab-group>
+<div class="default-spacer"></div>
+<router-outlet></router-outlet>

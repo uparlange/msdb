@@ -1,0 +1,5 @@
+<mat-nav-list>
+    <a mat-list-item *ngFor="let item of model.data.list; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'series', value:item.label}">
+        {{item.label}}
+    </a>
+</mat-nav-list>

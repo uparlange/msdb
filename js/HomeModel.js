@@ -5,6 +5,7 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheM
 			constructor: function HomeModel(MsdbService, ConnectionManager, Title, CacheManager) {
 				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
 				this._cacheManager = CacheManager;
+				//this._cacheManagerOnChangeSubscriber = null;
 			},
 			parameters: [
 				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title], [CacheManager]
@@ -12,6 +13,13 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheM
 			functions: {
 				onInit: function () {
 					this.data.searchLastType = this._cacheManager.getItem("searchLastType", "description");
+					/*
+					this._cacheManagerOnChangeSubscriber = this._cacheManager.on("change").subscribe((event) => {
+						if (event.key === "searchLastType") {
+							this.data.searchLastType = event.newValue;
+						}
+					});
+					*/
 				},
 				onRefresh: function () {
 					if (this.data.mame.build === null) {
@@ -22,6 +30,9 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheM
 							}
 						});
 					}
+				},
+				onDestroy: function () {
+					
 				},
 				_getInitData: function () {
 					return {

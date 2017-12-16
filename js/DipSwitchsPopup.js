@@ -2,8 +2,8 @@ define(["AbstractPopup", "DetailModel", "AppUtils"],
 	function (AbstractPopup, DetailModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractPopup,
-			constructor: function DipSwitchsPopup(DetailModel, MdDialogRef) {
-				AbstractPopup.call(this, DetailModel, MdDialogRef);
+			constructor: function DipSwitchsPopup(DetailModel, MatDialogRef) {
+				AbstractPopup.call(this, DetailModel, MatDialogRef);
 				this.provider = [];
 			},
 			parameters: [

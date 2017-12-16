@@ -23,6 +23,7 @@ define(["AppUtils", "AbstractClass"],
 				},
 				off: function (eventSubscriber) {
 					eventSubscriber.unsubscribe();
+					eventSubscriber = null;
 				}
 			}
 		});

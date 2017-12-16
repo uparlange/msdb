@@ -1,0 +1,11 @@
+<form #descriptionForm="ngForm">
+	<mat-form-field>
+		<input matInput #descriptionInput pattern=".{3,}" required name="description" placeholder="{{'LION_GAME_NAME'|translate}}" [(ngModel)]="model.data.description">
+	</mat-form-field>
+	<button *ngIf="model.data.description.length > 0" (click)="model.data.description = '';descriptionInput.focus();" type="button" mat-mini-fab>
+		<i class="material-icons mat-24 mat-light">clear</i>
+	</button>
+	<button *ngIf="descriptionForm.form.valid" routerLink="/result" [queryParams]="{type:'description', value:model.data.description}" mat-mini-fab>
+		<i class="material-icons mat-24 mat-light">search</i>
+	</button>
+</form>

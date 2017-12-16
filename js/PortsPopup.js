@@ -2,8 +2,8 @@ define(["AbstractPopup", "DetailModel", "AppUtils"],
 	function (AbstractPopup, DetailModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractPopup,
-			constructor: function PortsPopup(DetailModel, MdDialogRef) {
-				AbstractPopup.call(this, DetailModel, MdDialogRef);
+			constructor: function PortsPopup(DetailModel, MatDialogRef) {
+				AbstractPopup.call(this, DetailModel, MatDialogRef);
 			},
 			parameters: [
 				[DetailModel], [ng.material.MatDialogRef]

@@ -7,7 +7,7 @@
 <mat-dialog-content>
 	<mat-list>
 		<mat-list-item *ngFor="let deviceref of model.data.game.devicerefs; trackBy:model.trackByName">
-			<a (click)="close()" routerLink="/detail" [queryParams]="{name:deviceref.name}">
+			<a (click)="showDeviceDetail(deviceref.name)">
 				{{deviceref.name}}
 			</a>
 		</mat-list-item>

@@ -2,19 +2,19 @@ define(["AppUtils", "AbstractComponent"],
 	function (AppUtils, AbstractComponent) {
 		return AppUtils.getClass({
 			extends: AbstractComponent,
-			constructor: function AbstractPopup(Model, MdDialogRef) {
+			constructor: function AbstractPopup(Model, MatDialogRef) {
 				AbstractComponent.call(this);
 				this.model = Model;
-				this._mdDialogRef = MdDialogRef;
+				this._matDialogRef = MatDialogRef;
 			},
 			functions: {
 				ngOnDestroy: function () {
 					AbstractComponent.prototype.ngOnDestroy.call(this);
 					this.model = null;
-					this._mdDialogRef = null;
+					this._matDialogRef = null;
 				},
 				close: function () {
-					this._mdDialogRef.close();
+					this._matDialogRef.close();
 				}
 			}
 		});

@@ -2,7 +2,7 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "Socket
 	function (AppUtils, AbstractModel, MsdbService, ConnectionManager, SocketManager) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function HomeModel(MsdbService, ConnectionManager, Title, SocketManager) {
+			constructor: function ConfigModel(MsdbService, ConnectionManager, Title, SocketManager) {
 				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
 				this._socketManager = SocketManager;
 			},

@@ -1,7 +1,7 @@
 define(["AbstractModule", "TranslatePipe", "NgForItemComponent", "LazyDirective", "ScrollToTopDirective",
-	"HrefDirective", "MaterialModule", "AppUtils"],
+	"HrefDirective", "MaterialModule", "AppUtils", "TreeComponent"],
 	function (AbstractModule, TranslatePipe, NgForItemComponent, LazyDirective, ScrollToTopDirective,
-		HrefDirective, MaterialModule, AppUtils) {
+		HrefDirective, MaterialModule, AppUtils, TreeComponent) {
 		return AppUtils.getClass({
 			extends: AbstractModule,
 			constructor: function CommonModule() {
@@ -20,7 +20,8 @@ define(["AbstractModule", "TranslatePipe", "NgForItemComponent", "LazyDirective"
 						NgForItemComponent,
 						LazyDirective,
 						ScrollToTopDirective,
-						HrefDirective
+						HrefDirective,
+						TreeComponent
 					],
 					exports: [
 						ng.common.CommonModule,
@@ -31,7 +32,8 @@ define(["AbstractModule", "TranslatePipe", "NgForItemComponent", "LazyDirective"
 						NgForItemComponent,
 						LazyDirective,
 						ScrollToTopDirective,
-						HrefDirective
+						HrefDirective,
+						TreeComponent
 					]
 				})
 			]

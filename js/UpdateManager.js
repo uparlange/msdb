@@ -35,7 +35,6 @@ define(["AppUtils", "AbstractManager", "TranslateManager", "WindowRef"],
 						this._translateManager.getValues(["L10N_NEW_VERSION"]).subscribe((translations) => {
 							if (confirm(translations.L10N_NEW_VERSION)) {
 								this._checked = true;
-
 								this._window.location.reload();
 							}
 						});

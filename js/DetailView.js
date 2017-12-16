@@ -6,10 +6,10 @@ define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup"
 		DeviceRefsPopup) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function DetailView(DetailModel, ActivatedRoute, ViewContainerRef, MdDialog) {
+			constructor: function DetailView(DetailModel, ActivatedRoute, ViewContainerRef, MatDialog) {
 				AbstractView.call(this, DetailModel, ActivatedRoute);
 				this._viewContainerRef = ViewContainerRef;
-				this._mdDialog = MdDialog;
+				this._matDialog = MatDialog;
 				this._dialogRef = null;
 			},
 			parameters: [
@@ -51,7 +51,7 @@ define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup"
 						const config = new ng.material.MatDialogConfig();
 						config.disableClose = true;
 						config.viewContainerRef = this._viewContainerRef;
-						this._dialogRef = this._mdDialog.open(clazz, config);
+						this._dialogRef = this._matDialog.open(clazz, config);
 						this._dialogRef.afterClosed().subscribe(() => {
 							this._dialogRef = null;
 						});

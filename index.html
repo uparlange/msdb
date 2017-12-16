@@ -66,18 +66,6 @@
 	<script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js"></script>
 	<script src="node_modules/@angular/router/bundles/router.umd.min.js"></script>
 	<script src="node_modules/@angular/forms/bundles/forms.umd.min.js"></script>
-	<!-- angular material 2 dependencies fix -->
-	<script>
-		// fix cdk-scrolling.umd.min.js
-		Rx.Observable.auditTime = Rx.operators.auditTime;
-		// fix cdk-a11y.umd.min.js
-		Rx.Observable.tap = Rx.operators.tap;
-		Rx.Observable.debounceTime = Rx.operators.debounceTime;
-		Rx.Observable.filter = Rx.operators.filter;
-		Rx.Observable.map = Rx.operators.map;
-		// fix cdk-overlay.umd.min.js
-		Rx.Observable.first = Rx.operators.first;
-	</script>
 	<!-- angular material 2 dependencies -->
 	<script src="node_modules/@angular/cdk/bundles/cdk.umd.min.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-platform.umd.min.js"></script>
@@ -94,10 +82,6 @@
 	<script src="node_modules/@angular/cdk/bundles/cdk-table.umd.min.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-stepper.umd.min.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-accordion.umd.min.js"></script>
-	<!-- angular material 2 fix -->
-	<script>
-		Rx.Observable.startWith = Rx.operators.startWith;
-	</script>
 	<!-- angular material 2 -->
 	<script src="node_modules/@angular/material/bundles/material.umd.min.js"></script>
 	<!-- photoswipe -->

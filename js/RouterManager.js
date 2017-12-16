@@ -2,11 +2,11 @@ define(["AbstractManager", "CacheManager", "AppUtils"],
 	function (AbstractManager, CacheManager, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractManager,
-			constructor: function RouterManager(Router, Location, CacheManager) {
+			constructor: function RouterManager(Router, CacheManager, NgZone) {
 				AbstractManager.call(this);
 				this._router = Router;
-				this._location = Location;
 				this._cacheManager = CacheManager;
+				this._ngZone = NgZone;
 				this._mutationObserver = null;
 				this._bodyRef = document.querySelector("body");
 				this._routerEventsSubscriber = this._router.events.subscribe((e) => {
@@ -29,12 +29,20 @@ define(["AbstractManager", "CacheManager", "AppUtils"],
 				});
 			},
 			parameters: [
-				[ng.router.Router], [ng.common.Location], [CacheManager]
+				[ng.router.Router], [CacheManager], [ng.core.NgZone]
 			],
 			functions: {
 				saveCurrentViewScrollPosition: function () {
 					const scrollTop = this._bodyRef.scrollTop;
 					this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), scrollTop);
+				},
+				navigate: function (commands, extras) {
+					this._ngZone.run(() => {
+						this._router.navigate(commands, extras);
+					});
+				},
+				getLocation: function () {
+					return this._router.location;
 				},
 				_restoreCurrentViewScrollPosition: function () {
 					const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
@@ -48,7 +56,7 @@ define(["AbstractManager", "CacheManager", "AppUtils"],
 					this._router.navigateByUrl(lastView);
 				},
 				_getCurrentPath: function () {
-					return this._location.path(true);
+					return this._router.location.path(true);
 				},
 				_disableMutationObserver: function () {
 					if (this._mutationObserver !== null) {

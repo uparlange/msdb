@@ -4,26 +4,24 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 		UpdateManager, RouterManager, Shell) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function AppView(AppModel, ActivatedRoute, ViewContainerRef, MdSnackBar, TranslateManager,
-				ConnectionManager, UpdateManager, RouterManager, Router, NgZone,
-				ElementRef, Renderer, Shell) {
+			constructor: function AppView(AppModel, ActivatedRoute, ViewContainerRef, MatSnackBar, TranslateManager,
+				ConnectionManager, UpdateManager, RouterManager, ElementRef, Renderer,
+				Shell) {
 				AbstractView.call(this, AppModel, ActivatedRoute);
 				this._viewContainerRef = ViewContainerRef;
-				this._mdSnackBar = MdSnackBar;
+				this._matSnackBar = MatSnackBar;
 				this._translateManager = TranslateManager;
 				this._connectionManager = ConnectionManager;
 				this._updateManager = UpdateManager;
 				this._routerManager = RouterManager;
-				this._router = Router;
-				this._ngZone = NgZone;
 				this._element = ElementRef.nativeElement;
 				this._renderer = Renderer;
 				this._shell = Shell;
 			},
 			parameters: [
 				[AppModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MatSnackBar], [TranslateManager],
-				[ConnectionManager], [UpdateManager], [RouterManager], [ng.router.Router], [ng.core.NgZone],
-				[ng.core.ElementRef], [ng.core.Renderer], [Shell]
+				[ConnectionManager], [UpdateManager], [RouterManager], [ng.core.ElementRef], [ng.core.Renderer],
+				[Shell]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("app", {
@@ -46,9 +44,7 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 					});
 				},
 				_showView: function (view) {
-					this._ngZone.run(() => {
-						this._router.navigate([view]);
-					});
+					this._routerManager.navigate([view]);
 				},
 				_initMenuBar: function () {
 					const pkg = require("./package.json");
@@ -105,7 +101,7 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 						config.viewContainerRef = this._viewContainerRef;
 						const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
 						this._translateManager.getValues([key]).subscribe((translations) => {
-							this._mdSnackBar.open(translations[key], null, config);
+							this._matSnackBar.open(translations[key], null, config);
 						});
 					});
 				}
