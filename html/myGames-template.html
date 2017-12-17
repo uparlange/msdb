@@ -4,7 +4,6 @@
 	</mat-card-title>
 </mat-card>
 <div *ngIf="model.data.allGames.length > 0">
-	<div class="default-spacer"></div>
 	<mat-list>
 		<mat-nav-list>
 			<a mat-list-item *ngFor="let game of model.data.allGames; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:game.name}">
@@ -15,7 +14,6 @@
 		</mat-nav-list>
 	</mat-list>
 </div>
-<div class="default-spacer"></div>
 <mat-card>
 	<mat-card-title>
 		{{'L10N_MY_BIOS'|translate}}
@@ -25,7 +23,6 @@
 	</mat-card-title>
 </mat-card>
 <div *ngIf="model.data.allBios.length > 0">
-	<div class="default-spacer"></div>
 	<mat-list>
 		<mat-nav-list>
 			<a mat-list-item *ngFor="let bios of model.data.allBios; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:bios.name}">

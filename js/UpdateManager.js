@@ -10,15 +10,6 @@ define(["AppUtils", "AbstractManager", "TranslateManager", "WindowRef"],
 				this._window.applicationCache.addEventListener("updateready", () => {
 					this._askForReload();
 				});
-				/*
-				if ("serviceWorker" in navigator) {
-					navigator.serviceWorker.register("sw.js").then((reg) => {
-						this.getLogger().info("Registration succeeded. Scope is " + reg.scope);
-					}).catch((error) => {
-						this.getLogger().error("Registration failed with " + error);
-					});
-				};
-				*/
 			},
 			parameters: [
 				[TranslateManager], [WindowRef]

@@ -9,7 +9,7 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
 			],
 			functions: {
-				onInit: function () {
+				onRefresh: function () {
 					const categories = [];
 					const category_map = {};
 					this._msdbService.getCategories().subscribe((data) => {
@@ -31,12 +31,6 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 						});
 						this.data.list = categories;
 					});
-				},
-				onRefresh: function () {
-
-				},
-				onDestroy: function () {
-
 				},
 				_getInitData: function () {
 					return {

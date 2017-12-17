@@ -13,9 +13,6 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheM
 				onInit: function () {
 					this.data.description = this._cacheManager.getItem("searchDescription", "");
 				},
-				onRefresh: function () {
-
-				},
 				onDestroy: function () {
 					this._cacheManager.setItem("searchDescription", this.data.description);
 				},

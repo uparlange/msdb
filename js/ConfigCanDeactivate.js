@@ -1,13 +1,14 @@
-define(["AppUtils", "AbstractClass", "TranslateManager"],
-	function (AppUtils, AbstractClass, TranslateManager) {
+define(["AppUtils", "AbstractClass", "TranslateManager", "WindowRef"],
+	function (AppUtils, AbstractClass, TranslateManager, WindowRef) {
 		return AppUtils.getClass({
 			extends: AbstractClass,
-			constructor: function ConfigCanDeactivate(TranslateManager) {
+			constructor: function ConfigCanDeactivate(TranslateManager, WindowRef) {
 				AbstractClass.call(this);
 				this._translateManager = TranslateManager;
+				this._window = WindowRef.nativeWindow;
 			},
 			parameters: [
-				[TranslateManager]
+				[TranslateManager], [WindowRef]
 			],
 			functions: {
 				canDeactivate: function (component) {
@@ -15,7 +16,7 @@ define(["AppUtils", "AbstractClass", "TranslateManager"],
 					setTimeout(() => {
 						if (component.model.hasChanges()) {
 							this._translateManager.getValues(["L10N_CONFIRM_QUIT"]).subscribe((translations) => {
-								eventEmitter.emit(window.confirm(translations.L10N_CONFIRM_QUIT));
+								eventEmitter.emit(this._window.confirm(translations.L10N_CONFIRM_QUIT));
 							});
 						}
 						else {

@@ -1,10 +1,10 @@
 define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "ConnectionManager",
-    "LazyManager", "CacheManager", "UpdateManager", "RouterManager"],
+    "LazyManager", "CacheManager", "UpdateManager", "RouterManager", "WindowRef"],
     function (AppUtils, EventManager, TranslateManager, SocketManager, ConnectionManager,
-        LazyManager, CacheManager, UpdateManager, RouterManager) {
+        LazyManager, CacheManager, UpdateManager, RouterManager, WindowRef) {
         return AppUtils.getClass({
             constructor: function Shell(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-                CacheManager, UpdateManager, RouterManager) {
+                CacheManager, UpdateManager, RouterManager, WindowRef) {
                 this._eventManager = EventManager;
                 this._translateManager = TranslateManager;
                 this._socketManager = SocketManager;
@@ -13,15 +13,16 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
                 this._cacheManager = CacheManager;
                 this._updateManager = UpdateManager;
                 this._routerManager = RouterManager;
+                this._window = WindowRef.nativeWindow;
             },
             parameters: [
                 [EventManager], [TranslateManager], [SocketManager], [ConnectionManager], [LazyManager],
-                [CacheManager], [UpdateManager], [RouterManager]
+                [CacheManager], [UpdateManager], [RouterManager], [WindowRef]
             ],
             functions: {
                 init: function () {
                     this._eventManager.init();
-                    const navigatorLang = navigator.language.split("-")[0];
+                    const navigatorLang = this._window.navigator.language.split("-")[0];
                     const defaultLang = /(fr|en)/gi.test(navigatorLang) ? navigatorLang : "en";
                     this._translateManager.init({
                         propertyFilePattern: "/data/{locale}.json",

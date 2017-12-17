@@ -43,10 +43,46 @@ define(["AbstractClass", "AppUtils"],
 					return AppUtils.getGameVideoUrl(game);
 				},
 				getSizeLabel: function (value) {
-					return AppUtils.getSizeLabel(value);
+					return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
 				},
 				getFrequencyLabel: function (value) {
-					return AppUtils.getFrequencyLabel(value);
+					return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
+				},
+				getGroupedArrayByFirstLetter: function (data, attribute) {
+					if (!Array.isArray(data)) {
+						return data;
+					}
+					const groups = {};
+					data.forEach((item) => {
+						let group = null;
+						const letter = item[attribute][0].toUpperCase();
+						group = isNaN(parseInt(letter)) ? letter : "0-9";
+						if (groups[group] === undefined) {
+							groups[group] = [];
+						}
+						groups[group].push(item);
+					});
+					const list = [];
+					for (let group in groups) {
+						list.push({
+							label: group,
+							data: groups[group]
+						});
+					}
+					return list;
+				},
+				_getUnitLabel: function (value, steps, stepMultiplier) {
+					let step = null;
+					steps.forEach((item, index) => {
+						const stepValue = Math.pow(stepMultiplier, index);
+						if (value >= stepValue) {
+							step = { unit: item, value: stepValue };
+						}
+						else {
+							return;
+						}
+					});
+					return (Math.round(value / step.value * 100) / 100) + " " + step.unit;
 				},
 				_callInitMethod: function () {
 					if (typeof this.onInit === "function") {

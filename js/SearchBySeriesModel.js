@@ -9,16 +9,10 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
 			],
 			functions: {
-				onInit: function () {
-					this._msdbService.getSeries().subscribe((data) => {
-						this.data.list = data;
-					});
-				},
 				onRefresh: function () {
-
-				},
-				onDestroy: function () {
-
+					this._msdbService.getSeries().subscribe((data) => {
+						this.data.list = this.getGroupedArrayByFirstLetter(data, "label");
+					});
 				},
 				trackByLabel: function (index, item) {
 					return item ? item.label : undefined;

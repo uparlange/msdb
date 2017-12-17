@@ -1,9 +1,5 @@
 define(function () {
 	return {
-		_md: new MobileDetect(navigator.userAgent),
-		getDevice: function () {
-			return this._md;
-		},
 		getClass: function (conf) {
 			const c = conf.constructor;
 			if (conf.extends) {
@@ -17,7 +13,7 @@ define(function () {
 				c.parameters = conf.parameters;
 			}
 			if (conf.functions) {
-				for(var fname in conf.functions) {
+				for (var fname in conf.functions) {
 					c.prototype[fname] = conf.functions[fname];
 				}
 			}
@@ -39,12 +35,6 @@ define(function () {
 			};
 			return Object.assign({}, defaultParams, params);
 		},
-		getSizeLabel: function (value) {
-			return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);
-		},
-		getFrequencyLabel: function (value) {
-			return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
-		},
 		getGameIconUrl: function (game) {
 			return (game.icon !== null ? this.getGameFolder(game) + "/" + game.icon.name : "images/mame_joy_32px.png");
 		},
@@ -65,19 +55,6 @@ define(function () {
 		},
 		getSocketUrl: function () {
 			return this._getBaseServerUrl() + ":" + this.getSocketPort();
-		},
-		_getUnitLabel: function (value, steps, stepMultiplier) {
-			let step = null;
-			steps.forEach((item, index) => {
-				const stepValue = Math.pow(stepMultiplier, index);
-				if (value >= stepValue) {
-					step = { unit: item, value: stepValue };
-				}
-				else {
-					return;
-				}
-			});
-			return (Math.round(value / step.value * 100) / 100) + " " + step.unit;
 		},
 		_getBaseServerUrl: function () {
 			return "http://localhost";

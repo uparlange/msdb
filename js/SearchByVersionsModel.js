@@ -9,16 +9,10 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
 			],
 			functions: {
-				onInit: function () {
+				onRefresh: function () {
 					this._msdbService.getVersions().subscribe((data) => {
 						this.data.list = data;
 					});
-				},
-				onRefresh: function () {
-
-				},
-				onDestroy: function () {
-
 				},
 				trackByLabel: function (index, item) {
 					return item ? item.label : undefined;
