@@ -9,6 +9,7 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 				this._ngZone = NgZone;
 				this._window = WindowRef.nativeWindow;
 				this._mutationObserver = null;
+				this._timeoutInterval = 50;
 				this._routerEventsSubscriber = this._router.events.subscribe((e) => {
 					switch (e.constructor.name) {
 						case "NavigationStart":
@@ -24,6 +25,7 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 						case "NavigationEnd":
 							this._saveLastView(e.urlAfterRedirects);
 							this._enableMutationObserver();
+							this._checkCreationComplete();
 							break;
 					}
 				});
@@ -67,13 +69,7 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 				_enableMutationObserver: function () {
 					if (this._mutationObserver === null) {
 						this._mutationObserver = new MutationObserver(() => {
-							if (this._creationCompleteTimeout !== null) {
-								clearTimeout(this._creationCompleteTimeout);
-							}
-							this._creationCompleteTimeout = setTimeout(() => {
-								this._disableMutationObserver();
-								this._restoreCurrentViewScrollPosition();
-							}, 50);
+							this._checkCreationComplete();
 						});
 						const config = {
 							childList: true,
@@ -83,6 +79,15 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 						};
 						this._mutationObserver.observe(document.querySelector("body"), config);
 					}
+				},
+				_checkCreationComplete: function () {
+					if (this._creationCompleteTimeout !== null) {
+						clearTimeout(this._creationCompleteTimeout);
+					}
+					this._creationCompleteTimeout = setTimeout(() => {
+						this._disableMutationObserver();
+						this._restoreCurrentViewScrollPosition();
+					}, this._timeoutInterval);
 				}
 			}
 		});

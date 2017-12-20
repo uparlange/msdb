@@ -13,10 +13,10 @@ define(["AbstractPopup", "DetailModel", "AppUtils", "RouterManager"],
 				new ng.core.Component(AppUtils.getComponentConfiguration("driver"))
 			],
 			functions: {
-				showGamesForMameVersion: function () {
+				showGamesForMameVersion: function (version) {
 					this.close();
 					setTimeout(() => {
-						this._routerManager.navigate(["/result"], { queryParams: { type: "mameversionadded", value: this.model.data.game.mameVersionAdded } })
+						this._routerManager.navigate(["/result"], { queryParams: { type: "mameversionadded", value: version } })
 					}, 0);
 				}
 			}

@@ -34,7 +34,8 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 				},
 				_getInitData: function () {
 					return {
-						list: null
+						list: null,
+						selectedItem: null
 					};
 				}
 			}

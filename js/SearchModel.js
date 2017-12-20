@@ -16,22 +16,19 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheM
 			functions: {
 				onInit: function () {
 					const type = this._routerManager.getLocation().path().split("/")[2];
-					const tabInfo = this._tabsInfo.byType(type);
+					const tabInfo = this.getTabsInfo().byType(type);
 					this.data.selectedIndex = tabInfo.index;
 				},
-				onRefresh: function () {
-
-				},
-				onDestroy: function () {
-
-				},
 				tabChanged: function (event) {
-					const tabInfo = this._tabsInfo.byIndex(event.index);
+					const tabInfo = this.getTabsInfo().byIndex(event.index);
 					this._cacheManager.setItem("searchLastType", tabInfo.type);
 				},
 				getSearchTabLabel: function (index) {
-					const tabInfo = this._tabsInfo.byIndex(index);
+					const tabInfo = this.getTabsInfo().byIndex(index);
 					return tabInfo.key;
+				},
+				getTabsInfo: function () {
+					return this._tabsInfo;
 				},
 				_getInitData: function () {
 					return {
