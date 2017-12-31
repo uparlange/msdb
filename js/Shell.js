@@ -13,7 +13,7 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
                 this._cacheManager = CacheManager;
                 this._updateManager = UpdateManager;
                 this._routerManager = RouterManager;
-                this._window = WindowRef.nativeWindow;
+                this._windowRef = WindowRef;
             },
             parameters: [
                 [EventManager], [TranslateManager], [SocketManager], [ConnectionManager], [LazyManager],
@@ -22,7 +22,7 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
             functions: {
                 init: function () {
                     this._eventManager.init();
-                    const navigatorLang = this._window.navigator.language.split("-")[0];
+                    const navigatorLang = this._windowRef.nativeWindow.navigator.language.split("-")[0];
                     const defaultLang = /(fr|en)/gi.test(navigatorLang) ? navigatorLang : "en";
                     this._translateManager.init({
                         propertyFilePattern: "/data/{locale}.json",

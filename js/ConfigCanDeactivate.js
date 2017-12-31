@@ -5,7 +5,7 @@ define(["AppUtils", "AbstractClass", "TranslateManager", "WindowRef"],
 			constructor: function ConfigCanDeactivate(TranslateManager, WindowRef) {
 				AbstractClass.call(this);
 				this._translateManager = TranslateManager;
-				this._window = WindowRef.nativeWindow;
+				this._windowRef = WindowRef;
 			},
 			parameters: [
 				[TranslateManager], [WindowRef]
@@ -16,7 +16,7 @@ define(["AppUtils", "AbstractClass", "TranslateManager", "WindowRef"],
 					setTimeout(() => {
 						if (component.model.hasChanges()) {
 							this._translateManager.getValues(["L10N_CONFIRM_QUIT"]).subscribe((translations) => {
-								eventEmitter.emit(this._window.confirm(translations.L10N_CONFIRM_QUIT));
+								eventEmitter.emit(this._windowRef.nativeWindow.confirm(translations.L10N_CONFIRM_QUIT));
 							});
 						}
 						else {

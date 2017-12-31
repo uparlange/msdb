@@ -7,32 +7,37 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 				this._router = Router;
 				this._cacheManager = CacheManager;
 				this._ngZone = NgZone;
-				this._window = WindowRef.nativeWindow;
+				this._windowRef = WindowRef;
 				this._mutationObserver = null;
-				this._routerEventsSubscriber = this._router.events.subscribe((e) => {
-					switch (e.constructor.name) {
-						case "NavigationStart":
-							if (e.id === 1) {
-								if (this._window.navigator.hasOwnProperty("standalone")) {
-									this._restoreLastView();
-								}
-							}
-							else {
-								this.saveCurrentViewScrollPosition();
-							}
-							break;
-						case "NavigationEnd":
-							this._saveLastView(e.urlAfterRedirects);
-							break;
-					}
-				});
+				this._routerEventsSubscriber = null;
 			},
 			parameters: [
 				[ng.router.Router], [CacheManager], [ng.core.NgZone], [WindowRef]
 			],
 			functions: {
+				init: function () {
+					AbstractManager.prototype.init.call(this);
+					this._routerEventsSubscriber = this._router.events.subscribe((e) => {
+						switch (e.constructor.name) {
+							case "NavigationStart":
+								if (e.id === 1) {
+									if (this._windowRef.isInWebApp()) {
+										this._restoreLastView();
+									}
+								}
+								else {
+									this.saveCurrentViewScrollPosition();
+								}
+								break;
+							case "NavigationEnd":
+								this._saveLastView(e.urlAfterRedirects);
+								break;
+						}
+					});
+				},
 				saveCurrentViewScrollPosition: function () {
-					this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), this._window.pageYOffset);
+					const scrollPosition = this._windowRef.getScrollPosition();
+					this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), scrollPosition.y);
 				},
 				navigate: function (commands, extras) {
 					this._ngZone.run(() => {
@@ -62,7 +67,7 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 									this._mutationObserver = null;
 								}
 								const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
-								document.documentElement.scrollTop = scrollTop;
+								this._windowRef.scrollTo(0, scrollTop);
 							}, 50);
 						});
 						const config = {

@@ -4,21 +4,24 @@ define(["AppUtils", "AbstractManager", "WindowRef"],
 			extends: AbstractManager,
 			constructor: function ConnectionManager(WindowRef) {
 				AbstractManager.call(this);
-				this._window = WindowRef.nativeWindow;
-				this.online = this._window.navigator.onLine;
-				this._window.addEventListener("offline", () => {
-					this._changeHandler();
-				});
-				this._window.addEventListener("online", () => {
-					this._changeHandler();
-				});
+				this._windowRef = WindowRef;
+				this.online = this._windowRef.nativeWindow.navigator.onLine;
 			},
 			parameters: [
 				[WindowRef]
 			],
 			functions: {
+				init: function () {
+					AbstractManager.prototype.init.call(this);
+					this._windowRef.nativeWindow.addEventListener("offline", () => {
+						this._changeHandler();
+					});
+					this._windowRef.nativeWindow.addEventListener("online", () => {
+						this._changeHandler();
+					});
+				},
 				_changeHandler: function () {
-					this.online = this._window.navigator.onLine;
+					this.online = this._windowRef.nativeWindow.navigator.onLine;
 					this.emit("change", this.online);
 				}
 			}
