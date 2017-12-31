@@ -10,13 +10,26 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
 			],
 			functions: {
 				onRefresh: function (callback) {
-					this.getServices().getManufacturers().subscribe((data) => {
-						this.data.list = this.getGroupedArrayByFirstLetter(data, "label");
+					this._refreshList().subscribe(() => {
 						callback();
 					});
 				},
 				trackByLabel: function (index, item) {
 					return item ? item.label : undefined;
+				},
+				_refreshList: function () {
+					const eventEmitter = new ng.core.EventEmitter();
+					if (this.data.list === null) {
+						this.getServices().getManufacturers().subscribe((data) => {
+							this.data.list = this.getGroupedArrayByFirstLetter(data, "label");
+							eventEmitter.emit();
+						});
+					} else {
+						setTimeout(() => {
+							eventEmitter.emit();
+						}, 0);
+					}
+					return eventEmitter;
 				},
 				_getInitData: function () {
 					return {

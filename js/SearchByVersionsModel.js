@@ -10,8 +10,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
 			],
 			functions: {
 				onRefresh: function (callback) {
-					this.getServices().getVersions().subscribe((data) => {
-						this.data.list = data;
+					this._refreshList().subscribe(() => {
 						callback();
 					});
 				},
@@ -27,6 +26,20 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
 				},
 				changeLogAvailable: function (value) {
 					return (value.indexOf("u") === -1 && value.indexOf("b") === -1);
+				},
+				_refreshList: function () {
+					const eventEmitter = new ng.core.EventEmitter();
+					if (this.data.list === null) {
+						this.getServices().getVersions().subscribe((data) => {
+							this.data.list = this.getGroupedArrayByItemsNumber(data, 20);
+							eventEmitter.emit();
+						});
+					} else {
+						setTimeout(() => {
+							eventEmitter.emit();
+						}, 0);
+					}
+					return eventEmitter;
 				},
 				_getInitData: function () {
 					return {

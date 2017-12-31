@@ -1,18 +1,17 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
-	function (AppUtils, AbstractModel, AbstractModelHelper, SocketManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
+	function (AppUtils, AbstractModel, AbstractModelHelper) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function MyGamesModel(AbstractModelHelper, SocketManager) {
+			constructor: function MyGamesModel(AbstractModelHelper) {
 				AbstractModel.call(this, AbstractModelHelper);
-				this._socketManager = SocketManager;
 				this._socketManagerConfigChangedSubscriber = null;
 			},
 			parameters: [
-				[AbstractModelHelper], [SocketManager]
+				[AbstractModelHelper]
 			],
 			functions: {
 				onInit: function () {
-					this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() => {
+					this._socketManagerConfigChangedSubscriber = this.getSockets().on("CONFIG_CHANGED").subscribe(() => {
 						this._refreshList();
 					});
 				},
@@ -20,14 +19,14 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
 					this._refreshList(callback);
 				},
 				onDestroy: function () {
-					this._socketManager.off(this._socketManagerConfigChangedSubscriber);
+					this.getSockets().off(this._socketManagerConfigChangedSubscriber);
 				},
 				trackByName: function (index, item) {
 					return item ? item.name : undefined;
 				},
-				_refreshList:function(callback) {
+				_refreshList: function (callback) {
 					this.data = this._getInitData();
-					this._socketManager.emit("GET_MY_GAMES", null).subscribe((result) => {
+					this.getSockets().emit("GET_MY_GAMES", null).subscribe((result) => {
 						if (result !== null && result.length > 0) {
 							this.getServices().search("name", result).subscribe((games) => {
 								const allGames = [];
@@ -44,7 +43,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
 									allGames: allGames,
 									allBios: allBios
 								};
-								if(callback) {
+								if (callback) {
 									callback();
 								}
 							});

@@ -38,6 +38,9 @@ define(["AbstractClass", "AppUtils"],
 				getServices: function () {
 					return this._helper.msdbService;
 				},
+				getSockets: function () {
+					return this._helper.socketManager;
+				},
 				getGameIconUrl: function (game) {
 					return AppUtils.getGameIconUrl(game);
 				},
@@ -74,6 +77,29 @@ define(["AbstractClass", "AppUtils"],
 							data: groups[group]
 						});
 					}
+					return list;
+				},
+				getGroupedArrayByItemsNumber: function (data, number) {
+					if (!Array.isArray(data)) {
+						return data;
+					}
+					const list = [];
+					let group = null;
+					let groupIndex = 0;
+					data.forEach((item, index) => {
+						if (groupIndex === 0) {
+							group = {
+								label: (index + 1) + " ... " + (index + number),
+								data: []
+							};
+							list.push(group);
+						}
+						group.data.push(item);
+						groupIndex++;
+						if (groupIndex === number) {
+							groupIndex = 0;
+						}
+					});
 					return list;
 				},
 				_getUnitLabel: function (value, steps, stepMultiplier) {

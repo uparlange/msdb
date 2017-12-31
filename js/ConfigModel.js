@@ -1,20 +1,19 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
-	function (AppUtils, AbstractModel, AbstractModelHelper, SocketManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
+	function (AppUtils, AbstractModel, AbstractModelHelper) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function ConfigModel(AbstractModelHelper, SocketManager) {
+			constructor: function ConfigModel(AbstractModelHelper) {
 				AbstractModel.call(this, AbstractModelHelper);
-				this._socketManager = SocketManager;
 			},
 			parameters: [
-				[AbstractModelHelper], [SocketManager]
+				[AbstractModelHelper]
 			],
 			functions: {
 				onRefresh: function (callback) {
 					this._getConfiguration(callback);
 				},
 				save: function () {
-					this._socketManager.emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result) => {
+					this.getSockets().emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result) => {
 						if (result !== null) {
 							this._getConfiguration();
 						}
@@ -32,7 +31,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
 					return (this.data.oldValue !== newValue);
 				},
 				_getConfiguration: function (callback) {
-					this._socketManager.emit("GET_CONFIGURATION").subscribe((result) => {
+					this.getSockets().emit("GET_CONFIGURATION").subscribe((result) => {
 						if (result !== null) {
 							this.data.oldValue = JSON.stringify(result);
 							this.data.newValue = result;

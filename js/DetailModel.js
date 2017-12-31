@@ -1,18 +1,17 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
-	function (AppUtils, AbstractModel, AbstractModelHelper, SocketManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
+	function (AppUtils, AbstractModel, AbstractModelHelper) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function DetailModel(AbstractModelHelper, SocketManager) {
+			constructor: function DetailModel(AbstractModelHelper) {
 				AbstractModel.call(this, AbstractModelHelper);
-				this._socketManager = SocketManager;
 				this._socketManagerConfigChangedSubscriber = null;
 			},
 			parameters: [
-				[AbstractModelHelper], [SocketManager]
+				[AbstractModelHelper]
 			],
 			functions: {
 				onInit: function () {
-					this._socketManagerConfigChangedSubscriber = this._socketManager.on("CONFIG_CHANGED").subscribe(() => {
+					this._socketManagerConfigChangedSubscriber = this.getSockets().on("CONFIG_CHANGED").subscribe(() => {
 						this._refreshGameAvailability();
 					});
 				},
@@ -36,10 +35,10 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
 					});
 				},
 				onDestroy: function () {
-					this._socketManager.off(this._socketManagerConfigChangedSubscriber);
+					this.getSockets().off(this._socketManagerConfigChangedSubscriber);
 				},
 				playGame: function () {
-					this._socketManager.emit("PLAY_GAME", this.params.name);
+					this.getSockets().emit("PLAY_GAME", this.params.name);
 				},
 				setVideoAvailable: function (b) {
 					this.data.videoAvailable = b;
@@ -67,7 +66,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
 				},
 				_refreshGameAvailability: function () {
 					this.data.gameAvailable = false;
-					this._socketManager.emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result) => {
+					this.getSockets().emit("IS_ROM_AVAILABLE", this.params.name).subscribe((result) => {
 						if (result !== null && result.name === this.params.name) {
 							this.data.gameAvailable = result.available;
 						}

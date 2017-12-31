@@ -93,6 +93,11 @@ mat-toolbar-row
 	padding-right:12px !important;
 }
 
+.mat-list-item-content
+{
+	width:100%;
+}
+
 .default-spacer
 {
 	height:10px;
