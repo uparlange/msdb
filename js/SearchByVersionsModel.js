@@ -1,17 +1,18 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
+	function (AppUtils, AbstractModel, AbstractModelHelper) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchByVersionsModel(MsdbService, ConnectionManager, Title) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function SearchByVersionsModel(AbstractModelHelper) {
+				AbstractModel.call(this, AbstractModelHelper);
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
+				[AbstractModelHelper]
 			],
 			functions: {
-				onRefresh: function () {
-					this._msdbService.getVersions().subscribe((data) => {
+				onRefresh: function (callback) {
+					this.getServices().getVersions().subscribe((data) => {
 						this.data.list = data;
+						callback();
 					});
 				},
 				trackByLabel: function (index, item) {

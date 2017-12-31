@@ -1,13 +1,13 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager, CacheManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper", "CacheManager"],
+	function (AppUtils, AbstractModel, AbstractModelHelper, CacheManager) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchByDescriptionModel(MsdbService, ConnectionManager, Title, CacheManager) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function SearchByDescriptionModel(AbstractModelHelper, CacheManager) {
+				AbstractModel.call(this, AbstractModelHelper);
 				this._cacheManager = CacheManager;
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title], [CacheManager]
+				[AbstractModelHelper], [CacheManager]
 			],
 			functions: {
 				onInit: function () {

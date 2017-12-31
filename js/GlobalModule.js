@@ -1,9 +1,9 @@
 define(["AppUtils", "EventManager", "TranslateManager", "MsdbService", "SocketManager",
     "ConnectionManager", "LazyManager", "CacheManager", "UpdateManager", "RouterManager",
-    "WindowRef", "Shell"],
+    "WindowRef", "Shell", "AbstractModelHelper"],
     function (AppUtils, EventManager, TranslateManager, MsdbService, SocketManager,
         ConnectionManager, LazyManager, CacheManager, UpdateManager, RouterManager,
-        WindowRef, Shell) {
+        WindowRef, Shell, AbstractModelHelper) {
         return AppUtils.getClass({
             constructor: function GlobalModule() {
 
@@ -21,7 +21,8 @@ define(["AppUtils", "EventManager", "TranslateManager", "MsdbService", "SocketMa
                         UpdateManager,
                         RouterManager,
                         WindowRef,
-                        Shell
+                        Shell,
+                        AbstractModelHelper
                     ]
                 })
             ]

@@ -1,14 +1,14 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "SocketManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager, SocketManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
+	function (AppUtils, AbstractModel, AbstractModelHelper, SocketManager) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function DetailModel(MsdbService, ConnectionManager, Title, SocketManager) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function DetailModel(AbstractModelHelper, SocketManager) {
+				AbstractModel.call(this, AbstractModelHelper);
 				this._socketManager = SocketManager;
 				this._socketManagerConfigChangedSubscriber = null;
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title], [SocketManager]
+				[AbstractModelHelper], [SocketManager]
 			],
 			functions: {
 				onInit: function () {
@@ -16,9 +16,9 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "Socket
 						this._refreshGameAvailability();
 					});
 				},
-				onRefresh: function () {
+				onRefresh: function (callback) {
 					this.data = this._getInitData();
-					this._msdbService.getDetail(this.params.name).subscribe((data) => {
+					this.getServices().getDetail(this.params.name).subscribe((data) => {
 						if (data === null) {
 							data = {
 								name: this.params.name,
@@ -28,8 +28,9 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "Socket
 						this.data.game = data;
 						const title = this.data.game.description + " - " + this.data.game.name;
 						this._setTitle(title);
-						this._msdbService.search("clones", this.params.name).subscribe((data) => {
+						this.getServices().search("clones", this.params.name).subscribe((data) => {
 							this.data.clones = data;
+							callback();
 						});
 						this._refreshGameAvailability();
 					});

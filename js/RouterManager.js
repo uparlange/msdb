@@ -9,12 +9,11 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 				this._ngZone = NgZone;
 				this._window = WindowRef.nativeWindow;
 				this._mutationObserver = null;
-				this._timeoutInterval = 50;
 				this._routerEventsSubscriber = this._router.events.subscribe((e) => {
 					switch (e.constructor.name) {
 						case "NavigationStart":
 							if (e.id === 1) {
-								if (this._window.navigator.standalone == true) {
+								if (this._window.navigator.hasOwnProperty("standalone")) {
 									this._restoreLastView();
 								}
 							}
@@ -24,8 +23,6 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 							break;
 						case "NavigationEnd":
 							this._saveLastView(e.urlAfterRedirects);
-							this._enableMutationObserver();
-							this._checkCreationComplete();
 							break;
 					}
 				});
@@ -35,41 +32,38 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 			],
 			functions: {
 				saveCurrentViewScrollPosition: function () {
-					const scrollTop = (this._window.pageYOffset || document.documentElement.scrollTop);
-					this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), scrollTop);
+					this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), this._window.pageYOffset);
 				},
 				navigate: function (commands, extras) {
 					this._ngZone.run(() => {
 						this._router.navigate(commands, extras);
 					});
 				},
-				getLocation: function () {
-					return this._router.location;
-				},
-				_restoreCurrentViewScrollPosition: function () {
-					const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
-					document.documentElement.scrollTop = scrollTop;
-				},
-				_saveLastView: function (url) {
-					this._cacheManager.setItem("lastView", url);
-				},
-				_restoreLastView: function () {
-					const lastView = this._cacheManager.getItem("lastView", "/home");
-					this._router.navigateByUrl(lastView);
-				},
-				_getCurrentPath: function () {
-					return this._router.location.path(true);
-				},
-				_disableMutationObserver: function () {
-					if (this._mutationObserver !== null) {
-						this._mutationObserver.disconnect();
-						this._mutationObserver = null;
+				getUrlWithoutQueryParams: function () {
+					let url = this._router.url;
+					if (url.indexOf("?") !== -1) {
+						url = url.substring(0, url.indexOf("?"));
 					}
+					return url;
 				},
-				_enableMutationObserver: function () {
+				getUrlQueryParams: function () {
+					return this._router.parseUrl(this._router.url).queryParams;
+				},
+				restoreScrollPosition: function () {
 					if (this._mutationObserver === null) {
 						this._mutationObserver = new MutationObserver(() => {
-							this._checkCreationComplete();
+							if (this._creationCompleteTimeout !== null) {
+								clearTimeout(this._creationCompleteTimeout);
+							}
+							this._creationCompleteTimeout = setTimeout(() => {
+								this._creationCompleteTimeout = null;
+								if (this._mutationObserver !== null) {
+									this._mutationObserver.disconnect();
+									this._mutationObserver = null;
+								}
+								const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
+								document.documentElement.scrollTop = scrollTop;
+							}, 50);
 						});
 						const config = {
 							childList: true,
@@ -80,14 +74,15 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 						this._mutationObserver.observe(document.querySelector("body"), config);
 					}
 				},
-				_checkCreationComplete: function () {
-					if (this._creationCompleteTimeout !== null) {
-						clearTimeout(this._creationCompleteTimeout);
-					}
-					this._creationCompleteTimeout = setTimeout(() => {
-						this._disableMutationObserver();
-						this._restoreCurrentViewScrollPosition();
-					}, this._timeoutInterval);
+				_saveLastView: function (url) {
+					this._cacheManager.setItem("lastView", url);
+				},
+				_restoreLastView: function () {
+					const lastView = this._cacheManager.getItem("lastView", "/home");
+					this._router.navigateByUrl(lastView);
+				},
+				_getCurrentPath: function () {
+					return this._router.location.path(true);
 				}
 			}
 		});

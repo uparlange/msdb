@@ -2,36 +2,41 @@ define(["AbstractClass", "AppUtils"],
 	function (AbstractClass, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractClass,
-			constructor: function AbstractModel(MsdbService, ConnectionManager, Title) {
+			constructor: function AbstractModel(AbstractModelHelper) {
 				AbstractClass.call(this);
-				this._msdbService = MsdbService;
-				this._connectionManager = ConnectionManager;
-				this._title = Title;
-				this._connectionManagerChangeSubscriber = null;
 				this.params = {};
 				this.data = this._getInitData();
+				this._helper = AbstractModelHelper;
+				this._connectionManagerChangeSubscriber = null;
 			},
 			functions: {
 				init: function (params) {
-					this._connectionManagerChangeSubscriber = this._connectionManager.on("change").subscribe((online) => {
+					this._connectionManagerChangeSubscriber = this._helper.connectionManager.on("change").subscribe((online) => {
 						this.params.online = online;
 						if (online) {
-							this._callRefreshMethod();
+							this._callRefreshMethod(() => {
+								this._helper.routerManager.restoreScrollPosition();
+							});
 						}
 					});
 					this._setTitle();
 					this._callInitMethod();
+					this._helper.routerManager.restoreScrollPosition();
 					const currentParams = this.params;
-					const newParams = Object.assign({ online: this._connectionManager.online }, params);
+					const newParams = Object.assign({ online: this._helper.connectionManager.online }, params);
 					if (JSON.stringify(currentParams) !== JSON.stringify(newParams)) {
 						this.params = newParams;
-						this._callRefreshMethod();
+						this._callRefreshMethod(() => {
+							this._helper.routerManager.restoreScrollPosition();
+						});
 					}
 				},
 				destroy: function () {
 					this._callDestroyMethod();
-					this._connectionManager.off(this._connectionManagerChangeSubscriber);
-					this._connectionManagerChangeSubscriber = null;
+					this._helper.connectionManager.off(this._connectionManagerChangeSubscriber);
+				},
+				getServices: function () {
+					return this._helper.msdbService;
 				},
 				getGameIconUrl: function (game) {
 					return AppUtils.getGameIconUrl(game);
@@ -90,10 +95,10 @@ define(["AbstractClass", "AppUtils"],
 						this.onInit();
 					}
 				},
-				_callRefreshMethod: function () {
+				_callRefreshMethod: function (callback) {
 					if (typeof this.onRefresh === "function") {
 						this.getLogger().debug("onRefresh");
-						this.onRefresh();
+						this.onRefresh(callback);
 					}
 				},
 				_callDestroyMethod: function () {
@@ -110,7 +115,7 @@ define(["AbstractClass", "AppUtils"],
 					if (typeof value === "string") {
 						title += " - " + value;
 					}
-					this._title.setTitle(title);
+					this._helper.title.setTitle(title);
 				}
 			}
 		});

@@ -1,12 +1,12 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
+	function (AppUtils, AbstractModel, AbstractModelHelper) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function BotModel(MsdbService, ConnectionManager, Title) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function BotModel(AbstractModelHelper) {
+				AbstractModel.call(this, AbstractModelHelper);
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
+				[AbstractModelHelper]
 			],
 			functions: {
 				_getInitData: function () {

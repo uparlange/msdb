@@ -1,17 +1,17 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "SocketManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager, SocketManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper", "SocketManager"],
+	function (AppUtils, AbstractModel, AbstractModelHelper, SocketManager) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function ConfigModel(MsdbService, ConnectionManager, Title, SocketManager) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function ConfigModel(AbstractModelHelper, SocketManager) {
+				AbstractModel.call(this, AbstractModelHelper);
 				this._socketManager = SocketManager;
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title], [SocketManager]
+				[AbstractModelHelper], [SocketManager]
 			],
 			functions: {
-				onRefresh: function () {
-					this._getConfiguration();
+				onRefresh: function (callback) {
+					this._getConfiguration(callback);
 				},
 				save: function () {
 					this._socketManager.emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result) => {
@@ -31,12 +31,15 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "Socket
 					const newValue = JSON.stringify(this.data.newValue);
 					return (this.data.oldValue !== newValue);
 				},
-				_getConfiguration: function () {
+				_getConfiguration: function (callback) {
 					this._socketManager.emit("GET_CONFIGURATION").subscribe((result) => {
 						if (result !== null) {
 							this.data.oldValue = JSON.stringify(result);
 							this.data.newValue = result;
 							this.data.enabled = false;
+						}
+						if (callback) {
+							callback();
 						}
 					});
 				},

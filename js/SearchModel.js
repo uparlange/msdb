@@ -1,21 +1,21 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager", "CacheManager",
+define(["AppUtils", "AbstractModel", "AbstractModelHelper", "CacheManager",
 	"RouterManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager, CacheManager,
+	function (AppUtils, AbstractModel, AbstractModelHelper, CacheManager,
 		RouterManager) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchModel(MsdbService, ConnectionManager, Title, CacheManager, RouterManager) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function SearchModel(AbstractModelHelper, CacheManager, RouterManager) {
+				AbstractModel.call(this, AbstractModelHelper);
 				this._cacheManager = CacheManager;
 				this._routerManager = RouterManager;
 				this._tabsInfo = this._getTabsInfo();
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title], [CacheManager], [RouterManager]
+				[AbstractModelHelper], [CacheManager], [RouterManager]
 			],
 			functions: {
 				onInit: function () {
-					const type = this._routerManager.getLocation().path().split("/")[2];
+					const type = this._routerManager.getUrlWithoutQueryParams().split("/")[2];
 					const tabInfo = this.getTabsInfo().byType(type);
 					this.data.selectedIndex = tabInfo.index;
 				},

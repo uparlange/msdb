@@ -1,9 +1,9 @@
-define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
-	function (AppUtils, AbstractModel, MsdbService, ConnectionManager) {
+define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
+	function (AppUtils, AbstractModel, AbstractModelHelper) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function ResultModel(MsdbService, ConnectionManager, Title) {
-				AbstractModel.call(this, MsdbService, ConnectionManager, Title);
+			constructor: function ResultModel(AbstractModelHelper) {
+				AbstractModel.call(this, AbstractModelHelper);
 				this.SYSTEM_DEVICE = "System / Device";
 				this.SYSTEM_BIOS = "System / BIOS";
 				this.showBios = false;
@@ -11,7 +11,7 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 				this.showClone = false;
 			},
 			parameters: [
-				[MsdbService], [ConnectionManager], [ng.platformBrowser.Title]
+				[AbstractModelHelper]
 			],
 			functions: {
 				onInit: function () {
@@ -33,11 +33,12 @@ define(["AppUtils", "AbstractModel", "MsdbService", "ConnectionManager"],
 							break;
 					}
 				},
-				onRefresh: function () {
+				onRefresh: function (callback) {
 					this.data = this._getInitData();
-					this._msdbService.search(this.params.type, this.params.value).subscribe((data) => {
+					this.getServices().search(this.params.type, this.params.value).subscribe((data) => {
 						this.data.count = Array.isArray(data) ? data.length : 0;
 						this.data.list = this.getGroupedArrayByFirstLetter(data, "description");
+						callback();
 					});
 				},
 				canShowGame: function (game) {
