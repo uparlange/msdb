@@ -4,8 +4,8 @@
             {{item.label}}
         </mat-list-item>
     </mat-nav-list>
-    <mat-expansion-panel [expanded]="selectedItem === item" #panel *ngIf="item.children != null && item.children.length > 0" (click)="toggleNode(panel, item)">
-        <mat-expansion-panel-header>
+    <mat-expansion-panel [expanded]="selectedItem === item" *ngIf="item.children != null && item.children.length > 0">
+        <mat-expansion-panel-header #panelHeader (click)="toggleNode(panelHeader, item)">
             <mat-panel-title>
                 {{item.label}}
             </mat-panel-title>
