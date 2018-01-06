@@ -1,15 +1,14 @@
-define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
-	function (AbstractService, EventManager, CacheManager, AppUtils) {
+define(["AbstractService", "AbstractClassHelper", "AppUtils"],
+	function (AbstractService, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractService,
-			constructor: function MsdbService(HttpClient, EventManager, CacheManager) {
-				AbstractService.call(this, HttpClient, EventManager);
-				this._cacheManager = CacheManager;
+			constructor: function MsdbService(AbstractClassHelper) {
+				AbstractService.call(this, AbstractClassHelper);
 				this._mameInfos = null;
 				this._token = null;
 			},
 			parameters: [
-				[ng.common.http.HttpClient], [EventManager], [CacheManager]
+				[AbstractClassHelper]
 			],
 			functions: {
 				getMameInfos: function () {
@@ -77,7 +76,7 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 					const cacheKey = this._getCacheKey(config);
 					let value = null;
 					if (config.useCache === true) {
-						value = this._cacheManager.getItem(cacheKey);
+						value = this.getCache().getItem(cacheKey);
 					}
 					if (value !== null) {
 						setTimeout(() => {
@@ -92,7 +91,7 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 								this.httpGet(config.url, params).subscribe((result) => {
 									value = this._getData(result);
 									if (config.useCache === true) {
-										this._cacheManager.setItem(cacheKey, value);
+										this.getCache().setItem(cacheKey, value);
 									}
 									eventEmitter.emit(value);
 								});
@@ -131,7 +130,7 @@ define(["AbstractService", "EventManager", "CacheManager", "AppUtils"],
 							if (data !== null) {
 								this._token = data.token;
 								this._mameInfos = data.mameInfos;
-								this._cacheManager.setDefaultNs(data.mameInfos.build);
+								this.getCache().setDefaultNs(data.mameInfos.build);
 							}
 							eventEmitter.emit();
 						});

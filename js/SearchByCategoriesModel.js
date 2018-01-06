@@ -1,13 +1,12 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper", "RouterManager"],
-	function (AppUtils, AbstractModel, AbstractModelHelper, RouterManager) {
+define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
+	function (AppUtils, AbstractModel, AbstractClassHelper, MsdbService) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchByCategoriesModel(AbstractModelHelper, RouterManager) {
-				AbstractModel.call(this, AbstractModelHelper);
-				this._routerManager = RouterManager;
+			constructor: function SearchByCategoriesModel(AbstractClassHelper, MsdbService) {
+				AbstractModel.call(this, AbstractClassHelper, MsdbService);
 			},
 			parameters: [
-				[AbstractModelHelper], [RouterManager]
+				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
 				onRefresh: function (callback) {
@@ -18,7 +17,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper", "RouterManager"],
 				},
 				_refreshSelection: function () {
 					if (this.data.list !== null) {
-						const params = this._routerManager.getUrlQueryParams();
+						const params = this.getRouter().getUrlQueryParams();
 						if (params.hasOwnProperty("category")) {
 							this.data.list.forEach((element) => {
 								if (element.label === params.category) {

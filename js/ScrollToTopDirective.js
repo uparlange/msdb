@@ -1,14 +1,13 @@
-define(["AbstractDirective", "WindowRef", "AppUtils"],
-	function (AbstractDirective, WindowRef, AppUtils) {
+define(["AbstractDirective", "AbstractClassHelper", "AppUtils"],
+	function (AbstractDirective, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractDirective,
-			constructor: function ScrollToTopDirective(WindowRef) {
-				AbstractDirective.call(this);
-				this._windowRef = WindowRef;
+			constructor: function ScrollToTopDirective(AbstractClassHelper) {
+				AbstractDirective.call(this, AbstractClassHelper);
 				this._scrollDuration = 500;
 			},
 			parameters: [
-				[WindowRef]
+				[AbstractClassHelper]
 			],
 			annotations: [
 				new ng.core.Directive({
@@ -20,22 +19,22 @@ define(["AbstractDirective", "WindowRef", "AppUtils"],
 			],
 			functions: {
 				onClick: function () {
-					const cosParameter = this._windowRef.getScrollPosition().y / 2;
+					const cosParameter = this.getWindowRef().getScrollPosition().y / 2;
 					let scrollCount = 0;
 					let oldTimestamp = performance.now();
 					const step = (newTimestamp) => {
 						scrollCount += Math.PI / (this._scrollDuration / (newTimestamp - oldTimestamp));
 						if (scrollCount >= Math.PI) {
-							this._windowRef.scrollTo(0, 0);
+							this.getWindowRef().scrollTo(0, 0);
 						}
-						if (this._windowRef.getScrollPosition().y === 0) {
+						if (this.getWindowRef().getScrollPosition().y === 0) {
 							return;
 						}
-						this._windowRef.scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
+						this.getWindowRef().scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
 						oldTimestamp = newTimestamp;
-						this._windowRef.nativeWindow.requestAnimationFrame(step);
+						this.getWindowRef().nativeWindow.requestAnimationFrame(step);
 					}
-					this._windowRef.nativeWindow.requestAnimationFrame(step);
+					this.getWindowRef().nativeWindow.requestAnimationFrame(step);
 				}
 			}
 		});

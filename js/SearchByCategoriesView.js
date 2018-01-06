@@ -1,23 +1,22 @@
-define(["AbstractView", "SearchByCategoriesModel", "AppUtils", "RouterManager"],
-	function (AbstractView, SearchByCategoriesModel, AppUtils, RouterManager) {
+define(["AbstractView", "AbstractClassHelper", "SearchByCategoriesModel", "AppUtils"],
+	function (AbstractView, AbstractClassHelper, SearchByCategoriesModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function SearchByCategoriesView(SearchByCategoriesModel, ActivatedRoute, RouterManager) {
-				AbstractView.call(this, SearchByCategoriesModel, ActivatedRoute);
-				this._routerManager = RouterManager;
+			constructor: function SearchByCategoriesView(AbstractClassHelper, SearchByCategoriesModel) {
+				AbstractView.call(this, AbstractClassHelper, SearchByCategoriesModel);
 			},
 			parameters: [
-				[SearchByCategoriesModel], [ng.router.ActivatedRoute], [RouterManager]
+				[AbstractClassHelper], [SearchByCategoriesModel]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("searchByCategories"))
 			],
 			functions: {
 				itemChangeHandler: function (event) {
-					this._routerManager.navigate([], { queryParams: { category: event.item.label } });
+					this.getRouter().navigate([], { queryParams: { category: event.item.label } });
 				},
 				itemClickHandler: function (item) {
-					this._routerManager.navigate(["/result"], { queryParams: { type: "category", value: item.data } });
+					this.getRouter().navigate(["/result"], { queryParams: { type: "category", value: item.data } });
 				}
 			}
 		});

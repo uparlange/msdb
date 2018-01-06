@@ -1,19 +1,19 @@
-define(["AbstractView", "DetailModel", "DriverPopup", "RomsPopup", "ClonesPopup",
-	"DipSwitchsPopup", "AppUtils", "ChipsPopup", "BiossetsPopup", "PortsPopup",
-	"DeviceRefsPopup"],
-	function (AbstractView, DetailModel, DriverPopup, RomsPopup, ClonesPopup,
-		DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup, PortsPopup,
-		DeviceRefsPopup) {
+define(["AbstractView", "AbstractClassHelper", "DetailModel", "DriverPopup", "RomsPopup",
+	"ClonesPopup", "DipSwitchsPopup", "AppUtils", "ChipsPopup", "BiossetsPopup",
+	"PortsPopup", "DeviceRefsPopup"],
+	function (AbstractView, AbstractClassHelper, DetailModel, DriverPopup, RomsPopup,
+		ClonesPopup, DipSwitchsPopup, AppUtils, ChipsPopup, BiossetsPopup,
+		PortsPopup, DeviceRefsPopup) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function DetailView(DetailModel, ActivatedRoute, ViewContainerRef, MatDialog) {
-				AbstractView.call(this, DetailModel, ActivatedRoute);
+			constructor: function DetailView(AbstractClassHelper, DetailModel, ViewContainerRef, MatDialog) {
+				AbstractView.call(this, AbstractClassHelper, DetailModel);
 				this._viewContainerRef = ViewContainerRef;
 				this._matDialog = MatDialog;
 				this._dialogRef = null;
 			},
 			parameters: [
-				[DetailModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MatDialog]
+				[AbstractClassHelper], [DetailModel], [ng.core.ViewContainerRef], [ng.material.MatDialog]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("detail"))

@@ -1,27 +1,23 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper", "CacheManager",
-	"RouterManager"],
-	function (AppUtils, AbstractModel, AbstractModelHelper, CacheManager,
-		RouterManager) {
+define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
+	function (AppUtils, AbstractModel, AbstractClassHelper, MsdbService) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchModel(AbstractModelHelper, CacheManager, RouterManager) {
-				AbstractModel.call(this, AbstractModelHelper);
-				this._cacheManager = CacheManager;
-				this._routerManager = RouterManager;
+			constructor: function SearchModel(AbstractClassHelper, MsdbService) {
+				AbstractModel.call(this, AbstractClassHelper, MsdbService);
 				this._tabsInfo = this._getTabsInfo();
 			},
 			parameters: [
-				[AbstractModelHelper], [CacheManager], [RouterManager]
+				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
 				onInit: function () {
-					const type = this._routerManager.getUrlWithoutQueryParams().split("/")[2];
+					const type = this.getRouter().getUrlWithoutQueryParams().split("/")[2];
 					const tabInfo = this.getTabsInfo().byType(type);
 					this.data.selectedIndex = tabInfo.index;
 				},
 				tabChanged: function (event) {
 					const tabInfo = this.getTabsInfo().byIndex(event.index);
-					this._cacheManager.setItem("searchLastType", tabInfo.type);
+					this.getCache().setItem("searchLastType", tabInfo.type);
 				},
 				getSearchTabLabel: function (index) {
 					const tabInfo = this.getTabsInfo().byIndex(index);

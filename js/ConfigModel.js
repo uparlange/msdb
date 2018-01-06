@@ -1,19 +1,19 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
-	function (AppUtils, AbstractModel, AbstractModelHelper) {
+define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
+	function (AppUtils, AbstractModel, AbstractClassHelper, MsdbService) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function ConfigModel(AbstractModelHelper) {
-				AbstractModel.call(this, AbstractModelHelper);
+			constructor: function ConfigModel(AbstractClassHelper, MsdbService) {
+				AbstractModel.call(this, AbstractClassHelper, MsdbService);
 			},
 			parameters: [
-				[AbstractModelHelper]
+				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
 				onRefresh: function (callback) {
 					this._getConfiguration(callback);
 				},
 				save: function () {
-					this.getSockets().emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result) => {
+					this.getSocket().emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result) => {
 						if (result !== null) {
 							this._getConfiguration();
 						}
@@ -31,7 +31,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
 					return (this.data.oldValue !== newValue);
 				},
 				_getConfiguration: function (callback) {
-					this.getSockets().emit("GET_CONFIGURATION").subscribe((result) => {
+					this.getSocket().emit("GET_CONFIGURATION").subscribe((result) => {
 						if (result !== null) {
 							this.data.oldValue = JSON.stringify(result);
 							this.data.newValue = result;

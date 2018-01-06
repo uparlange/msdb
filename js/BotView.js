@@ -1,12 +1,12 @@
-define(["AbstractView", "BotModel", "AppUtils"],
-	function (AbstractView, BotModel, AppUtils) {
+define(["AbstractView", "AbstractClassHelper", "BotModel", "AppUtils"],
+	function (AbstractView, AbstractClassHelper, BotModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function BotView(BotModel, ActivatedRoute) {
-				AbstractView.call(this, BotModel, ActivatedRoute);
+			constructor: function BotView(AbstractClassHelper, BotModel) {
+				AbstractView.call(this, AbstractClassHelper, BotModel);
 			},
 			parameters: [
-				[BotModel], [ng.router.ActivatedRoute]
+				[AbstractClassHelper], [BotModel]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("bot"))

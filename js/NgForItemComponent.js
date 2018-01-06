@@ -1,9 +1,9 @@
-define(["AbstractComponent", "AppUtils"],
-	function (AbstractComponent, AppUtils) {
+define(["AbstractComponent", "AbstractClassHelper", "AppUtils"],
+	function (AbstractComponent, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractComponent,
-			constructor: function NgForItemComponent() {
-				AbstractComponent.call(this);
+			constructor: function NgForItemComponent(AbstractClassHelper) {
+				AbstractComponent.call(this, AbstractClassHelper);
 				this.onLast = new ng.core.EventEmitter();
 				this.last = false;
 			},
@@ -12,6 +12,9 @@ define(["AbstractComponent", "AppUtils"],
 					inputs: ["last"],
 					outputs: ["onLast"]
 				}))
+			],
+			parameters: [
+				[AbstractClassHelper]
 			],
 			functions: {
 				afterContentInit: function () {

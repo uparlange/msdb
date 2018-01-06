@@ -1,12 +1,12 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
-	function (AppUtils, AbstractModel, AbstractModelHelper) {
+define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
+	function (AppUtils, AbstractModel, AbstractClassHelper, MsdbService) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchBySeriesModel(AbstractModelHelper) {
-				AbstractModel.call(this, AbstractModelHelper);
+			constructor: function SearchBySeriesModel(AbstractClassHelper, MsdbService) {
+				AbstractModel.call(this, AbstractClassHelper, MsdbService);
 			},
 			parameters: [
-				[AbstractModelHelper]
+				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
 				onRefresh: function (callback) {

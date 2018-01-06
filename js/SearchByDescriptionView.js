@@ -1,12 +1,12 @@
-define(["AbstractView", "SearchByDescriptionModel", "AppUtils"],
-	function (AbstractView, SearchByDescriptionModel, AppUtils) {
+define(["AbstractView", "AbstractClassHelper", "SearchByDescriptionModel", "AppUtils"],
+	function (AbstractView, AbstractClassHelper, SearchByDescriptionModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function SearchByDescriptionView(SearchByDescriptionModel, ActivatedRoute) {
-				AbstractView.call(this, SearchByDescriptionModel, ActivatedRoute);
+			constructor: function SearchByDescriptionView(AbstractClassHelper, SearchByDescriptionModel) {
+				AbstractView.call(this, AbstractClassHelper, SearchByDescriptionModel);
 			},
 			parameters: [
-				[SearchByDescriptionModel], [ng.router.ActivatedRoute]
+				[AbstractClassHelper], [SearchByDescriptionModel]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("searchByDescription"))

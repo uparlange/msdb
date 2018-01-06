@@ -2,8 +2,8 @@ define(["AppUtils", "AbstractDirective"],
 	function (AppUtils, AbstractDirective) {
 		return AppUtils.getClass({
 			extends: AbstractDirective,
-			constructor: function AbstractComponent() {
-				AbstractDirective.call(this);
+			constructor: function AbstractComponent(AbstractClassHelper) {
+				AbstractDirective.call(this, AbstractClassHelper);
 			},
 			functions: {
 				ngAfterContentInit: function () {

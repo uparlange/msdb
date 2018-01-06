@@ -2,8 +2,9 @@ define(["AppUtils", "AbstractClass"],
 	function (AppUtils, AbstractClass) {
 		return AppUtils.getClass({
 			extends: AbstractClass,
-			constructor: function AbstractDirective() {
+			constructor: function AbstractDirective(AbstractClassHelper) {
 				AbstractClass.call(this);
+				this._helper = AbstractClassHelper;
 			},
 			functions: {
 				ngOnChanges: function (event) {
@@ -31,6 +32,25 @@ define(["AppUtils", "AbstractClass"],
 					else {
 						this.getLogger().warn("onDestroy?");
 					}
+					this._helper = null;
+				},
+				getRouter: function () {
+					return this._helper.getRouter();
+				},
+				getConnection: function () {
+					return this._helper.getConnection();
+				},
+				getLabels: function () {
+					return this._helper.getLabels();
+				},
+				getLazy: function () {
+					return this._helper.getLazy();
+				},
+				getWindowRef: function () {
+					return this._helper.getWindowRef();
+				},
+				getEventBus: function () {
+					return this._helper.getEventBus();
 				}
 			}
 		});

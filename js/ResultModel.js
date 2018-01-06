@@ -1,9 +1,9 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
-	function (AppUtils, AbstractModel, AbstractModelHelper) {
+define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
+	function (AppUtils, AbstractModel, AbstractClassHelper, MsdbService) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function ResultModel(AbstractModelHelper) {
-				AbstractModel.call(this, AbstractModelHelper);
+			constructor: function ResultModel(AbstractClassHelper, MsdbService) {
+				AbstractModel.call(this, AbstractClassHelper, MsdbService);
 				this.SYSTEM_DEVICE = "System / Device";
 				this.SYSTEM_BIOS = "System / BIOS";
 				this.showBios = false;
@@ -11,7 +11,7 @@ define(["AppUtils", "AbstractModel", "AbstractModelHelper"],
 				this.showClone = false;
 			},
 			parameters: [
-				[AbstractModelHelper]
+				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
 				onInit: function () {

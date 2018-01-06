@@ -1,13 +1,12 @@
-define(["AbstractPopup", "DetailModel", "AppUtils", "RouterManager"],
-	function (AbstractPopup, DetailModel, AppUtils, RouterManager) {
+define(["AbstractPopup", "AbstractClassHelper", "DetailModel", "AppUtils"],
+	function (AbstractPopup, AbstractClassHelper, DetailModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractPopup,
-			constructor: function DriverPopup(DetailModel, MatDialogRef, RouterManager) {
-				AbstractPopup.call(this, DetailModel, MatDialogRef);
-				this._routerManager = RouterManager;
+			constructor: function DriverPopup(AbstractClassHelper, DetailModel, MatDialogRef) {
+				AbstractPopup.call(this, AbstractClassHelper, DetailModel, MatDialogRef);
 			},
 			parameters: [
-				[DetailModel], [ng.material.MatDialogRef], [RouterManager]
+				[AbstractClassHelper], [DetailModel], [ng.material.MatDialogRef]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("driver"))
@@ -16,7 +15,7 @@ define(["AbstractPopup", "DetailModel", "AppUtils", "RouterManager"],
 				showGamesForMameVersion: function (version) {
 					this.close();
 					setTimeout(() => {
-						this._routerManager.navigate(["/result"], { queryParams: { type: "mameversionadded", value: version } })
+						this.getRouter().navigate(["/result"], { queryParams: { type: "mameversionadded", value: version } })
 					}, 0);
 				}
 			}

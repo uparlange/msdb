@@ -1,20 +1,19 @@
-define(["AppUtils", "AbstractModel", "AbstractModelHelper", "CacheManager"],
-	function (AppUtils, AbstractModel, AbstractModelHelper, CacheManager) {
+define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
+	function (AppUtils, AbstractModel, AbstractClassHelper, MsdbService) {
 		return AppUtils.getClass({
 			extends: AbstractModel,
-			constructor: function SearchByDescriptionModel(AbstractModelHelper, CacheManager) {
-				AbstractModel.call(this, AbstractModelHelper);
-				this._cacheManager = CacheManager;
+			constructor: function SearchByDescriptionModel(AbstractClassHelper, MsdbService) {
+				AbstractModel.call(this, AbstractClassHelper, MsdbService);
 			},
 			parameters: [
-				[AbstractModelHelper], [CacheManager]
+				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
 				onInit: function () {
-					this.data.description = this._cacheManager.getItem("searchDescription", "");
+					this.data.description = this.getCache().getItem("searchDescription", "");
 				},
 				onDestroy: function () {
-					this._cacheManager.setItem("searchDescription", this.data.description);
+					this.getCache().setItem("searchDescription", this.data.description);
 				},
 				_getInitData: function () {
 					return {

@@ -1,13 +1,12 @@
-define(["AbstractDirective", "RouterManager", "AppUtils"],
-	function (AbstractDirective, RouterManager, AppUtils) {
+define(["AbstractDirective", "AbstractClassHelper", "AppUtils"],
+	function (AbstractDirective, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractDirective,
-			constructor: function HrefDirective(RouterManager) {
-				AbstractDirective.call(this);
-				this._routerManager = RouterManager;
+			constructor: function HrefDirective(AbstractClassHelper) {
+				AbstractDirective.call(this, AbstractClassHelper);
 			},
 			parameters: [
-				[RouterManager]
+				[AbstractClassHelper]
 			],
 			annotations: [
 				new ng.core.Directive({
@@ -19,7 +18,7 @@ define(["AbstractDirective", "RouterManager", "AppUtils"],
 			],
 			functions: {
 				onClick: function () {
-					this._routerManager.saveCurrentViewScrollPosition();
+					this.getRouter().saveCurrentViewScrollPosition();
 				}
 			}
 		});

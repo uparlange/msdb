@@ -1,27 +1,18 @@
-define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionManager",
-	"UpdateManager", "RouterManager", "Shell"],
-	function (AbstractView, AppModel, AppUtils, TranslateManager, ConnectionManager,
-		UpdateManager, RouterManager, Shell) {
+define(["AbstractView", "AbstractClassHelper", "AppModel", "AppUtils"],
+	function (AbstractView, AbstractClassHelper, AppModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function AppView(AppModel, ActivatedRoute, ViewContainerRef, MatSnackBar, TranslateManager,
-				ConnectionManager, UpdateManager, RouterManager, ElementRef, Renderer,
-				Shell) {
-				AbstractView.call(this, AppModel, ActivatedRoute);
+			constructor: function AppView(AbstractClassHelper, AppModel, ViewContainerRef, MatSnackBar, ElementRef,
+				Renderer) {
+				AbstractView.call(this, AbstractClassHelper, AppModel);
 				this._viewContainerRef = ViewContainerRef;
 				this._matSnackBar = MatSnackBar;
-				this._translateManager = TranslateManager;
-				this._connectionManager = ConnectionManager;
-				this._updateManager = UpdateManager;
-				this._routerManager = RouterManager;
 				this._element = ElementRef.nativeElement;
 				this._renderer = Renderer;
-				this._shell = Shell;
 			},
 			parameters: [
-				[AppModel], [ng.router.ActivatedRoute], [ng.core.ViewContainerRef], [ng.material.MatSnackBar], [TranslateManager],
-				[ConnectionManager], [UpdateManager], [RouterManager], [ng.core.ElementRef], [ng.core.Renderer],
-				[Shell]
+				[AbstractClassHelper], [AppModel], [ng.core.ViewContainerRef], [ng.material.MatSnackBar], [ng.core.ElementRef],
+				[ng.core.Renderer]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("app", {
@@ -30,7 +21,6 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 			],
 			functions: {
 				onInit: function () {
-					this._shell.init();
 					this._initBackground();
 					this._initToaster();
 					if (AppUtils.runInNw()) {
@@ -44,11 +34,11 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 					});
 				},
 				_showView: function (view) {
-					this._routerManager.navigate([view]);
+					this.getRouter().navigate([view]);
 				},
 				_initMenuBar: function () {
 					const pkg = require("./package.json");
-					this._translateManager.getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIG", "L10N_DISPLAY"]).subscribe((translations) => {
+					this.getLabels().getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIG", "L10N_DISPLAY"]).subscribe((translations) => {
 						const menu = new nw.Menu({ type: "menubar" });
 						const fileSubMenu = new nw.Menu();
 						fileSubMenu.append(new nw.MenuItem({
@@ -95,12 +85,12 @@ define(["AbstractView", "AppModel", "AppUtils", "TranslateManager", "ConnectionM
 					this._renderer.setElementStyle(this._element, "background-image", "url('images/background.jpg')");
 				},
 				_initToaster: function () {
-					this._connectionManager.on("change").subscribe((online) => {
+					this.getConnection().on("change").subscribe((online) => {
 						const config = new ng.material.MatSnackBarConfig();
 						config.duration = 1500;
 						config.viewContainerRef = this._viewContainerRef;
 						const key = online ? "L10_CONNECTED" : "L10_NO_CONNECTION";
-						this._translateManager.getValues([key]).subscribe((translations) => {
+						this.getLabels().getValues([key]).subscribe((translations) => {
 							this._matSnackBar.open(translations[key], null, config);
 						});
 					});

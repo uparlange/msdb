@@ -1,9 +1,9 @@
-define(["AbstractComponent", "AppUtils"],
-	function (AbstractComponent, AppUtils) {
+define(["AbstractComponent", "AbstractClassHelper", "AppUtils"],
+	function (AbstractComponent, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractComponent,
-			constructor: function TreeComponent() {
-				AbstractComponent.call(this);
+			constructor: function TreeComponent(AbstractClassHelper) {
+				AbstractComponent.call(this, AbstractClassHelper);
 				this.provider = [];
 				this.selectedItem = null;
 				this.selectedItemChange = new ng.core.EventEmitter();
@@ -15,6 +15,9 @@ define(["AbstractComponent", "AppUtils"],
 					inputs: ["provider", "selectedItem"],
 					outputs: ["onToggle", "onClick", "onChange", "selectedItemChange"]
 				}))
+			],
+			parameters: [
+				[AbstractClassHelper]
 			],
 			functions: {
 				trackByLabel: function (index, item) {

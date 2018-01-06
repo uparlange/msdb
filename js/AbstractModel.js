@@ -2,44 +2,51 @@ define(["AbstractClass", "AppUtils"],
 	function (AbstractClass, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractClass,
-			constructor: function AbstractModel(AbstractModelHelper) {
+			constructor: function AbstractModel(AbstractClassHelper, Services) {
 				AbstractClass.call(this);
 				this.params = {};
 				this.data = this._getInitData();
-				this._helper = AbstractModelHelper;
-				this._connectionManagerChangeSubscriber = null;
+				this._helper = AbstractClassHelper;
+				this._services = Services;
+				this._connectionChangeSubscriber = null;
 			},
 			functions: {
 				init: function (params) {
-					this._connectionManagerChangeSubscriber = this._helper.connectionManager.on("change").subscribe((online) => {
+					this._connectionChangeSubscriber = this._helper.getConnection().on("change").subscribe((online) => {
 						this.params.online = online;
 						if (online) {
 							this._callRefreshMethod(() => {
-								this._helper.routerManager.restoreScrollPosition();
+								this.getRouter().restoreScrollPosition();
 							});
 						}
 					});
 					this._setTitle();
 					this._callInitMethod();
-					this._helper.routerManager.restoreScrollPosition();
+					this.getRouter().restoreScrollPosition();
 					const currentParams = this.params;
-					const newParams = Object.assign({ online: this._helper.connectionManager.online }, params);
+					const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
 					if (JSON.stringify(currentParams) !== JSON.stringify(newParams)) {
 						this.params = newParams;
 						this._callRefreshMethod(() => {
-							this._helper.routerManager.restoreScrollPosition();
+							this.getRouter().restoreScrollPosition();
 						});
 					}
 				},
 				destroy: function () {
 					this._callDestroyMethod();
-					this._helper.connectionManager.off(this._connectionManagerChangeSubscriber);
+					this._helper.getConnection().off(this._connectionChangeSubscriber);
 				},
 				getServices: function () {
-					return this._helper.msdbService;
+					return this._services;
 				},
-				getSockets: function () {
-					return this._helper.socketManager;
+				getSocket: function () {
+					return this._helper.getSocket();
+				},
+				getRouter: function () {
+					return this._helper.getRouter();
+				},
+				getCache: function () {
+					return this._helper.getCache();
 				},
 				getGameIconUrl: function (game) {
 					return AppUtils.getGameIconUrl(game);
@@ -141,7 +148,7 @@ define(["AbstractClass", "AppUtils"],
 					if (typeof value === "string") {
 						title += " - " + value;
 					}
-					this._helper.title.setTitle(title);
+					this._helper.getTitle().setTitle(title);
 				}
 			}
 		});

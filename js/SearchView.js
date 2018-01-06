@@ -1,13 +1,12 @@
-define(["AbstractView", "SearchModel", "AppUtils", "RouterManager"],
-	function (AbstractView, SearchModel, AppUtils, RouterManager) {
+define(["AbstractView", "AbstractClassHelper", "SearchModel", "AppUtils"],
+	function (AbstractView, AbstractClassHelper, SearchModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function SearchView(SearchModel, ActivatedRoute, RouterManager) {
-				AbstractView.call(this, SearchModel, ActivatedRoute);
-				this._routerManager = RouterManager;
+			constructor: function SearchView(AbstractClassHelper, SearchModel) {
+				AbstractView.call(this, AbstractClassHelper, SearchModel);
 			},
 			parameters: [
-				[SearchModel], [ng.router.ActivatedRoute], [RouterManager]
+				[AbstractClassHelper], [SearchModel]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("search"))
@@ -16,7 +15,7 @@ define(["AbstractView", "SearchModel", "AppUtils", "RouterManager"],
 				tabChanged: function (event) {
 					this.model.tabChanged(event);
 					const url = "/search/" + this.model.getTabsInfo().byIndex(event.index).type;
-					this._routerManager.navigate([url]);
+					this.getRouter().navigate([url]);
 				}
 			}
 		});

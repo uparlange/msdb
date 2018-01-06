@@ -1,12 +1,12 @@
-define(["AbstractView", "ConfigModel", "AppUtils"],
-	function (AbstractView, ConfigModel, AppUtils) {
+define(["AbstractView", "AbstractClassHelper", "ConfigModel", "AppUtils"],
+	function (AbstractView, AbstractClassHelper, ConfigModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function ConfigView(ConfigModel, ActivatedRoute) {
-				AbstractView.call(this, ConfigModel, ActivatedRoute);
+			constructor: function ConfigView(AbstractClassHelper, ConfigModel) {
+				AbstractView.call(this, AbstractClassHelper, ConfigModel);
 			},
 			parameters: [
-				[ConfigModel], [ng.router.ActivatedRoute]
+				[AbstractClassHelper], [ConfigModel]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("config"))

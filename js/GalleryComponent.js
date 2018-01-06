@@ -1,19 +1,18 @@
-define(["AbstractComponent", "AppUtils", "WindowRef"],
-	function (AbstractComponent, AppUtils, WindowRef) {
+define(["AbstractComponent", "AppUtils", "AbstractClassHelper"],
+	function (AbstractComponent, AppUtils, AbstractClassHelper) {
 		return AppUtils.getClass({
 			extends: AbstractComponent,
-			constructor: function GalleryComponent(ElementRef, Renderer, WindowRef) {
-				AbstractComponent.call(this);
+			constructor: function GalleryComponent(ElementRef, Renderer, AbstractClassHelper) {
+				AbstractComponent.call(this, AbstractClassHelper);
 				this._element = ElementRef.nativeElement;
 				this._renderer = Renderer;
-				this._window = WindowRef.nativeWindow;
 				this._windowResizeHandler = null;
 				this._gallery = null;
 				this._masonry = null;
 				this._resizeTimeout = null;
 			},
 			parameters: [
-				[ng.core.ElementRef], [ng.core.Renderer], [WindowRef]
+				[ng.core.ElementRef], [ng.core.Renderer], [AbstractClassHelper]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("gallery", {
@@ -25,7 +24,7 @@ define(["AbstractComponent", "AppUtils", "WindowRef"],
 					this._onWindowResizeHandler = () => {
 						this._refreshMasonry();
 					};
-					this._windowResizeHandler = this._renderer.listen(this._window, "resize", this._onWindowResizeHandler);
+					this._windowResizeHandler = this._renderer.listen(this.getWindowRef().nativeWindow, "resize", this._onWindowResizeHandler);
 				},
 				onDestroy: function () {
 					if (this._gallery !== null) {

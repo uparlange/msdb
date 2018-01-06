@@ -1,13 +1,12 @@
-define(["AbstractPopup", "DetailModel", "AppUtils", "RouterManager"],
-	function (AbstractPopup, DetailModel, AppUtils, RouterManager) {
+define(["AbstractPopup", "AbstractClassHelper", "DetailModel", "AppUtils"],
+	function (AbstractPopup, AbstractClassHelper, DetailModel, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractPopup,
-			constructor: function DeviceRefsPopup(DetailModel, MatDialogRef, RouterManager) {
-				AbstractPopup.call(this, DetailModel, MatDialogRef);
-				this._routerManager = RouterManager;
+			constructor: function DeviceRefsPopup(AbstractClassHelper, DetailModel, MatDialogRef) {
+				AbstractPopup.call(this, AbstractClassHelper, DetailModel, MatDialogRef);
 			},
 			parameters: [
-				[DetailModel], [ng.material.MatDialogRef], [RouterManager]
+				[AbstractClassHelper], [DetailModel], [ng.material.MatDialogRef]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("deviceRefs"))
@@ -16,7 +15,7 @@ define(["AbstractPopup", "DetailModel", "AppUtils", "RouterManager"],
 				showDeviceDetail: function (name) {
 					this.close();
 					setTimeout(() => {
-						this._routerManager.navigate(["/detail"], { queryParams: { name: name } })
+						this.getRouter().navigate(["/detail"], { queryParams: { name: name } })
 					}, 0);
 				}
 			}

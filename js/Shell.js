@@ -34,6 +34,30 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
                     this._cacheManager.init();
                     this._updateManager.init();
                     this._routerManager.init();
+                },
+                getEventManager: function () {
+                    return this._eventManager;
+                },
+                getTranslateManager: function () {
+                    return this._translateManager;
+                },
+                getSocketManager: function () {
+                    return this._socketManager;
+                },
+                getConnectionManager: function () {
+                    return this._connectionManager;
+                },
+                getLazyManager: function () {
+                    return this._lazyManager;
+                },
+                getCacheManager: function () {
+                    return this._cacheManager;
+                },
+                getUpdateManager: function () {
+                    return this._updateManager;
+                },
+                getRouterManager: function () {
+                    return this._routerManager;
                 }
             }
         });

@@ -1,12 +1,13 @@
-define(["AppUtils", "TranslateManager"],
-	function (AppUtils, TranslateManager) {
+define(["AppUtils", "AbstractPipe", "AbstractClassHelper"],
+	function (AppUtils, AbstractPipe, AbstractClassHelper) {
 		return AppUtils.getClass({
-			constructor: function TranslatePipe(TranslateManager) {
+			extends: AbstractPipe,
+			constructor: function TranslatePipe(AbstractClassHelper) {
+				AbstractPipe.call(this, AbstractClassHelper);
 				this._tranlateKey = null;
 				this._translateParams = null;
 				this._tranlateValue = null;
-				this._translateManager = TranslateManager;
-				this._onLanguageChangeSubscriber = this._translateManager.onLanguageChange.subscribe(() => {
+				this._onLanguageChangeSubscriber = this.getLabels().onLanguageChange.subscribe(() => {
 					this._refreshTranslation();
 				});
 			},
@@ -17,7 +18,7 @@ define(["AppUtils", "TranslateManager"],
 				})
 			],
 			parameters: [
-				[TranslateManager]
+				[AbstractClassHelper]
 			],
 			functions: {
 				transform: function () {
@@ -42,7 +43,7 @@ define(["AppUtils", "TranslateManager"],
 							properties: this._translateParams.toString().split(",")
 						};
 					}
-					this._translateManager.getValues([param]).subscribe((translations) => {
+					this.getLabels().getValues([param]).subscribe((translations) => {
 						this._tranlateValue = translations[this._tranlateKey];
 					});
 				}

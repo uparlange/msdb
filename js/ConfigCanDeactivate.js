@@ -1,22 +1,20 @@
-define(["AppUtils", "AbstractClass", "TranslateManager", "WindowRef"],
-	function (AppUtils, AbstractClass, TranslateManager, WindowRef) {
+define(["AppUtils", "AbstractGuard", "AbstractClassHelper"],
+	function (AppUtils, AbstractGuard, AbstractClassHelper) {
 		return AppUtils.getClass({
-			extends: AbstractClass,
-			constructor: function ConfigCanDeactivate(TranslateManager, WindowRef) {
-				AbstractClass.call(this);
-				this._translateManager = TranslateManager;
-				this._windowRef = WindowRef;
+			extends: AbstractGuard,
+			constructor: function ConfigCanDeactivate(AbstractClassHelper) {
+				AbstractGuard.call(this, AbstractClassHelper);
 			},
 			parameters: [
-				[TranslateManager], [WindowRef]
+				[AbstractClassHelper]
 			],
 			functions: {
 				canDeactivate: function (component) {
 					const eventEmitter = new ng.core.EventEmitter();
 					setTimeout(() => {
 						if (component.model.hasChanges()) {
-							this._translateManager.getValues(["L10N_CONFIRM_QUIT"]).subscribe((translations) => {
-								eventEmitter.emit(this._windowRef.nativeWindow.confirm(translations.L10N_CONFIRM_QUIT));
+							this.getLabels().getValues(["L10N_CONFIRM_QUIT"]).subscribe((translations) => {
+								eventEmitter.emit(this.getWindowRef().nativeWindow.confirm(translations.L10N_CONFIRM_QUIT));
 							});
 						}
 						else {

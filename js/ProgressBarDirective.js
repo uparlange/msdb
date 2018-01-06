@@ -1,17 +1,16 @@
-define(["AbstractDirective", "EventManager", "AppUtils"],
-	function (AbstractDirective, EventManager, AppUtils) {
+define(["AbstractDirective", "AbstractClassHelper", "AppUtils"],
+	function (AbstractDirective, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractDirective,
-			constructor: function ProgressBarDirective(EventManager) {
-				AbstractDirective.call(this);
-				this._eventManager = EventManager;
+			constructor: function ProgressBarDirective(AbstractClassHelper) {
+				AbstractDirective.call(this, AbstractClassHelper);
 				this._httpBegintEventEmitter = null;
 				this._httpEndEventEmitter = null;
 				this.display = "none";
 				this._counter = 0;
 			},
 			parameters: [
-				[EventManager]
+				[AbstractClassHelper]
 			],
 			annotations: [
 				new ng.core.Directive({
@@ -24,11 +23,11 @@ define(["AbstractDirective", "EventManager", "AppUtils"],
 			functions: {
 				onInit: function () {
 					this._hide();
-					this._httpBegintEventEmitter = this._eventManager.on("HTTP_BEGIN").subscribe(() => {
+					this._httpBegintEventEmitter = this.getEventBus().on("HTTP_BEGIN").subscribe(() => {
 						this._counter++;
 						this._show();
 					});
-					this._httpEndEventEmitter = this._eventManager.on("HTTP_END").subscribe(() => {
+					this._httpEndEventEmitter = this.getEventBus().on("HTTP_END").subscribe(() => {
 						this._counter--;
 						if (this._counter === 0) {
 							this._hide();
@@ -36,8 +35,8 @@ define(["AbstractDirective", "EventManager", "AppUtils"],
 					});
 				},
 				onDestroy: function () {
-					this._eventManager.off(this._httpBegintEventEmitter);
-					this._eventManager.off(this._httpEndEventEmitter);
+					this.getEventBus().off(this._httpBegintEventEmitter);
+					this.getEventBus().off(this._httpEndEventEmitter);
 				},
 				_hide: function () {
 					this.display = "none";

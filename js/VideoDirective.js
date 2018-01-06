@@ -1,9 +1,9 @@
-define(["AbstractDirective", "AppUtils"],
-	function (AbstractDirective, AppUtils) {
+define(["AbstractDirective", "AbstractClassHelper", "AppUtils"],
+	function (AbstractDirective, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractDirective,
-			constructor: function VideoDirective() {
-				AbstractDirective.call(this);
+			constructor: function VideoDirective(AbstractClassHelper) {
+				AbstractDirective.call(this, AbstractClassHelper);
 				this.onEvent = new ng.core.EventEmitter();
 				this.src = undefined;
 			},
@@ -18,6 +18,9 @@ define(["AbstractDirective", "AppUtils"],
 						"(loadedmetadata)": "onLoadedmetadata($event)"
 					}
 				})
+			],
+			parameters: [
+				[AbstractClassHelper]
 			],
 			functions: {
 				onError: function (event) {

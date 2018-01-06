@@ -1,15 +1,14 @@
-define(["AbstractDirective", "LazyManager", "AppUtils"],
-	function (AbstractDirective, LazyManager, AppUtils) {
+define(["AbstractDirective", "AbstractClassHelper", "AppUtils"],
+	function (AbstractDirective, AbstractClassHelper, AppUtils) {
 		return AppUtils.getClass({
 			extends: AbstractDirective,
-			constructor: function LazyDirective(LazyManager) {
-				AbstractDirective.call(this);
-				this._lazyManager = LazyManager;
+			constructor: function LazyDirective(AbstractClassHelper) {
+				AbstractDirective.call(this, AbstractClassHelper);
 				this.dataSrc = null;
 				this.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 			},
 			parameters: [
-				[LazyManager]
+				[AbstractClassHelper]
 			],
 			annotations: [
 				new ng.core.Directive({
@@ -27,7 +26,7 @@ define(["AbstractDirective", "LazyManager", "AppUtils"],
 					if (event.hasOwnProperty("lazySrc")) {
 						if (typeof event.lazySrc.currentValue === "string") {
 							this.dataSrc = event.lazySrc.currentValue;
-							this._lazyManager.refresh();
+							this.getLazy().refresh();
 						}
 					}
 				}
