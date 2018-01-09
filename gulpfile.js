@@ -270,10 +270,15 @@ gulp.task('prepare-node-modules', (callback) => {
             dest: './dist/node_modules/' + dependency
         });
 
-        const pkg2 = require(folder + '/package.json');
-        for (let dependency in pkg2.dependencies) {
-            addDependency(dependency);
+        try {
+            const pkg2 = require(folder + '/package.json');
+            for (let dependency in pkg2.dependencies) {
+                addDependency(dependency);
+            }
+        } catch (e) {
+            // Not a big deal ?
         }
+
     };
 
     const files = [];
