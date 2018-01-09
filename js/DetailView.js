@@ -6,14 +6,12 @@ define(["AbstractView", "AbstractClassHelper", "DetailModel", "DriverPopup", "Ro
 		PortsPopup, DeviceRefsPopup) {
 		return AppUtils.getClass({
 			extends: AbstractView,
-			constructor: function DetailView(AbstractClassHelper, DetailModel, ViewContainerRef, MatDialog) {
+			constructor: function DetailView(AbstractClassHelper, DetailModel, MatDialog) {
 				AbstractView.call(this, AbstractClassHelper, DetailModel);
-				this._viewContainerRef = ViewContainerRef;
 				this._matDialog = MatDialog;
-				this._dialogRef = null;
 			},
 			parameters: [
-				[AbstractClassHelper], [DetailModel], [ng.core.ViewContainerRef], [ng.material.MatDialog]
+				[AbstractClassHelper], [DetailModel], [ng.material.MatDialog]
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("detail"))
@@ -47,15 +45,7 @@ define(["AbstractView", "AbstractClassHelper", "DetailModel", "DriverPopup", "Ro
 					this._openPopup(DeviceRefsPopup);
 				},
 				_openPopup: function (clazz) {
-					if (this._dialogRef === null) {
-						const config = new ng.material.MatDialogConfig();
-						config.disableClose = true;
-						config.viewContainerRef = this._viewContainerRef;
-						this._dialogRef = this._matDialog.open(clazz, config);
-						this._dialogRef.afterClosed().subscribe(() => {
-							this._dialogRef = null;
-						});
-					}
+					this.getPopups().open(this._matDialog, clazz, { disableClose: true });
 				}
 			}
 		});

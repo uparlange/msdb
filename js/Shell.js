@@ -1,10 +1,12 @@
 define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "ConnectionManager",
-    "LazyManager", "CacheManager", "UpdateManager", "RouterManager", "WindowRef"],
+    "LazyManager", "CacheManager", "UpdateManager", "RouterManager", "WindowRef",
+    "PopupManager"],
     function (AppUtils, EventManager, TranslateManager, SocketManager, ConnectionManager,
-        LazyManager, CacheManager, UpdateManager, RouterManager, WindowRef) {
+        LazyManager, CacheManager, UpdateManager, RouterManager, WindowRef,
+        PopupManager) {
         return AppUtils.getClass({
             constructor: function Shell(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-                CacheManager, UpdateManager, RouterManager, WindowRef) {
+                CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager) {
                 this._eventManager = EventManager;
                 this._translateManager = TranslateManager;
                 this._socketManager = SocketManager;
@@ -13,11 +15,12 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
                 this._cacheManager = CacheManager;
                 this._updateManager = UpdateManager;
                 this._routerManager = RouterManager;
+                this._popupManager = PopupManager;
                 this._windowRef = WindowRef;
             },
             parameters: [
                 [EventManager], [TranslateManager], [SocketManager], [ConnectionManager], [LazyManager],
-                [CacheManager], [UpdateManager], [RouterManager], [WindowRef]
+                [CacheManager], [UpdateManager], [RouterManager], [WindowRef], [PopupManager]
             ],
             functions: {
                 init: function () {
@@ -34,6 +37,7 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
                     this._cacheManager.init();
                     this._updateManager.init();
                     this._routerManager.init();
+                    this._popupManager.init();
                 },
                 getEventManager: function () {
                     return this._eventManager;
@@ -58,6 +62,9 @@ define(["AppUtils", "EventManager", "TranslateManager", "SocketManager", "Connec
                 },
                 getRouterManager: function () {
                     return this._routerManager;
+                },
+                getPopupManager: function () {
+                    return this._popupManager;
                 }
             }
         });

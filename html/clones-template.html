@@ -7,7 +7,7 @@
 <mat-dialog-content>
 	<mat-list>
 		<mat-list-item *ngFor="let clone of model.data.clones; trackBy:model.trackByName">
-			<a (click)="close()" routerLink="/detail" [queryParams]="{name:clone.name}">{{clone.description}}</a>
+			<a (click)="showCloneDetail(clone.name)">{{clone.description}}</a>
 		</mat-list-item>
 	</mat-list>
 </mat-dialog-content>

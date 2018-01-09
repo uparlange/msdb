@@ -51,6 +51,9 @@ define(["AppUtils", "AbstractClass"],
 				},
 				getEventBus: function () {
 					return this._helper.getEventBus();
+				},
+				getPopups: function () {
+					return this._helper.getPopups();
 				}
 			}
 		});

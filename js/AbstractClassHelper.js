@@ -37,6 +37,9 @@ define(["AbstractClass", "AppUtils", "Shell", "WindowRef"],
 				getLazy: function () {
 					return this._shell.getLazyManager();
 				},
+				getPopups: function () {
+					return this._shell.getPopupManager();
+				},
 				getTitle: function () {
 					return this._title;
 				},

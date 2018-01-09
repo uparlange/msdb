@@ -4,6 +4,7 @@ define(["AbstractPopup", "AbstractClassHelper", "DetailModel", "AppUtils"],
 			extends: AbstractPopup,
 			constructor: function DriverPopup(AbstractClassHelper, DetailModel, MatDialogRef) {
 				AbstractPopup.call(this, AbstractClassHelper, DetailModel, MatDialogRef);
+				this._routerAction = null;
 			},
 			parameters: [
 				[AbstractClassHelper], [DetailModel], [ng.material.MatDialogRef]
@@ -13,10 +14,17 @@ define(["AbstractPopup", "AbstractClassHelper", "DetailModel", "AppUtils"],
 			],
 			functions: {
 				showGamesForMameVersion: function (version) {
+					this._routerAction = {
+						commands: ["/result"],
+						extras: { queryParams: { type: "mameversionadded", value: version } }
+					};
 					this.close();
-					setTimeout(() => {
-						this.getRouter().navigate(["/result"], { queryParams: { type: "mameversionadded", value: version } })
-					}, 0);
+				},
+				beforeClose: function () {
+					if (this._routerAction != null) {
+						this.getRouter().navigate(this._routerAction.commands, this._routerAction.extras);
+						this._routerAction = null;
+					}
 				}
 			}
 		});

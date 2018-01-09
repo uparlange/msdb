@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -76,7 +76,7 @@
     "material-design-icons": "3.0.1",
     "merge-stream": "1.0.1",
     "nodemon": "1.13.3",
-    "nw": "0.27.1-sdk",
+    "nw": "0.27.4-sdk",
     "pump": "2.0.0",
     "run-sequence": "2.2.0"
   }

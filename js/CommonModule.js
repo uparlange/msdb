@@ -11,7 +11,6 @@ define(["AbstractModule", "TranslatePipe", "NgForItemComponent", "LazyDirective"
 				new ng.core.NgModule({
 					imports: [
 						ng.common.CommonModule,
-						ng.common.http.HttpClientModule,
 						ng.forms.FormsModule,
 						MaterialModule
 					],
@@ -25,7 +24,6 @@ define(["AbstractModule", "TranslatePipe", "NgForItemComponent", "LazyDirective"
 					],
 					exports: [
 						ng.common.CommonModule,
-						ng.common.http.HttpClientModule,
 						ng.forms.FormsModule,
 						MaterialModule,
 						TranslatePipe,

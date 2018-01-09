@@ -15,6 +15,7 @@ define(["AppUtils", "AbstractModule", "CommonModule", "AppView", "AppModel",
 					imports: [
 						CommonModule,
 						GlobalModule,
+						ng.common.http.HttpClientModule,
 						ng.platformBrowser.BrowserModule,
 						ng.platformBrowser.animations.BrowserAnimationsModule,
 						ng.router.RouterModule.forRoot([

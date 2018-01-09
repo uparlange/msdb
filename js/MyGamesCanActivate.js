@@ -1,10 +1,13 @@
-define(["AppUtils", "AbstractClass"],
-	function (AppUtils, AbstractClass) {
+define(["AppUtils", "AbstractGuard", "AbstractClassHelper"],
+	function (AppUtils, AbstractGuard, AbstractClassHelper) {
 		return AppUtils.getClass({
-			extends: AbstractClass,
-			constructor: function MyGamesCanActivate() {
-				AbstractClass.call(this);
+			extends: AbstractGuard,
+			constructor: function MyGamesCanActivate(AbstractClassHelper) {
+				AbstractGuard.call(this, AbstractClassHelper);
 			},
+			parameters: [
+				[AbstractClassHelper]
+			],
 			functions: {
 				canActivate: function () {
 					return AppUtils.runInNw();
