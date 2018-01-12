@@ -316,7 +316,7 @@ gulp.task('prepare-copy-resources', (callback) => {
     });
     // photoswipe_default_skin
     resources.copy4web.push({
-        src: './node_modules/photoswipe/dist/default-skin/**/*',
+        src: './node_modules/photoswipe/dist/default-skin/**/*.{png,svg,gif}',
         dest: './dist/node_modules/photoswipe/dist/default-skin'
     });
     callback();
