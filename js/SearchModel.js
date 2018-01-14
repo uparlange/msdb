@@ -26,6 +26,9 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 				getTabsInfo: function () {
 					return this._tabsInfo;
 				},
+				trackByKey: function (index, item) {
+					return item ? item.key : undefined;
+				},
 				_getInitData: function () {
 					return {
 						selectedIndex: 0
@@ -34,14 +37,13 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 				_getTabsInfo: function () {
 					return {
 						_tabs: [
-							{ index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description" },
-							{ index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings" },
-							{ index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories" },
-							{ index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series" },
-							{ index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years" },
-							{ index: 5, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers" },
-							{ index: 6, key: "L10N_SEARCH_BY_MAMEVERSIONADDED", type: "versions" }
-							
+							{ index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description", icon: "search" },
+							{ index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings", icon: "stars" },
+							{ index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories", icon: "folder_open" },
+							{ index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series", icon: "list" },
+							{ index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years", icon: "today" },
+							{ index: 5, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers", icon: "business" },
+							{ index: 6, key: "L10N_SEARCH_BY_MAMEVERSIONADDED", type: "versions", icon: "plus_one" }
 						],
 						getTabs: function () {
 							return this._tabs;
