@@ -35,11 +35,13 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 					return {
 						_tabs: [
 							{ index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description" },
-							{ index: 1, key: "L10N_SEARCH_BY_CATEGORY", type: "categories" },
-							{ index: 2, key: "L10N_SEARCH_BY_SERIES", type: "series" },
-							{ index: 3, key: "L10N_SEARCH_BY_YEAR", type: "years" },
-							{ index: 4, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers" },
-							{ index: 5, key: "L10N_SEARCH_BY_MAMEVERSIONADDED", type: "versions" }
+							{ index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings" },
+							{ index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories" },
+							{ index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series" },
+							{ index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years" },
+							{ index: 5, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers" },
+							{ index: 6, key: "L10N_SEARCH_BY_MAMEVERSIONADDED", type: "versions" }
+							
 						],
 						getTabs: function () {
 							return this._tabs;

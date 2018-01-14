@@ -56,6 +56,7 @@
 	"L10N_SEARCH_BY_YEAR": "Année",
 	"L10N_SEARCH_BY_SERIES": "Série",
 	"L10N_SEARCH_BY_MAMEVERSIONADDED": "Mame version",
+	"L10N_SEARCH_BY_RATING": "Meilleurs jeux",
 	"L10N_SEARCH_BY_BIOS": "Bios",
 	"L10N_NO_MATCHES_FOUND": "Aucun résultat trouvé",
 	"L10N_BACK": "Précédent",
@@ -89,5 +90,6 @@
 	"L10N_FILE": "Fichier",
 	"L10N_CONFIG": "Configuration",
 	"L10N_DISPLAY": "Afficher",
-	"L10N_CONFIRM_QUIT": "Etes vous sûr de vouloir quitter ?"
+	"L10N_CONFIRM_QUIT": "Etes vous sûr de vouloir quitter ?",
+	"L10N_RATING": "Notation"
 }

@@ -1,0 +1,16 @@
+<div *ngFor="let group of model.data.list; let index=index; trackBy:model.trackByLabel">
+    <mat-card *ngIf="model.data.list.length > 1 && index > 0">
+        <mat-card-title>
+            <!--{{group.label}}-->
+            &nbsp;
+            <button mat-mini-fab scrollToTop>
+                <i class="material-icons mat-24 mat-light">arrow_drop_up</i>
+            </button>
+        </mat-card-title>
+    </mat-card>
+    <mat-nav-list>
+        <a mat-list-item *ngFor="let item of group.data; trackBy:model.trackByLabel" routerLink="/result" [queryParams]="{type:'rating', value:item.label}">
+            {{item.label}}
+        </a>
+    </mat-nav-list>
+</div>

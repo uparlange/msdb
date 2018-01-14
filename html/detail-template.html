@@ -29,6 +29,11 @@
 				<span class="sep">:</span>
 				<button [class]="'link-button ' + model.getStatusClass(model.data.game.driver.status)" (click)="openDriverPopup()">{{model.getStatusLabel(model.data.game.driver.status)|translate}}</button>
 			</mat-list-item>
+			<mat-list-item *ngIf="model.data.game.rating != null">
+				{{'L10N_RATING'|translate}}
+				<span class="sep">:</span>
+				<a routerLink="/result" [queryParams]="{type:'rating',value:model.data.game.rating}">{{model.data.game.rating}}</a>
+			</mat-list-item>
 			<mat-list-item *ngIf="model.data.game.input != null && model.data.game.input.players != null">
 				{{'L10N_PLAYERS_NUMBER'|translate}}
 				<span class="sep">:</span>

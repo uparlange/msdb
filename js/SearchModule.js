@@ -19,7 +19,8 @@ define(["AppUtils", "AbstractModule", "CommonModule", "SearchView", "SearchModel
 									{ path: "manufacturers", loadChildren: AppUtils.getLazyModuleName("SearchByManufacturersModule") },
 									{ path: "series", loadChildren: AppUtils.getLazyModuleName("SearchBySeriesModule") },
 									{ path: "years", loadChildren: AppUtils.getLazyModuleName("SearchByYearsModule") },
-									{ path: "versions", loadChildren: AppUtils.getLazyModuleName("SearchByVersionsModule") }
+									{ path: "versions", loadChildren: AppUtils.getLazyModuleName("SearchByVersionsModule") },
+									{ path: "ratings", loadChildren: AppUtils.getLazyModuleName("SearchByRatingsModule") }
 								]
 							}
 						])

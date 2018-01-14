@@ -43,6 +43,13 @@ define(["AbstractService", "AbstractClassHelper", "AppUtils"],
 					};
 					return this._callService(config);
 				},
+				getRatings: function () {
+					const config = {
+						url: AppUtils.getServiceUrl("ratings"),
+						useCache: true
+					};
+					return this._callService(config);
+				},
 				getSeries: function () {
 					const config = {
 						url: AppUtils.getServiceUrl("series"),
