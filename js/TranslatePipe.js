@@ -32,7 +32,7 @@ define(["AppUtils", "AbstractPipe", "AbstractClassHelper"],
 					}
 					return this._tranlateValue;
 				},
-				ngOnDestroy: function () {
+				onDestroy: function () {
 					this._onLanguageChangeSubscriber.unsubscribe();
 				},
 				_refreshTranslation: function () {

@@ -18,7 +18,6 @@ define(["AppUtils", "AbstractComponent"],
 					this.model.destroy();
 					this.model = null;
 					this._activatedRouteQueryParamsSubscriber.unsubscribe();
-					this._activatedRouteQueryParamsSubscriber = null;
 				}
 			}
 		});

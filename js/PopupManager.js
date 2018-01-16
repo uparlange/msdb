@@ -21,11 +21,8 @@ define(["AppUtils", "AbstractManager"],
 					});
 					this._afterClosedSubscriber = this._matDialogRef.afterClosed().subscribe(() => {
 						this._afterOpenSubscriber.unsubscribe();
-						this._afterOpenSubscriber = null;
 						this._beforeCloseSubscriber.unsubscribe();
-						this._beforeCloseSubscriber = null;
 						this._afterClosedSubscriber.unsubscribe();
-						this._afterClosedSubscriber = null;
 						this._matDialogRef = null;
 					});
 				},
