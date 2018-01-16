@@ -19,7 +19,7 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper"],
 					});
 				},
 				onDestroy: function () {
-					this.getCache().off(this._cacheChangeSubscriber);
+					this._cacheChangeSubscriber.unsubscribe();
 				},
 				_getInitData: function () {
 					return {

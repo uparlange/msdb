@@ -35,8 +35,8 @@ define(["AbstractDirective", "AbstractClassHelper", "AppUtils"],
 					});
 				},
 				onDestroy: function () {
-					this.getEventBus().off(this._httpBegintEventEmitter);
-					this.getEventBus().off(this._httpEndEventEmitter);
+					this._httpBegintEventEmitter.unsubscribe();
+					this._httpEndEventEmitter.unsubscribe();
 				},
 				_hide: function () {
 					this.display = "none";

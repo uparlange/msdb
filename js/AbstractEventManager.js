@@ -20,10 +20,6 @@ define(["AppUtils", "AbstractClass"],
 					if (eventEmitter !== undefined) {
 						eventEmitter.emit(evt);
 					}
-				},
-				off: function (eventSubscriber) {
-					eventSubscriber.unsubscribe();
-					eventSubscriber = null;
 				}
 			}
 		});

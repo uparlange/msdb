@@ -37,46 +37,48 @@ define(["AbstractView", "AbstractClassHelper", "AppModel", "AppUtils"],
 					this.getRouter().navigate([view]);
 				},
 				_initMenuBar: function () {
-					const pkg = require("./package.json");
-					this.getLabels().getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIG", "L10N_DISPLAY"]).subscribe((translations) => {
-						const menu = new nw.Menu({ type: "menubar" });
-						const fileSubMenu = new nw.Menu();
-						fileSubMenu.append(new nw.MenuItem({
-							label: translations.L10N_QUIT,
-							click: () => {
-								nw.App.quit();
-							}
-						}));
-						menu.append(new nw.MenuItem({
-							label: translations.L10N_FILE,
-							submenu: fileSubMenu
-						}));
-						const displaySubMenu = new nw.Menu();
-						displaySubMenu.append(new nw.MenuItem({
-							label: translations.L10N_MY_GAMES,
-							click: () => {
-								this._showView("/mygames");
-							}
-						}));
-						displaySubMenu.append(new nw.MenuItem({
-							label: translations.L10N_CONFIG,
-							click: () => {
-								this._showView("/config");
-							}
-						}));
-						menu.append(new nw.MenuItem({
-							label: translations.L10N_DISPLAY,
-							submenu: displaySubMenu
-						}));
-						const infoSubMenu = new nw.Menu();
-						infoSubMenu.append(new nw.MenuItem({
-							label: "v" + pkg.version
-						}));
-						menu.append(new nw.MenuItem({
-							label: "?",
-							submenu: infoSubMenu
-						}));
-						nw.Window.get().menu = menu;
+					this.getLabels().on("languageChange").subscribe(() => {
+						const pkg = require("./package.json");
+						this.getLabels().getValues(["L10N_QUIT", "L10N_FILE", "L10N_MY_GAMES", "L10N_CONFIGURATION", "L10N_DISPLAY"]).subscribe((translations) => {
+							const menu = new nw.Menu({ type: "menubar" });
+							const fileSubMenu = new nw.Menu();
+							fileSubMenu.append(new nw.MenuItem({
+								label: translations.L10N_QUIT,
+								click: () => {
+									nw.App.quit();
+								}
+							}));
+							menu.append(new nw.MenuItem({
+								label: translations.L10N_FILE,
+								submenu: fileSubMenu
+							}));
+							const displaySubMenu = new nw.Menu();
+							displaySubMenu.append(new nw.MenuItem({
+								label: translations.L10N_MY_GAMES,
+								click: () => {
+									this._showView("/mygames");
+								}
+							}));
+							displaySubMenu.append(new nw.MenuItem({
+								label: translations.L10N_CONFIGURATION,
+								click: () => {
+									this._showView("/config");
+								}
+							}));
+							menu.append(new nw.MenuItem({
+								label: translations.L10N_DISPLAY,
+								submenu: displaySubMenu
+							}));
+							const infoSubMenu = new nw.Menu();
+							infoSubMenu.append(new nw.MenuItem({
+								label: "v" + pkg.version
+							}));
+							menu.append(new nw.MenuItem({
+								label: "?",
+								submenu: infoSubMenu
+							}));
+							nw.Window.get().menu = menu;
+						});
 					});
 				},
 				_initBackground: function () {

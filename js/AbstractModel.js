@@ -34,7 +34,7 @@ define(["AbstractClass", "AppUtils"],
 				},
 				destroy: function () {
 					this._callDestroyMethod();
-					this._helper.getConnection().off(this._connectionChangeSubscriber);
+					this._connectionChangeSubscriber.unsubscribe();
 				},
 				getServices: function () {
 					return this._services;
@@ -47,6 +47,9 @@ define(["AbstractClass", "AppUtils"],
 				},
 				getCache: function () {
 					return this._helper.getCache();
+				},
+				getLabels: function () {
+					return this._helper.getLabels();
 				},
 				getGameIconUrl: function (game) {
 					return AppUtils.getGameIconUrl(game);

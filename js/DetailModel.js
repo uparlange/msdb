@@ -35,7 +35,7 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 					});
 				},
 				onDestroy: function () {
-					this.getSocket().off(this._socketConfigChangedSubscriber);
+					this._socketConfigChangedSubscriber.unsubscribe();
 				},
 				playGame: function () {
 					this.getSocket().emit("PLAY_GAME", this.params.name);

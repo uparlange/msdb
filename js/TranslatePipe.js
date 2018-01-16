@@ -7,7 +7,7 @@ define(["AppUtils", "AbstractPipe", "AbstractClassHelper"],
 				this._tranlateKey = null;
 				this._translateParams = null;
 				this._tranlateValue = null;
-				this._onLanguageChangeSubscriber = this.getLabels().onLanguageChange.subscribe(() => {
+				this._onLanguageChangeSubscriber = this.getLabels().on("languageChange").subscribe(() => {
 					this._refreshTranslation();
 				});
 			},

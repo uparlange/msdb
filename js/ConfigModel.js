@@ -9,6 +9,9 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 				[AbstractClassHelper], [MsdbService]
 			],
 			functions: {
+				onInit: function () {
+					this.data.selectedLanguage = this.getLabels().getCurrentLanguage();
+				},
 				onRefresh: function (callback) {
 					this._getConfiguration(callback);
 				},
@@ -43,10 +46,16 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 					});
 				},
 				_getInitData: function () {
+					const availableLanguages = [
+						{ data: "en", label: "English" },
+						{ data: "fr", label: "Français" }
+					];
 					return {
 						oldValue: {},
 						newValue: {},
-						enabled: false
+						enabled: false,
+						languages: availableLanguages,
+						selectedLanguage: null
 					};
 				}
 			}

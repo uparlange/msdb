@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "4.2.2",
+  "version": "4.2.3",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -22,9 +22,9 @@
   },
   "scripts": {
     "web": "node ./server.js",
-    "web-debug": "nodemon ./server.js",
+    "web-debug": "nodemon -L ./server.js",
     "desktop": "nw",
-    "desktop-debug": "nodemon node_modules/nw/bin/nw debug"
+    "desktop-debug": "nodemon -L node_modules/nw/bin/nw debug"
   },
   "dependencies": {
     "@angular/animations": "5.2.0",

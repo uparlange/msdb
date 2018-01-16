@@ -22,7 +22,8 @@ define(["AppUtils", "AbstractModule"],
 						ng.material.MatListModule,
 						ng.material.MatMenuModule,
 						ng.material.MatExpansionModule,
-						ng.material.MatTooltipModule
+						ng.material.MatTooltipModule,
+						ng.material.MatSelectModule
 					],
 					exports: [
 						ng.material.MatToolbarModule,
@@ -39,7 +40,8 @@ define(["AppUtils", "AbstractModule"],
 						ng.material.MatListModule,
 						ng.material.MatMenuModule,
 						ng.material.MatExpansionModule,
-						ng.material.MatTooltipModule
+						ng.material.MatTooltipModule,
+						ng.material.MatSelectModule
 					]
 				})
 			]

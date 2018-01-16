@@ -1,3 +1,9 @@
 {
+	"watch": [
+		"js/",
+		"css/",
+		"html/",
+		"data/"
+	],
 	"ext": "js css html json"
 }

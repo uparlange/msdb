@@ -10,7 +10,12 @@ define(["AbstractView", "AbstractClassHelper", "ConfigModel", "AppUtils"],
 			],
 			annotations: [
 				new ng.core.Component(AppUtils.getComponentConfiguration("config"))
-			]
+			],
+			functions: {
+				onLanguageChanged: function (event) {
+					this.getLabels().setLanguage(event.value);
+				}
+			}
 		});
 	}
 );

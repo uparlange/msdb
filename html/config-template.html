@@ -1,10 +1,24 @@
 <mat-card>
 	<mat-card-title>
-		{{'L10N_CONFIGURATION'|translate}}
+		{{'L10N_APPLICATION'|translate}}
 	</mat-card-title>
+	<mat-card-content>
+		<div>
+			<mat-form-field>
+				<mat-select placeholder="{{'L10N_LANGUAGE'|translate}}" [value]="model.data.selectedLanguage" (selectionChange)="onLanguageChanged($event)">
+					<mat-option *ngFor="let language of model.data.languages" [value]="language.data">
+						{{language.label}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</mat-card-content>
 </mat-card>
 <div class="default-spacer"></div>
 <mat-card>
+	<mat-card-title>
+		{{'L10N_CONFIGURATION'|translate}}
+	</mat-card-title>
 	<mat-card-content>
 		<div>
 			<mat-form-field class="full-width">

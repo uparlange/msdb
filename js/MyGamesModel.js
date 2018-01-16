@@ -19,7 +19,7 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 					this._refreshList(callback);
 				},
 				onDestroy: function () {
-					this.getSocket().off(this._socketConfigChangedSubscriber);
+					this._socketConfigChangedSubscriber.unsubscribe();
 				},
 				trackByName: function (index, item) {
 					return item ? item.name : undefined;

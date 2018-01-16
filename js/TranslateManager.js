@@ -4,7 +4,6 @@ define(["AppUtils", "AbstractManager"],
 			extends: AbstractManager,
 			constructor: function TranslateManager(Http) {
 				AbstractManager.call(this);
-				this.onLanguageChange = new ng.core.EventEmitter();
 				this._http = Http;
 				this._properties = {};
 				this._propertyFilePattern = null;
@@ -23,9 +22,13 @@ define(["AppUtils", "AbstractManager"],
 				},
 				setLanguage: function (lang) {
 					if (this._currentLang !== lang) {
+						const oldValue = this._currentLang;
 						this._currentLang = lang;
 						this._loadProperties().subscribe(() => {
-							this.onLanguageChange.emit(this._currentLang);
+							this.emit("languageChange", {
+								oldValue: oldValue,
+								newValue: lang
+							});
 						});
 					}
 				},
