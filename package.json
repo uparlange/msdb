@@ -1,11 +1,11 @@
 {
   "name": "msdb",
-  "version": "4.2.9",
+  "version": "4.3.0",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
   "synopsis": "MAME 'Multiple Arcade Machine Emulator' est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Pour vérifier que votre jeu préféré est disponible, allez faire une recherche sur MSDB !",
-  "favicon": "images/apple-touch-icon-114x114.png",
+  "favicon": "images/apple-touch-icon.png",
   "repository": {
     "type": "git",
     "url": "git://github.com/uparlange/msdb.git"
@@ -18,7 +18,7 @@
     "title": "Mame Smart Database",
     "width": 500,
     "height": 700,
-    "icon": "images/android-chrome-192x192.png"
+    "icon": "images/apple-touch-icon.png"
   },
   "scripts": {
     "web": "node ./server.js",
@@ -27,16 +27,16 @@
     "desktop-debug": "nodemon node_modules/nw/bin/nw debug"
   },
   "dependencies": {
-    "@angular/animations": "6.0.0-beta.5",
-    "@angular/cdk": "6.0.0-beta.2",
-    "@angular/common": "6.0.0-beta.5",
-    "@angular/compiler": "6.0.0-beta.5",
-    "@angular/core": "6.0.0-beta.5",
-    "@angular/forms": "6.0.0-beta.5",
-    "@angular/material": "6.0.0-beta.2",
-    "@angular/platform-browser": "6.0.0-beta.5",
-    "@angular/platform-browser-dynamic": "6.0.0-beta.5",
-    "@angular/router": "6.0.0-beta.5",
+    "@angular/animations": "6.0.0-beta.6",
+    "@angular/cdk": "6.0.0-beta.3",
+    "@angular/common": "6.0.0-beta.6",
+    "@angular/compiler": "6.0.0-beta.6",
+    "@angular/core": "6.0.0-beta.6",
+    "@angular/forms": "6.0.0-beta.6",
+    "@angular/material": "6.0.0-beta.3",
+    "@angular/platform-browser": "6.0.0-beta.6",
+    "@angular/platform-browser-dynamic": "6.0.0-beta.6",
+    "@angular/router": "6.0.0-beta.6",
     "blazy": "1.8.2",
     "body-parser": "1.18.2",
     "core-js": "2.5.3",
@@ -76,8 +76,8 @@
     "karma-jasmine": "1.1.1",
     "material-design-icons": "3.0.1",
     "merge-stream": "1.0.1",
-    "nodemon": "1.15.1",
-    "nw": "0.28.2-sdk",
+    "nodemon": "1.17.1",
+    "nw": "0.28.3-sdk",
     "pump": "3.0.0",
     "run-sequence": "2.2.1"
   }

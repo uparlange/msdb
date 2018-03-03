@@ -10,7 +10,7 @@ define(["AppUtils", "LogUtils"],
                 const express = require("express");
                 const expressInstance = express();
                 const http = require("http");
-                const httpInstance = http.createServer(expressInstance);
+                const httpInstance = http.Server(expressInstance);
                 const io = require("socket.io");
                 const ioInstance = io(httpInstance);
                 const bodyParser = require("body-parser");
@@ -21,7 +21,6 @@ define(["AppUtils", "LogUtils"],
                 });
                 ioInstance.on("connection", (socket) => {
                     this._getLogger().info("(SOCKET.IO) User (" + socket.id + ") connected");
-
                     socket.on("GET_MY_GAMES", (params, callback) => {
                         this._getMyGames(params, callback);
                     });
