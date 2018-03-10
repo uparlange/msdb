@@ -1,1 +1,1 @@
-<tree [provider]="model.data.list" [(selectedItem)]="model.data.selectedItem" (onChange)="itemChangeHandler($event)" (onClick)="itemClickHandler($event)"></tree>
+<tree [provider]="model.data.list" [(selectedItem)]="model.data.selectedItem" (onChange)="showSubCategory($event)" (onSelect)="showCategoryItems($event)"></tree>

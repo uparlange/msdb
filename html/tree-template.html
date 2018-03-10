@@ -1,15 +1,10 @@
 <div *ngFor="let item of provider; trackBy:trackByLabel">
-    <mat-nav-list *ngIf="item.children == null || item.children.length == 0" (click)="selectNode(item)">
-        <mat-list-item>
-            {{item.label}}
-        </mat-list-item>
-    </mat-nav-list>
-    <mat-expansion-panel [expanded]="selectedItem === item" *ngIf="item.children != null && item.children.length > 0">
-        <mat-expansion-panel-header #panelHeader (click)="toggleNode(panelHeader, item)">
+    <mat-expansion-panel [expanded]="selectedItem === item" [hideToggle]="item.children == null || item.children.length == 0">
+        <mat-expansion-panel-header (click)="toggleNode(item)">
             <mat-panel-title>
                 {{item.label}}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <tree [provider]="item.children" [(selectedItem)]="selectedItem" (onClick)="selectNode($event)"></tree>
+        <tree [provider]="item.children" [(selectedItem)]="selectedItem" (onSelect)="selectNode($event)" (onChange)="toggleNode($event)"></tree>
     </mat-expansion-panel>
 </div>

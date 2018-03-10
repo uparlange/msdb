@@ -12,10 +12,10 @@ define(["AbstractView", "AbstractClassHelper", "SearchByCategoriesModel", "AppUt
 				new ng.core.Component(AppUtils.getComponentConfiguration("searchByCategories"))
 			],
 			functions: {
-				itemChangeHandler: function (event) {
-					this.getRouter().navigate([], { queryParams: { category: event.item.label } });
+				showSubCategory: function (item) {
+					this.getRouter().navigate([], { queryParams: { category: item.label } });
 				},
-				itemClickHandler: function (item) {
+				showCategoryItems: function (item) {
 					this.getRouter().navigate(["/result"], { queryParams: { type: "category", value: item.data } });
 				}
 			}

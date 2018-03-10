@@ -12,8 +12,6 @@ const babel = require('gulp-babel');
 const htmlclean = require('gulp-htmlclean');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
-const pump = require('pump');
-const runSequence = require('run-sequence');
 const fs = require('fs');
 const htmlparser = require('htmlparser2');
 const mergeStream = require('merge-stream');
@@ -22,7 +20,6 @@ const imageminJpegtran = require('imagemin-jpegtran');
 const imageminPngquant = require('imagemin-pngquant');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
-const karma = require('karma');
 
 // -------------------------------------------------
 // VARIABLES
@@ -97,9 +94,7 @@ gulp.task('add-image-resources', (callback) => {
     callback();
 });
 
-gulp.task('prepare-image-resources', (callback) => {
-    runSequence('add-image-resources', callback);
-});
+gulp.task('prepare-image-resources', gulp.series('add-image-resources'));
 
 gulp.task('optimize-image-resources', () => {
     const streams = mergeStream();
@@ -136,9 +131,7 @@ gulp.task('add-html-resources', (callback) => {
     callback();
 });
 
-gulp.task('prepare-html-resources', (callback) => {
-    runSequence('change-index', 'add-html-resources', callback);
-});
+gulp.task('prepare-html-resources', gulp.series('change-index', 'add-html-resources'));
 
 gulp.task('minify-html-resources', () => {
     const streams = mergeStream();
@@ -166,9 +159,7 @@ gulp.task('add-css-resources', (callback) => {
     callback();
 });
 
-gulp.task('prepare-css-resources', (callback) => {
-    runSequence('generate-theme', 'add-css-resources', callback);
-});
+gulp.task('prepare-css-resources', gulp.series('generate-theme', 'add-css-resources'));
 
 gulp.task('minify-css-resources', () => {
     const streams = mergeStream();
@@ -203,9 +194,7 @@ gulp.task('add-js-resources', (callback) => {
     callback();
 });
 
-gulp.task('prepare-js-resources', (callback) => {
-    runSequence('lint-js', 'babel-js', 'add-js-resources', callback);
-});
+gulp.task('prepare-js-resources', gulp.series('lint-js', 'babel-js', 'add-js-resources'));
 
 gulp.task('minify-js-resources', () => {
     const streams = mergeStream();
@@ -340,41 +329,14 @@ gulp.task('copy-desktop-resources', () => {
     return streams;
 });
 
-// TEST
-
-gulp.task('test', function (callback) {
-    new karma.Server({
-        configFile: __dirname + '/karma.conf.js',
-        singleRun: true
-    }, callback).start();
-});
-
-gulp.task('tdd', function (callback) {
-    new karma.Server({
-        configFile: __dirname + '/karma.conf.js'
-    }, callback).start();
-});
-
 // MAIN
 
-gulp.task('prepare-resources', (callback) => {
-    runSequence(['prepare-copy-resources', 'prepare-node-modules', 'prepare-css-resources', 'prepare-html-resources', 'prepare-js-resources', 'prepare-image-resources'], callback);
-});
+gulp.task('prepare-resources', gulp.parallel('prepare-copy-resources', 'prepare-node-modules', 'prepare-css-resources', 'prepare-html-resources', 'prepare-js-resources', 'prepare-image-resources'));
 
-gulp.task('manage-web-resources', (callback) => {
-    runSequence(['copy-web-resources', 'minify-css-resources', 'minify-html-resources', 'minify-js-resources', 'optimize-image-resources'], callback);
-});
+gulp.task('manage-web-resources', gulp.parallel('copy-web-resources', 'minify-css-resources', 'minify-html-resources', 'minify-js-resources', 'optimize-image-resources'));
 
-gulp.task('build-web', (callback) => {
-    runSequence('clean-dist', 'prepare-resources', 'manage-web-resources', 'clean-tmp', 'generate-manifest', callback);
-});
+gulp.task('build-web', gulp.series('clean-dist', 'prepare-resources', 'manage-web-resources', 'clean-tmp', 'generate-manifest'));
 
-gulp.task('build-desktop', (callback) => {
-    runSequence('build-web', 'copy-desktop-resources', 'generate-release', callback);
-});
+gulp.task('build-desktop', gulp.series('build-web', 'copy-desktop-resources', 'generate-release'));
 
-gulp.task('tests', ['tdd']);
-
-gulp.task('default', (callback) => {
-    runSequence('build-web', callback);
-});
+gulp.task('default', gulp.series('build-web'));
