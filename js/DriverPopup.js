@@ -16,7 +16,7 @@ define(["AbstractPopup", "AbstractClassHelper", "DetailModel", "AppUtils"],
 				showGamesForMameVersion: function (version) {
 					this._routerAction = {
 						commands: ["/result"],
-						extras: { queryParams: { type: "mameversionadded", value: version } }
+						extras: { queryParams: { type: "version", value: version } }
 					};
 					this.close();
 				},

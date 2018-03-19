@@ -7,4 +7,4 @@ else {
 	GlobalConfig.PRODUCTION = false;
 	GlobalConfig.LOG_LEVEL = "all";
 }
-GlobalConfig.HTTP_REQUEST_TIMEOUT = 30000;
+GlobalConfig.HTTP_REQUEST_TIMEOUT = 10000;

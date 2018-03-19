@@ -10,7 +10,7 @@
     </mat-card>
     <mat-nav-list>
         <mat-list-item *ngFor="let item of group.data; trackBy:model.trackByLabel">
-            <a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'mameversionadded', value:item.label}">
+            <a class="fill-remaining-space" routerLink="/result" [queryParams]="{type:'version', value:item.label}">
                 {{item.label}} 
             </a>
             <span class="addition-count">(+{{item.data}})</span>

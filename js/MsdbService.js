@@ -95,7 +95,7 @@ define(["AbstractService", "AbstractClassHelper", "AppUtils"],
 							if (this._initialized()) {
 								let params = config.params || new ng.common.http.HttpParams();
 								params = params.set("token", this._token);
-								this.httpGet(config.url, params).subscribe((result) => {
+								this.httpGet({ url: config.url, params: params }).subscribe((result) => {
 									value = this._getData(result);
 									if (config.useCache === true) {
 										this.getCache().setItem(cacheKey, value);
@@ -132,7 +132,7 @@ define(["AbstractService", "AbstractClassHelper", "AppUtils"],
 					}
 					else {
 						const url = AppUtils.getServiceUrl("init");
-						this.httpGet(url).subscribe((result) => {
+						this.httpGet({ url: url }).subscribe((result) => {
 							const data = this._getData(result);
 							if (data !== null) {
 								this._token = data.token;

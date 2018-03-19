@@ -54,11 +54,14 @@ define(["AbstractClass", "AppUtils"],
 				getGameIconUrl: function (game) {
 					return AppUtils.getGameIconUrl(game);
 				},
-				getGameFolder: function (game) {
-					return AppUtils.getGameFolder(game);
-				},
 				getGameVideoUrl: function (game) {
 					return AppUtils.getGameVideoUrl(game);
+				},
+				getGameSoundTrackUrl: function (game) {
+					return AppUtils.getGameSoundTrackUrl(game);
+				},
+				getGameFolder: function (game) {
+					return AppUtils.getGameFolder(game);
 				},
 				getSizeLabel: function (value) {
 					return this._getUnitLabel(value, ["B", "KiB", "MiB", "GiB"], 1024);

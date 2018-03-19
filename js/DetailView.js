@@ -17,9 +17,6 @@ define(["AbstractView", "AbstractClassHelper", "DetailModel", "DriverPopup", "Ro
 				new ng.core.Component(AppUtils.getComponentConfiguration("detail"))
 			],
 			functions: {
-				videoStateChange: function (event) {
-					this.model.setVideoAvailable((event.type !== "error"));
-				},
 				openDriverPopup: function () {
 					this._openPopup(DriverPopup);
 				},

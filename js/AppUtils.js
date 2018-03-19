@@ -38,11 +38,14 @@ define(function () {
 		getGameIconUrl: function (game) {
 			return (game.icon !== null ? this.getGameFolder(game) + "/" + game.icon.name : "images/mame_joy_32px.png");
 		},
+		getGameVideoUrl: function (game) {
+			return "http://www.progettosnaps.net/videosnaps/mp4/" + game.name + ".mp4";
+		},
+		getGameSoundTrackUrl: function (game) {
+			return "http://www.progettosnaps.net/soundtrack/packs/mp3/" + game.name + ".zip";
+		},
 		getGameFolder: function (game) {
 			return this._getBaseClientUrl() + "games/" + game.name;
-		},
-		getGameVideoUrl: function (game) {
-			return (game.name !== undefined) ? "http://adb.arcadeitalia.net/download_file.php?tipo=mame_current&codice=" + game.name + "&entity=shortplay&oper=streaming&filler=" + game.name + ".mp4" : null;
 		},
 		getServiceUrl: function (serviceName) {
 			return this._getBaseClientUrl() + "php/services/" + serviceName + ".php";

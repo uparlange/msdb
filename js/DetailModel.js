@@ -40,9 +40,6 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 				playGame: function () {
 					this.getSocket().emit("PLAY_GAME", this.params.name);
 				},
-				setVideoAvailable: function (b) {
-					this.data.videoAvailable = b;
-				},
 				getStatusClass: function (status) {
 					return "label-" + status;
 				},
@@ -82,7 +79,6 @@ define(["AppUtils", "AbstractModel", "AbstractClassHelper", "MsdbService"],
 							devicerefs: []
 						},
 						clones: [],
-						videoAvailable: true,
 						gameAvailable: false
 					};
 				}

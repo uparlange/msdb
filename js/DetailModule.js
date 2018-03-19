@@ -1,9 +1,9 @@
 define(["AbstractModule", "CommonModule", "DetailView", "DetailModel", "DriverPopup",
-	"RomsPopup", "ClonesPopup", "VideoDirective", "GalleryComponent", "DipSwitchsPopup",
-	"ChipsPopup", "BiossetsPopup", "PortsPopup", "DeviceRefsPopup", "AppUtils"],
+	"RomsPopup", "ClonesPopup", "GalleryComponent", "DipSwitchsPopup", "ChipsPopup",
+	"BiossetsPopup", "PortsPopup", "DeviceRefsPopup", "AppUtils"],
 	function (AbstractModule, CommonModule, DetailView, DetailModel, DriverPopup,
-		RomsPopup, ClonesPopup, VideoDirective, GalleryComponent, DipSwitchsPopup,
-		ChipsPopup, BiossetsPopup, PortsPopup, DeviceRefsPopup, AppUtils) {
+		RomsPopup, ClonesPopup, GalleryComponent, DipSwitchsPopup, ChipsPopup,
+		BiossetsPopup, PortsPopup, DeviceRefsPopup, AppUtils) {
 		return AppUtils.getLazyModuleClass({
 			extends: AbstractModule,
 			constructor: function DetailModule() {
@@ -22,7 +22,6 @@ define(["AbstractModule", "CommonModule", "DetailView", "DetailModel", "DriverPo
 						DriverPopup,
 						RomsPopup,
 						ClonesPopup,
-						VideoDirective,
 						GalleryComponent,
 						DipSwitchsPopup,
 						ChipsPopup,

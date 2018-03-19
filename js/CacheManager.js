@@ -11,7 +11,7 @@ define(["AppUtils", "AbstractManager"],
 				setDefaultNs: function (ns) {
 					const lastNs = this._getDefaultNs();
 					if (lastNs !== ns) {
-						this._clear();
+						this.clear();
 						this._setItem(this._defaultNs, ns);
 					}
 				},
@@ -26,6 +26,9 @@ define(["AppUtils", "AbstractManager"],
 						oldValue: oldValue,
 						newValue: value
 					});
+				},
+				clear: function () {
+					localStorage.clear();
 				},
 				_getDefaultNs: function () {
 					return this._getItem(this._defaultNs);
@@ -54,9 +57,6 @@ define(["AppUtils", "AbstractManager"],
 				_setItem: function (key, value) {
 					const calculatedKey = this._getApplicationKey(key);
 					localStorage.setItem(calculatedKey, JSON.stringify(value));
-				},
-				_clear: function () {
-					localStorage.clear();
 				}
 			}
 		});

@@ -7,9 +7,16 @@ define(["AppUtils", "AbstractClass"],
 				this._helper = AbstractClassHelper;
 			},
 			functions: {
-				httpGet: function (url, params, defaultValue) {
-					const source = this._helper.getHttpClient().get(url, { "params": params });
-					return this._httpCall(source, defaultValue);
+				httpGet: function (config) {
+					const httpConfig = {};
+					if (config.params) {
+						httpConfig.params = config.params;
+					}
+					if (config.responseType) {
+						httpConfig.responseType = config.responseType;
+					}
+					const source = this._helper.getHttpClient().get(config.url, httpConfig);
+					return this._httpCall(source, config.defaultValue);
 				},
 				getCache: function () {
 					return this._helper.getCache();
