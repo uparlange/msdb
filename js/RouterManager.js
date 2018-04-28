@@ -18,20 +18,17 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 				init: function () {
 					AbstractManager.prototype.init.call(this);
 					this._routerEventsSubscriber = this._router.events.subscribe((e) => {
-						switch (e.constructor.name) {
-							case "NavigationStart":
-								if (e.id === 1) {
-									if (this._windowRef.isInWebApp()) {
-										this._restoreLastView();
-									}
+						if (e instanceof ng.router.NavigationStart) {
+							if (e.id === 1) {
+								if (this._windowRef.isInWebApp()) {
+									this._restoreLastView();
 								}
-								else {
-									this.saveCurrentViewScrollPosition();
-								}
-								break;
-							case "NavigationEnd":
-								this._saveLastView(e.urlAfterRedirects);
-								break;
+							}
+							else {
+								this.saveCurrentViewScrollPosition();
+							}
+						} else if (e instanceof ng.router.NavigationEnd) {
+							this._saveLastView(e.urlAfterRedirects);
 						}
 					});
 				},
@@ -68,7 +65,7 @@ define(["AbstractManager", "CacheManager", "AppUtils", "WindowRef"],
 								}
 								const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
 								this._windowRef.scrollTo(0, scrollTop);
-							}, 50);
+							}, 100);
 						});
 						const config = {
 							childList: true,

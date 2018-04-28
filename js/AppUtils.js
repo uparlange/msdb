@@ -41,6 +41,9 @@ define(function () {
 		getGameVideoUrl: function (game) {
 			return "http://www.progettosnaps.net/videosnaps/mp4/" + game.name + ".mp4";
 		},
+		getGameManualUrl: function (game) {
+			return "http://www.progettosnaps.net/manuals/pdf/" + game.name + ".pdf";
+		},
 		getGameSoundTrackUrl: function (game) {
 			return "http://www.progettosnaps.net/soundtrack/packs/mp3/" + game.name + ".zip";
 		},

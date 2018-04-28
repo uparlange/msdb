@@ -6,7 +6,7 @@ folders.forEach((ressource) => {
     app.use('/' + ressource, express.static(ressource));
 });
 
-const files = ['index.html', 'sw.js', 'package.json'];
+const files = ['index.html', 'package.json'];
 files.forEach((ressource) => {
     const file = '/' + ressource;
     app.get(file, function (req, res) {

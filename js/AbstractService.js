@@ -27,7 +27,8 @@ define(["AppUtils", "AbstractClass"],
 						defaultValue = null;
 					}
 					this._helper.getEventBus().emit("HTTP_BEGIN");
-					source.timeout(GlobalConfig.HTTP_REQUEST_TIMEOUT).subscribe((result) => {
+					// source.timeout(GlobalConfig.HTTP_REQUEST_TIMEOUT)
+					source.subscribe((result) => {
 						this._helper.getEventBus().emit("HTTP_END");
 						eventEmitter.emit(result);
 					}, () => {

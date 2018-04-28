@@ -26,12 +26,12 @@
 	<meta name="theme-color" content="#ff5722">
 	<!-- application splash screens -->
 	<link rel="apple-touch-startup-image" href="images/splash/launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+	<link rel="apple-touch-startup-image" href="images/splash/launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+	<link rel="apple-touch-startup-image" href="images/splash/launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+	<link rel="apple-touch-startup-image" href="images/splash/launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+	<link rel="apple-touch-startup-image" href="images/splash/launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+	<link rel="apple-touch-startup-image" href="images/splash/launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+	<link rel="apple-touch-startup-image" href="images/splash/launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
 	<!-- photoswipe -->
 	<link rel="stylesheet" href="node_modules/photoswipe/dist/photoswipe.css">
 	<link rel="stylesheet" href="node_modules/photoswipe/dist/default-skin/default-skin.css">
@@ -43,15 +43,8 @@
 
 <body version="APP_VERSION">
 	<!-- angular dependencies -->
-	<script src="node_modules/core-js/client/shim.js"></script>
 	<script src="node_modules/zone.js/dist/zone.js"></script>
-	<script src="node_modules/rxjs/bundles/Rx.js"></script>
-	<!-- angular fix -->
-	<script src="node_modules/tslib/tslib.js"></script>
-	<script>
-		// fix common-http.umd.js
-		tslib = { __extends: __extends };
-	</script>
+	<script src="node_modules/rxjs/bundles/rxjs.umd.js"></script>
 	<!-- angular -->
 	<script src="node_modules/@angular/compiler/bundles/compiler.umd.js"></script>
 	<script src="node_modules/@angular/core/bundles/core.umd.js"></script>
@@ -62,10 +55,10 @@
 	<script src="node_modules/@angular/platform-browser/bundles/platform-browser.umd.js"></script>
 	<script src="node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js"></script>
 	<script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js"></script>
-	<!-- don't use default version, loose function names at minification -->
-	<script src="node_modules/@angular/router/bundles/router.umd.min.js"></script>
+	<script src="node_modules/@angular/router/bundles/router.umd.js"></script>
 	<script src="node_modules/@angular/forms/bundles/forms.umd.js"></script>
 	<!-- angular material 2 dependencies -->
+	<script>window.Rx = window.rxjs; // fix rxjs</script>
 	<script src="node_modules/hammerjs/hammer.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk.umd.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-platform.umd.js"></script>
@@ -79,6 +72,7 @@
 	<script src="node_modules/@angular/cdk/bundles/cdk-layout.umd.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-scrolling.umd.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-overlay.umd.js"></script>
+	<script src="node_modules/@angular/cdk/bundles/cdk-text-field.umd.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-table.umd.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-stepper.umd.js"></script>
 	<script src="node_modules/@angular/cdk/bundles/cdk-accordion.umd.js"></script>

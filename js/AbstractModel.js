@@ -57,6 +57,9 @@ define(["AbstractClass", "AppUtils"],
 				getGameVideoUrl: function (game) {
 					return AppUtils.getGameVideoUrl(game);
 				},
+				getGameManualUrl: function (game) {
+					return AppUtils.getGameManualUrl(game);
+				},
 				getGameSoundTrackUrl: function (game) {
 					return AppUtils.getGameSoundTrackUrl(game);
 				},

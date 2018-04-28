@@ -95,10 +95,13 @@
 		<a target="_blank" href="http://mamedev.org/">{{'L10N_MAME_EMULATOR'|translate}}</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.isdevice == 'no'">
-		<a target="_blank" [href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">ROM {{model.data.game.description}}</a>
+		<a target="_blank" [href]="'http://www.planetemu.net/?section=recherche&recherche='+model.data.game.description+'&type=Phrase exacte&rubrique=roms'">Rom {{model.data.game.description}}</a>
 	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.cloneof == null && model.data.game.romof != null">
-		<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">BIOS {{model.data.game.romof}}</a>
+		<a target="_blank" href="http://www.planetemu.net/roms/mame-bios-pack">Bios {{model.data.game.romof}}</a>
+	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.manual === true">
+		<a target="_blank" [href]="model.getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
 	</mat-list-item>
 </mat-list>
 <div *ngIf="model.data.game.images != null && model.data.game.images.length > 0">

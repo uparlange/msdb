@@ -93,5 +93,6 @@
 	"L10N_CONFIRM_QUIT": "Are you sure you want to leave?",
 	"L10N_RATING": "Rating",
 	"L10N_LANGUAGE": "Language",
-	"L10N_APPLICATION": "Application"
+	"L10N_APPLICATION": "Application",
+	"L10N_MANUAL": "Manual"
 }
