@@ -613,6 +613,12 @@ input.mat-input-element {
 textarea.cdk-textarea-autosize {
   resize: none; }
 
+textarea.cdk-textarea-autosize-measuring {
+  height: auto !important;
+  overflow: hidden !important;
+  padding: 2px 0 !important;
+  box-sizing: content-box !important; }
+
 .mat-ripple-element {
   background-color: rgba(0, 0, 0, 0.1); }
 
@@ -1230,7 +1236,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.42) 33%, transparent 0%);
-  background-size: 4px 1px;
+  background-size: 4px 100%;
   background-repeat: repeat-x; }
 
 .mat-form-field-appearance-standard .mat-form-field-underline {
@@ -1238,7 +1244,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.42) 33%, transparent 0%);
-  background-size: 4px 1px;
+  background-size: 4px 100%;
   background-repeat: repeat-x; }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
@@ -1773,6 +1779,18 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   .mat-toolbar.mat-warn {
     background: #f44336;
     color: white; }
+  .mat-toolbar .mat-form-field-underline,
+  .mat-toolbar .mat-form-field-ripple,
+  .mat-toolbar .mat-focused .mat-form-field-ripple {
+    background-color: currentColor; }
+  .mat-toolbar .mat-form-field-label,
+  .mat-toolbar .mat-focused .mat-form-field-label,
+  .mat-toolbar .mat-select-value,
+  .mat-toolbar .mat-select-arrow,
+  .mat-toolbar .mat-form-field.mat-focused .mat-select-arrow {
+    color: inherit; }
+  .mat-toolbar .mat-input-element {
+    caret-color: currentColor; }
 
 .mat-tooltip {
   background: rgba(97, 97, 97, 0.9); }
