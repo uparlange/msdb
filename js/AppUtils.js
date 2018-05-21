@@ -36,7 +36,7 @@ define(function () {
 			return Object.assign({}, defaultParams, params);
 		},
 		getGameIconUrl: function (game) {
-			return (game.icon !== null ? this.getGameFolder(game) + "/" + game.icon.name : "images/mame_joy_32px.png");
+			return this.getGameFolder(game) + "/" + (game.icon !== null ? game.icon.name : "titles.png");
 		},
 		getGameVideoUrl: function (game) {
 			return "http://www.progettosnaps.net/videosnaps/mp4/" + game.name + ".mp4";
