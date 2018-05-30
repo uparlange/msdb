@@ -183,14 +183,10 @@ gulp.task('lint-js', () => {
 gulp.task('babel-js', () => {
     return gulp.src('./js/**/*.js')
         .pipe(babel())
-        .pipe(gulp.dest('./dist/tmp/babel'));
+        .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('add-js-resources', (callback) => {
-    resources.js.push({
-        src: './dist/tmp/babel/**/*.js',
-        dest: './dist/js'
-    });
     callback();
 });
 

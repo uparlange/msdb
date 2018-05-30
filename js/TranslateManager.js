@@ -1,106 +1,106 @@
-define(["AppUtils", "AbstractManager"],
-	function (AppUtils, AbstractManager) {
-		return AppUtils.getClass({
-			extends: AbstractManager,
-			constructor: function TranslateManager(Http) {
-				AbstractManager.call(this);
-				this._http = Http;
-				this._properties = {};
-				this._propertyFilePattern = null;
-				this._loading = false;
-				this._pendingRequests = [];
-				this._currentLang = null;
-			},
-			parameters: [
-				[ng.common.http.HttpClient]
-			],
-			functions: {
-				init: function (params) {
-					AbstractManager.prototype.init.call(this);
-					this._propertyFilePattern = params.propertyFilePattern;
-					this.setLanguage(params.language);
-				},
-				setLanguage: function (lang) {
-					if (this._currentLang !== lang) {
-						const oldValue = this._currentLang;
-						this._currentLang = lang;
-						this._loadProperties().subscribe(() => {
-							this.emit("languageChange", {
-								oldValue: oldValue,
-								newValue: lang
-							});
-						});
-					}
-				},
-				getCurrentLanguage: function () {
-					return this._currentLang;
-				},
-				getValues: function (params) {
-					const eventEmitter = new ng.core.EventEmitter();
-					if (this._loading) {
-						this._pendingRequests.push({
-							params: params,
-							eventEmitter: eventEmitter
-						});
-					}
-					else {
-						setTimeout(() => {
-							eventEmitter.emit(this._getValues(params));
-						}, 0);
-					}
-					return eventEmitter;
-				},
-				_getValues: function (params) {
-					const values = {};
-					params.forEach((param) => {
-						if (typeof (param) === "object") {
-							values[param.key] = this._getValue(param.key, param.properties);
-						} else {
-							values[param] = this._getValue(param);
-						}
+import AppUtils from "./AppUtils.js";
+import AbstractManager from "./AbstractManager.js";
+
+export default AppUtils.getClass({
+	extends: AbstractManager,
+	constructor: function TranslateManager(Http) {
+		AbstractManager.call(this);
+		this._http = Http;
+		this._properties = {};
+		this._propertyFilePattern = null;
+		this._loading = false;
+		this._pendingRequests = [];
+		this._currentLang = null;
+	},
+	parameters: [
+		[ng.common.http.HttpClient]
+	],
+	functions: {
+		init: function (params) {
+			AbstractManager.prototype.init.call(this);
+			this._propertyFilePattern = params.propertyFilePattern;
+			this.setLanguage(params.language);
+		},
+		setLanguage: function (lang) {
+			if (this._currentLang !== lang) {
+				const oldValue = this._currentLang;
+				this._currentLang = lang;
+				this._loadProperties().subscribe(() => {
+					this.emit("languageChange", {
+						oldValue: oldValue,
+						newValue: lang
 					});
-					return values;
-				},
-				_getValue: function (key, properties) {
-					let value = key;
-					if (this._properties[this._currentLang] !== undefined) {
-						if (this._properties[this._currentLang].hasOwnProperty(key)) {
-							value = this._properties[this._currentLang][key];
-						}
-						if (Array.isArray(properties)) {
-							properties.forEach((property, index) => {
-								value = value.replace("{" + index + "}", property);
-							});
-						}
-					}
-					return value;
-				},
-				_checkPendingRequests: function () {
-					this._pendingRequests.forEach((request) => {
-						const values = this._getValues(request.params);
-						request.eventEmitter.emit(values);
+				});
+			}
+		},
+		getCurrentLanguage: function () {
+			return this._currentLang;
+		},
+		getValues: function (params) {
+			const eventEmitter = new ng.core.EventEmitter();
+			if (this._loading) {
+				this._pendingRequests.push({
+					params: params,
+					eventEmitter: eventEmitter
+				});
+			}
+			else {
+				setTimeout(() => {
+					eventEmitter.emit(this._getValues(params));
+				}, 0);
+			}
+			return eventEmitter;
+		},
+		_getValues: function (params) {
+			const values = {};
+			params.forEach((param) => {
+				if (typeof (param) === "object") {
+					values[param.key] = this._getValue(param.key, param.properties);
+				} else {
+					values[param] = this._getValue(param);
+				}
+			});
+			return values;
+		},
+		_getValue: function (key, properties) {
+			let value = key;
+			if (this._properties[this._currentLang] !== undefined) {
+				if (this._properties[this._currentLang].hasOwnProperty(key)) {
+					value = this._properties[this._currentLang][key];
+				}
+				if (Array.isArray(properties)) {
+					properties.forEach((property, index) => {
+						value = value.replace("{" + index + "}", property);
 					});
-					this._pendingRequests = [];
-				},
-				_loadProperties: function () {
-					const eventEmitter = new ng.core.EventEmitter();
-					if (!this._properties.hasOwnProperty(this._currentLang) && !this._loading) {
-						this._loading = true;
-						const path = this._propertyFilePattern.replace("{locale}", this._currentLang);
-						this._http.get(path).subscribe((data) => {
-							this._properties[this._currentLang] = data;
-							this._loading = false;
-							this._checkPendingRequests();
-							eventEmitter.emit();
-						});
-					}
-					else {
-						setTimeout(() => {
-							eventEmitter.emit();
-						}, 0);
-					}
-					return eventEmitter;
 				}
 			}
-		});
-	});
+			return value;
+		},
+		_checkPendingRequests: function () {
+			this._pendingRequests.forEach((request) => {
+				const values = this._getValues(request.params);
+				request.eventEmitter.emit(values);
+			});
+			this._pendingRequests = [];
+		},
+		_loadProperties: function () {
+			const eventEmitter = new ng.core.EventEmitter();
+			if (!this._properties.hasOwnProperty(this._currentLang) && !this._loading) {
+				this._loading = true;
+				const path = this._propertyFilePattern.replace("{locale}", this._currentLang);
+				this._http.get(path).subscribe((data) => {
+					this._properties[this._currentLang] = data;
+					this._loading = false;
+					this._checkPendingRequests();
+					eventEmitter.emit();
+				});
+			}
+			else {
+				setTimeout(() => {
+					eventEmitter.emit();
+				}, 0);
+			}
+			return eventEmitter;
+		}
+	}
+});
