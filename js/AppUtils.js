@@ -37,7 +37,7 @@ export default {
 		return Object.assign({}, defaultParams, params);
 	},
 	getGameIconUrl: function (game) {
-		return this.getGameFolder(game) + "/" + (game.icon !== null ? game.icon.name : "titles.png");
+		return game.icon !== null ? this.getGameFolder(game) + "/" + game.icon.name : "images/game.png";
 	},
 	getGameVideoUrl: function (game) {
 		return "http://www.progettosnaps.net/videosnaps/mp4/" + game.name + ".mp4";

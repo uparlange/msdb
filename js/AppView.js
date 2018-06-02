@@ -87,7 +87,7 @@ export default AppUtils.getClass({
 		_initBackground: function () {
 			this._renderer.setElementStyle(this._element, "background-size", "100% 100%");
 			this._renderer.setElementStyle(this._element, "background-attachment", "fixed");
-			this._renderer.setElementStyle(this._element, "background-image", "url('images/background.jpg')");
+			this._renderer.setElementStyle(this._element, "background-image", "url('images/background.png')");
 		},
 		_initToaster: function () {
 			this.getConnection().on("change").subscribe((online) => {
