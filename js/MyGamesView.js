@@ -1,17 +1,17 @@
-import AppUtils from "./AppUtils.js";
 import AbstractView from "./AbstractView.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import MyGamesModel from "./MyGamesModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractView,
-	constructor: function MyGamesView(AbstractClassHelper, MyGamesModel) {
-		AbstractView.call(this, AbstractClassHelper, MyGamesModel);
-	},
-	parameters: [
-		[AbstractClassHelper], [MyGamesModel]
-	],
-	annotations: [
-		new ng.core.Component(AppUtils.getComponentConfiguration("myGames"))
-	]
-});
+class MyGamesView extends AbstractView {
+	static get annotations() {
+		return this.getAnnotations({ selector: "myGames" });
+	}
+	static get parameters() {
+		return this.getParameters(AbstractClassHelper, MyGamesModel);
+	}
+	constructor(AbstractClassHelper, MyGamesModel) {
+		super(AbstractClassHelper, MyGamesModel);
+	}
+}
+
+export default MyGamesView;

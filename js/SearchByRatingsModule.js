@@ -1,16 +1,11 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import SearchByRatingsView from "./SearchByRatingsView.js";
 import SearchByRatingsModel from "./SearchByRatingsModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function SearchByRatingsModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class SearchByRatingsModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -23,6 +18,11 @@ export default AppUtils.getClass({
 			providers: [
 				SearchByRatingsModel
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default SearchByRatingsModule;

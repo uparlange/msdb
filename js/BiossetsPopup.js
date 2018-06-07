@@ -1,17 +1,17 @@
-import AppUtils from "./AppUtils.js";
 import AbstractPopup from "./AbstractPopup.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import DetailModel from "./DetailModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractPopup,
-	constructor: function BiossetsPopup(AbstractClassHelper, DetailModel, MatDialogRef) {
-		AbstractPopup.call(this, AbstractClassHelper, DetailModel, MatDialogRef);
-	},
-	parameters: [
-		[AbstractClassHelper], [DetailModel], [ng.material.MatDialogRef]
-	],
-	annotations: [
-		new ng.core.Component(AppUtils.getComponentConfiguration("biossets"))
-	]
-});
+class BiossetsPopup extends AbstractPopup {
+	static get annotations() {
+		return this.getAnnotations({ selector: "biossets" });
+	}
+	static get parameters() {
+		return this.getParameters(AbstractClassHelper, DetailModel, ng.material.MatDialogRef);
+	}
+	constructor(AbstractClassHelper, DetailModel, MatDialogRef) {
+		super(AbstractClassHelper, DetailModel, MatDialogRef);
+	}
+}
+
+export default BiossetsPopup;

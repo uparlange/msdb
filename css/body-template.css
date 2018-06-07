@@ -1,0 +1,52 @@
+.app-header
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	max-width: 800px;
+	margin: auto;
+	z-index:2;
+}
+
+.app-header mat-toolbar
+{
+	height: 64px;
+}
+
+.app-header img
+{
+	vertical-align:middle;
+}
+
+.app-header mat-progress-bar
+{
+	position:absolute;
+	top:64px;
+}
+
+.app-network-status
+{
+	position: absolute;
+    top: 5px;
+}
+
+.app-container
+{
+	max-width: 800px;
+	margin: auto;
+	height:100%;
+	background:white;
+}
+
+.app-container-header
+{
+	height:64px;
+}
+
+.app-container-content
+{
+	background:white;
+	padding:10px;
+}

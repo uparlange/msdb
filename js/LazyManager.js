@@ -1,21 +1,19 @@
-import AppUtils from "./AppUtils.js";
 import AbstractManager from "./AbstractManager.js";
 
-export default AppUtils.getClass({
-	extends: AbstractManager,
-	constructor: function LazyManager() {
-		AbstractManager.call(this);
+class LazyManager extends AbstractManager {
+	constructor() {
+		super();
 		this._blazy = new Blazy();
 		this._timeoutInterval = null;
-	},
-	functions: {
-		refresh: function () {
-			if (this._timeoutInterval !== null) {
-				clearTimeout(this._timeoutInterval);
-			}
-			this._timeoutInterval = setTimeout(() => {
-				this._blazy.revalidate();
-			}, 50);
-		}
 	}
-});
+	refresh() {
+		if (this._timeoutInterval !== null) {
+			clearTimeout(this._timeoutInterval);
+		}
+		this._timeoutInterval = setTimeout(() => {
+			this._blazy.revalidate();
+		}, 50);
+	}
+}
+
+export default LazyManager;

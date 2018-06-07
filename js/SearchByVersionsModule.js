@@ -1,16 +1,11 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import SearchByVersionsView from "./SearchByVersionsView.js";
 import SearchByVersionsModel from "./SearchByVersionsModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function SearchByVersionsModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class SearchByVersionsModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -23,6 +18,11 @@ export default AppUtils.getClass({
 			providers: [
 				SearchByVersionsModel
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default SearchByVersionsModule;

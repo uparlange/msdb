@@ -1,9 +1,24 @@
-import AppUtils from "./AppUtils.js";
 import AbstractClass from "./AbstractClass.js";
 
-export default AppUtils.getClass({
-	extends: AbstractClass,
-	constructor: function AbstractModule() {
-		AbstractClass.call(this);
+class AbstractModule extends AbstractClass {
+	static getAnnotations(params) {
+		return [
+			new ng.core.NgModule(params)
+		];
 	}
-});
+	static getLazyModule(moduleName) {
+		return function () {
+			const eventEmitter = new ng.core.EventEmitter();
+			const modulePath = "/js/" + moduleName + ".js";
+			import(modulePath).then((module) => {
+				eventEmitter.emit(module.default);
+			});
+			return eventEmitter;
+		};
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default AbstractModule;

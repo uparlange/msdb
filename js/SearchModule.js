@@ -1,16 +1,11 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import SearchView from "./SearchView.js";
 import SearchModel from "./SearchModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function SearchModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class SearchModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -18,13 +13,13 @@ export default AppUtils.getClass({
 						path: "",
 						component: SearchView,
 						children: [
-							{ path: "description", loadChildren: AppUtils.loadModule("SearchByDescriptionModule") },
-							{ path: "categories", loadChildren: AppUtils.loadModule("SearchByCategoriesModule") },
-							{ path: "manufacturers", loadChildren: AppUtils.loadModule("SearchByManufacturersModule") },
-							{ path: "series", loadChildren: AppUtils.loadModule("SearchBySeriesModule") },
-							{ path: "years", loadChildren: AppUtils.loadModule("SearchByYearsModule") },
-							{ path: "versions", loadChildren: AppUtils.loadModule("SearchByVersionsModule") },
-							{ path: "ratings", loadChildren: AppUtils.loadModule("SearchByRatingsModule") }
+							{ path: "description", loadChildren: this.getLazyModule("SearchByDescriptionModule") },
+							{ path: "categories", loadChildren: this.getLazyModule("SearchByCategoriesModule") },
+							{ path: "manufacturers", loadChildren: this.getLazyModule("SearchByManufacturersModule") },
+							{ path: "series", loadChildren: this.getLazyModule("SearchBySeriesModule") },
+							{ path: "years", loadChildren: this.getLazyModule("SearchByYearsModule") },
+							{ path: "versions", loadChildren: this.getLazyModule("SearchByVersionsModule") },
+							{ path: "ratings", loadChildren: this.getLazyModule("SearchByRatingsModule") }
 						]
 					}
 				])
@@ -35,6 +30,11 @@ export default AppUtils.getClass({
 			providers: [
 				SearchModel
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default SearchModule;

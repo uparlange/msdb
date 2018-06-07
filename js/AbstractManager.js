@@ -1,14 +1,12 @@
-import AppUtils from "./AppUtils.js";
 import AbstractEventManager from "./AbstractEventManager.js";
 
-export default AppUtils.getClass({
-	extends: AbstractEventManager,
-	constructor: function AbstractManager() {
-		AbstractEventManager.call(this);
-	},
-	functions: {
-		init: function () {
-
-		}
+class AbstractManager extends AbstractEventManager {
+	constructor() {
+		super();
 	}
-});
+	init() {
+
+	}
+}
+
+export default AbstractManager;

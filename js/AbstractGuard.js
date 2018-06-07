@@ -1,18 +1,16 @@
-import AppUtils from "./AppUtils.js";
 import AbstractClass from "./AbstractClass.js";
 
-export default AppUtils.getClass({
-	extends: AbstractClass,
-	constructor: function AbstractGuard(AbstractClassHelper) {
-		AbstractClass.call(this);
+class AbstractGuard extends AbstractClass {
+	constructor(AbstractClassHelper) {
+		super();
 		this._helper = AbstractClassHelper;
-	},
-	functions: {
-		getLabels: function () {
-			return this._helper.getLabels();
-		},
-		getWindowRef: function () {
-			return this._helper.getWindowRef();
-		}
 	}
-});
+	getLabels() {
+		return this._helper.getLabels();
+	}
+	getWindowRef() {
+		return this._helper.getWindowRef();
+	}
+}
+
+export default AbstractGuard;

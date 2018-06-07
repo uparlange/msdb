@@ -1,4 +1,3 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import ConfigView from "./ConfigView.js";
@@ -6,13 +5,9 @@ import ConfigModel from "./ConfigModel.js";
 import ConfigCanActivate from "./ConfigCanActivate.js";
 import ConfigCanDeactivate from "./ConfigCanDeactivate.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function ConfigModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class ConfigModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -27,6 +22,11 @@ export default AppUtils.getClass({
 				ConfigCanActivate,
 				ConfigCanDeactivate
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default ConfigModule;

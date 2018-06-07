@@ -1,4 +1,3 @@
-import AppUtils from "./AppUtils.js";
 import EventManager from "./EventManager.js";
 import TranslateManager from "./TranslateManager.js";
 import MsdbService from "./MsdbService.js";
@@ -12,13 +11,11 @@ import WindowRef from "./WindowRef.js";
 import Shell from "./Shell.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import PopupManager from "./PopupManager.js";
+import AbstractModule from "./AbstractModule.js";
 
-export default AppUtils.getClass({
-    constructor: function GlobalModule() {
-
-    },
-    annotations: [
-        new ng.core.NgModule({
+class GlobalModule extends AbstractModule {
+    static get annotations() {
+        return this.getAnnotations({
             providers: [
                 MsdbService,
                 EventManager,
@@ -34,6 +31,11 @@ export default AppUtils.getClass({
                 AbstractClassHelper,
                 PopupManager
             ]
-        })
-    ]
-});
+        });
+    }
+    constructor() {
+        super();
+    }
+}
+
+export default GlobalModule;

@@ -1,4 +1,3 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import TranslatePipe from "./TranslatePipe.js";
 import NgForItemComponent from "./NgForItemComponent.js";
@@ -8,13 +7,9 @@ import HrefDirective from "./HrefDirective.js";
 import MaterialModule from "./MaterialModule.js";
 import TreeComponent from "./TreeComponent.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function CommonModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class CommonModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				ng.common.CommonModule,
 				ng.forms.FormsModule,
@@ -39,6 +34,11 @@ export default AppUtils.getClass({
 				HrefDirective,
 				TreeComponent
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default CommonModule;

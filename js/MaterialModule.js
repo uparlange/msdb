@@ -1,13 +1,8 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function MaterialModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class MaterialModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				ng.material.MatToolbarModule,
 				ng.material.MatSnackBarModule,
@@ -44,6 +39,11 @@ export default AppUtils.getClass({
 				ng.material.MatTooltipModule,
 				ng.material.MatSelectModule
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default MaterialModule;

@@ -1,17 +1,17 @@
-import AppUtils from "./AppUtils.js"
 import AbstractView from "./AbstractView.js"
 import AbstractClassHelper from "./AbstractClassHelper.js"
 import HomeModel from "./HomeModel.js"
 
-export default AppUtils.getClass({
-	extends: AbstractView,
-	constructor: function HomeView(AbstractClassHelper, HomeModel) {
-		AbstractView.call(this, AbstractClassHelper, HomeModel);
-	},
-	parameters: [
-		[AbstractClassHelper], [HomeModel]
-	],
-	annotations: [
-		new ng.core.Component(AppUtils.getComponentConfiguration("home"))
-	]
-});
+class HomeView extends AbstractView {
+	static get annotations() {
+		return this.getAnnotations({ selector: "home" });
+	}
+	static get parameters() {
+		return this.getParameters(AbstractClassHelper, HomeModel);
+	}
+	constructor(AbstractClassHelper, HomeModel) {
+		super(AbstractClassHelper, HomeModel);
+	}
+}
+
+export default HomeView;

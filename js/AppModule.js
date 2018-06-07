@@ -1,4 +1,3 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import AppView from "./AppView.js";
@@ -6,13 +5,9 @@ import AppModel from "./AppModel.js";
 import ProgressBarDirective from "./ProgressBarDirective.js";
 import GlobalModule from "./GlobalModule.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function AppModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class AppModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				GlobalModule,
@@ -21,13 +16,13 @@ export default AppUtils.getClass({
 				ng.platformBrowser.animations.BrowserAnimationsModule,
 				ng.router.RouterModule.forRoot([
 					{ path: "", redirectTo: "home", pathMatch: "full" },
-					{ path: "home", loadChildren: AppUtils.loadModule("HomeModule") },
-					{ path: "search", loadChildren: AppUtils.loadModule("SearchModule") },
-					{ path: "detail", loadChildren: AppUtils.loadModule("DetailModule") },
-					{ path: "result", loadChildren: AppUtils.loadModule("ResultModule") },
-					{ path: "mygames", loadChildren: AppUtils.loadModule("MyGamesModule") },
-					{ path: "config", loadChildren: AppUtils.loadModule("ConfigModule") },
-					{ path: "bot", loadChildren: AppUtils.loadModule("BotModule") }
+					{ path: "home", loadChildren: this.getLazyModule("HomeModule") },
+					{ path: "search", loadChildren: this.getLazyModule("SearchModule") },
+					{ path: "detail", loadChildren: this.getLazyModule("DetailModule") },
+					{ path: "result", loadChildren: this.getLazyModule("ResultModule") },
+					{ path: "mygames", loadChildren: this.getLazyModule("MyGamesModule") },
+					{ path: "config", loadChildren: this.getLazyModule("ConfigModule") },
+					{ path: "bot", loadChildren: this.getLazyModule("BotModule") }
 				], { useHash: true })
 			],
 			declarations: [
@@ -40,6 +35,11 @@ export default AppUtils.getClass({
 			bootstrap: [
 				AppView
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default AppModule;

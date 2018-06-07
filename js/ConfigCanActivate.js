@@ -2,17 +2,16 @@ import AppUtils from "./AppUtils.js";
 import AbstractGuard from "./AbstractGuard.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 
-export default AppUtils.getClass({
-	extends: AbstractGuard,
-	constructor: function ConfigCanActivate(AbstractClassHelper) {
-		AbstractGuard.call(this, AbstractClassHelper);
-	},
-	parameters: [
-		[AbstractClassHelper]
-	],
-	functions: {
-		canActivate: function () {
-			return AppUtils.runInNw();
-		}
+class ConfigCanActivate extends AbstractGuard {
+	static get parameters() {
+		return this.getParameters(AbstractClassHelper);
 	}
-});
+	constructor(AbstractClassHelper) {
+		super(AbstractClassHelper);
+	}
+	canActivate() {
+		return AppUtils.runInNw();
+	}
+}
+
+export default ConfigCanActivate;

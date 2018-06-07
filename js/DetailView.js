@@ -1,4 +1,3 @@
-import AppUtils from "./AppUtils.js";
 import AbstractView from "./AbstractView.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import DetailModel from "./DetailModel.js";
@@ -11,45 +10,44 @@ import BiossetsPopup from "./BiossetsPopup.js";
 import PortsPopup from "./PortsPopup.js";
 import DeviceRefsPopup from "./DeviceRefsPopup.js";
 
-export default AppUtils.getClass({
-	extends: AbstractView,
-	constructor: function DetailView(AbstractClassHelper, DetailModel, MatDialog) {
-		AbstractView.call(this, AbstractClassHelper, DetailModel);
-		this._matDialog = MatDialog;
-	},
-	parameters: [
-		[AbstractClassHelper], [DetailModel], [ng.material.MatDialog]
-	],
-	annotations: [
-		new ng.core.Component(AppUtils.getComponentConfiguration("detail"))
-	],
-	functions: {
-		openDriverPopup: function () {
-			this._openPopup(DriverPopup);
-		},
-		openRomsPopup: function () {
-			this._openPopup(RomsPopup);
-		},
-		openClonesPopup: function () {
-			this._openPopup(ClonesPopup);
-		},
-		openDipSwitchsPopup: function () {
-			this._openPopup(DipSwitchsPopup);
-		},
-		openChipsPopup: function () {
-			this._openPopup(ChipsPopup);
-		},
-		openBiossetsPopup: function () {
-			this._openPopup(BiossetsPopup);
-		},
-		openPortsPopup: function () {
-			this._openPopup(PortsPopup);
-		},
-		openDeviceReferencesPopup: function () {
-			this._openPopup(DeviceRefsPopup);
-		},
-		_openPopup: function (clazz) {
-			this.getPopups().open(this._matDialog, clazz, { disableClose: true });
-		}
+class DetailView extends AbstractView {
+	static get annotations() {
+		return this.getAnnotations({ selector: "detail" });
 	}
-});
+	static get parameters() {
+		return this.getParameters(AbstractClassHelper, DetailModel, ng.material.MatDialog);
+	}
+	constructor(AbstractClassHelper, DetailModel, MatDialog) {
+		super(AbstractClassHelper, DetailModel);
+		this._matDialog = MatDialog;
+	}
+	openDriverPopup() {
+		this._openPopup(DriverPopup);
+	}
+	openRomsPopup() {
+		this._openPopup(RomsPopup);
+	}
+	openClonesPopup() {
+		this._openPopup(ClonesPopup);
+	}
+	openDipSwitchsPopup() {
+		this._openPopup(DipSwitchsPopup);
+	}
+	openChipsPopup() {
+		this._openPopup(ChipsPopup);
+	}
+	openBiossetsPopup() {
+		this._openPopup(BiossetsPopup);
+	}
+	openPortsPopup() {
+		this._openPopup(PortsPopup);
+	}
+	openDeviceReferencesPopup() {
+		this._openPopup(DeviceRefsPopup);
+	}
+	_openPopup(clazz) {
+		this.getPopups().open(this._matDialog, clazz, { disableClose: true });
+	}
+}
+
+export default DetailView;

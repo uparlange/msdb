@@ -1,16 +1,11 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import BotView from "./BotView.js";
 import BotModel from "./BotModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function BotModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class BotModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -23,6 +18,11 @@ export default AppUtils.getClass({
 			providers: [
 				BotModel
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default BotModule;

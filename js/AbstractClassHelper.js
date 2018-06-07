@@ -1,12 +1,13 @@
-import AppUtils from "./AppUtils.js";
 import AbstractClass from "./AbstractClass.js";
 import Shell from "./Shell.js";
 import WindowRef from "./WindowRef.js";
 
-export default AppUtils.getClass({
-	extends: AbstractClass,
-	constructor: function AbstractClassHelper(Shell, WindowRef, Title, HttpClient, ActivatedRoute) {
-		AbstractClass.call(this);
+class AbstractClassHelper extends AbstractClass {
+	static get parameters() {
+		return this.getParameters(Shell, WindowRef, ng.platformBrowser.Title, ng.common.http.HttpClient, ng.router.ActivatedRoute)
+	}
+	constructor(Shell, WindowRef, Title, HttpClient, ActivatedRoute) {
+		super();
 		this._title = Title;
 		this._shell = Shell;
 		this._httpClient = HttpClient;
@@ -14,46 +15,43 @@ export default AppUtils.getClass({
 		this._windowRef = WindowRef;
 		// TODO right place ?
 		this._shell.init();
-	},
-	parameters: [
-		[Shell], [WindowRef], [ng.platformBrowser.Title], [ng.common.http.HttpClient], [ng.router.ActivatedRoute]
-	],
-	functions: {
-		getEventBus: function () {
-			return this._shell.getEventManager();
-		},
-		getConnection: function () {
-			return this._shell.getConnectionManager();
-		},
-		getSocket: function () {
-			return this._shell.getSocketManager();
-		},
-		getRouter: function () {
-			return this._shell.getRouterManager();
-		},
-		getCache: function () {
-			return this._shell.getCacheManager();
-		},
-		getLabels: function () {
-			return this._shell.getTranslateManager();
-		},
-		getLazy: function () {
-			return this._shell.getLazyManager();
-		},
-		getPopups: function () {
-			return this._shell.getPopupManager();
-		},
-		getTitle: function () {
-			return this._title;
-		},
-		getHttpClient: function () {
-			return this._httpClient;
-		},
-		getActivatedRoute: function () {
-			return this._activatedRoute;
-		},
-		getWindowRef: function () {
-			return this._windowRef;
-		}
 	}
-});
+	getEventBus() {
+		return this._shell.getEventManager();
+	}
+	getConnection() {
+		return this._shell.getConnectionManager();
+	}
+	getSocket() {
+		return this._shell.getSocketManager();
+	}
+	getRouter() {
+		return this._shell.getRouterManager();
+	}
+	getCache() {
+		return this._shell.getCacheManager();
+	}
+	getLabels() {
+		return this._shell.getTranslateManager();
+	}
+	getLazy() {
+		return this._shell.getLazyManager();
+	}
+	getPopups() {
+		return this._shell.getPopupManager();
+	}
+	getTitle() {
+		return this._title;
+	}
+	getHttpClient() {
+		return this._httpClient;
+	}
+	getActivatedRoute() {
+		return this._activatedRoute;
+	}
+	getWindowRef() {
+		return this._windowRef;
+	}
+}
+
+export default AbstractClassHelper;

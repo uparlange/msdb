@@ -1,25 +1,28 @@
-import AppUtils from "./AppUtils.js";
 import AbstractClass from "./AbstractClass.js";
 
-export default AppUtils.getClass({
-	extends: AbstractClass,
-	constructor: function AbstractPipe(AbstractClassHelper) {
-		AbstractClass.call(this);
-		this._helper = AbstractClassHelper;
-	},
-	functions: {
-		ngOnDestroy: function () {
-			if (typeof this.onDestroy === "function") {
-				this.getLogger().debug("onDestroy");
-				this.onDestroy();
-			}
-			else {
-				this.getLogger().warn("onDestroy?");
-			}
-			this._helper = null;
-		},
-		getLabels: function () {
-			return this._helper.getLabels();
-		}
+class AbstractPipe extends AbstractClass {
+	static getAnnotations(params) {
+		return [
+			new ng.core.Pipe(params)
+		];
 	}
-});
+	constructor(AbstractClassHelper) {
+		super();
+		this._helper = AbstractClassHelper;
+	}
+	ngOnDestroy() {
+		if (typeof this.onDestroy === "function") {
+			this.getLogger().debug("onDestroy");
+			this.onDestroy();
+		}
+		else {
+			this.getLogger().warn("onDestroy?");
+		}
+		this._helper = null;
+	}
+	getLabels() {
+		return this._helper.getLabels();
+	}
+}
+
+export default AbstractPipe;

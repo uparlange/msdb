@@ -1,4 +1,3 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import DetailView from "./DetailView.js";
@@ -13,13 +12,9 @@ import BiossetsPopup from "./BiossetsPopup.js";
 import PortsPopup from "./PortsPopup.js";
 import DeviceRefsPopup from "./DeviceRefsPopup.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function DetailModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class DetailModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -51,6 +46,11 @@ export default AppUtils.getClass({
 				PortsPopup,
 				DeviceRefsPopup
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default DetailModule;

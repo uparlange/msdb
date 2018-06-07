@@ -1,16 +1,11 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import SearchByManufacturersView from "./SearchByManufacturersView.js";
 import SearchByManufacturersModel from "./SearchByManufacturersModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function SearchByManufacturersModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class SearchByManufacturersModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -23,6 +18,11 @@ export default AppUtils.getClass({
 			providers: [
 				SearchByManufacturersModel
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default SearchByManufacturersModule;

@@ -1,16 +1,11 @@
-import AppUtils from "./AppUtils.js";
 import AbstractModule from "./AbstractModule.js";
 import CommonModule from "./CommonModule.js";
 import ResultView from "./ResultView.js";
 import ResultModel from "./ResultModel.js";
 
-export default AppUtils.getClass({
-	extends: AbstractModule,
-	constructor: function ResultModule() {
-		AbstractModule.call(this);
-	},
-	annotations: [
-		new ng.core.NgModule({
+class ResultModule extends AbstractModule {
+	static get annotations() {
+		return this.getAnnotations({
 			imports: [
 				CommonModule,
 				ng.router.RouterModule.forChild([
@@ -23,6 +18,11 @@ export default AppUtils.getClass({
 			providers: [
 				ResultModel
 			]
-		})
-	]
-});
+		});
+	}
+	constructor() {
+		super();
+	}
+}
+
+export default ResultModule;

@@ -1,26 +1,24 @@
-import AppUtils from "./AppUtils.js";
 import AbstractDirective from "./AbstractDirective.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 
-export default AppUtils.getClass({
-	extends: AbstractDirective,
-	constructor: function HrefDirective(AbstractClassHelper) {
-		AbstractDirective.call(this, AbstractClassHelper);
-	},
-	parameters: [
-		[AbstractClassHelper]
-	],
-	annotations: [
-		new ng.core.Directive({
+class HrefDirective extends AbstractDirective {
+	static get annotations() {
+		return this.getAnnotations({
 			selector: "[href]",
 			host: {
 				"(click)": "onClick($event)"
 			}
-		})
-	],
-	functions: {
-		onClick: function () {
-			this.getRouter().saveCurrentViewScrollPosition();
-		}
+		});
 	}
-});
+	static get parameters() {
+		return this.getParameters(AbstractClassHelper);
+	}
+	constructor(AbstractClassHelper) {
+		super(AbstractClassHelper);
+	}
+	onClick() {
+		this.getRouter().saveCurrentViewScrollPosition();
+	}
+}
+
+export default HrefDirective;

@@ -1088,8 +1088,8 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   border-top-color: rgba(0, 0, 0, 0.54); }
 
 .mat-datepicker-toggle,
-.mat-datepicker-popup .mat-calendar-next-button,
-.mat-datepicker-popup .mat-calendar-previous-button {
+.mat-datepicker-content .mat-calendar-next-button,
+.mat-datepicker-content .mat-calendar-previous-button {
   color: rgba(0, 0, 0, 0.54); }
 
 .mat-calendar-table-header {
