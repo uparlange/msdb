@@ -1,13 +1,14 @@
 import AbstractPopup from "./AbstractPopup.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import DetailModel from "./DetailModel.js";
+import AppUtils from "./AppUtils.js";
 
 class DeviceRefsPopup extends AbstractPopup {
 	static get annotations() {
 		return this.getAnnotations({ selector: "deviceRefs" });
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, DetailModel, ng.material.MatDialogRef);
+		return AppUtils.getParameters(AbstractClassHelper, DetailModel, ng.material.MatDialogRef);
 	}
 	constructor(AbstractClassHelper, DetailModel, MatDialogRef) {
 		super(AbstractClassHelper, DetailModel, MatDialogRef);

@@ -4,6 +4,7 @@ import AppView from "./AppView.js";
 import AppModel from "./AppModel.js";
 import ProgressBarDirective from "./ProgressBarDirective.js";
 import GlobalModule from "./GlobalModule.js";
+import MatPaginatorL10n from "./MatPaginatorL10n.js";
 
 class AppModule extends AbstractModule {
 	static get annotations() {
@@ -30,6 +31,7 @@ class AppModule extends AbstractModule {
 				ProgressBarDirective
 			],
 			providers: [
+				{ provide: ng.material.MatPaginatorIntl, useClass: MatPaginatorL10n },
 				AppModel
 			],
 			bootstrap: [

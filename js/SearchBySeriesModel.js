@@ -1,39 +1,49 @@
 import AbstractModel from "./AbstractModel.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import MsdbService from "./MsdbService.js";
+import AppUtils from "./AppUtils.js";
 
 class SearchBySeriesModel extends AbstractModel {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, MsdbService);
+		return AppUtils.getParameters(AbstractClassHelper, MsdbService);
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onRefresh(callback) {
-		this._refreshList().subscribe(() => {
+		this.getServices().getSeries().subscribe((data) => {
+			this.data.list.data = data;
 			callback();
 		});
+	}
+	onDestroy() {
+		this.data.list.paginator = null;
 	}
 	trackByLabel(index, item) {
 		return item ? item.label : undefined;
 	}
-	_refreshList() {
-		const eventEmitter = new ng.core.EventEmitter();
-		if (this.data.list === null) {
-			this.getServices().getSeries().subscribe((data) => {
-				this.data.list = this.getGroupedArrayByFirstLetter(data, "label");
-				eventEmitter.emit();
-			});
-		} else {
-			setTimeout(() => {
-				eventEmitter.emit();
-			}, 0);
-		}
-		return eventEmitter;
+	applyFilter(value) {
+		this._setFilterValue(value);
+	}
+	clearFilter() {
+		this._setFilterValue("");
+	}
+	setPaginator(paginator) {
+		this.data.list.paginator = paginator;
+	}
+	pageChanged(event) {
+		this.data.pageIndex = event.pageIndex;
+	}
+	_setFilterValue(value) {
+		this.data.filterValue = value;
+		this.data.list.filter = value;
 	}
 	_getInitData() {
 		return {
-			list: null
+			list: new ng.material.MatTableDataSource(),
+			filterValue: "",
+			displayedColumns: ["label"],
+			pageIndex: 0
 		};
 	}
 }

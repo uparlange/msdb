@@ -1,10 +1,11 @@
 import AbstractManager from "./AbstractManager.js";
 import CacheManager from "./CacheManager.js";
 import WindowRef from "./WindowRef.js";
+import AppUtils from "./AppUtils.js";
 
 class RouterManager extends AbstractManager {
 	static get parameters() {
-		return this.getParameters(ng.router.Router, CacheManager, ng.core.NgZone, WindowRef);
+		return AppUtils.getParameters(ng.router.Router, CacheManager, ng.core.NgZone, WindowRef);
 	}
 	constructor(Router, CacheManager, NgZone, WindowRef) {
 		super();
@@ -34,7 +35,7 @@ class RouterManager extends AbstractManager {
 	}
 	saveCurrentViewScrollPosition() {
 		const scrollPosition = this._windowRef.getScrollPosition();
-		this._cacheManager.setItem("scrollTop_" + this._getCurrentPath(), scrollPosition.y);
+		this._cacheManager.setItem(`scrollTop_${this._getCurrentPath()}`, scrollPosition.y);
 	}
 	navigate(commands, extras) {
 		this._ngZone.run(() => {
@@ -63,7 +64,7 @@ class RouterManager extends AbstractManager {
 						this._mutationObserver.disconnect();
 						this._mutationObserver = null;
 					}
-					const scrollTop = this._cacheManager.getItem("scrollTop_" + this._getCurrentPath(), 0);
+					const scrollTop = this._cacheManager.getItem(`scrollTop_${this._getCurrentPath()}`, 0);
 					this._windowRef.scrollTo(0, scrollTop);
 				}, 100);
 			});

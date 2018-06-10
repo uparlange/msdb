@@ -19,7 +19,8 @@ class MaterialModule extends AbstractModule {
 				ng.material.MatMenuModule,
 				ng.material.MatExpansionModule,
 				ng.material.MatTooltipModule,
-				ng.material.MatSelectModule
+				ng.material.MatSelectModule,
+				ng.material.MatPaginatorModule
 			],
 			exports: [
 				ng.material.MatToolbarModule,
@@ -37,7 +38,8 @@ class MaterialModule extends AbstractModule {
 				ng.material.MatMenuModule,
 				ng.material.MatExpansionModule,
 				ng.material.MatTooltipModule,
-				ng.material.MatSelectModule
+				ng.material.MatSelectModule,
+				ng.material.MatPaginatorModule
 			]
 		});
 	}

@@ -18,10 +18,10 @@ export default {
         expressInstance.use(bodyParser.json());
         const serverPort = AppUtils.getSocketPort();
         httpInstance.listen(serverPort, () => {
-            this._getLogger().info("(EXPRESS) Listening on port " + serverPort);
+            this._getLogger().info(`(EXPRESS) Listening on port ${serverPort}`);
         });
         ioInstance.on("connection", (socket) => {
-            this._getLogger().info("(SOCKET.IO) User (" + socket.id + ") connected");
+            this._getLogger().info(`(SOCKET.IO) User (${socket.id}) connected`);
             socket.on("GET_MY_GAMES", (params, callback) => {
                 this._getMyGames(params, callback);
             });
@@ -45,7 +45,7 @@ export default {
     _getConfigFile: function () {
         const os = require("os");
         const pkg = require("./package.json");
-        return os.homedir() + "\\" + pkg.name + ".json";
+        return `${os.homedir()}\\${pkg.name}.json`;
     },
     _saveConfiguration: function (config, callback) {
         this._fs.writeFileSync(this._getConfigFile(), JSON.stringify(config));
@@ -72,8 +72,7 @@ export default {
         const eventEmitter = new ng.core.EventEmitter();
         const mameIni = mameDirectory + "\\mame.ini";
         if (this._fs.existsSync(mameIni)) {
-            let cmd = "cd " + mameDirectory + " & " + mameFileName;
-            cmd += " -cc";
+            let cmd = `cd ${mameDirectory} & ${mameFileName} -cc`;
             this._execCmd(cmd).subscribe(() => {
                 let source = this._fs.readFileSync(mameIni, "utf8");
                 const params = {};
@@ -96,7 +95,7 @@ export default {
                 params.syncrefresh = "1"
                 let dest = "";
                 for (let attr in params) {
-                    dest += attr + " " + params[attr] + "\r\n";
+                    dest += `${attr} ${params[attr]}\r\n`;
                 }
                 this._fs.writeFileSync(mameIni, dest);
                 eventEmitter.emit();
@@ -111,32 +110,32 @@ export default {
     },
     _execCmd: function (cmd) {
         const eventEmitter = new ng.core.EventEmitter();
-        this._getLogger().info("(CMD) Execute '" + cmd + "'");
+        this._getLogger().info(`(CMD) Execute '${cmd}'`);
         const child_process = require("child_process");
         child_process.exec(cmd, (error, stdout, stderr) => {
             if (error != null && error.length > 0) {
-                this._getLogger().error("(CMD) " + error.toString());
+                this._getLogger().error(`(CMD) ${error.toString()}`);
             }
             if (stdout != null && stdout.length > 0) {
-                this._getLogger().info("(CMD) " + stdout);
+                this._getLogger().info(`(CMD) ${stdout}`);
             }
             if (stderr != null && stderr.length > 0) {
-                this._getLogger().error("(CMD) " + stderr);
+                this._getLogger().error(`(CMD) ${stderr}`);
             }
             eventEmitter.emit();
         });
         return eventEmitter;
     },
     _playGame: function (name, callback) {
-        this._getLogger().info("(MAME) Launch game " + name);
+        this._getLogger().info(`(MAME) Launch game ${name}`);
         this._getConfiguration((configuration) => {
             const mameDirectory = configuration.mameDirectory;
             let mameFileName = "mame64.exe";
-            if (!this._fs.existsSync(mameDirectory + "\\" + mameFileName)) {
+            if (!this._fs.existsSync(`${mameDirectory}\\${mameFileName}`)) {
                 mameFileName = "mame.exe";
             }
             this._initMame(mameDirectory, mameFileName).subscribe(() => {
-                let cmd = "cd " + mameDirectory + " & " + mameFileName + " " + name;
+                let cmd = `cd ${mameDirectory} & ${mameFileName} ${name}`;
                 if (configuration.autosave) {
                     cmd += " -autosave";
                 }
@@ -172,7 +171,7 @@ export default {
                 name: name,
                 available: false
             };
-            const gameFilename = configuration.romsDirectory + "\\" + name + ".zip";
+            const gameFilename = `${configuration.romsDirectory}\\${name}.zip`;
             if (this._fs.existsSync(gameFilename)) {
                 result.available = true;
             }

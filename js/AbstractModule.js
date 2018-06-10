@@ -9,7 +9,7 @@ class AbstractModule extends AbstractClass {
 	static getLazyModule(moduleName) {
 		return function () {
 			const eventEmitter = new ng.core.EventEmitter();
-			const modulePath = "/js/" + moduleName + ".js";
+			const modulePath = `/js/${moduleName}.js`;
 			import(modulePath).then((module) => {
 				eventEmitter.emit(module.default);
 			});

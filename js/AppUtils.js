@@ -1,21 +1,33 @@
 export default {
+	getParameters: function () {
+		const argumentsCount = arguments.length;
+		if (argumentsCount > 0) {
+			const params = [];
+			for (let i = 0; i < argumentsCount; i++) {
+				params.push([arguments[i]]);
+			}
+			return params;
+		} else {
+			return undefined;
+		}
+	},
 	getGameIconUrl: function (game) {
-		return game.icon !== null ? this.getGameFolder(game) + "/" + game.icon.name : "images/game.png";
+		return game.icon !== null ? `${this.getGameFolder(game)}/${game.icon.name}` : "images/game.png";
 	},
 	getGameVideoUrl: function (game) {
-		return "http://www.progettosnaps.net/videosnaps/mp4/" + game.name + ".mp4";
+		return `http://www.progettosnaps.net/videosnaps/mp4/${game.name}.mp4`;
 	},
 	getGameManualUrl: function (game) {
-		return "http://www.progettosnaps.net/manuals/pdf/" + game.name + ".pdf";
+		return `http://www.progettosnaps.net/manuals/pdf/${game.name}.pdf`;
 	},
 	getGameSoundTrackUrl: function (game) {
-		return "http://www.progettosnaps.net/soundtrack/packs/mp3/" + game.name + ".zip";
+		return `http://www.progettosnaps.net/soundtrack/packs/mp3/${game.name}.zip`;
 	},
 	getGameFolder: function (game) {
-		return this._getBaseClientUrl() + "games/" + game.name;
+		return `${this._getBaseClientUrl()}games/${game.name}`;
 	},
 	getServiceUrl: function (serviceName) {
-		return this._getBaseClientUrl() + "php/services/" + serviceName + ".php";
+		return `${this._getBaseClientUrl()}php/services/${serviceName}.php`;
 	},
 	runInNw: function () {
 		return window.hasOwnProperty("nw");
@@ -24,7 +36,7 @@ export default {
 		return 3000;
 	},
 	getSocketUrl: function () {
-		return this._getBaseServerUrl() + ":" + this.getSocketPort();
+		return `${this._getBaseServerUrl()}:${this.getSocketPort()}`;
 	},
 	productionMode: function () {
 		return window.location.search.indexOf("debug") === -1;

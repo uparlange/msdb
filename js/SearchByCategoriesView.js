@@ -1,13 +1,14 @@
 import AbstractView from "./AbstractView.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import SearchByCategoriesModel from "./SearchByCategoriesModel.js";
+import AppUtils from "./AppUtils.js";
 
 class SearchByCategoriesView extends AbstractView {
 	static get annotations() {
 		return this.getAnnotations({ selector: "searchByCategories" });
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, SearchByCategoriesModel);
+		return AppUtils.getParameters(AbstractClassHelper, SearchByCategoriesModel);
 	}
 	constructor(AbstractClassHelper, SearchByCategoriesModel) {
 		super(AbstractClassHelper, SearchByCategoriesModel);

@@ -4,7 +4,7 @@ import AbstractClassHelper from "./AbstractClassHelper.js";
 
 class MsdbService extends AbstractService {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);
@@ -111,9 +111,9 @@ class MsdbService extends AbstractService {
 		return eventEmitter;
 	}
 	_getCacheKey(config) {
-		let cacheKey = "service_" + config.url;
+		let cacheKey = `service_${config.url}`;
 		if (config.params !== undefined) {
-			cacheKey += "?" + config.params.toString();
+			cacheKey += `?${config.params.toString()}`;
 		}
 		return cacheKey;
 	}

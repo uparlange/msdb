@@ -1,9 +1,10 @@
 import AbstractGuard from "./AbstractGuard.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
+import AppUtils from "./AppUtils.js";
 
 class ConfigCanDeactivate extends AbstractGuard {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);

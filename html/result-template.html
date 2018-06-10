@@ -1,34 +1,25 @@
-<div>
-	<mat-card>
-		<mat-card-title>
-			{{model.getSearchLabel(model.params.type)|translate}} "{{model.params.value}}"
-			<span *ngIf="model.data.count >= 0"> : {{model.data.count}} {{'L10N_RESULTS'|translate}}</span>
-			<hr>
-			<mat-checkbox [(ngModel)]="model.showClone">Clone</mat-checkbox>
-			<mat-checkbox [(ngModel)]="model.showBios">Bios</mat-checkbox>
-			<mat-checkbox [(ngModel)]="model.showDevice">Device</mat-checkbox>
-		</mat-card-title>
-	</mat-card>
-	<div class="default-spacer"></div>
-	<div *ngFor="let group of model.data.list; let index=index; trackBy:model.trackByLabel">
-		<div *ngIf="model.data.list.length > 1">
-			<mat-card>
-				<mat-card-title>
-					{{group.label}} ({{group.data.length}})
-					<button *ngIf="index > 0" mat-mini-fab scrollToTop>
-						<i class="material-icons mat-24 mat-light">arrow_drop_up</i>
-					</button>
-				</mat-card-title>
-			</mat-card>
-		</div>
-		<mat-nav-list>
-			<span *ngFor="let game of group.data; trackBy:model.trackByName">
-				<a mat-list-item *ngIf="model.canShowGame(game)" routerLink="/detail" [queryParams]="{name:game.name}">
-					<img mat-list-avatar [lazySrc]="model.getGameIconUrl(game)">
-					<span class="sep"></span>
-					{{game.description}}
-				</a>
-			</span>
-		</mat-nav-list>
-	</div>
-</div>
+<mat-card>
+	<mat-card-title>
+		<span>{{model.getSearchLabel(model.params.type)|translate}} "{{model.params.value}}"</span>
+		<hr>
+		<mat-checkbox [(ngModel)]="model.showClone" (ngModelChange)="model.checkBoxChanged($event)">Clone</mat-checkbox>
+		<mat-checkbox [(ngModel)]="model.showBios" (ngModelChange)="model.checkBoxChanged($event)">Bios</mat-checkbox>
+		<mat-checkbox [(ngModel)]="model.showDevice" (ngModelChange)="model.checkBoxChanged($event)">Device</mat-checkbox>
+	</mat-card-title>
+</mat-card>
+<div class="default-spacer"></div>
+<mat-paginator [hidePageSize]="true" [pageSize]="400" [pageIndex]="model.data.pageIndex" (page)="model.pageChanged($event)"
+ showFirstLastButtons></mat-paginator>
+<table mat-table [dataSource]="model.data.list" [trackBy]="model.trackByName">
+	<ng-container matColumnDef="icon">
+		<td mat-cell *matCellDef="let element">
+			<img mat-list-avatar [lazySrc]="model.getGameIconUrl(element)">
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="description">
+		<td mat-cell *matCellDef="let element">
+			<a routerLink="/detail" [queryParams]="{name:element.name}">{{element.description}}</a>
+		</td>
+	</ng-container>
+	<tr mat-row *matRowDef="let row; columns: model.data.displayedColumns;"></tr>
+</table>

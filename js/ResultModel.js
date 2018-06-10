@@ -1,10 +1,11 @@
 import AbstractModel from "./AbstractModel.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import MsdbService from "./MsdbService.js";
+import AppUtils from "./AppUtils.js";
 
 class ResultModel extends AbstractModel {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, MsdbService);
+		return AppUtils.getParameters(AbstractClassHelper, MsdbService);
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
@@ -34,34 +35,47 @@ class ResultModel extends AbstractModel {
 		}
 	}
 	onRefresh(callback) {
-		this.data = this._getInitData();
+		this.data.list.data = [];
 		this.getServices().search(this.params.type, this.params.value).subscribe((data) => {
-			this.data.count = Array.isArray(data) ? data.length : 0;
-			this.data.list = this.getGroupedArrayByFirstLetter(data, "description");
+			this.data.source = data || [];
+			this._refreshList();
 			callback();
 		});
 	}
-	canShowGame(game) {
-		return (
-			(game.category !== this.SYSTEM_DEVICE && game.category !== this.SYSTEM_BIOS && game.cloneof == null) ||
-			(game.cloneof != null && this.showClone) ||
-			(game.category === this.SYSTEM_DEVICE && this.showDevice) ||
-			(game.category === this.SYSTEM_BIOS && this.showBios)
-		)
+	onDestroy() {
+		this.data.list.paginator = null;
 	}
 	getSearchLabel(type) {
-		return (type) ? "L10N_SEARCH_BY_" + type.toUpperCase() : "";
-	}
-	trackByLabel(index, item) {
-		return item ? item.label : undefined;
+		return (type) ? `L10N_SEARCH_BY_${type.toUpperCase()}` : "";
 	}
 	trackByName(index, item) {
 		return item ? item.name : undefined;
 	}
+	setPaginator(paginator) {
+		this.data.list.paginator = paginator;
+	}
+	pageChanged(event) {
+		this.data.pageIndex = event.pageIndex;
+	}
+	checkBoxChanged() {
+		this._refreshList();
+	}
+	_refreshList() {
+		this.data.list.data = this.data.source.filter((game) => {
+			return (
+				(game.category !== this.SYSTEM_DEVICE && game.category !== this.SYSTEM_BIOS && game.cloneof == null) ||
+				(game.cloneof != null && this.showClone) ||
+				(game.category === this.SYSTEM_DEVICE && this.showDevice) ||
+				(game.category === this.SYSTEM_BIOS && this.showBios)
+			)
+		});
+	}
 	_getInitData() {
 		return {
-			list: [],
-			count: -1
+			source: null,
+			list: new ng.material.MatTableDataSource(),
+			displayedColumns: ["icon", "description"],
+			pageIndex: 0
 		};
 	}
 }

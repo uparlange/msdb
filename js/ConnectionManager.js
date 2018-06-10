@@ -1,9 +1,10 @@
 import AbstractManager from "./AbstractManager.js";
 import WindowRef from "./WindowRef.js";
+import AppUtils from "./AppUtils.js";
 
 class ConnectionManager extends AbstractManager {
 	static get parameters() {
-		return this.getParameters(WindowRef);
+		return AppUtils.getParameters(WindowRef);
 	}
 	constructor(WindowRef) {
 		super();

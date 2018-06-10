@@ -1,10 +1,11 @@
 import AbstractClass from "./AbstractClass.js";
 import Shell from "./Shell.js";
 import WindowRef from "./WindowRef.js";
+import AppUtils from "./AppUtils.js";
 
 class AbstractClassHelper extends AbstractClass {
 	static get parameters() {
-		return this.getParameters(Shell, WindowRef, ng.platformBrowser.Title, ng.common.http.HttpClient, ng.router.ActivatedRoute)
+		return AppUtils.getParameters(Shell, WindowRef, ng.platformBrowser.Title, ng.common.http.HttpClient, ng.router.ActivatedRoute)
 	}
 	constructor(Shell, WindowRef, Title, HttpClient, ActivatedRoute) {
 		super();

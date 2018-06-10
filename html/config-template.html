@@ -5,7 +5,7 @@
 	<mat-card-content>
 		<div>
 			<mat-form-field>
-				<mat-select placeholder="{{'L10N_LANGUAGE'|translate}}" [value]="model.data.selectedLanguage" (selectionChange)="onLanguageChanged($event)">
+				<mat-select [placeholder]="'L10N_LANGUAGE'|translate" [value]="model.data.selectedLanguage" (selectionChange)="onLanguageChanged($event)">
 					<mat-option *ngFor="let language of model.data.languages" [value]="language.data">
 						{{language.label}}
 					</mat-option>
@@ -22,13 +22,13 @@
 	<mat-card-content>
 		<div>
 			<mat-form-field class="full-width">
-				<input matInput [(ngModel)]="model.data.newValue.mameDirectory" placeholder="{{'L10N_MAME_DIRECTORY'|translate}}" (keyup)="model.checkFormChanges()"
+				<input matInput [(ngModel)]="model.data.newValue.mameDirectory" [placeholder]="'L10N_MAME_DIRECTORY'|translate" (keyup)="model.checkFormChanges()"
 				 (change)="model.checkFormChanges()">
 			</mat-form-field>
 		</div>
 		<div>
 			<mat-form-field class="full-width">
-				<input matInput [(ngModel)]="model.data.newValue.romsDirectory" disabled placeholder="{{'L10N_ROMS_DIRECTORY'|translate}}">
+				<input matInput [(ngModel)]="model.data.newValue.romsDirectory" disabled [placeholder]="'L10N_ROMS_DIRECTORY'|translate">
 			</mat-form-field>
 		</div>
 		<div>

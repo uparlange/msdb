@@ -9,10 +9,11 @@ import RouterManager from "./RouterManager.js";
 import WindowRef from "./WindowRef.js";
 import PopupManager from "./PopupManager.js";
 import AbstractClass from "./AbstractClass.js";
+import AppUtils from "./AppUtils.js";
 
 class Shell extends AbstractClass {
     static get parameters() {
-        return this.getParameters(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
+        return AppUtils.getParameters(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
             CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager);
     }
     constructor(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,

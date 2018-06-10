@@ -1,9 +1,10 @@
 import AbstractModel from "./AbstractModel.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
+import AppUtils from "./AppUtils.js";
 
 class AppModel extends AbstractModel {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);

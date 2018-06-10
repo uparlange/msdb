@@ -8,7 +8,7 @@ class AppView extends AbstractView {
 		return this.getAnnotations({ selector: "body" });
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar, ng.core.ElementRef,
+		return AppUtils.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar, ng.core.ElementRef,
 			ng.core.Renderer);
 	}
 	constructor(AbstractClassHelper, AppModel, ViewContainerRef, MatSnackBar, ElementRef,
@@ -70,7 +70,7 @@ class AppView extends AbstractView {
 				}));
 				const infoSubMenu = new nw.Menu();
 				infoSubMenu.append(new nw.MenuItem({
-					label: "v" + pkg.version
+					label: `v${pkg.version}`
 				}));
 				menu.append(new nw.MenuItem({
 					label: "?",

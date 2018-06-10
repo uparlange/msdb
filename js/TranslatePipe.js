@@ -1,5 +1,6 @@
 import AbstractPipe from "./AbstractPipe.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
+import AppUtils from "./AppUtils.js";
 
 class TranslatePipe extends AbstractPipe {
 	static get annotations() {
@@ -9,7 +10,7 @@ class TranslatePipe extends AbstractPipe {
 		});
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);

@@ -1,5 +1,6 @@
 import AbstractDirective from "./AbstractDirective.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
+import AppUtils from "./AppUtils.js";
 
 class ProgressBarDirective extends AbstractDirective {
 	static get annotations() {
@@ -11,7 +12,7 @@ class ProgressBarDirective extends AbstractDirective {
 		});
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);

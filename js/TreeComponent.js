@@ -1,5 +1,6 @@
 import AbstractComponent from "./AbstractComponent.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
+import AppUtils from "./AppUtils.js";
 
 class TreeComponent extends AbstractComponent {
 	static get annotations() {
@@ -10,7 +11,7 @@ class TreeComponent extends AbstractComponent {
 		});
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);

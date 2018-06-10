@@ -32,10 +32,10 @@ class CacheManager extends AbstractManager {
 		return this._getItem(this._defaultNs);
 	}
 	_getDefaultNsKey(key) {
-		return this._getDefaultNs() + "_" + key;
+		return `${this._getDefaultNs()}_${key}`;
 	}
 	_getApplicationKey(key) {
-		return this._applicationCachePrefix + "_" + key;
+		return `${this._applicationCachePrefix}_${key}`;
 	}
 	_getItem(key, defaultValue) {
 		let result = null;

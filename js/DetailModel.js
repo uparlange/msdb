@@ -1,10 +1,11 @@
 import AbstractModel from "./AbstractModel.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import MsdbService from "./MsdbService.js";
+import AppUtils from "./AppUtils.js";
 
 class DetailModel extends AbstractModel {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, MsdbService);
+		return AppUtils.getParameters(AbstractClassHelper, MsdbService);
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
@@ -25,7 +26,7 @@ class DetailModel extends AbstractModel {
 				};
 			}
 			this.data.game = data;
-			const title = this.data.game.description + " - " + this.data.game.name;
+			const title = `${this.data.game.description} - ${this.data.game.name}`;
 			this._setTitle(title);
 			this.getServices().search("clones", this.params.name).subscribe((data) => {
 				this.data.clones = data;
@@ -41,10 +42,10 @@ class DetailModel extends AbstractModel {
 		this.getSocket().emit("PLAY_GAME", this.params.name);
 	}
 	getStatusClass(status) {
-		return "label-" + status;
+		return `label-${status}`;
 	}
 	getStatusLabel(status) {
-		return (status != null) ? "L10N_" + status.toUpperCase() : null;
+		return (status != null) ? `L10N_${status.toUpperCase()}` : null;
 	}
 	getGameSizeLabel() {
 		let size = 0;

@@ -2,10 +2,11 @@ import AbstractManager from "./AbstractManager.js";
 import TranslateManager from "./TranslateManager.js";
 import WindowRef from "./WindowRef.js";
 import CacheManager from "./CacheManager.js";
+import AppUtils from "./AppUtils.js";
 
 class UpdateManager extends AbstractManager {
 	static get parameters() {
-		return this.getParameters(TranslateManager, WindowRef, CacheManager);
+		return AppUtils.getParameters(TranslateManager, WindowRef, CacheManager);
 	}
 	constructor(TranslateManager, WindowRef, CacheManager) {
 		super();

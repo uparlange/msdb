@@ -1,13 +1,14 @@
 import AbstractView from "./AbstractView.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import ConfigModel from "./ConfigModel.js";
+import AppUtils from "./AppUtils.js";
 
 class ConfigView extends AbstractView {
 	static get annotations() {
 		return this.getAnnotations({ selector: "config" });
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, ConfigModel);
+		return AppUtils.getParameters(AbstractClassHelper, ConfigModel);
 	}
 	constructor(AbstractClassHelper, ConfigModel) {
 		super(AbstractClassHelper, ConfigModel);

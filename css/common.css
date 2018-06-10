@@ -38,6 +38,10 @@ video
 	max-width: 100%;
 }
 
+table {
+	width: 100%;
+  }
+
 mat-card
 {
 	margin:0px;
@@ -98,11 +102,6 @@ mat-card-title > button.mat-mini-fab
 .default-spacer
 {
 	height:10px;
-}
-
-.material-icons
-{
-	vertical-align:middle;
 }
 
 .fill-remaining-space

@@ -4,7 +4,7 @@ import AbstractClassHelper from "./AbstractClassHelper.js";
 
 class ConfigCanActivate extends AbstractGuard {
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper);
+		return AppUtils.getParameters(AbstractClassHelper);
 	}
 	constructor(AbstractClassHelper) {
 		super(AbstractClassHelper);

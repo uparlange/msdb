@@ -3,8 +3,8 @@ import AbstractDirective from "./AbstractDirective.js";
 class AbstractComponent extends AbstractDirective {
 	static getAnnotations(params) {
 		const defaultParams = {
-			templateUrl: "html/" + params.selector + "-template.html",
-			styleUrls: ["css/" + params.selector + "-template.css"]
+			templateUrl: `html/${params.selector}-template.html`,
+			styleUrls: [`css/${params.selector}-template.css`]
 		};
 		return [
 			new ng.core.Component(Object.assign({}, defaultParams, params))

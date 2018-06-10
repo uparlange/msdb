@@ -4,7 +4,7 @@ import EventManager from "./EventManager.js";
 
 class SocketManager extends AbstractManager {
 	static get parameters() {
-		return this.getParameters(EventManager);
+		return AppUtils.getParameters(EventManager);
 	}
 	constructor(EventManager) {
 		super();

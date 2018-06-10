@@ -1,8 +1,9 @@
 import AbstractManager from "./AbstractManager.js";
+import AppUtils from "./AppUtils.js";
 
 class TranslateManager extends AbstractManager {
 	static get parameters() {
-		return this.getParameters(ng.common.http.HttpClient);
+		return AppUtils.getParameters(ng.common.http.HttpClient);
 	}
 	constructor(Http) {
 		super();
@@ -67,7 +68,7 @@ class TranslateManager extends AbstractManager {
 			}
 			if (Array.isArray(properties)) {
 				properties.forEach((property, index) => {
-					value = value.replace("{" + index + "}", property);
+					value = value.replace(`{${index}}`, property);
 				});
 			}
 		}

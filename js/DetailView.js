@@ -9,13 +9,14 @@ import ChipsPopup from "./ChipsPopup.js";
 import BiossetsPopup from "./BiossetsPopup.js";
 import PortsPopup from "./PortsPopup.js";
 import DeviceRefsPopup from "./DeviceRefsPopup.js";
+import AppUtils from "./AppUtils.js";
 
 class DetailView extends AbstractView {
 	static get annotations() {
 		return this.getAnnotations({ selector: "detail" });
 	}
 	static get parameters() {
-		return this.getParameters(AbstractClassHelper, DetailModel, ng.material.MatDialog);
+		return AppUtils.getParameters(AbstractClassHelper, DetailModel, ng.material.MatDialog);
 	}
 	constructor(AbstractClassHelper, DetailModel, MatDialog) {
 		super(AbstractClassHelper, DetailModel);

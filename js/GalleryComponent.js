@@ -1,5 +1,6 @@
 import AbstractComponent from "./AbstractComponent.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
+import AppUtils from "./AppUtils.js";
 
 class GalleryComponent extends AbstractComponent {
 	static get annotations() {
@@ -9,7 +10,7 @@ class GalleryComponent extends AbstractComponent {
 		});
 	}
 	static get parameters() {
-		return this.getParameters(ng.core.ElementRef, ng.core.Renderer, AbstractClassHelper);
+		return AppUtils.getParameters(ng.core.ElementRef, ng.core.Renderer, AbstractClassHelper);
 	}
 	constructor(ElementRef, Renderer, AbstractClassHelper) {
 		super(AbstractClassHelper);
@@ -48,7 +49,7 @@ class GalleryComponent extends AbstractComponent {
 		}
 	}
 	getImageUrl(image) {
-		return this.folder + "/" + image.name;
+		return `${this.folder}/${image.name}`;
 	}
 	getItemStyles(image) {
 		const colwidth = this._getColWidth();

@@ -50,7 +50,7 @@
 	"L10N_DOWNLOADS": "Download(s)",
 	"L10N_IMAGES": "Image(s)",
 	"L10N_VIDEOS": "Video(s)",
-	"L10N_SOUNDTRACKS": "Sound Track(s)",
+	"L10N_SOUNDTRACKS": "Soundtrack(s)",
 	"L10N_SEARCH_BY_DESCRIPTION": "Description",
 	"L10N_SEARCH_BY_CATEGORY": "Category",
 	"L10N_SEARCH_BY_MANUFACTURER": "Publisher",
@@ -94,5 +94,13 @@
 	"L10N_RATING": "Rating",
 	"L10N_LANGUAGE": "Language",
 	"L10N_APPLICATION": "Application",
-	"L10N_MANUAL": "Manual"
+	"L10N_MANUAL": "Manual",
+	"L10N_FILTER": "Filter",
+	"L10N_FIRST_PAGE": "First page",
+	"L10N_LAST_PAGE": "Last page",
+	"L10N_NEXT_PAGE": "Next page",
+	"L10N_PREVIOUS_PAGE": "Previous page",
+	"L10N_ITEMS_PER_PAGE": "Items per page",
+	"L10N_DELETE_FILTER": "Delete filter",
+	"L10N_SEARCH": "Search"
 }
