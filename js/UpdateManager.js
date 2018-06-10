@@ -16,7 +16,7 @@ class UpdateManager extends AbstractManager {
 		this._checked = false;
 	}
 	init() {
-		AbstractManager.prototype.init.call(this);
+		super.init();
 		this._windowRef.nativeWindow.applicationCache.addEventListener("updateready", () => {
 			this._askForReload();
 		});

@@ -12,7 +12,7 @@ class ConnectionManager extends AbstractManager {
 		this.online = this._windowRef.nativeWindow.navigator.onLine;
 	}
 	init() {
-		AbstractManager.prototype.init.call(this);
+		super.init();
 		this._windowRef.nativeWindow.addEventListener("offline", () => {
 			this._changeHandler();
 		});

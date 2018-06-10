@@ -15,7 +15,7 @@ class TranslateManager extends AbstractManager {
 		this._currentLang = null;
 	}
 	init(params) {
-		AbstractManager.prototype.init.call(this);
+		super.init();
 		this._propertyFilePattern = params.propertyFilePattern;
 		this.setLanguage(params.language);
 	}
