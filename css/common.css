@@ -54,12 +54,6 @@ mat-list
 	margin:0px !important;
 }
 
-mat-nav-list
-{
-	padding:0px !important;
-	margin:0px !important;
-}
-
 mat-toolbar-row
 {
 	height:100% !important;
@@ -69,6 +63,11 @@ mat-card-title > button.mat-mini-fab
 {
 	float:right;
 	top: -6px;
+}
+
+mat-tree-node
+{
+    cursor:pointer;
 }
 
 [routerLink]

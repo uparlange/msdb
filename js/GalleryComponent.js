@@ -6,7 +6,7 @@ class GalleryComponent extends AbstractComponent {
 	static get annotations() {
 		return this.getAnnotations({
 			selector: "gallery",
-			inputs: ["folder", "provider", "colcount", "gap", "excludedExtensions"]
+			inputs: ["provider", "colcount", "gap"]
 		});
 	}
 	static get parameters() {
@@ -39,18 +39,6 @@ class GalleryComponent extends AbstractComponent {
 	trackByName(index, item) {
 		return item ? item.name : undefined;
 	}
-	imageAllowed(image) {
-		if (!Array.isArray(this.excludedExtensions)) {
-			return true;
-		}
-		else {
-			const extension = image.name.split(".")[1];
-			return (this.excludedExtensions.indexOf(extension) === -1);
-		}
-	}
-	getImageUrl(image) {
-		return `${this.folder}/${image.name}`;
-	}
 	getItemStyles(image) {
 		const colwidth = this._getColWidth();
 		const styles = {
@@ -62,33 +50,23 @@ class GalleryComponent extends AbstractComponent {
 		return styles;
 	}
 	openImage(image) {
-		const provider = this._getAllowedImageProvider();
-		provider.forEach((element, index) => {
-			if (element.name === image.name) {
-				this._openPhotoSwift(index);
-				return;
-			}
-		});
+		if (this._gallery !== null) {
+			this._gallery.close();
+		}
+		const options = {
+			index: this.provider.indexOf(image),
+			clickToCloseNonZoomable: false,
+			shareEl: false,
+			history: false
+		};
+		this._gallery = new PhotoSwipe(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, this.provider, options);
+		this._gallery.init();
 	}
 	imagesCreated() {
 		this._refreshMasonry();
 	}
-	_getAllowedImageProvider() {
-		const images = [];
-		this.provider.forEach((image) => {
-			if (this.imageAllowed(image)) {
-				images.push({
-					name: image.name,
-					src: this.getImageUrl(image),
-					w: image.width,
-					h: image.height
-				});
-			}
-		});
-		return images;
-	}
 	_getItemHeight(requiredWidth, image) {
-		return Math.round(requiredWidth * image.height / image.width);
+		return Math.round(requiredWidth * image.h / image.w);
 	}
 	_refreshMasonry() {
 		if (this._masonry !== null) {
@@ -113,23 +91,8 @@ class GalleryComponent extends AbstractComponent {
 		return this._element.getElementsByClassName("pswp")[0];
 	}
 	_getColWidth() {
-		const provider = this._getAllowedImageProvider();
-		const colcount = Math.min(this.colcount, provider.length);
+		const colcount = Math.min(this.colcount, this.provider.length);
 		return Math.round((this._getGalleryContainer().clientWidth - (colcount * this.gap)) / colcount);
-	}
-	_openPhotoSwift(index) {
-		if (this._gallery !== null) {
-			this._gallery.close();
-		}
-		const items = this._getAllowedImageProvider();
-		const options = {
-			index: index,
-			clickToCloseNonZoomable: false,
-			shareEl: false,
-			history: false
-		};
-		this._gallery = new PhotoSwipe(this._getPhotoSwipeContainer(), PhotoSwipeUI_Default, items, options);
-		this._gallery.init();
 	}
 }
 

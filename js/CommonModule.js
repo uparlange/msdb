@@ -5,7 +5,6 @@ import LazyDirective from "./LazyDirective.js";
 import ScrollToTopDirective from "./ScrollToTopDirective.js";
 import HrefDirective from "./HrefDirective.js";
 import MaterialModule from "./MaterialModule.js";
-import TreeComponent from "./TreeComponent.js";
 
 class CommonModule extends AbstractModule {
 	static get annotations() {
@@ -20,8 +19,7 @@ class CommonModule extends AbstractModule {
 				NgForItemComponent,
 				LazyDirective,
 				ScrollToTopDirective,
-				HrefDirective,
-				TreeComponent
+				HrefDirective
 			],
 			exports: [
 				ng.common.CommonModule,
@@ -31,8 +29,7 @@ class CommonModule extends AbstractModule {
 				NgForItemComponent,
 				LazyDirective,
 				ScrollToTopDirective,
-				HrefDirective,
-				TreeComponent
+				HrefDirective
 			]
 		});
 	}

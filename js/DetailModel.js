@@ -22,10 +22,23 @@ class DetailModel extends AbstractModel {
 			if (data === null) {
 				data = {
 					name: this.params.name,
-					description: "?"
+					description: "?",
+					images: []
 				};
 			}
 			this.data.game = data;
+			const images = [];
+			this.data.game.images.forEach((image) => {
+				if (image.name.indexOf(".ico") === -1) {
+					images.push({
+						name: image.name,
+						src: `${this.getGameFolder(this.data.game)}/${image.name}`,
+						w: image.width,
+						h: image.height
+					});
+				}
+			});
+			this.data.images = images;
 			const title = `${this.data.game.description} - ${this.data.game.name}`;
 			this._setTitle(title);
 			this.getServices().search("clones", this.params.name).subscribe((data) => {
@@ -80,6 +93,7 @@ class DetailModel extends AbstractModel {
 				devicerefs: []
 			},
 			clones: [],
+			images: [],
 			gameAvailable: false
 		};
 	}

@@ -20,41 +20,53 @@ class MyGamesModel extends AbstractModel {
 		this._refreshList(callback);
 	}
 	onDestroy() {
+		this.data.list.paginator = null;
 		this._socketConfigChangedSubscriber.unsubscribe();
 	}
 	trackByName(index, item) {
 		return item ? item.name : undefined;
 	}
+	applyFilter(value) {
+		this._setFilterValue(value);
+	}
+	clearFilter() {
+		this._setFilterValue("");
+	}
+	setPaginator(paginator) {
+		this.data.list.paginator = paginator;
+	}
+	pageChanged(event) {
+		this.data.pageIndex = event.pageIndex;
+	}
+	_setFilterValue(value) {
+		this.data.filterValue = value;
+		this.data.list.filter = value;
+	}
 	_refreshList(callback) {
-		this.data = this._getInitData();
 		this.getSocket().emit("GET_MY_GAMES", null).subscribe((result) => {
-			if (result !== null && result.length > 0) {
-				this.getServices().search("name", result).subscribe((games) => {
-					const allGames = [];
-					const allBios = [];
-					games.forEach((game) => {
-						if (game.isbios === "no") {
-							allGames.push(game);
-						}
-						else {
-							allBios.push(game);
-						}
-					});
-					this.data = {
-						allGames: allGames,
-						allBios: allBios
-					};
-					if (callback) {
-						callback();
+			if (Array.isArray(result)) {
+				this.getServices().search("name", result).subscribe((data) => {
+					if (Array.isArray(data)) {
+						data.sort((x, y) => {
+							if (x.isbios < y.isbios) return -1;
+							if (x.isbios > y.isbios) return 1;
+							return 0;
+						});
 					}
+					this.data.list.data = data;
+					callback();
 				});
+			} else {
+				callback();
 			}
 		});
 	}
 	_getInitData() {
 		return {
-			allGames: [],
-			allBios: []
+			list: new ng.material.MatTableDataSource(),
+			filterValue: "",
+			displayedColumns: ["icon", "description"],
+			pageIndex: 0
 		};
 	}
 }

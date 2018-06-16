@@ -10,6 +10,9 @@ class SearchByCategoriesModel extends AbstractModel {
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
 	}
+	hasChild(_, _nodeData) {
+		return _nodeData.expandable;
+	}
 	onRefresh(callback) {
 		const categories = [];
 		const category_map = {};
@@ -20,7 +23,7 @@ class SearchByCategoriesModel extends AbstractModel {
 				if (category_map[category] == null) {
 					category_map[category] = {
 						label: category,
-						data: null,
+						data: category,
 						children: []
 					}
 					categories.push(category_map[category]);
@@ -30,26 +33,36 @@ class SearchByCategoriesModel extends AbstractModel {
 					data: item.label
 				});
 			});
-			this.data.list = categories;
+			this.data.dataSource.data = categories;
 			callback();
 		});
 	}
-	_refreshSelection() {
-		if (this.data.list !== null) {
-			const params = this.getRouter().getUrlQueryParams();
-			if (params.hasOwnProperty("category")) {
-				this.data.list.forEach((element) => {
-					if (element.label === params.category) {
-						this.data.selectedItem = element;
-						return;
-					}
-				});
-			}
-		}
+	trackByData(index, item) {
+		return item ? item.data : undefined;
+	}
+	_transformer(node, level) {
+		return {
+			label: node.label,
+			data: node.data,
+			level: level,
+			expandable: !!node.children
+		};
+	}
+	_getLevel(node) {
+		return node.level;
+	}
+	_isExpandable(node) {
+		return node.expandable;
+	}
+	_getChildren(node) {
+		return rxjs.of(node.children);
 	}
 	_getInitData() {
+		const treeControl = new ng.cdk.tree.FlatTreeControl(this._getLevel, this._isExpandable);
+		const treeFlattener = new ng.material.MatTreeFlattener(this._transformer, this._getLevel, this._isExpandable, this._getChildren);
 		return {
-			list: null,
+			dataSource: new ng.material.MatTreeFlatDataSource(treeControl, treeFlattener, []),
+			treeControl: treeControl,
 			selectedItem: null
 		};
 	}

@@ -3,30 +3,25 @@
 		{{'L10N_MY_GAMES'|translate}}
 	</mat-card-title>
 </mat-card>
-<div *ngIf="model.data.allGames.length > 0">
-	<mat-list>
-		<mat-nav-list>
-			<a mat-list-item *ngFor="let game of model.data.allGames; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:game.name}">
-				<img mat-list-avatar [src]="model.getGameIconUrl(game)">
-				<span class="sep"></span>
-				{{game.description}}
-			</a>
-		</mat-nav-list>
-	</mat-list>
-</div>
-<mat-card>
-	<mat-card-title>
-		{{'L10N_MY_BIOS'|translate}}
-	</mat-card-title>
-</mat-card>
-<div *ngIf="model.data.allBios.length > 0">
-	<mat-list>
-		<mat-nav-list>
-			<a mat-list-item *ngFor="let bios of model.data.allBios; trackBy:model.trackByName" routerLink="/detail" [queryParams]="{name:bios.name}">
-				<img mat-list-avatar [src]="model.getGameIconUrl(bios)">
-				<span class="sep"></span>
-				{{bios.description}}
-			</a>
-		</mat-nav-list>
-	</mat-list>
-</div>
+<div class="default-spacer"></div>
+<mat-form-field>
+	<input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)" [placeholder]="'L10N_FILTER'|translate">
+</mat-form-field>
+<button *ngIf="model.data.filterValue.length > 0" (click)="model.clearFilter();filterValueInput.focus();" type="button" mat-mini-fab>
+	<i [matTooltip]="'L10N_DELETE_FILTER'|translate" class="material-icons mat-24 mat-light">clear</i>
+</button>
+<mat-paginator [hidePageSize]="true" [pageSize]="400" [pageIndex]="model.data.pageIndex" (page)="model.pageChanged($event)"
+ showFirstLastButtons></mat-paginator>
+<table mat-table [dataSource]="model.data.list" [trackBy]="model.trackByName">
+	<ng-container matColumnDef="icon">
+		<td mat-cell *matCellDef="let element">
+			<img mat-list-avatar [lazySrc]="model.getGameIconUrl(element)">
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="description">
+		<td mat-cell *matCellDef="let element">
+			<a routerLink="/detail" [queryParams]="{name:element.name}">{{element.description}}</a>
+		</td>
+	</ng-container>
+	<tr mat-row *matRowDef="let row; columns: model.data.displayedColumns;"></tr>
+</table>

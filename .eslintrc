@@ -18,6 +18,7 @@
         "Masonry": true,
         "PhotoSwipe": true,
         "PhotoSwipeUI_Default": true,
-        "onmessage": true
+        "onmessage": true,
+        "rxjs": true
     }
 }

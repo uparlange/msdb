@@ -101,14 +101,14 @@
 		<a target="_blank" [href]="model.getGameManualUrl(model.data.game)">{{'L10N_MANUAL'|translate}}</a>
 	</mat-list-item>
 </mat-list>
-<div *ngIf="model.data.game.images != null && model.data.game.images.length > 0">
+<div *ngIf="model.data.images.length > 0">
 	<mat-card>
 		<mat-card-title>
 			{{'L10N_IMAGES'|translate}}
 		</mat-card-title>
 	</mat-card>
 	<div class="default-spacer"></div>
-	<gallery [colcount]="3" [gap]="5" [folder]="model.getGameFolder(model.data.game)" [excludedExtensions]="['ico']" [provider]="model.data.game.images"></gallery>
+	<gallery [colcount]="3" [gap]="5" [provider]="model.data.images"></gallery>
 </div>
 <div *ngIf="model.data.game.video === true">
 	<mat-card>
