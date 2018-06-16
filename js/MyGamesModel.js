@@ -12,6 +12,7 @@ class MyGamesModel extends AbstractModel {
 		this._socketConfigChangedSubscriber = null;
 	}
 	onInit() {
+		this._setFilterValue(this.getCache().getItem("myGamesFilterValue", ""));
 		this._socketConfigChangedSubscriber = this.getSocket().on("CONFIG_CHANGED").subscribe(() => {
 			this._refreshList();
 		});
@@ -20,6 +21,7 @@ class MyGamesModel extends AbstractModel {
 		this._refreshList(callback);
 	}
 	onDestroy() {
+		this.getCache().setItem("myGamesFilterValue", this.data.filterValue);
 		this.data.list.paginator = null;
 		this._socketConfigChangedSubscriber.unsubscribe();
 	}

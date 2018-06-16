@@ -10,11 +10,17 @@ class SearchByYearsModel extends AbstractModel {
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
 	}
+	onInit() {
+		this._setFilterValue(this.getCache().getItem("searchByYearsFilterValue", ""));
+	}
 	onRefresh(callback) {
 		this.getServices().getYears().subscribe((data) => {
 			this.data.list.data = data;
 			callback();
 		});
+	}
+	onDestroy() {
+		this.getCache().setItem("searchByYearsFilterValue", this.data.filterValue);
 	}
 	trackByLabel(index, item) {
 		return item ? item.label : undefined;

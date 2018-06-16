@@ -62,8 +62,7 @@ class SearchByCategoriesModel extends AbstractModel {
 		const treeFlattener = new ng.material.MatTreeFlattener(this._transformer, this._getLevel, this._isExpandable, this._getChildren);
 		return {
 			dataSource: new ng.material.MatTreeFlatDataSource(treeControl, treeFlattener, []),
-			treeControl: treeControl,
-			selectedItem: null
+			treeControl: treeControl
 		};
 	}
 }

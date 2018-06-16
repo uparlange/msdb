@@ -10,6 +10,9 @@ class SearchByVersionsModel extends AbstractModel {
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
 	}
+	onInit() {
+		this._setFilterValue(this.getCache().getItem("searchByVersionsFilterValue", ""));
+	}
 	onRefresh(callback) {
 		this.getServices().getVersions().subscribe((data) => {
 			this.data.list.data = data;
@@ -17,6 +20,7 @@ class SearchByVersionsModel extends AbstractModel {
 		});
 	}
 	onDestroy() {
+		this.getCache().setItem("searchByVersionsFilterValue", this.data.filterValue);
 		this.data.list.paginator = null;
 	}
 	trackByLabel(index, item) {
