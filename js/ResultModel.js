@@ -38,7 +38,7 @@ class ResultModel extends AbstractModel {
 		this.data.list.data = [];
 		this.getServices().search(this.params.type, this.params.value).subscribe((data) => {
 			this.data.source = data || [];
-			this._refreshList();
+			this._filterList();
 			callback();
 		});
 	}
@@ -58,9 +58,9 @@ class ResultModel extends AbstractModel {
 		this.data.pageIndex = event.pageIndex;
 	}
 	checkBoxChanged() {
-		this._refreshList();
+		this._filterList();
 	}
-	_refreshList() {
+	_filterList() {
 		this.data.list.data = this.data.source.filter((game) => {
 			return (
 				(game.category !== this.SYSTEM_DEVICE && game.category !== this.SYSTEM_BIOS && game.cloneof == null) ||

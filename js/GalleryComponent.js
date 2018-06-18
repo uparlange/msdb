@@ -69,15 +69,17 @@ class GalleryComponent extends AbstractComponent {
 		return Math.round(requiredWidth * image.h / image.w);
 	}
 	_refreshMasonry() {
-		if (this._masonry !== null) {
-			this._masonry.destroy();
-		}
-		this._masonry = new Masonry(".grid", {
-			itemSelector: ".grid-item",
-			columnWidth: this._getColWidth(),
-			gutter: this.gap,
-			resize: false
-		});
+		setTimeout(() => {
+			if (this._masonry !== null) {
+				this._masonry.destroy();
+			}
+			this._masonry = new Masonry(".grid", {
+				itemSelector: ".grid-item",
+				columnWidth: this._getColWidth(),
+				gutter: this.gap,
+				resize: false
+			});
+		}, 50);
 	}
 	_windowResizeHandler() {
 		this._refreshMasonry();

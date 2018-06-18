@@ -20,9 +20,7 @@ class NgForItemComponent extends AbstractComponent {
 	}
 	afterContentInit() {
 		if (this.last) {
-			setTimeout(() => {
-				this.onLast.emit();
-			}, 0);
+			this.onLast.emit();
 		}
 	}
 }

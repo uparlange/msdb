@@ -56,10 +56,14 @@ class MyGamesModel extends AbstractModel {
 						});
 					}
 					this.data.list.data = data;
-					callback();
+					if (callback) {
+						callback();
+					}
 				});
 			} else {
-				callback();
+				if (callback) {
+					callback();
+				}
 			}
 		});
 	}

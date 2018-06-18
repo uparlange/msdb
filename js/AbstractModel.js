@@ -20,12 +20,15 @@ class AbstractModel extends AbstractClass {
 			}
 		});
 		this._setTitle();
-		this._callInitMethod();
 		this.getRouter().restoreScrollPosition();
-		const currentParams = this.params;
 		const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
-		if (JSON.stringify(currentParams) !== JSON.stringify(newParams)) {
+		let paramsChanged = false;
+		if (JSON.stringify(this.params) !== JSON.stringify(newParams)) {
 			this.params = newParams;
+			paramsChanged = true;
+		}
+		this._callInitMethod();
+		if (paramsChanged) {
 			this._callRefreshMethod(() => {
 				this.getRouter().restoreScrollPosition();
 			});

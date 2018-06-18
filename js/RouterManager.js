@@ -66,7 +66,7 @@ class RouterManager extends AbstractManager {
 					}
 					const scrollTop = this._cacheManager.getItem(`scrollTop_${this._getCurrentPath()}`, 0);
 					this._windowRef.scrollTo(0, scrollTop);
-				}, 100);
+				}, 50);
 			});
 			const config = {
 				childList: true,

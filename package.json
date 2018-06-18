@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "4.4.7",
+  "version": "4.4.8",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -40,7 +40,6 @@
     "blazy": "1.8.2",
     "body-parser": "1.18.3",
     "express": "4.16.3",
-    "hammerjs": "2.0.8",
     "masonry-layout": "4.2.1",
     "node-sass": "4.9.0",
     "photoswipe": "4.1.2",
