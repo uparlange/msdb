@@ -26,6 +26,7 @@ const zip = require('gulp-zip');
 // -------------------------------------------------
 
 const pkg = require('./package.json');
+const pkgLock = require('./package-lock.json');
 const resources = {
     copy4web: [],
     copy4desktop: [],
@@ -247,26 +248,18 @@ gulp.task('prepare-node-modules', (callback) => {
     parser.write(fs.readFileSync('index.html', 'utf8'));
     parser.end();
 
+    const dependencies = [];
     const addDependency = function (dependency) {
-        const folder = './node_modules/' + dependency;
-
-        resources.copy4desktop.push({
-            src: folder + '/**/*',
-            dest: './dist/node_modules/' + dependency
-        });
-
-        try {
-            const pkg2 = require(folder + '/package.json');
-            for (let dependency in pkg2.dependencies) {
-                addDependency(dependency);
+        dependencies[dependency] = true;
+        for (let pkgLockDependency in pkgLock.dependencies) {
+            if (pkgLockDependency == dependency) {
+                for (let pkgLockRequire in pkgLock.dependencies[dependency].requires) {
+                    addDependency(pkgLockRequire);
+                }
+                break;
             }
-        } catch (e) {
-            // Not a big deal ?
         }
-
     };
-
-    const files = [];
     for (let dependency in pkg.dependencies) {
         let toAdd = true;
         urls.forEach(function (url) {
@@ -278,6 +271,12 @@ gulp.task('prepare-node-modules', (callback) => {
         if (toAdd) {
             addDependency(dependency);
         }
+    }
+    for (let dependency in dependencies) {
+        resources.copy4desktop.push({
+            src: './node_modules/' + dependency + '/**/*',
+            dest: './dist/node_modules/' + dependency
+        });
     }
 
     callback();
