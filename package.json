@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "4.4.9",
+  "version": "4.5.0",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -27,16 +27,16 @@
     "desktop-debug": "nodemon node_modules/nw/bin/nw debug"
   },
   "dependencies": {
-    "@angular/animations": "6.1.0-beta.2",
-    "@angular/cdk": "6.3.0",
-    "@angular/common": "6.1.0-beta.2",
-    "@angular/compiler": "6.1.0-beta.2",
-    "@angular/core": "6.1.0-beta.2",
-    "@angular/forms": "6.1.0-beta.2",
-    "@angular/material": "6.3.0",
-    "@angular/platform-browser": "6.1.0-beta.2",
-    "@angular/platform-browser-dynamic": "6.1.0-beta.2",
-    "@angular/router": "6.1.0-beta.2",
+    "@angular/animations": "6.1.0-beta.3",
+    "@angular/cdk": "6.3.1",
+    "@angular/common": "6.1.0-beta.3",
+    "@angular/compiler": "6.1.0-beta.3",
+    "@angular/core": "6.1.0-beta.3",
+    "@angular/forms": "6.1.0-beta.3",
+    "@angular/material": "6.3.1",
+    "@angular/platform-browser": "6.1.0-beta.3",
+    "@angular/platform-browser-dynamic": "6.1.0-beta.3",
+    "@angular/router": "6.1.0-beta.3",
     "blazy": "1.8.2",
     "body-parser": "1.18.3",
     "express": "4.16.3",
@@ -49,14 +49,13 @@
     "iconv-lite": "0.4.23"
   },
   "devDependencies": {
-    "node-sass": "4.9.0",
     "babel-core": "6.26.3",
-    "babel-eslint": "8.2.3",
+    "babel-eslint": "8.2.5",
     "babel-plugin-syntax-dynamic-import": "6.18.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-minify": "canary",
     "del": "3.0.0",
-    "eslint": "4.19.1",
+    "eslint": "5.0.1",
     "gulp": "4.0.0",
     "gulp-babel": "7.0.1",
     "gulp-change": "1.0.0",
@@ -72,8 +71,9 @@
     "imagemin-pngquant": "5.1.0",
     "material-design-icons": "3.0.1",
     "merge-stream": "1.0.1",
+    "node-sass": "4.9.0",
     "nodemon": "1.17.5",
-    "nw": "0.30.2-sdk",
+    "nw": "0.31.4-sdk",
     "pump": "3.0.0"
   }
 }

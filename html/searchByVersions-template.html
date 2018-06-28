@@ -14,15 +14,18 @@
     </ng-container>
     <ng-container matColumnDef="addcount">
         <td mat-cell *matCellDef="let element">
-            +{{element.data}}
+            <mat-chip-list>
+                <mat-chip color="accent" selected>+{{element.data}}</mat-chip>
+            </mat-chip-list>
         </td>
     </ng-container>
     <ng-container matColumnDef="changelog">
         <td mat-cell *matCellDef="let element">
             <a *ngIf="model.changeLogAvailable(element.label)" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(element.label)+'.txt'">
-                <i class="material-icons mat-24 mat-dark">track_changes</i>
+                <i [matTooltip]="'L10N_CHANGELOG'|translate" class="material-icons mat-24 mat-dark">track_changes</i>
             </a>
         </td>
     </ng-container>
     <tr mat-row *matRowDef="let row; columns: model.data.displayedColumns;"></tr>
 </table>
+<h4 class="no-data" *ngIf="model.data.list.filteredData.length == 0">{{'L10N_NO_RESULT'|translate}}</h4>

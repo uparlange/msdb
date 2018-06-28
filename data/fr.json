@@ -102,5 +102,7 @@
 	"L10N_PREVIOUS_PAGE": "Page précédente",
 	"L10N_ITEMS_PER_PAGE": "Eléments par page",
 	"L10N_DELETE_FILTER": "Supprimer le filtre",
-	"L10N_SEARCH": "Rechercher"
+	"L10N_SEARCH": "Rechercher",
+	"L10N_CHANGELOG": "Changelog",
+	"L10N_NO_RESULT": "Aucun résultat !"
 }

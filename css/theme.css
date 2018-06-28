@@ -1603,6 +1603,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-stepper-horizontal-line {
   border-top-color: rgba(0, 0, 0, 0.12); }
 
+.mat-sort-header-arrow {
+  color: #757575; }
+
 .mat-tab-nav-bar,
 .mat-tab-header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12); }

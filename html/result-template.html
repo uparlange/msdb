@@ -25,3 +25,4 @@
 	</ng-container>
 	<tr mat-row *matRowDef="let row; columns: model.data.displayedColumns;"></tr>
 </table>
+<h4 class="no-data" *ngIf="model.data.list.data.length == 0">{{'L10N_NO_RESULT'|translate}}</h4>
