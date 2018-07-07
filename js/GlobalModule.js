@@ -11,6 +11,8 @@ import WindowRef from "./WindowRef.js";
 import Shell from "./Shell.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import PopupManager from "./PopupManager.js";
+import HistoryManager from "./HistoryManager.js";
+import FavoritesManager from "./FavoritesManager.js";
 import AbstractModule from "./AbstractModule.js";
 
 class GlobalModule extends AbstractModule {
@@ -29,7 +31,9 @@ class GlobalModule extends AbstractModule {
                 WindowRef,
                 Shell,
                 AbstractClassHelper,
-                PopupManager
+                PopupManager,
+                FavoritesManager,
+                HistoryManager
             ]
         });
     }

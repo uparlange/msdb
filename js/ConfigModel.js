@@ -19,6 +19,7 @@ class ConfigModel extends AbstractModel {
 	save() {
 		this.getSocket().emit("SAVE_CONFIGURATION", this.data.newValue).subscribe((result) => {
 			if (result !== null) {
+				this.getEventBus().emit("CONFIG_CHANGED");
 				this._getConfiguration();
 			}
 		});

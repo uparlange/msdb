@@ -42,8 +42,11 @@ class RouterManager extends AbstractManager {
 			this._router.navigate(commands, extras);
 		});
 	}
+	getUrl() {
+		return this._router.url;
+	}
 	getUrlWithoutQueryParams() {
-		let url = this._router.url;
+		let url = this.getUrl();
 		if (url.indexOf("?") !== -1) {
 			url = url.substring(0, url.indexOf("?"));
 		}

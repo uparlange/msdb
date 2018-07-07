@@ -104,5 +104,7 @@
 	"L10N_DELETE_FILTER": "Supprimer le filtre",
 	"L10N_SEARCH": "Rechercher",
 	"L10N_CHANGELOG": "Changelog",
-	"L10N_NO_RESULT": "Aucun résultat !"
+	"L10N_NO_RESULT": "Aucun résultat !",
+	"L10N_HISTORY": "Historique",
+	"L10N_FAVORITES": "Favoris"
 }

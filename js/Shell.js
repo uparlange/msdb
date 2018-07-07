@@ -8,16 +8,20 @@ import UpdateManager from "./UpdateManager.js";
 import RouterManager from "./RouterManager.js";
 import WindowRef from "./WindowRef.js";
 import PopupManager from "./PopupManager.js";
+import HistoryManager from "./HistoryManager.js";
+import FavoritesManager from "./FavoritesManager.js";
 import AbstractClass from "./AbstractClass.js";
 import AppUtils from "./AppUtils.js";
 
 class Shell extends AbstractClass {
     static get parameters() {
         return AppUtils.getParameters(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-            CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager);
+            CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager,
+            HistoryManager, FavoritesManager);
     }
     constructor(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-        CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager) {
+        CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager,
+        HistoryManager, FavoritesManager) {
         super();
         this._eventManager = EventManager;
         this._translateManager = TranslateManager;
@@ -29,6 +33,8 @@ class Shell extends AbstractClass {
         this._routerManager = RouterManager;
         this._popupManager = PopupManager;
         this._windowRef = WindowRef;
+        this._historyManager = HistoryManager;
+        this._favoritesManager = FavoritesManager;
     }
     init() {
         this._eventManager.init();
@@ -45,6 +51,8 @@ class Shell extends AbstractClass {
         this._updateManager.init();
         this._routerManager.init();
         this._popupManager.init();
+        this._historyManager.init();
+        this._favoritesManager.init();
     }
     getEventManager() {
         return this._eventManager;
@@ -72,6 +80,9 @@ class Shell extends AbstractClass {
     }
     getPopupManager() {
         return this._popupManager;
+    }
+    getHistoryManager() {
+        return this._historyManager;
     }
 }
 

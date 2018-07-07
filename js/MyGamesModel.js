@@ -9,11 +9,18 @@ class MyGamesModel extends AbstractModel {
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
-		this._socketConfigChangedSubscriber = null;
+		this._needRefresh = false;
+		this._changeInRomsDirectorySubscriber = null;
+		this._configChangedSubscriber = this.getEventBus().on("CONFIG_CHANGED").subscribe(() => {
+			this._needRefresh = true;
+		});
 	}
 	onInit() {
 		this._setFilterValue(this.getCache().getItem("myGamesFilterValue", ""));
-		this._socketConfigChangedSubscriber = this.getSocket().on("CONFIG_CHANGED").subscribe(() => {
+		if (this._needRefresh) {
+			this._refreshList();
+		}
+		this._changeInRomsDirectorySubscriber = this.getSocket().on("CHANGE_IN_ROMS_DIRECTORY").subscribe(() => {
 			this._refreshList();
 		});
 	}
@@ -22,8 +29,8 @@ class MyGamesModel extends AbstractModel {
 	}
 	onDestroy() {
 		this.getCache().setItem("myGamesFilterValue", this.data.filterValue);
+		this._changeInRomsDirectorySubscriber.unsubscribe();
 		this.data.list.paginator = null;
-		this._socketConfigChangedSubscriber.unsubscribe();
 	}
 	trackByName(index, item) {
 		return item ? item.name : undefined;
@@ -45,6 +52,7 @@ class MyGamesModel extends AbstractModel {
 		this.data.list.filter = value;
 	}
 	_refreshList(callback) {
+		this._needRefresh = false;
 		this.getSocket().emit("GET_MY_GAMES", null).subscribe((result) => {
 			if (Array.isArray(result)) {
 				this.getServices().search("name", result).subscribe((data) => {
@@ -55,7 +63,7 @@ class MyGamesModel extends AbstractModel {
 							return 0;
 						});
 					}
-					this.data.list.data = data;
+					this.data.list.data = data || [];
 					if (callback) {
 						callback();
 					}

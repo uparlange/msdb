@@ -23,6 +23,8 @@ class AppModule extends AbstractModule {
 					{ path: "result", loadChildren: this.getLazyModule("ResultModule") },
 					{ path: "mygames", loadChildren: this.getLazyModule("MyGamesModule") },
 					{ path: "config", loadChildren: this.getLazyModule("ConfigModule") },
+					{ path: "history", loadChildren: this.getLazyModule("HistoryModule") },
+					{ path: "favorites", loadChildren: this.getLazyModule("FavoritesModule") },
 					{ path: "bot", loadChildren: this.getLazyModule("BotModule") }
 				], { useHash: true })
 			],

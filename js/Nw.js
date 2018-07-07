@@ -4,8 +4,10 @@ import LogUtils from "./LogUtils.js";
 export default {
     init: function () {
         this._logger = LogUtils.getLogger("Nw");
-        this._fs = require("fs");
+        this._watcher = null;
+        this._socket = null;
         this._initServer();
+        this._initUpdateWatcher();
     },
     _initServer: function () {
         const express = require("express");
@@ -22,6 +24,7 @@ export default {
         });
         ioInstance.on("connection", (socket) => {
             this._getLogger().info(`(SOCKET.IO) User (${socket.id}) connected`);
+            this._socket = socket;
             socket.on("GET_MY_GAMES", (params, callback) => {
                 this._getMyGames(params, callback);
             });
@@ -39,6 +42,23 @@ export default {
             });
         });
     },
+    _initUpdateWatcher: function () {
+        const chokidar = require("chokidar");
+        const fs = require("fs");
+        this._getConfiguration((configuration) => {
+            if (fs.existsSync(configuration.romsDirectory) && fs.statSync(configuration.romsDirectory).isDirectory()) {
+                if (this._watcher) {
+                    this._watcher.close();
+                }
+                this._watcher = chokidar.watch(configuration.romsDirectory, {
+                    ignoreInitial: true
+                });
+                this._watcher.on("all", () => {
+                    this._socket.emit("CHANGE_IN_ROMS_DIRECTORY");
+                });
+            }
+        });
+    },
     _getLogger: function () {
         return this._logger;
     },
@@ -48,13 +68,16 @@ export default {
         return `${os.homedir()}\\${pkg.name}.json`;
     },
     _saveConfiguration: function (config, callback) {
-        this._fs.writeFileSync(this._getConfigFile(), JSON.stringify(config));
+        const fs = require("fs");
+        fs.writeFileSync(this._getConfigFile(), JSON.stringify(config));
+        this._initUpdateWatcher();
         callback();
     },
     _getConfiguration: function (callback) {
+        const fs = require("fs");
         let config = null;
         try {
-            config = JSON.parse(this._fs.readFileSync(this._getConfigFile()));
+            config = JSON.parse(fs.readFileSync(this._getConfigFile()));
         } catch (e) {
             this._getLogger().info("(CONFIG) No configuration file found !");
         }
@@ -69,12 +92,13 @@ export default {
         callback(config);
     },
     _initMame: function (mameDirectory, mameFileName) {
+        const fs = require("fs");
         const eventEmitter = new ng.core.EventEmitter();
         const mameIni = mameDirectory + "\\mame.ini";
-        if (this._fs.existsSync(mameIni)) {
+        if (fs.existsSync(mameIni)) {
             let cmd = `cd ${mameDirectory} & ${mameFileName} -cc`;
             this._execCmd(cmd).subscribe(() => {
-                let source = this._fs.readFileSync(mameIni, "utf8");
+                let source = fs.readFileSync(mameIni, "utf8");
                 const params = {};
                 const all_lines_array = source.split("\r\n");
                 all_lines_array.forEach((line) => {
@@ -97,7 +121,7 @@ export default {
                 for (let attr in params) {
                     dest += `${attr} ${params[attr]}\r\n`;
                 }
-                this._fs.writeFileSync(mameIni, dest);
+                fs.writeFileSync(mameIni, dest);
                 eventEmitter.emit();
             });
         }
@@ -127,11 +151,12 @@ export default {
         return eventEmitter;
     },
     _playGame: function (name, callback) {
+        const fs = require("fs");
         this._getLogger().info(`(MAME) Launch game ${name}`);
         this._getConfiguration((configuration) => {
             const mameDirectory = configuration.mameDirectory;
             let mameFileName = "mame64.exe";
-            if (!this._fs.existsSync(`${mameDirectory}\\${mameFileName}`)) {
+            if (!fs.existsSync(`${mameDirectory}\\${mameFileName}`)) {
                 mameFileName = "mame.exe";
             }
             this._initMame(mameDirectory, mameFileName).subscribe(() => {
@@ -148,11 +173,12 @@ export default {
         });
     },
     _getMyGames: function (name, callback) {
+        const fs = require("fs");
         this._getConfiguration((configuration) => {
             const path = require("path");
             const games = [];
             try {
-                const files = this._fs.readdirSync(configuration.romsDirectory);
+                const files = fs.readdirSync(configuration.romsDirectory);
                 files.forEach((file) => {
                     const fileInfos = path.parse(file);
                     if (fileInfos.ext === ".zip") {
@@ -166,13 +192,14 @@ export default {
         });
     },
     _isRomAvailable: function (name, callback) {
+        const fs = require("fs");
         this._getConfiguration((configuration) => {
             const result = {
                 name: name,
                 available: false
             };
             const gameFilename = `${configuration.romsDirectory}\\${name}.zip`;
-            if (this._fs.existsSync(gameFilename)) {
+            if (fs.existsSync(gameFilename)) {
                 result.available = true;
             }
             callback(result);

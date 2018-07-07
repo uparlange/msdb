@@ -9,6 +9,7 @@ class DetailModel extends AbstractModel {
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
+		this.UNKNOWN_GAME_DESCRIPTION = "?";
 		this._socketConfigChangedSubscriber = null;
 	}
 	onInit() {
@@ -22,30 +23,35 @@ class DetailModel extends AbstractModel {
 			if (data === null) {
 				data = {
 					name: this.params.name,
-					description: "?",
-					images: []
+					description: this.UNKNOWN_GAME_DESCRIPTION,
+					clones: [],
+					images: [],
+					gameAvailable: false
 				};
 			}
 			this.data.game = data;
-			const images = [];
-			this.data.game.images.forEach((image) => {
-				if (image.name.indexOf(".ico") === -1) {
-					images.push({
-						name: image.name,
-						src: `${this.getGameFolder(this.data.game)}/${image.name}`,
-						w: image.width,
-						h: image.height
-					});
-				}
-			});
-			this.data.images = images;
-			const title = `${this.data.game.description} - ${this.data.game.name}`;
-			this._setTitle(title);
-			this.getServices().search("clones", this.params.name).subscribe((data) => {
-				this.data.clones = data;
-				callback();
-			});
-			this._refreshGameAvailability();
+			if (this.data.game.description !== this.UNKNOWN_GAME_DESCRIPTION) {
+				this.getHistory().add({ label: this.data.game.description, url: this.getRouter().getUrl(), icon: "gamepad" });
+				const images = [];
+				this.data.game.images.forEach((image) => {
+					if (image.name.indexOf(".ico") === -1) {
+						images.push({
+							name: image.name,
+							src: `${this.getGameFolder(this.data.game)}/${image.name}`,
+							w: image.width,
+							h: image.height
+						});
+					}
+				});
+				this.data.images = images;
+				const title = `${this.data.game.description} - ${this.data.game.name}`;
+				this._setTitle(title);
+				this.getServices().search("clones", this.params.name).subscribe((data) => {
+					this.data.clones = data;
+					callback();
+				});
+				this._refreshGameAvailability();
+			}
 		});
 	}
 	onDestroy() {

@@ -5,9 +5,25 @@
 			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
-		<button mat-fab routerLink="/search/{{model.data.searchLastType}}">
-			<i [matTooltip]="'L10N_SEARCH'|translate" class="material-icons mat-24 mat-light">search</i>
+		<button mat-icon-button [matMenuTriggerFor]="menu">
+			<mat-icon class="mat-36">menu</mat-icon>
 		</button>
+		<mat-menu #menu="matMenu">
+			<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
+				<mat-icon>search</mat-icon>
+				<span>{{"L10N_SEARCH"|translate}}</span>
+			</button>
+			<!--
+			<button mat-menu-item routerLink="/favorites">
+				<mat-icon>favorite_border</mat-icon>
+				<span>{{"L10N_FAVORITES"|translate}}</span>
+			</button>
+			-->
+			<button mat-menu-item routerLink="/history">
+				<mat-icon>history</mat-icon>
+				<span>{{"L10N_HISTORY"|translate}}</span>
+			</button>
+		</mat-menu>
 	</mat-toolbar>
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

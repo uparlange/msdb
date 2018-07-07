@@ -16,8 +16,6 @@ const fs = require('fs');
 const htmlparser = require('htmlparser2');
 const mergeStream = require('merge-stream');
 const imagemin = require('gulp-imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
 

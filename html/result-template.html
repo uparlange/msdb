@@ -1,12 +1,12 @@
 <mat-card>
 	<mat-card-title>
-		<span>{{model.getSearchLabel(model.params.type)|translate}} "{{model.params.value}}"</span>
+		<span>{{model.data.title}}</span>
 		<div class="default-spacer"></div>
 		<mat-divider [inset]="true"></mat-divider>
 		<div class="default-spacer"></div>
-		<mat-checkbox [(ngModel)]="model.showClone" (ngModelChange)="model.checkBoxChanged($event)">Clone</mat-checkbox>
-		<mat-checkbox [(ngModel)]="model.showBios" (ngModelChange)="model.checkBoxChanged($event)">Bios</mat-checkbox>
-		<mat-checkbox [(ngModel)]="model.showDevice" (ngModelChange)="model.checkBoxChanged($event)">Device</mat-checkbox>
+		<mat-checkbox [(ngModel)]="model.data.showClone" (ngModelChange)="model.checkBoxChanged($event)">Clone</mat-checkbox>
+		<mat-checkbox [(ngModel)]="model.data.showBios" (ngModelChange)="model.checkBoxChanged($event)">Bios</mat-checkbox>
+		<mat-checkbox [(ngModel)]="model.data.showDevice" (ngModelChange)="model.checkBoxChanged($event)">Device</mat-checkbox>
 	</mat-card-title>
 </mat-card>
 <div class="default-spacer"></div>

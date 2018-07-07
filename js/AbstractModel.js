@@ -41,6 +41,9 @@ class AbstractModel extends AbstractClass {
 	getServices() {
 		return this._services;
 	}
+	getEventBus() {
+		return this._helper.getEventBus();
+	}
 	getSocket() {
 		return this._helper.getSocket();
 	}
@@ -52,6 +55,9 @@ class AbstractModel extends AbstractClass {
 	}
 	getLabels() {
 		return this._helper.getLabels();
+	}
+	getHistory() {
+		return this._helper.getHistory();
 	}
 	getGameIconUrl(game) {
 		return AppUtils.getGameIconUrl(game);

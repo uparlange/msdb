@@ -19,18 +19,21 @@ class AbstractService extends AbstractClass {
 	getCache() {
 		return this._helper.getCache();
 	}
+	getEventBus() {
+		return this._helper.getEventBus();
+	}
 	_httpCall(source, defaultValue) {
 		const eventEmitter = new ng.core.EventEmitter();
 		if (defaultValue === undefined) {
 			defaultValue = null;
 		}
-		this._helper.getEventBus().emit("HTTP_BEGIN");
+		this.getEventBus().emit("HTTP_BEGIN");
 		// source.timeout(AppUtils.getHttpRequestTimeOut())
 		source.subscribe((result) => {
-			this._helper.getEventBus().emit("HTTP_END");
+			this.getEventBus().emit("HTTP_END");
 			eventEmitter.emit(result);
 		}, () => {
-			this._helper.getEventBus().emit("HTTP_END");
+			this.getEventBus().emit("HTTP_END");
 			eventEmitter.emit(defaultValue);
 		});
 		return eventEmitter;

@@ -41,6 +41,9 @@ class AbstractClassHelper extends AbstractClass {
 	getPopups() {
 		return this._shell.getPopupManager();
 	}
+	getHistory() {
+		return this._shell.getHistoryManager();
+	}
 	getTitle() {
 		return this._title;
 	}

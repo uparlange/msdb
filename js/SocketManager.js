@@ -17,14 +17,14 @@ class SocketManager extends AbstractManager {
 		if (eventEmitter === undefined) {
 			eventEmitter = new ng.core.EventEmitter();
 			this._eventEmitters[eventName] = eventEmitter;
+			this._getSocket().subscribe((socket) => {
+				if (socket !== null) {
+					socket.on(eventName, () => {
+						eventEmitter.emit();
+					});
+				}
+			});
 		}
-		this._getSocket().subscribe((socket) => {
-			if (socket !== null) {
-				socket.on(eventName, () => {
-					eventEmitter.emit();
-				});
-			}
-		});
 		return eventEmitter;
 	}
 	emit(eventName, params) {
@@ -56,7 +56,6 @@ class SocketManager extends AbstractManager {
 				});
 				this._socket.on("connect_error", () => {
 					this._socket = null;
-
 					eventEmitter.emit(this._socket);
 				});
 			}
