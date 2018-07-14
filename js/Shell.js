@@ -84,6 +84,9 @@ class Shell extends AbstractClass {
     getHistoryManager() {
         return this._historyManager;
     }
+    getFavoritesManager() {
+        return this._favoritesManager;
+    }
 }
 
 export default Shell;

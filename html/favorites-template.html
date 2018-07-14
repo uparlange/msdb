@@ -4,3 +4,25 @@
 	</mat-card-title>
 </mat-card>
 <div class="default-spacer"></div>
+<mat-form-field>
+	<input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)" [placeholder]="'L10N_FILTER'|translate">
+</mat-form-field>
+<button *ngIf="model.data.filterValue.length > 0" (click)="model.clearFilter();filterValueInput.focus();" type="button" mat-mini-fab>
+	<mdi-icon name="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mdi-icon>
+</button>
+<mat-paginator [hidePageSize]="true" [pageSize]="400" [pageIndex]="model.data.pageIndex" (page)="model.pageChanged($event)"
+ showFirstLastButtons></mat-paginator>
+<table mat-table [dataSource]="model.data.list" [trackBy]="model.trackByName">
+	<ng-container matColumnDef="icon">
+		<td mat-cell *matCellDef="let element">
+			<img mat-list-avatar [lazySrc]="model.getGameIconUrl(element)">
+		</td>
+	</ng-container>
+	<ng-container matColumnDef="description">
+		<td mat-cell *matCellDef="let element">
+			<a routerLink="/detail" [queryParams]="{name:element.name}">{{element.description}}</a>
+		</td>
+	</ng-container>
+	<tr mat-row *matRowDef="let row; columns: model.data.displayedColumns;"></tr>
+</table>
+<h4 class="no-data" *ngIf="!model.data.list.filteredData || model.data.list.filteredData.length == 0">{{'L10N_NO_RESULT'|translate}}</h4>

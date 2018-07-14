@@ -28,7 +28,7 @@ class ConfigModel extends AbstractModel {
 		this._getConfiguration();
 	}
 	checkFormChanges() {
-		this.data.newValue.romsDirectory = (typeof this.data.newValue.mameDirectory === "string" && this.data.newValue.mameDirectory.length > 0) ? this.data.newValue.mameDirectory + "\\roms" : null;
+		this.data.newValue.romsDirectory = (typeof this.data.newValue.mameDirectory === "string" && this.data.newValue.mameDirectory.length > 0) ? `${this.data.newValue.mameDirectory}\\roms` : null;
 		this.data.enabled = this.hasChanges();
 	}
 	hasChanges() {

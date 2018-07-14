@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>
 	{{'L10N_CHIP'|translate}}
-	<button mat-dialog-close class="link-button">
-		<i class="material-icons mat-24">clear</i>
+	<button mat-dialog-close mat-icon-button>
+		<mdi-icon name="close" size="18"></mdi-icon>
 	</button>
 </h1>
 <mat-dialog-content>
@@ -9,7 +9,9 @@
 		<b>{{item.name}}</b>
 		<ul>
 			<li *ngFor="let value of item.values; trackBy:model.trackByTag">
-				{{value.tag}} <b>{{value.name}}</b> <span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
+				{{value.tag}}
+				<b>{{value.name}}</b>
+				<span *ngIf="value.clock != null">@{{model.getFrequencyLabel(value.clock)}}</span>
 			</li>
 		</ul>
 	</div>

@@ -44,6 +44,9 @@ class AbstractClassHelper extends AbstractClass {
 	getHistory() {
 		return this._shell.getHistoryManager();
 	}
+	getFavorites() {
+		return this._shell.getFavoritesManager();
+	}
 	getTitle() {
 		return this._title;
 	}

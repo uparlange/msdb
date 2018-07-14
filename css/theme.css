@@ -1628,9 +1628,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   border-bottom: none;
   border-top: none; }
 
-.mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-group.mat-primary .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-nav-bar.mat-primary .mat-tab-link:not(.mat-tab-disabled):focus {
+.mat-tab-group.mat-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-group.mat-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
   background-color: rgba(255, 204, 188, 0.3); }
 
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
@@ -1639,9 +1639,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-primary.mat-background-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary.mat-background-primary .mat-ink-bar {
   background-color: white; }
 
-.mat-tab-group.mat-accent .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-group.mat-accent .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-accent .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-nav-bar.mat-accent .mat-tab-link:not(.mat-tab-disabled):focus {
+.mat-tab-group.mat-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-group.mat-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
   background-color: rgba(187, 222, 251, 0.3); }
 
 .mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
@@ -1650,9 +1650,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-accent.mat-background-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent.mat-background-accent .mat-ink-bar {
   background-color: white; }
 
-.mat-tab-group.mat-warn .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-group.mat-warn .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-warn .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-nav-bar.mat-warn .mat-tab-link:not(.mat-tab-disabled):focus {
+.mat-tab-group.mat-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-group.mat-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
   background-color: rgba(255, 205, 210, 0.3); }
 
 .mat-tab-group.mat-warn .mat-ink-bar, .mat-tab-nav-bar.mat-warn .mat-ink-bar {
@@ -1661,9 +1661,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-warn.mat-background-warn .mat-ink-bar, .mat-tab-nav-bar.mat-warn.mat-background-warn .mat-ink-bar {
   background-color: white; }
 
-.mat-tab-group.mat-background-primary .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-group.mat-background-primary .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-background-primary .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-nav-bar.mat-background-primary .mat-tab-link:not(.mat-tab-disabled):focus {
+.mat-tab-group.mat-background-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-group.mat-background-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
   background-color: rgba(255, 204, 188, 0.3); }
 
 .mat-tab-group.mat-background-primary .mat-tab-header, .mat-tab-group.mat-background-primary .mat-tab-links, .mat-tab-nav-bar.mat-background-primary .mat-tab-header, .mat-tab-nav-bar.mat-background-primary .mat-tab-links {
@@ -1683,9 +1683,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-background-primary .mat-ripple-element, .mat-tab-nav-bar.mat-background-primary .mat-ripple-element {
   background-color: rgba(255, 255, 255, 0.12); }
 
-.mat-tab-group.mat-background-accent .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-group.mat-background-accent .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-background-accent .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-nav-bar.mat-background-accent .mat-tab-link:not(.mat-tab-disabled):focus {
+.mat-tab-group.mat-background-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-group.mat-background-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
   background-color: rgba(187, 222, 251, 0.3); }
 
 .mat-tab-group.mat-background-accent .mat-tab-header, .mat-tab-group.mat-background-accent .mat-tab-links, .mat-tab-nav-bar.mat-background-accent .mat-tab-header, .mat-tab-nav-bar.mat-background-accent .mat-tab-links {
@@ -1705,9 +1705,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-background-accent .mat-ripple-element, .mat-tab-nav-bar.mat-background-accent .mat-ripple-element {
   background-color: rgba(255, 255, 255, 0.12); }
 
-.mat-tab-group.mat-background-warn .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-group.mat-background-warn .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-background-warn .mat-tab-label:not(.mat-tab-disabled):focus,
-.mat-tab-nav-bar.mat-background-warn .mat-tab-link:not(.mat-tab-disabled):focus {
+.mat-tab-group.mat-background-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-group.mat-background-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
   background-color: rgba(255, 205, 210, 0.3); }
 
 .mat-tab-group.mat-background-warn .mat-tab-header, .mat-tab-group.mat-background-warn .mat-tab-links, .mat-tab-nav-bar.mat-background-warn .mat-tab-header, .mat-tab-nav-bar.mat-background-warn .mat-tab-links {

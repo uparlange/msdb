@@ -18,7 +18,7 @@ class SearchModel extends AbstractModel {
 	}
 	tabChanged(event) {
 		const tabInfo = this.getTabsInfo().byIndex(event.index);
-		this.getCache().setItem("searchLastType", tabInfo.type);
+		this.getCache().setItem("version", "searchLastType", tabInfo.type);
 	}
 	getSearchTabLabel(index) {
 		const tabInfo = this.getTabsInfo().byIndex(index);
@@ -38,13 +38,13 @@ class SearchModel extends AbstractModel {
 	_getTabsInfo() {
 		return {
 			_tabs: [
-				{ index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description", icon: "search" },
-				{ index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings", icon: "stars" },
-				{ index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories", icon: "folder_open" },
-				{ index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series", icon: "list" },
-				{ index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years", icon: "today" },
-				{ index: 5, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers", icon: "business" },
-				{ index: 6, key: "L10N_SEARCH_BY_VERSION", type: "versions", icon: "plus_one" }
+				{ index: 0, key: "L10N_SEARCH_BY_DESCRIPTION", type: "description", icon: "magnify" },
+				{ index: 1, key: "L10N_SEARCH_BY_RATING", type: "ratings", icon: "star-circle-outline" },
+				{ index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories", icon: "folder-outline" },
+				{ index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series", icon: "format-list-bulleted" },
+				{ index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years", icon: "calendar" },
+				{ index: 5, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers", icon: "domain" },
+				{ index: 6, key: "L10N_SEARCH_BY_VERSION", type: "versions", icon: "plus-one" }
 			],
 			getTabs() {
 				return this._tabs;

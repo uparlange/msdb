@@ -1,35 +1,40 @@
-<div class="app-header">
+<div class="header">
 	<mat-toolbar color="primary">
-		<i class="app-network-status material-icons mat-18 mat-light">{{model.params.online ? 'network_wifi' : 'signal_wifi_off'}}</i>
+		<div class="network-status">
+			<ng-template [ngIf]="model.params.online" [ngIfElse]="offline">
+				<mdi-icon name="wifi"></mdi-icon>
+			</ng-template>
+			<ng-template #offline>
+				<mdi-icon name="wifi-off"></mdi-icon>
+			</ng-template>
+		</div>
 		<a routerLink="/home">
 			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
 		<button mat-icon-button [matMenuTriggerFor]="menu">
-			<mat-icon class="mat-36">menu</mat-icon>
+			<mdi-icon name="menu" size="36"></mdi-icon>
 		</button>
 		<mat-menu #menu="matMenu">
 			<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
-				<mat-icon>search</mat-icon>
+				<mdi-icon name="magnify">search</mdi-icon>
 				<span>{{"L10N_SEARCH"|translate}}</span>
 			</button>
-			<!--
 			<button mat-menu-item routerLink="/favorites">
-				<mat-icon>favorite_border</mat-icon>
+				<mdi-icon name="heart-outline"></mdi-icon>
 				<span>{{"L10N_FAVORITES"|translate}}</span>
 			</button>
-			-->
 			<button mat-menu-item routerLink="/history">
-				<mat-icon>history</mat-icon>
+				<mdi-icon name="history"></mdi-icon>
 				<span>{{"L10N_HISTORY"|translate}}</span>
 			</button>
 		</mat-menu>
 	</mat-toolbar>
 	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<div class="app-container">
-	<div class="app-container-header"></div>
-	<div class="app-container-content">
+<div class="container">
+	<div class="container-header"></div>
+	<div class="container-content">
 		<router-outlet></router-outlet>
 	</div>
 </div>

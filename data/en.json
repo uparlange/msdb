@@ -106,5 +106,7 @@
 	"L10N_CHANGELOG": "Changelog",
 	"L10N_NO_RESULT": "No result !",
 	"L10N_HISTORY": "History",
-	"L10N_FAVORITES": "Favorites"
+	"L10N_FAVORITES": "Favorites",
+	"L10N_ADD_TO_FAVORITES": "Add to favorites",
+	"L10N_REMOVE_FROM_FAVORITES": "Remove from to favorites"
 }

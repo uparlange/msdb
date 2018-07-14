@@ -7,7 +7,7 @@
 <table mat-table [dataSource]="model.data.list">
 	<ng-container matColumnDef="icon">
 		<td mat-cell *matCellDef="let element">
-			<mat-icon>{{element.icon}}</mat-icon>
+			<mdi-icon [name]="element.icon"></mdi-icon>
 		</td>
 	</ng-container>
 	<ng-container matColumnDef="label">

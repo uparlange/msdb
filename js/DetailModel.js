@@ -9,7 +9,6 @@ class DetailModel extends AbstractModel {
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
-		this.UNKNOWN_GAME_DESCRIPTION = "?";
 		this._socketConfigChangedSubscriber = null;
 	}
 	onInit() {
@@ -21,16 +20,9 @@ class DetailModel extends AbstractModel {
 		this.data = this._getInitData();
 		this.getServices().getDetail(this.params.name).subscribe((data) => {
 			if (data === null) {
-				data = {
-					name: this.params.name,
-					description: this.UNKNOWN_GAME_DESCRIPTION,
-					clones: [],
-					images: [],
-					gameAvailable: false
-				};
-			}
-			this.data.game = data;
-			if (this.data.game.description !== this.UNKNOWN_GAME_DESCRIPTION) {
+				this.data.game.description = this.params.name;
+			} else {
+				this.data.game = data;
 				this.getHistory().add({ label: this.data.game.description, url: this.getRouter().getUrl(), icon: "gamepad" });
 				const images = [];
 				this.data.game.images.forEach((image) => {
@@ -57,8 +49,17 @@ class DetailModel extends AbstractModel {
 	onDestroy() {
 		this._socketConfigChangedSubscriber.unsubscribe();
 	}
-	playGame() {
-		this.getSocket().emit("PLAY_GAME", this.params.name);
+	inFavorites(game) {
+		return this.getFavorites().has(game.name);
+	}
+	addToFavorite(game) {
+		this.getFavorites().add(game.name);
+	}
+	removeFromFavorites(game) {
+		this.getFavorites().remove(game.name);
+	}
+	playGame(game) {
+		this.getSocket().emit("PLAY_GAME", game.name);
 	}
 	getStatusClass(status) {
 		return `label-${status}`;

@@ -43,9 +43,9 @@ class GalleryComponent extends AbstractComponent {
 		const colwidth = this._getColWidth();
 		const styles = {
 			'float': 'left',
-			'width': colwidth + "px",
-			'height': this._getItemHeight(colwidth, image) + "px",
-			'margin-bottom': this.gap + "px"
+			'width': `${colwidth}px`,
+			'height': `${this._getItemHeight(colwidth, image)}px`,
+			'margin-bottom': `${this.gap}px`
 		};
 		return styles;
 	}

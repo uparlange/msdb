@@ -11,10 +11,10 @@ class SearchByDescriptionModel extends AbstractModel {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onInit() {
-		this.data.value = this.getCache().getItem("searchByDescriptionValue", "");
+		this.data.value = this.getCache().getItem("version", "searchByDescriptionValue", "");
 	}
 	onDestroy() {
-		this.getCache().setItem("searchByDescriptionValue", this.data.value);
+		this.getCache().setItem("version", "searchByDescriptionValue", this.data.value);
 	}
 	_getInitData() {
 		return {

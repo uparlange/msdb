@@ -94,7 +94,7 @@ export default {
     _initMame: function (mameDirectory, mameFileName) {
         const fs = require("fs");
         const eventEmitter = new ng.core.EventEmitter();
-        const mameIni = mameDirectory + "\\mame.ini";
+        const mameIni = `${mameDirectory}\\mame.ini`;
         if (fs.existsSync(mameIni)) {
             let cmd = `cd ${mameDirectory} & ${mameFileName} -cc`;
             this._execCmd(cmd).subscribe(() => {

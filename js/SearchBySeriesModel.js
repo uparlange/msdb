@@ -11,7 +11,7 @@ class SearchBySeriesModel extends AbstractModel {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onInit() {
-		this._setFilterValue(this.getCache().getItem("searchBySeriesFilterValue", ""));
+		this._setFilterValue(this.getCache().getItem("version", "searchBySeriesFilterValue", ""));
 	}
 	onRefresh(callback) {
 		this.getServices().getSeries().subscribe((data) => {
@@ -20,7 +20,7 @@ class SearchBySeriesModel extends AbstractModel {
 		});
 	}
 	onDestroy() {
-		this.getCache().setItem("searchBySeriesFilterValue", this.data.filterValue);
+		this.getCache().setItem("version", "searchBySeriesFilterValue", this.data.filterValue);
 		this.data.list.paginator = null;
 	}
 	trackByLabel(index, item) {

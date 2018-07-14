@@ -16,7 +16,7 @@ class MyGamesModel extends AbstractModel {
 		});
 	}
 	onInit() {
-		this._setFilterValue(this.getCache().getItem("myGamesFilterValue", ""));
+		this._setFilterValue(this.getCache().getItem("version", "myGamesFilterValue", ""));
 		if (this._needRefresh) {
 			this._refreshList();
 		}
@@ -28,7 +28,7 @@ class MyGamesModel extends AbstractModel {
 		this._refreshList(callback);
 	}
 	onDestroy() {
-		this.getCache().setItem("myGamesFilterValue", this.data.filterValue);
+		this.getCache().setItem("version", "myGamesFilterValue", this.data.filterValue);
 		this._changeInRomsDirectorySubscriber.unsubscribe();
 		this.data.list.paginator = null;
 	}

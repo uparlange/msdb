@@ -32,7 +32,7 @@ class ResultModel extends AbstractModel {
 		}
 		this._getTitle().subscribe((title) => {
 			this.data.title = title;
-			this.getHistory().add({ label: title, url: this.getRouter().getUrl(), icon: "search" });
+			this.getHistory().add({ label: title, url: this.getRouter().getUrl(), icon: "magnify" });
 		})
 	}
 	onRefresh(callback) {

@@ -59,6 +59,9 @@ class AbstractModel extends AbstractClass {
 	getHistory() {
 		return this._helper.getHistory();
 	}
+	getFavorites() {
+		return this._helper.getFavorites();
+	}
 	getGameIconUrl(game) {
 		return AppUtils.getGameIconUrl(game);
 	}

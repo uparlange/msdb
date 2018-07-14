@@ -6,7 +6,7 @@
 		<mat-tab-group (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="model.data.selectedIndex">
 			<mat-tab *ngFor="let tab of model.getTabsInfo().getTabs(); trackBy:model.trackByKey">
 				<ng-template matTabLabel>
-					<i [matTooltip]="tab.key|translate" class="material-icons mat-24">{{tab.icon}}</i>
+					<mdi-icon [name]="tab.icon" [matTooltip]="tab.key|translate"></mdi-icon>
 				</ng-template>
 			</mat-tab>
 		</mat-tab-group>

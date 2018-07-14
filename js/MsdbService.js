@@ -83,7 +83,7 @@ class MsdbService extends AbstractService {
 		const cacheKey = this._getCacheKey(config);
 		let value = null;
 		if (config.useCache === true) {
-			value = this.getCache().getItem(cacheKey);
+			value = this.getCache().getItem("version", cacheKey);
 		}
 		if (value !== null) {
 			setTimeout(() => {
@@ -98,7 +98,7 @@ class MsdbService extends AbstractService {
 					this.httpGet({ url: config.url, params: params }).subscribe((result) => {
 						value = this._getData(result);
 						if (config.useCache === true) {
-							this.getCache().setItem(cacheKey, value);
+							this.getCache().setItem("version", cacheKey, value);
 						}
 						eventEmitter.emit(value);
 					});
@@ -137,7 +137,7 @@ class MsdbService extends AbstractService {
 				if (data !== null) {
 					this._token = data.token;
 					this._mameInfos = data.mameInfos;
-					this.getCache().setDefaultNs(data.mameInfos.build);
+					this.getCache().setNsValue("version", data.mameInfos.build);
 				}
 				eventEmitter.emit();
 			});

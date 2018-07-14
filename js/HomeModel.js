@@ -11,7 +11,7 @@ class HomeModel extends AbstractModel {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onInit() {
-		this.data.searchLastType = this.getCache().getItem("searchLastType", "description");
+		this.data.searchLastType = this.getCache().getItem("version", "searchLastType", "description");
 	}
 	onRefresh(callback) {
 		if (this.data.mame.build === null) {
