@@ -64,8 +64,8 @@ export default {
 					_consoleWorker.postMessage([params]);
 				}
 				else {
-					const Console = console;
-					Console[methodName](className, message);
+					const appender = console;
+					appender[methodName](className, message);
 				}
 			}
 		};

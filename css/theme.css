@@ -512,10 +512,8 @@ input.mat-input-element {
   font-size: 14px; }
 
 .mat-ripple {
-  overflow: hidden; }
-  @media screen and (-ms-high-contrast: active) {
-    .mat-ripple {
-      display: none; } }
+  overflow: hidden;
+  position: relative; }
 
 .mat-ripple.mat-ripple-unbounded {
   overflow: visible; }
@@ -526,6 +524,9 @@ input.mat-input-element {
   pointer-events: none;
   transition: opacity, transform 0ms cubic-bezier(0, 0, 0.2, 1);
   transform: scale(0); }
+  @media screen and (-ms-high-contrast: active) {
+    .mat-ripple-element {
+      display: none; } }
 
 .cdk-visually-hidden {
   border: 0;
@@ -1130,6 +1131,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled='true']).cdk-keyboard-focused, .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled='true']).cdk-program-focused, .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled='true']):hover {
   background: rgba(0, 0, 0, 0.04); }
 
+@media (hover: none) {
+  .mat-expansion-panel:not(.mat-expanded):not([aria-disabled='true'])
+.mat-expansion-panel-header:hover {
+    background: white; } }
+
 .mat-expansion-panel-header-title {
   color: rgba(0, 0, 0, 0.87); }
 
@@ -1370,15 +1376,6 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-radio-outer-circle {
   border-color: rgba(0, 0, 0, 0.54); }
 
-.mat-radio-disabled .mat-radio-outer-circle {
-  border-color: rgba(0, 0, 0, 0.38); }
-
-.mat-radio-disabled .mat-radio-ripple .mat-ripple-element, .mat-radio-disabled .mat-radio-inner-circle {
-  background-color: rgba(0, 0, 0, 0.38); }
-
-.mat-radio-disabled .mat-radio-label-content {
-  color: rgba(0, 0, 0, 0.38); }
-
 .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
   border-color: #ff5722; }
 
@@ -1405,6 +1402,17 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .mat-radio-button.mat-warn .mat-radio-ripple .mat-ripple-element {
   background-color: rgba(244, 67, 54, 0.26); }
+
+.mat-radio-button.mat-radio-disabled.mat-radio-checked .mat-radio-outer-circle,
+.mat-radio-button.mat-radio-disabled .mat-radio-outer-circle {
+  border-color: rgba(0, 0, 0, 0.38); }
+
+.mat-radio-button.mat-radio-disabled .mat-radio-ripple .mat-ripple-element,
+.mat-radio-button.mat-radio-disabled .mat-radio-inner-circle {
+  background-color: rgba(0, 0, 0, 0.38); }
+
+.mat-radio-button.mat-radio-disabled .mat-radio-label-content {
+  color: rgba(0, 0, 0, 0.38); }
 
 .mat-select-content, .mat-select-panel-done-animating {
   background: white; }

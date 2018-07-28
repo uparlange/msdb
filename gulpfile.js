@@ -293,7 +293,7 @@ gulp.task('prepare-copy-resources', (callback) => {
     });
     // material-design-icons
     resources.copy4web.push({
-        src: './node_modules/@mdi/font/fonts/**/*',
+        src: './node_modules/@mdi/font/fonts/**/*.{eot,woff2,woff,ttf}',
         dest: './dist/node_modules/@mdi/font/fonts'
     });
     // photoswipe_default_skin

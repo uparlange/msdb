@@ -1,6 +1,2 @@
 /node_modules/
-/build/
-/.sass-cache/
 /dist/
-/.vscode/
-/data/config.json

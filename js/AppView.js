@@ -8,19 +8,14 @@ class AppView extends AbstractView {
 		return this.getAnnotations({ selector: "body" });
 	}
 	static get parameters() {
-		return AppUtils.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar, ng.core.ElementRef,
-			ng.core.Renderer);
+		return AppUtils.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar);
 	}
-	constructor(AbstractClassHelper, AppModel, ViewContainerRef, MatSnackBar, ElementRef,
-		Renderer) {
+	constructor(AbstractClassHelper, AppModel, ViewContainerRef, MatSnackBar) {
 		super(AbstractClassHelper, AppModel);
 		this._viewContainerRef = ViewContainerRef;
 		this._matSnackBar = MatSnackBar;
-		this._element = ElementRef.nativeElement;
-		this._renderer = Renderer;
 	}
 	onInit() {
-		this._initBackground();
 		this._initToaster();
 		if (AppUtils.runInNw()) {
 			this._initNw();
@@ -79,11 +74,6 @@ class AppView extends AbstractView {
 				nw.Window.get().menu = menu;
 			});
 		});
-	}
-	_initBackground() {
-		this._renderer.setElementStyle(this._element, "background-size", "100% 100%");
-		this._renderer.setElementStyle(this._element, "background-attachment", "fixed");
-		this._renderer.setElementStyle(this._element, "background-image", "url('images/background.png')");
 	}
 	_initToaster() {
 		this.getConnection().on("change").subscribe((online) => {

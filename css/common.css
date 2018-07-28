@@ -178,6 +178,7 @@ mat-tree-node
 	text-align: center;
 }
 
-.mat-menu-item .mdi {
+.mat-menu-item .mdi 
+{
     margin-right: 16px;
 }

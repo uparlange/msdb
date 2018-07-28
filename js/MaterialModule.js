@@ -22,7 +22,6 @@ class MaterialModule extends AbstractModule {
 				ng.material.MatSelectModule,
 				ng.material.MatPaginatorModule,
 				ng.material.MatTreeModule,
-				ng.material.MatIconModule,
 				ng.material.MatChipsModule
 			],
 			exports: [
@@ -44,7 +43,6 @@ class MaterialModule extends AbstractModule {
 				ng.material.MatSelectModule,
 				ng.material.MatPaginatorModule,
 				ng.material.MatTreeModule,
-				ng.material.MatIconModule,
 				ng.material.MatChipsModule
 			]
 		});
