@@ -1,12 +1,7 @@
 <div class="header">
 	<mat-toolbar color="primary">
 		<div class="network-status">
-			<ng-template [ngIf]="model.params.online" [ngIfElse]="offline">
-				<mdi-icon name="wifi"></mdi-icon>
-			</ng-template>
-			<ng-template #offline>
-				<mdi-icon name="wifi-off"></mdi-icon>
-			</ng-template>
+			<mdi-icon [name]="model.params.online ? 'wifi' : 'wifi-off'"></mdi-icon>
 		</div>
 		<a routerLink="/home">
 			<img [src]="'images/logo.png'">
@@ -17,7 +12,7 @@
 		</button>
 		<mat-menu #menu="matMenu">
 			<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
-				<mdi-icon name="magnify">search</mdi-icon>
+				<mdi-icon name="magnify"></mdi-icon>
 				<span>{{"L10N_SEARCH"|translate}}</span>
 			</button>
 			<button mat-menu-item routerLink="/favorites">

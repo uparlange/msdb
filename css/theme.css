@@ -512,8 +512,7 @@ input.mat-input-element {
   font-size: 14px; }
 
 .mat-ripple {
-  overflow: hidden;
-  position: relative; }
+  overflow: hidden; }
 
 .mat-ripple.mat-ripple-unbounded {
   overflow: visible; }
