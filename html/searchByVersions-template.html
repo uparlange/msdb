@@ -2,7 +2,7 @@
     <input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)" [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
 <button *ngIf="model.data.filterValue.length > 0" (click)="model.clearFilter();filterValueInput.focus();" type="button" mat-mini-fab>
-    <mdi-icon name="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mdi-icon>
+    <mdiIcon name="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mdiIcon>
 </button>
 <mat-paginator [hidePageSize]="true" [pageSize]="250" [pageIndex]="model.data.pageIndex" (page)="model.pageChanged($event)"
     showFirstLastButtons></mat-paginator>
@@ -22,7 +22,7 @@
     <ng-container matColumnDef="changelog">
         <td mat-cell *matCellDef="let element">
             <a *ngIf="model.changeLogAvailable(element.label)" target="_blank" [href]="'http://mamedev.org/releases/whatsnew_'+model.getVersion(element.label)+'.txt'">
-                <mdi-icon name="radar" [matTooltip]="'L10N_CHANGELOG'|translate"></mdi-icon>
+                <mdiIcon name="radar" [matTooltip]="'L10N_CHANGELOG'|translate"></mdiIcon>
             </a>
         </td>
     </ng-container>

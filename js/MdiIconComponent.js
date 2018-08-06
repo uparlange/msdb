@@ -5,7 +5,7 @@ import AppUtils from "./AppUtils.js";
 class MdiIconComponent extends AbstractComponent {
     static get annotations() {
         return this.getAnnotations({
-            selector: "mdi-icon",
+            selector: "mdiIcon",
             inputs: ["name", "size"],
             host: {
                 "role": "img"
@@ -13,27 +13,26 @@ class MdiIconComponent extends AbstractComponent {
         });
     }
     static get parameters() {
-        return AppUtils.getParameters(AbstractClassHelper, ng.core.ElementRef);
+        return AppUtils.getParameters(AbstractClassHelper);
     }
-    constructor(AbstractClassHelper, ElementRef) {
+    constructor(AbstractClassHelper) {
         super(AbstractClassHelper);
-        this._element = ElementRef.nativeElement;
         this.name = "";
         this.size = 24;
-        this.iconExists = false;
+        this.iconAvailable = false;
     }
     onInit() {
-        this._refreshIconExists();
+        this._refreshIconAvailable();
     }
     onChanges(event) {
         if (event.hasOwnProperty("name")) {
-            this._refreshIconExists();
+            this._refreshIconAvailable();
         }
     }
-    _refreshIconExists() {
-        this.iconExists = this._iconExists();
+    _refreshIconAvailable() {
+        this.iconAvailable = this._iconAvailable();
     }
-    _iconExists() {
+    _iconAvailable() {
         const styleSheetsCount = document.styleSheets.length;
         for (let i = 0; i < styleSheetsCount; i++) {
             const styleSheet = document.styleSheets[i];

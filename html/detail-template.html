@@ -1,31 +1,31 @@
 <mat-card>
 	<mat-card-title>
 		<span class="title">
-			<mdi-icon name="heart-outline" *ngIf="model.inFavorites(model.data.game)"></mdi-icon>
+			<mdiIcon name="heart-outline" *ngIf="model.inFavorites(model.data.game)"></mdiIcon>
 			<span>{{model.data.game.description}}</span>
 		</span>
 		<button class="actions-menu" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="model.data.game.name != null">
-			<mdi-icon name="menu"></mdi-icon>
+			<mdiIcon name="menu"></mdiIcon>
 		</button>
 		<mat-menu #menu="matMenu">
 			<ng-template [ngIf]="!model.inFavorites(model.data.game)" [ngIfElse]="removeFromFavorites">
 				<button mat-menu-item (click)="model.addToFavorite(model.data.game)">
-					<mdi-icon name="heart"></mdi-icon>
+					<mdiIcon name="heart"></mdiIcon>
 					<span>{{"L10N_ADD_TO_FAVORITES"|translate}}</span>
 				</button>
 			</ng-template>
 			<ng-template #removeFromFavorites>
 				<button mat-menu-item (click)="model.removeFromFavorites(model.data.game)">
-					<mdi-icon name="heart-broken"></mdi-icon>
+					<mdiIcon name="heart-broken"></mdiIcon>
 					<span>{{"L10N_REMOVE_FROM_FAVORITES"|translate}}</span>
 				</button>
 			</ng-template>
 			<button mat-menu-item *ngIf="model.data.gameAvailable" (click)="model.playGame(model.data.game)">
-				<mdi-icon name="gamepad-variant"></mdi-icon>
+				<mdiIcon name="gamepad-variant"></mdiIcon>
 				<span>{{"L10N_PLAY_GAME"|translate}}</span>
 			</button>
 			<button mat-menu-item [matMenuTriggerFor]="subMenu" *ngIf="model.data.game.dipswitchs.length > 0 || model.data.game.chips.length > 0 || model.data.game.biossets.length > 0 || model.data.game.ports.length > 0 || model.data.game.devicerefs.length > 0">
-				<mdi-icon name="more"></mdi-icon>
+				<mdiIcon name="more"></mdiIcon>
 				<span>{{"L10N_MORE"|translate}}</span>
 				<mat-menu #subMenu="matMenu">
 					<button mat-menu-item *ngIf="model.data.game.dipswitchs.length > 0" (click)="openDipSwitchsPopup()">{{'L10N_DIP_SWITCH'|translate}}</button>

@@ -8,10 +8,10 @@
     <mat-tree-node *matTreeNodeDef="let node; when: model.hasChild" matTreeNodePadding matTreeNodeToggle>
         <button mat-icon-button [attr.aria-label]="'toggle ' + node.label">
             <ng-template [ngIf]="model.data.treeControl.isExpanded(node)" [ngIfElse]="canExpand">
-                <mdi-icon name="chevron-down"></mdi-icon>
+                <mdiIcon name="chevron-down"></mdiIcon>
             </ng-template>
             <ng-template #canExpand>
-                <mdi-icon name="chevron-right"></mdi-icon>
+                <mdiIcon name="chevron-right"></mdiIcon>
             </ng-template>
         </button>
         {{node.label}}

@@ -1,6 +1,6 @@
 {
   "name": "msdb",
-  "version": "4.5.4",
+  "version": "4.5.5",
   "author": "Ugo Parlange",
   "description": "Mame Smart Database",
   "homepage": "https://msdb.lapli.fr",
@@ -28,16 +28,16 @@
     "desktop-debug": "nodemon node_modules/nw/bin/nw debug"
   },
   "dependencies": {
-    "@angular/animations": "6.1.0",
+    "@angular/animations": "7.0.0-beta.0",
     "@angular/cdk": "6.4.2",
-    "@angular/common": "6.1.0",
-    "@angular/compiler": "6.1.0",
-    "@angular/core": "6.1.0",
-    "@angular/forms": "6.1.0",
+    "@angular/common": "7.0.0-beta.0",
+    "@angular/compiler": "7.0.0-beta.0",
+    "@angular/core": "7.0.0-beta.0",
+    "@angular/forms": "7.0.0-beta.0",
     "@angular/material": "6.4.2",
-    "@angular/platform-browser": "6.1.0",
-    "@angular/platform-browser-dynamic": "6.1.0",
-    "@angular/router": "6.1.0",
+    "@angular/platform-browser": "7.0.0-beta.0",
+    "@angular/platform-browser-dynamic": "7.0.0-beta.0",
+    "@angular/router": "7.0.0-beta.0",
     "blazy": "1.8.2",
     "body-parser": "1.18.3",
     "chokidar": "2.0.4",
@@ -58,7 +58,7 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-minify": "canary",
     "del": "3.0.0",
-    "eslint": "5.2.0",
+    "eslint": "5.3.0",
     "gulp": "4.0.0",
     "gulp-babel": "7.0.1",
     "gulp-change": "1.0.0",
@@ -74,7 +74,7 @@
     "merge-stream": "1.0.1",
     "node-sass": "4.9.2",
     "nodemon": "1.18.3",
-    "nw": "0.32.0-sdk",
+    "nw": "0.32.1-sdk",
     "pump": "3.0.0"
   }
 }

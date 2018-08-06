@@ -1,26 +1,26 @@
 <div class="header">
 	<mat-toolbar color="primary">
 		<div class="network-status">
-			<mdi-icon [name]="model.params.online ? 'wifi' : 'wifi-off'"></mdi-icon>
+			<mdiIcon [name]="model.params.online ? 'wifi' : 'wifi-off'"></mdiIcon>
 		</div>
 		<a routerLink="/home">
 			<img [src]="'images/logo.png'">
 		</a>
 		<span class="fill-remaining-space"></span>
 		<button mat-icon-button [matMenuTriggerFor]="menu">
-			<mdi-icon name="menu" size="36"></mdi-icon>
+			<mdiIcon name="menu" size="36"></mdiIcon>
 		</button>
 		<mat-menu #menu="matMenu">
 			<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
-				<mdi-icon name="magnify"></mdi-icon>
+				<mdiIcon name="magnify"></mdiIcon>
 				<span>{{"L10N_SEARCH"|translate}}</span>
 			</button>
 			<button mat-menu-item routerLink="/favorites">
-				<mdi-icon name="heart-outline"></mdi-icon>
+				<mdiIcon name="heart-outline"></mdiIcon>
 				<span>{{"L10N_FAVORITES"|translate}}</span>
 			</button>
 			<button mat-menu-item routerLink="/history">
-				<mdi-icon name="history"></mdi-icon>
+				<mdiIcon name="history"></mdiIcon>
 				<span>{{"L10N_HISTORY"|translate}}</span>
 			</button>
 		</mat-menu>

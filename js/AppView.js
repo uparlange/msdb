@@ -5,7 +5,12 @@ import AppModel from "./AppModel.js";
 
 class AppView extends AbstractView {
 	static get annotations() {
-		return this.getAnnotations({ selector: "body" });
+		return this.getAnnotations({
+			selector: "body",
+			host: {
+				"mat-version": ng.material.VERSION.full
+			}
+		});
 	}
 	static get parameters() {
 		return AppUtils.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar);
