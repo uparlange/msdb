@@ -149,9 +149,7 @@
   margin: 0 0 64px; }
 
 .mat-bottom-sheet-container {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  font-weight: 400; }
+  font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button,
 .mat-flat-button, .mat-fab, .mat-mini-fab {
@@ -380,7 +378,7 @@ input.mat-input-element {
   height: 1.125em; }
 
 .mat-slide-toggle-content {
-  font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif; }
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-slider-thumb-label-text {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -424,8 +422,8 @@ input.mat-input-element {
 
 .mat-tooltip-handset {
   font-size: 14px;
-  padding-top: 9px;
-  padding-bottom: 9px; }
+  padding-top: 8px;
+  padding-bottom: 8px; }
 
 .mat-list-item {
   font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -512,7 +510,8 @@ input.mat-input-element {
   font-size: 14px; }
 
 .mat-ripple {
-  overflow: hidden; }
+  overflow: hidden;
+  position: relative; }
 
 .mat-ripple.mat-ripple-unbounded {
   overflow: visible; }
@@ -603,7 +602,13 @@ input.mat-input-element {
   width: 100%;
   overflow-y: scroll; }
 
-@keyframes cdk-text-field-autofill-start {}@keyframes cdk-text-field-autofill-end {}.cdk-text-field-autofill-monitored:-webkit-autofill {
+@keyframes cdk-text-field-autofill-start {
+  /*!*/ }
+
+@keyframes cdk-text-field-autofill-end {
+  /*!*/ }
+
+.cdk-text-field-autofill-monitored:-webkit-autofill {
   animation-name: cdk-text-field-autofill-start; }
 
 .cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
@@ -1378,29 +1383,29 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
   border-color: #ff5722; }
 
-.mat-radio-button.mat-primary .mat-radio-inner-circle {
+.mat-radio-button.mat-primary .mat-radio-inner-circle,
+.mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
   background-color: #ff5722; }
-
-.mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element {
-  background-color: rgba(255, 87, 34, 0.26); }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: #2196f3; }
 
-.mat-radio-button.mat-accent .mat-radio-inner-circle {
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
   background-color: #2196f3; }
-
-.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
-  background-color: rgba(33, 150, 243, 0.26); }
 
 .mat-radio-button.mat-warn.mat-radio-checked .mat-radio-outer-circle {
   border-color: #f44336; }
 
-.mat-radio-button.mat-warn .mat-radio-inner-circle {
+.mat-radio-button.mat-warn .mat-radio-inner-circle,
+.mat-radio-button.mat-warn .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-warn.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-warn:active .mat-radio-persistent-ripple {
   background-color: #f44336; }
-
-.mat-radio-button.mat-warn .mat-radio-ripple .mat-ripple-element {
-  background-color: rgba(244, 67, 54, 0.26); }
 
 .mat-radio-button.mat-radio-disabled.mat-radio-checked .mat-radio-outer-circle,
 .mat-radio-button.mat-radio-disabled .mat-radio-outer-circle {
@@ -1412,6 +1417,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .mat-radio-button.mat-radio-disabled .mat-radio-label-content {
   color: rgba(0, 0, 0, 0.38); }
+
+.mat-radio-button .mat-ripple-element {
+  background-color: black; }
 
 .mat-select-content, .mat-select-panel-done-animating {
   background: white; }
@@ -1456,6 +1464,19 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   .mat-drawer.mat-drawer-push {
     background-color: white; }
 
+.mat-drawer-side {
+  border-right: solid 1px rgba(0, 0, 0, 0.12); }
+  .mat-drawer-side.mat-drawer-end {
+    border-left: solid 1px rgba(0, 0, 0, 0.12);
+    border-right: none; }
+
+[dir='rtl'] .mat-drawer-side {
+  border-left: solid 1px rgba(0, 0, 0, 0.12);
+  border-right: none; }
+  [dir='rtl'] .mat-drawer-side.mat-drawer-end {
+    border-left: none;
+    border-right: solid 1px rgba(0, 0, 0, 0.12); }
+
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgba(0, 0, 0, 0.6); }
 
@@ -1463,37 +1484,31 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   background-color: #2196f3; }
 
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  background-color: rgba(33, 150, 243, 0.5); }
+  background-color: rgba(33, 150, 243, 0.54); }
 
-.mat-slide-toggle:not(.mat-checked) .mat-ripple-element {
-  background-color: rgba(0, 0, 0, 0.06); }
-
-.mat-slide-toggle .mat-ripple-element {
-  background-color: rgba(33, 150, 243, 0.12); }
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-ripple-element {
+  background-color: #2196f3; }
 
 .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   background-color: #ff5722; }
 
 .mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  background-color: rgba(255, 87, 34, 0.5); }
+  background-color: rgba(255, 87, 34, 0.54); }
 
-.mat-slide-toggle.mat-primary:not(.mat-checked) .mat-ripple-element {
-  background-color: rgba(0, 0, 0, 0.06); }
-
-.mat-slide-toggle.mat-primary .mat-ripple-element {
-  background-color: rgba(255, 87, 34, 0.12); }
+.mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-ripple-element {
+  background-color: #ff5722; }
 
 .mat-slide-toggle.mat-warn.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   background-color: #f44336; }
 
 .mat-slide-toggle.mat-warn.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  background-color: rgba(244, 67, 54, 0.5); }
+  background-color: rgba(244, 67, 54, 0.54); }
 
-.mat-slide-toggle.mat-warn:not(.mat-checked) .mat-ripple-element {
-  background-color: rgba(0, 0, 0, 0.06); }
+.mat-slide-toggle.mat-warn.mat-checked:not(.mat-disabled) .mat-ripple-element {
+  background-color: #f44336; }
 
-.mat-slide-toggle.mat-warn .mat-ripple-element {
-  background-color: rgba(244, 67, 54, 0.12); }
+.mat-slide-toggle:not(.mat-checked) .mat-ripple-element {
+  background-color: black; }
 
 .mat-disabled .mat-slide-toggle-thumb {
   background-color: #bdbdbd; }
@@ -1635,9 +1650,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   border-bottom: none;
   border-top: none; }
 
-.mat-tab-group.mat-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-group.mat-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-nav-bar.mat-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
+.mat-tab-group.mat-primary .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-group.mat-primary .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-primary .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-primary .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-primary .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-primary .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-primary .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-primary .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled) {
   background-color: rgba(255, 204, 188, 0.3); }
 
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
@@ -1646,9 +1663,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-primary.mat-background-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary.mat-background-primary .mat-ink-bar {
   background-color: white; }
 
-.mat-tab-group.mat-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-group.mat-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-nav-bar.mat-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
+.mat-tab-group.mat-accent .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-group.mat-accent .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-accent .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-accent .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-accent .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-accent .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-accent .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-accent .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled) {
   background-color: rgba(187, 222, 251, 0.3); }
 
 .mat-tab-group.mat-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent .mat-ink-bar {
@@ -1657,9 +1676,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-accent.mat-background-accent .mat-ink-bar, .mat-tab-nav-bar.mat-accent.mat-background-accent .mat-ink-bar {
   background-color: white; }
 
-.mat-tab-group.mat-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-group.mat-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-nav-bar.mat-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
+.mat-tab-group.mat-warn .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-group.mat-warn .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-warn .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-warn .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-warn .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-warn .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-warn .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-warn .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled) {
   background-color: rgba(255, 205, 210, 0.3); }
 
 .mat-tab-group.mat-warn .mat-ink-bar, .mat-tab-nav-bar.mat-warn .mat-ink-bar {
@@ -1668,9 +1689,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-warn.mat-background-warn .mat-ink-bar, .mat-tab-nav-bar.mat-warn.mat-background-warn .mat-ink-bar {
   background-color: white; }
 
-.mat-tab-group.mat-background-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-group.mat-background-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-primary .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-nav-bar.mat-background-primary .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
+.mat-tab-group.mat-background-primary .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-group.mat-background-primary .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-background-primary .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-background-primary .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-primary .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-primary .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-primary .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-primary .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled) {
   background-color: rgba(255, 204, 188, 0.3); }
 
 .mat-tab-group.mat-background-primary .mat-tab-header, .mat-tab-group.mat-background-primary .mat-tab-links, .mat-tab-nav-bar.mat-background-primary .mat-tab-header, .mat-tab-nav-bar.mat-background-primary .mat-tab-links {
@@ -1690,9 +1713,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-background-primary .mat-ripple-element, .mat-tab-nav-bar.mat-background-primary .mat-ripple-element {
   background-color: rgba(255, 255, 255, 0.12); }
 
-.mat-tab-group.mat-background-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-group.mat-background-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-accent .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-nav-bar.mat-background-accent .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
+.mat-tab-group.mat-background-accent .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-group.mat-background-accent .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-background-accent .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-background-accent .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-accent .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-accent .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-accent .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-accent .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled) {
   background-color: rgba(187, 222, 251, 0.3); }
 
 .mat-tab-group.mat-background-accent .mat-tab-header, .mat-tab-group.mat-background-accent .mat-tab-links, .mat-tab-nav-bar.mat-background-accent .mat-tab-header, .mat-tab-nav-bar.mat-background-accent .mat-tab-links {
@@ -1712,9 +1737,11 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-tab-group.mat-background-accent .mat-ripple-element, .mat-tab-nav-bar.mat-background-accent .mat-ripple-element {
   background-color: rgba(255, 255, 255, 0.12); }
 
-.mat-tab-group.mat-background-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-group.mat-background-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-warn .mat-tab-label.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled),
-.mat-tab-nav-bar.mat-background-warn .mat-tab-link.cdk-focused:not(.cdk-mouse-focused):not(.mat-tab-disabled) {
+.mat-tab-group.mat-background-warn .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-group.mat-background-warn .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-background-warn .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-group.mat-background-warn .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-warn .mat-tab-label.cdk-keyboard-focused:not(.mat-tab-disabled), .mat-tab-nav-bar.mat-background-warn .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-warn .mat-tab-link.cdk-keyboard-focused:not(.mat-tab-disabled),
+.mat-tab-nav-bar.mat-background-warn .mat-tab-link.cdk-program-focused:not(.mat-tab-disabled) {
   background-color: rgba(255, 205, 210, 0.3); }
 
 .mat-tab-group.mat-background-warn .mat-tab-header, .mat-tab-group.mat-background-warn .mat-tab-links, .mat-tab-nav-bar.mat-background-warn .mat-tab-header, .mat-tab-nav-bar.mat-background-warn .mat-tab-links {
@@ -1769,8 +1796,8 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   color: rgba(0, 0, 0, 0.87); }
 
 .mat-snack-bar-container {
-  background: #323232;
-  color: white; }
+  color: rgba(255, 255, 255, 0.7);
+  background: #323232; }
 
 .mat-simple-snackbar-action {
   color: #2196f3; }
