@@ -12,9 +12,10 @@ class AppModule extends AbstractModule {
 			imports: [
 				CommonModule,
 				GlobalModule,
-				ng.common.http.HttpClientModule,
 				ng.platformBrowser.BrowserModule,
 				ng.platformBrowser.animations.BrowserAnimationsModule,
+				// import HttpClientModule after BrowserModule
+				ng.common.http.HttpClientModule,
 				ng.router.RouterModule.forRoot([
 					{ path: "", redirectTo: "home", pathMatch: "full" },
 					{ path: "home", loadChildren: this.getLazyModule("HomeModule") },
@@ -24,8 +25,7 @@ class AppModule extends AbstractModule {
 					{ path: "mygames", loadChildren: this.getLazyModule("MyGamesModule") },
 					{ path: "config", loadChildren: this.getLazyModule("ConfigModule") },
 					{ path: "history", loadChildren: this.getLazyModule("HistoryModule") },
-					{ path: "favorites", loadChildren: this.getLazyModule("FavoritesModule") },
-					{ path: "bot", loadChildren: this.getLazyModule("BotModule") }
+					{ path: "favorites", loadChildren: this.getLazyModule("FavoritesModule") }
 				], { useHash: true })
 			],
 			declarations: [

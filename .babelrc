@@ -7,9 +7,13 @@
 			}
 		],
 		[
-			"minify"
+			"minify",
+			{
+				"builtIns": false
+			}
 		]
 	],
+	"comments": false,
 	"plugins": [
 		"@babel/plugin-syntax-dynamic-import"
 	]

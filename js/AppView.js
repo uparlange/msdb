@@ -6,7 +6,7 @@ import AppModel from "./AppModel.js";
 class AppView extends AbstractView {
 	static get annotations() {
 		return this.getAnnotations({
-			selector: "body",
+			selector: "app",
 			host: {
 				"mat-version": ng.material.VERSION.full
 			}
