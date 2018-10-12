@@ -19,6 +19,7 @@
         "PhotoSwipe": true,
         "PhotoSwipeUI_Default": true,
         "onmessage": true,
-        "rxjs": true
+        "rxjs": true,
+        "Dexie": true
     }
 }

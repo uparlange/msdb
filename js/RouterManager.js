@@ -35,7 +35,7 @@ class RouterManager extends AbstractManager {
 	}
 	saveCurrentViewScrollPosition() {
 		const scrollPosition = this._windowRef.getScrollPosition();
-		this._cacheManager.setItem("version", `scrollTop_${this._getCurrentPath()}`, scrollPosition.y);
+		this._cacheManager.setItem(`scrollTop_${this._getCurrentPath()}`, scrollPosition.y, "version");
 	}
 	navigate(commands, extras) {
 		this._ngZone.run(() => {
@@ -67,8 +67,9 @@ class RouterManager extends AbstractManager {
 						this._mutationObserver.disconnect();
 						this._mutationObserver = null;
 					}
-					const scrollTop = this._cacheManager.getItem("version", `scrollTop_${this._getCurrentPath()}`, 0);
-					this._windowRef.scrollTo(0, scrollTop);
+					this._cacheManager.getItem(`scrollTop_${this._getCurrentPath()}`, 0).subscribe((value) => {
+						this._windowRef.scrollTo(0, value);
+					});
 				}, 50);
 			});
 			const config = {
@@ -81,11 +82,12 @@ class RouterManager extends AbstractManager {
 		}
 	}
 	_saveLastView(url) {
-		this._cacheManager.setItem("version", "lastView", url);
+		this._cacheManager.setItem("lastView", url, "version");
 	}
 	_restoreLastView() {
-		const lastView = this._cacheManager.getItem("version", "lastView", "/home");
-		this._router.navigateByUrl(lastView);
+		this._cacheManager.getItem("lastView", "/home").subscribe((value) => {
+			this._router.navigateByUrl(value);
+		});
 	}
 	_getCurrentPath() {
 		return this._router.location.path(true);

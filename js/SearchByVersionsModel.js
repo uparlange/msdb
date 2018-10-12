@@ -11,7 +11,9 @@ class SearchByVersionsModel extends AbstractModel {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onInit() {
-		this._setFilterValue(this.getCache().getItem("version", "searchByVersionsFilterValue", ""));
+		this.getCache().getItem("searchByVersionsFilterValue", "").subscribe((value) => {
+			this._setFilterValue(value);
+		});
 	}
 	onRefresh(callback) {
 		this.getServices().getVersions().subscribe((data) => {
@@ -20,7 +22,7 @@ class SearchByVersionsModel extends AbstractModel {
 		});
 	}
 	onDestroy() {
-		this.getCache().setItem("version", "searchByVersionsFilterValue", this.data.filterValue);
+		this.getCache().setItem("searchByVersionsFilterValue", this.data.filterValue, "version");
 		this.data.list.paginator = null;
 	}
 	trackByLabel(index, item) {

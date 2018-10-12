@@ -11,7 +11,9 @@ class SearchByManufacturersModel extends AbstractModel {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onInit() {
-		this._setFilterValue(this.getCache().getItem("version", "searchByManufacturerFilterValue", ""));
+		this.getCache().getItem("searchByManufacturerFilterValue", "").subscribe((value) => {
+			this._setFilterValue(value);
+		});
 	}
 	onRefresh(callback) {
 		this.getServices().getManufacturers().subscribe((data) => {
@@ -20,7 +22,7 @@ class SearchByManufacturersModel extends AbstractModel {
 		});
 	}
 	onDestroy() {
-		this.getCache().setItem("version", "searchByManufacturerFilterValue", this.data.filterValue);
+		this.getCache().setItem("searchByManufacturerFilterValue", this.data.filterValue, "version");
 		this.data.list.paginator = null;
 	}
 	trackByLabel(index, item) {

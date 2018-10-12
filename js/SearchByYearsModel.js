@@ -11,7 +11,9 @@ class SearchByYearsModel extends AbstractModel {
 		super(AbstractClassHelper, MsdbService);
 	}
 	onInit() {
-		this._setFilterValue(this.getCache().getItem("version", "searchByYearsFilterValue", ""));
+		this.getCache().getItem("searchByYearsFilterValue", "").subscribe((value) => {
+			this._setFilterValue(value);
+		});
 	}
 	onRefresh(callback) {
 		this.getServices().getYears().subscribe((data) => {
@@ -20,7 +22,7 @@ class SearchByYearsModel extends AbstractModel {
 		});
 	}
 	onDestroy() {
-		this.getCache().setItem("version", "searchByYearsFilterValue", this.data.filterValue);
+		this.getCache().setItem("searchByYearsFilterValue", this.data.filterValue, "version");
 	}
 	trackByLabel(index, item) {
 		return item ? item.label : undefined;

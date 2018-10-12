@@ -13,7 +13,9 @@ class FavoritesManager extends AbstractManager {
 	}
 	init() {
 		super.init();
-		this._favorites = this._cacheManager.getItem("favorites", "list", []);
+		this._cacheManager.getItem("favorites", []).subscribe((value) => {
+			this._favorites = value;
+		});
 	}
 	add(name) {
 		if (!this.has(name)) {
@@ -47,7 +49,7 @@ class FavoritesManager extends AbstractManager {
 		return eventEmitter;
 	}
 	_save() {
-		this._cacheManager.setItem("favorites", "list", this._favorites);
+		this._cacheManager.setItem("favorites", this._favorites, "favorites");
 	}
 }
 

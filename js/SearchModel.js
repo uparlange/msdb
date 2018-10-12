@@ -18,7 +18,7 @@ class SearchModel extends AbstractModel {
 	}
 	tabChanged(event) {
 		const tabInfo = this.getTabsInfo().byIndex(event.index);
-		this.getCache().setItem("version", "searchLastType", tabInfo.type);
+		this.getCache().setItem("searchLastType", tabInfo.type, "version");
 	}
 	getSearchTabLabel(index) {
 		const tabInfo = this.getTabsInfo().byIndex(index);

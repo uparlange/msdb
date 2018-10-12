@@ -15,7 +15,9 @@ class FavoritesModel extends AbstractModel {
 		});
 	}
 	onInit() {
-		this._setFilterValue(this.getCache().getItem("version", "favoritesFilterValue", ""));
+		this.getCache().getItem("favoritesFilterValue", "").subscribe((value) => {
+			this._setFilterValue(value);
+		});
 		if (this._needRefresh) {
 			this._refreshList();
 		}
@@ -24,7 +26,7 @@ class FavoritesModel extends AbstractModel {
 		this._refreshList(callback);
 	}
 	onDestroy() {
-		this.getCache().setItem("version", "favoritesFilterValue", this.data.filterValue);
+		this.getCache().setItem("favoritesFilterValue", this.data.filterValue, "version");
 		this.data.list.paginator = null;
 	}
 	trackByName(index, item) {

@@ -22,13 +22,14 @@
 	<mat-card-content>
 		<div>
 			<mat-form-field class="full-width">
-				<input matInput [(ngModel)]="model.data.newValue.mameDirectory" [placeholder]="'L10N_MAME_DIRECTORY'|translate" (keyup)="model.checkFormChanges()"
-				 (change)="model.checkFormChanges()">
+				<input matInput [(ngModel)]="model.data.newValue.mameDirectory" [autocomplete]="mame-directory" [placeholder]="'L10N_MAME_DIRECTORY'|translate"
+				 (keyup)="model.checkFormChanges()" (change)="model.checkFormChanges()">
 			</mat-form-field>
 		</div>
 		<div>
 			<mat-form-field class="full-width">
-				<input matInput [(ngModel)]="model.data.newValue.romsDirectory" disabled [placeholder]="'L10N_ROMS_DIRECTORY'|translate">
+				<input matInput [(ngModel)]="model.data.newValue.romsDirectory" disabled [autocomplete]="roms-directory"
+				 [placeholder]="'L10N_ROMS_DIRECTORY'|translate">
 			</mat-form-field>
 		</div>
 		<div>

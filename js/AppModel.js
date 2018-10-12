@@ -11,7 +11,9 @@ class AppModel extends AbstractModel {
 		this._cacheChangeSubscriber = null;
 	}
 	onInit() {
-		this.data.searchLastType = this.getCache().getItem("version", "searchLastType", "description");
+		this.getCache().getItem("searchLastType", "description").subscribe((value) => {
+			this.data.searchLastType = value;
+		});
 		this._cacheChangeSubscriber = this.getCache().on("change").subscribe((event) => {
 			if (event.key === "searchLastType") {
 				this.data.searchLastType = event.newValue;

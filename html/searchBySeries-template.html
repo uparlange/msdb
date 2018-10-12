@@ -1,7 +1,9 @@
 <mat-form-field>
-    <input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)" [placeholder]="'L10N_FILTER'|translate">
+    <input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)"
+        [autocomplete]="game-series" [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
-<button *ngIf="model.data.filterValue.length > 0" (click)="model.clearFilter();filterValueInput.focus();" type="button" mat-mini-fab>
+<button *ngIf="model.data.filterValue.length > 0" (click)="model.clearFilter();filterValueInput.focus();" type="button"
+    mat-mini-fab>
     <mdiIcon name="close" [matTooltip]="'L10N_DELETE_FILTER'|translate"></mdiIcon>
 </button>
 <mat-paginator [hidePageSize]="true" [pageSize]="400" [pageIndex]="model.data.pageIndex" (page)="model.pageChanged($event)"

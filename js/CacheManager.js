@@ -3,58 +3,42 @@ import AbstractManager from "./AbstractManager.js";
 class CacheManager extends AbstractManager {
 	constructor() {
 		super();
+		this._db = new Dexie("MSDB");
+		this._db.version(1).stores({
+			properties: "key, namespace"
+		});
 	}
-	setItem(namespace, key, newValue) {
-		const oldValue = this.getItem(namespace, key);
-		if (oldValue != newValue) {
-			const calculatedKey = this._getCalculatedKey(namespace, key);
-			localStorage.setItem(calculatedKey, JSON.stringify(newValue));
-			this.emit("change", {
-				namespace: namespace,
+	setItem(key, newValue, namespace) {
+		const eventEmitter = new ng.core.EventEmitter();
+		this.getItem(key).subscribe((oldValue) => {
+			this._db.properties.put({ key: key, value: newValue, namespace: (namespace || "default") });
+			const change = {
 				key: key,
 				oldValue: oldValue,
 				newValue: newValue
-			});
-		}
+			};
+			this.emit("change", change);
+			eventEmitter.emit(change);
+		});
+		return eventEmitter;
 	}
-	getItem(namespace, key, defaultValue) {
-		const calculatedKey = this._getCalculatedKey(namespace, key);
-		let result = null;
-		if (defaultValue === undefined) {
-			defaultValue = null;
-		}
-		const value = localStorage.getItem(calculatedKey);
-		try {
-			result = JSON.parse(value)
-		}
-		catch (e) {
-			/* dont't act */
-		}
-		return result || defaultValue;
-	}
-	setNsValue(namespace, newValue) {
-		const oldValue = this.getItem(namespace, "value");
-		if (oldValue != newValue) {
-			this.clearNs(namespace);
-			this.setItem(namespace, "value", newValue);
-		}
-	}
-	clearNs(namespace) {
-		const prefix = (namespace);
-		for (var key in window.localStorage) {
-			if (key.indexOf(prefix)) {
-				localStorage.removeItem(key);
+	getItem(key, defaultValue) {
+		const eventEmitter = new ng.core.EventEmitter();
+		this._db.properties.get({ key: key }).then((property) => {
+			let value = null;
+			if (property != undefined) {
+				value = property.value;
+			} else if (defaultValue != undefined) {
+				value = defaultValue;
 			}
-		}
+			eventEmitter.emit(value);
+		});
+		return eventEmitter;
 	}
-	clearAll() {
-		localStorage.clear();
-	}
-	_getNsPrefix(namespace) {
-		return `${namespace}_`;
-	}
-	_getCalculatedKey(namespace, key) {
-		return `${this._getNsPrefix(namespace)}${key}`;
+	deleteNamespace(namespace) {
+		this._db.properties.where("namespace").equals(namespace).delete().then((deleteCount) => {
+			this.getLogger().debug("Deleted " + deleteCount + " objects from cache");
+		});
 	}
 }
 

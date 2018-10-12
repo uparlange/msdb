@@ -81,33 +81,31 @@ class MsdbService extends AbstractService {
 	_callService(config) {
 		const eventEmitter = new ng.core.EventEmitter();
 		const cacheKey = this._getCacheKey(config);
-		let value = null;
-		if (config.useCache === true) {
-			value = this.getCache().getItem("version", cacheKey);
-		}
-		if (value !== null) {
-			setTimeout(() => {
-				eventEmitter.emit(value);
-			}, 0);
-		}
-		else {
-			this._init().subscribe(() => {
-				if (this._initialized()) {
-					let params = config.params || new ng.common.http.HttpParams();
-					params = params.set("token", this._token);
-					this.httpGet({ url: config.url, params: params }).subscribe((result) => {
-						value = this._getData(result);
-						if (config.useCache === true) {
-							this.getCache().setItem("version", cacheKey, value);
-						}
-						eventEmitter.emit(value);
-					});
-				}
-				else {
-					eventEmitter.emit(null);
-				}
-			});
-		}
+		this.getCache().getItem(cacheKey).subscribe((value) => {
+			if (config.useCache === true && value !== null) {
+				setTimeout(() => {
+					eventEmitter.emit(value);
+				}, 0);
+			}
+			else {
+				this._init().subscribe(() => {
+					if (this._initialized()) {
+						let params = config.params || new ng.common.http.HttpParams();
+						params = params.set("token", this._token);
+						this.httpGet({ url: config.url, params: params }).subscribe((result) => {
+							value = this._getData(result);
+							if (config.useCache === true) {
+								this.getCache().setItem(cacheKey, value, "version");
+							}
+							eventEmitter.emit(value);
+						});
+					}
+					else {
+						eventEmitter.emit(null);
+					}
+				});
+			}
+		});
 		return eventEmitter;
 	}
 	_getCacheKey(config) {
@@ -137,7 +135,11 @@ class MsdbService extends AbstractService {
 				if (data !== null) {
 					this._token = data.token;
 					this._mameInfos = data.mameInfos;
-					this.getCache().setNsValue("version", data.mameInfos.build);
+					this.getCache().setItem("version", data.mameInfos.build).subscribe((event) => {
+						if (event.newValue !== event.oldValue) {
+							this.getCache().deleteNamespace("version");
+						}
+					});
 				}
 				eventEmitter.emit();
 			});
