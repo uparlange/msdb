@@ -18,6 +18,7 @@ const mergeStream = require('merge-stream');
 const imagemin = require('gulp-imagemin');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
+const swPrecache = require('sw-precache');
 
 // -------------------------------------------------
 // VARIABLES
@@ -75,6 +76,25 @@ gulp.task('generate-manifest', (callback) => {
     content += 'FALLBACK:\n';
     fs.writeFileSync(path, content);
     callback();
+});
+
+gulp.task('generate-swa', (callback) => {
+    const baseDir = './dist';
+    const fileName = 'swa.js';
+    const dynamicUrlToDependencies = {
+        '/': 'index.html'
+    };
+    swPrecache.write(baseDir + '/' + fileName, {
+        staticFileGlobs: [
+            baseDir + '/**/*'
+        ],
+        dynamicUrlToDependencies: dynamicUrlToDependencies,
+        ignoreUrlParametersMatching: [/./],
+        stripPrefix: baseDir,
+    }, function () {
+        gulp.src(baseDir + '/' + fileName).pipe(uglify()).pipe(gulp.dest(baseDir + '/'));
+        callback();
+    });
 });
 
 gulp.task('generate-release', () => {
@@ -328,7 +348,7 @@ gulp.task('prepare-resources', gulp.parallel('prepare-copy-resources', 'prepare-
 
 gulp.task('manage-web-resources', gulp.parallel('copy-web-resources', 'minify-css-resources', 'minify-html-resources', 'minify-js-resources', 'optimize-image-resources'));
 
-gulp.task('build-web', gulp.series('clean-dist', 'prepare-resources', 'manage-web-resources', 'clean-tmp', 'generate-manifest'));
+gulp.task('build-web', gulp.series('clean-dist', 'prepare-resources', 'manage-web-resources', 'clean-tmp', 'generate-swa'));
 
 gulp.task('build-desktop', gulp.series('build-web', 'copy-desktop-resources', 'generate-release'));
 

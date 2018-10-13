@@ -15,7 +15,7 @@
 <table mat-table [dataSource]="model.data.list" [trackBy]="model.trackByName">
 	<ng-container matColumnDef="icon">
 		<td mat-cell *matCellDef="let element">
-			<img mat-list-avatar [lazySrc]="model.getGameIconUrl(element)">
+			<img [alt]="element.name+'-icon'" mat-list-avatar [lazySrc]="model.getGameIconUrl(element)">
 		</td>
 	</ng-container>
 	<ng-container matColumnDef="description">

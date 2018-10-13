@@ -4,7 +4,6 @@ import SocketManager from "./SocketManager.js";
 import ConnectionManager from "./ConnectionManager.js";
 import LazyManager from "./LazyManager.js";
 import CacheManager from "./CacheManager.js";
-import UpdateManager from "./UpdateManager.js";
 import RouterManager from "./RouterManager.js";
 import WindowRef from "./WindowRef.js";
 import PopupManager from "./PopupManager.js";
@@ -16,12 +15,12 @@ import AppUtils from "./AppUtils.js";
 class Shell extends AbstractClass {
     static get parameters() {
         return AppUtils.getParameters(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-            CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager,
-            HistoryManager, FavoritesManager);
+            CacheManager, RouterManager, WindowRef, PopupManager, HistoryManager, 
+            FavoritesManager);
     }
     constructor(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-        CacheManager, UpdateManager, RouterManager, WindowRef, PopupManager,
-        HistoryManager, FavoritesManager) {
+        CacheManager, RouterManager, WindowRef, PopupManager, HistoryManager, 
+        FavoritesManager) {
         super();
         this._eventManager = EventManager;
         this._translateManager = TranslateManager;
@@ -29,7 +28,6 @@ class Shell extends AbstractClass {
         this._connectionManager = ConnectionManager;
         this._lazyManager = LazyManager;
         this._cacheManager = CacheManager;
-        this._updateManager = UpdateManager;
         this._routerManager = RouterManager;
         this._popupManager = PopupManager;
         this._windowRef = WindowRef;
@@ -48,7 +46,6 @@ class Shell extends AbstractClass {
         this._connectionManager.init();
         this._lazyManager.init();
         this._cacheManager.init();
-        this._updateManager.init();
         this._routerManager.init();
         this._popupManager.init();
         this._historyManager.init();
@@ -71,9 +68,6 @@ class Shell extends AbstractClass {
     }
     getCacheManager() {
         return this._cacheManager;
-    }
-    getUpdateManager() {
-        return this._updateManager;
     }
     getRouterManager() {
         return this._routerManager;

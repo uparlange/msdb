@@ -5,7 +5,6 @@ import SocketManager from "./SocketManager.js";
 import ConnectionManager from "./ConnectionManager.js";
 import LazyManager from "./LazyManager.js";
 import CacheManager from "./CacheManager.js";
-import UpdateManager from "./UpdateManager.js";
 import RouterManager from "./RouterManager.js";
 import WindowRef from "./WindowRef.js";
 import Shell from "./Shell.js";
@@ -26,7 +25,6 @@ class GlobalModule extends AbstractModule {
                 ConnectionManager,
                 LazyManager,
                 CacheManager,
-                UpdateManager,
                 RouterManager,
                 WindowRef,
                 Shell,
