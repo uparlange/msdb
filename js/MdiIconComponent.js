@@ -6,9 +6,10 @@ class MdiIconComponent extends AbstractComponent {
     static get annotations() {
         return this.getAnnotations({
             selector: "mdiIcon",
-            inputs: ["name", "size"],
+            inputs: ["alt", "name", "size"],
             host: {
-                "role": "img"
+                "role": "img",
+                "[attr.alt]": "alt"
             }
         });
     }
@@ -18,16 +19,24 @@ class MdiIconComponent extends AbstractComponent {
     constructor(AbstractClassHelper) {
         super(AbstractClassHelper);
         this.name = "";
+        this.alt = "";
         this.size = 24;
         this.iconAvailable = false;
     }
     onInit() {
-        this._refreshIconAvailable();
+        this._refresh();
     }
     onChanges(event) {
         if (event.hasOwnProperty("name")) {
-            this._refreshIconAvailable();
+            this._refresh();
         }
+    }
+    _refresh() {
+        this._refreshAltProperty();
+        this._refreshIconAvailable();
+    }
+    _refreshAltProperty() {
+        this.alt = this.name + "-icon";
     }
     _refreshIconAvailable() {
         this.iconAvailable = this._iconAvailable();

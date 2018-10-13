@@ -25,9 +25,10 @@ video
 	max-width: 100%;
 }
 
-table {
+table 
+{
 	width: 100%;
-  }
+}
 
 mat-card
 {
@@ -66,6 +67,13 @@ mat-tree-node
 {
 	float:right;
 	margin-left: 10px !important;
+}
+
+.noscript
+{
+	text-align:center;
+	color:white;
+	margin-top:20px;
 }
 
 .mat-toolbar-row
