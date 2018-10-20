@@ -39,7 +39,7 @@ export default {
 		return `${this._getBaseServerUrl()}:${this.getSocketPort()}`;
 	},
 	productionMode: function () {
-		return window.location.search.indexOf("debug") === -1;
+		return window.location.href.indexOf(this._getBaseServerUrl()) === -1;
 	},
 	getLogLevel: function () {
 		return this.productionMode() ? "error" : "all";

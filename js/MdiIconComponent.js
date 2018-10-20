@@ -9,7 +9,7 @@ class MdiIconComponent extends AbstractComponent {
             inputs: ["alt", "name", "size"],
             host: {
                 "role": "img",
-                "[attr.alt]": "alt"
+                "[attr.aria-label]": "alt"
             }
         });
     }
