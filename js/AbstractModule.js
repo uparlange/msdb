@@ -1,4 +1,5 @@
 import AbstractClass from "./AbstractClass.js";
+import AppUtils from "./AppUtils.js";
 
 class AbstractModule extends AbstractClass {
 	static getAnnotations(params) {
@@ -8,12 +9,7 @@ class AbstractModule extends AbstractClass {
 	}
 	static getLazyModule(moduleName) {
 		return function () {
-			const eventEmitter = new ng.core.EventEmitter();
-			const modulePath = `/js/${moduleName}.js`;
-			import(modulePath).then((module) => {
-				eventEmitter.emit(module.default);
-			});
-			return eventEmitter;
+			return AppUtils.import(`/js/${moduleName}.js`);
 		};
 	}
 	constructor() {

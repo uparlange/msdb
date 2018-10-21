@@ -28,8 +28,8 @@ class AppView extends AbstractView {
 	}
 	_initNw() {
 		this._initMenuBar();
-		import("/js/Nw.js").then((module) => {
-			module.default.init();
+		AppUtils.import("/js/Nw.js").subscribe((module) => {
+			module.init();
 		});
 	}
 	_showView(view) {

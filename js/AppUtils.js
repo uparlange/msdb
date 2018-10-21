@@ -47,6 +47,50 @@ export default {
 	getHttpRequestTimeOut: function () {
 		return 10000;
 	},
+	import: function (modulePath) {
+		const eventEmitter = new ng.core.EventEmitter();
+		/*
+		if (this._supportDynamicImport()) {
+			import(modulePath).then((module) => {
+				eventEmitter.emit(module.default);
+			});
+		} else {
+		*/
+		// https://github.com/uupaa/dynamic-import-polyfill
+		const vector = "$importModule$" + Math.random().toString(32).slice(2);
+		const script = document.createElement("script");
+		const destructor = () => {
+			delete window[vector];
+			script.onerror = null;
+			script.onload = null;
+			script.remove();
+			URL.revokeObjectURL(script.src);
+			script.src = "";
+		};
+		script.defer = "defer";
+		script.type = "module";
+		script.onload = () => {
+			eventEmitter.emit(window[vector].default);
+			destructor();
+		};
+		const a = document.createElement("a");
+		a.setAttribute("href", modulePath);
+		const absURL = a.cloneNode(false).href;
+		const loader = `import * as m from "${absURL}"; window.${vector} = m;`;
+		const blob = new Blob([loader], { type: "text/javascript" });
+		script.src = URL.createObjectURL(blob);
+		document.head.appendChild(script);
+		//}
+		return eventEmitter;
+	},
+	_supportDynamicImport() {
+		try {
+			new Function('import("")');
+			return true;
+		} catch (err) {
+			return false;
+		}
+	},
 	_getBaseServerUrl: function () {
 		return "http://localhost";
 	},

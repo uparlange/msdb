@@ -46,9 +46,9 @@ class MdiIconComponent extends AbstractComponent {
         for (let i = 0; i < styleSheetsCount; i++) {
             const styleSheet = document.styleSheets[i];
             if (styleSheet.href && styleSheet.href.indexOf("@mdi") != -1) {
-                const rulesCount = styleSheet.rules.length;
+                const rulesCount = styleSheet.cssRules.length;
                 for (let j = 0; j < rulesCount; j++) {
-                    const rule = styleSheet.rules[j];
+                    const rule = styleSheet.cssRules[j];
                     if (rule.selectorText == ".mdi-" + this.name + "::before") {
                         return true;
                     }
