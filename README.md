@@ -5,8 +5,8 @@ To check if your favorite game is available, go for a search on MSDB!
 
 # Technical #
 This application has been developped using
-* Angular 2 (https://github.com/angular/angular) 
-* Angular Material 2 (https://github.com/angular/material2)
+* Angular v7 (https://github.com/angular/angular) 
+* Angular Material v7 (https://github.com/angular/material2)
 * And others libraries, see package.json for dependencies (https://github.com/uparlange/msdb/blob/master/package.json)
 
 # Execute application #
@@ -16,7 +16,7 @@ This application has been developped using
 * Unzip content in "C:\Program Files\nwjs"
 
 ## Download application ##
-* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-4.6.2.nw
+* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-4.6.3.nw
 
 ## Launch application ##
 * Double click on the application (.nw file)
@@ -34,7 +34,7 @@ This application has been developped using
 ## Test browser version ##
 * Execute 'npm run web' command to start web server
 * Launch your favorite brower
-* Go to http://localhost/?debug=true
+* Go to http://localhost
 
 ## Test desktop version ##
 * Execute 'npm run desktop' command to launch desktop version
