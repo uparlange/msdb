@@ -1741,6 +1741,8 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 .mat-stepper-vertical-line::before {
   border-left-color: rgba(0, 0, 0, 0.12); }
 
+.mat-horizontal-stepper-header::before,
+.mat-horizontal-stepper-header::after,
 .mat-stepper-horizontal-line {
   border-top-color: rgba(0, 0, 0, 0.12); }
 
