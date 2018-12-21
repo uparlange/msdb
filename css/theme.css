@@ -1410,7 +1410,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   .mat-menu-item[disabled], .mat-menu-item[disabled]::after {
     color: rgba(0, 0, 0, 0.38); }
 
-.mat-menu-item .mat-icon:not([color]),
+.mat-menu-item .mat-icon-no-color,
 .mat-menu-item-submenu-trigger::after {
   color: rgba(0, 0, 0, 0.54); }
 
