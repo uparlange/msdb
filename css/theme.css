@@ -1391,7 +1391,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 
 .mat-list-option:hover, .mat-list-option:focus,
 .mat-nav-list .mat-list-item:hover,
-.mat-nav-list .mat-list-item:focus {
+.mat-nav-list .mat-list-item:focus,
+.mat-action-list .mat-list-item:hover,
+.mat-action-list .mat-list-item:focus {
   background: rgba(0, 0, 0, 0.04); }
 
 .mat-menu-panel {
