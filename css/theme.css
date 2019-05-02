@@ -7,7 +7,7 @@
   font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-badge-small .mat-badge-content {
-  font-size: 6px; }
+  font-size: 9px; }
 
 .mat-badge-large .mat-badge-content {
   font-size: 24px; }
@@ -49,18 +49,18 @@
 
 .mat-display-4, .mat-typography .mat-display-4 {
   font: 300 112px/112px Roboto, "Helvetica Neue", sans-serif;
-  margin: 0 0 56px;
-  letter-spacing: -0.05em; }
+  letter-spacing: -0.05em;
+  margin: 0 0 56px; }
 
 .mat-display-3, .mat-typography .mat-display-3 {
   font: 400 56px/56px Roboto, "Helvetica Neue", sans-serif;
-  margin: 0 0 64px;
-  letter-spacing: -0.02em; }
+  letter-spacing: -0.02em;
+  margin: 0 0 64px; }
 
 .mat-display-2, .mat-typography .mat-display-2 {
   font: 400 45px/48px Roboto, "Helvetica Neue", sans-serif;
-  margin: 0 0 64px;
-  letter-spacing: -0.005em; }
+  letter-spacing: -0.005em;
+  margin: 0 0 64px; }
 
 .mat-display-1, .mat-typography .mat-display-1 {
   font: 400 34px/40px Roboto, "Helvetica Neue", sans-serif;
@@ -596,6 +596,9 @@ textarea.cdk-textarea-autosize-measuring {
   .mat-pseudo-checkbox::after {
     color: #fafafa; }
 
+.mat-pseudo-checkbox-disabled {
+  color: #b0b0b0; }
+
 .mat-pseudo-checkbox-checked,
 .mat-pseudo-checkbox-indeterminate,
 .mat-accent .mat-pseudo-checkbox-checked,
@@ -743,6 +746,10 @@ textarea.cdk-textarea-autosize-measuring {
   white-space: nowrap;
   text-overflow: ellipsis;
   pointer-events: none; }
+
+.ng-animate-disabled .mat-badge-content,
+.mat-badge-content._mat-animation-noopable {
+  transition: none; }
 
 .mat-badge-content.mat-badge-active {
   transform: none; }
