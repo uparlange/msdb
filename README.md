@@ -18,7 +18,7 @@ This application has been developped using
 * Unzip content in "C:\Program Files\nwjs"
 
 ### 2. Download application
-* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-4.7.3.nw
+* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-4.7.4.nw
 
 ### 3. Launch application
 * Double click on the application (.nw file)
@@ -42,10 +42,10 @@ This application has been developped using
 
 > * Make sure to have gulp installed, execute 'npm install gulp-cli -g'
 > * In case of problem with jpegtran, execute : 'npm rebuild jpegtran-bin'
->* In case of problem with optipng, execute : 'npm rebuild optipng-bin'
+> * In case of problem with optipng, execute : 'npm rebuild optipng-bin'
 
 ### Build web version
-* Execute 'build-web'
+* Execute 'gulp build-web'
 
 ### Build desktop version
 * Execute 'gulp build-desktop'

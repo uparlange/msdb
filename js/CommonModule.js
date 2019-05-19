@@ -13,6 +13,7 @@ class CommonModule extends AbstractModule {
 			imports: [
 				ng.common.CommonModule,
 				ng.forms.FormsModule,
+				ng.common.http.HttpClientModule,
 				MaterialModule
 			],
 			declarations: [

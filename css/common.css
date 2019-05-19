@@ -17,7 +17,7 @@ a
 {
 	cursor: pointer;
 	text-decoration: none;	
-	color:rgb(68,138,255);
+	color:#0079C2;
 }
 
 video
@@ -28,34 +28,6 @@ video
 table 
 {
 	width: 100%;
-}
-
-mat-card
-{
-	margin:0px;
-	padding:10px !important;
-}
-
-mat-list
-{
-	padding:0px !important;
-	margin:0px !important;
-}
-
-mat-toolbar-row
-{
-	height:100% !important;
-}
-
-mat-card-title > button.mat-mini-fab
-{
-	float:right;
-	top: -6px;
-}
-
-mat-tree-node
-{
-    cursor:pointer;
 }
 
 [routerLink]
@@ -76,6 +48,18 @@ mat-tree-node
 	margin-top:20px;
 }
 
+.mat-card
+{
+	margin:0px;
+	padding:10px !important;
+}
+
+.mat-card-title > button.mat-mini-fab
+{
+	float:right;
+	top: -6px;
+}
+
 .mat-toolbar-row
 {
 	height:64px !important;
@@ -88,9 +72,21 @@ mat-tree-node
 	padding-right:12px !important;
 }
 
+.mat-list
+{
+	padding:0px !important;
+	margin:0px !important;
+}
+
 .mat-list-item-content
 {
 	width:100%;
+	font-size:14px;
+}
+
+.mat-tree-node
+{
+	cursor:pointer;
 }
 
 .default-spacer
@@ -161,9 +157,8 @@ mat-tree-node
 	padding:0px;
 	border:none;
 	cursor:pointer;
-	font-size: 16px;
-	color:rgb(68,138,255);
 	background: none;
+	color:#0079C2;
 }
 
 .b-lazy

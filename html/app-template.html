@@ -1,35 +1,42 @@
-<div class="header">
-	<mat-toolbar color="primary">
-		<div class="network-status">
-			<mdiIcon [name]="model.params.online ? 'wifi' : 'wifi-off'"></mdiIcon>
-		</div>
-		<a routerLink="/home">
-			<img alt="logo" [src]="'images/logo.png'">
-		</a>
-		<span class="fill-remaining-space"></span>
-		<button mat-icon-button [matMenuTriggerFor]="menu">
-			<mdiIcon name="menu" size="36"></mdiIcon>
-		</button>
-		<mat-menu #menu="matMenu">
-			<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
-				<mdiIcon name="magnify"></mdiIcon>
-				<span>{{"L10N_SEARCH"|translate}}</span>
+<header>
+	<div class="header">
+
+		<mat-toolbar color="primary">
+			<div class="network-status">
+				<mdiIcon [name]="model.params.online ? 'wifi' : 'wifi-off'"></mdiIcon>
+			</div>
+			<a routerLink="/home">
+				<img alt="logo" [src]="'images/logo.png'">
+			</a>
+			<span class="fill-remaining-space"></span>
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<mdiIcon name="menu" size="36"></mdiIcon>
 			</button>
-			<button mat-menu-item routerLink="/favorites">
-				<mdiIcon name="heart-outline"></mdiIcon>
-				<span>{{"L10N_FAVORITES"|translate}}</span>
-			</button>
-			<button mat-menu-item routerLink="/history">
-				<mdiIcon name="history"></mdiIcon>
-				<span>{{"L10N_HISTORY"|translate}}</span>
-			</button>
-		</mat-menu>
-	</mat-toolbar>
-	<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+			<mat-menu #menu="matMenu">
+				<nav>
+					<button mat-menu-item routerLink="/search/{{model.data.searchLastType}}">
+						<mdiIcon name="magnify"></mdiIcon>
+						<span>{{"L10N_SEARCH"|translate}}</span>
+					</button>
+					<button mat-menu-item routerLink="/favorites">
+						<mdiIcon name="heart-outline"></mdiIcon>
+						<span>{{"L10N_FAVORITES"|translate}}</span>
+					</button>
+					<button mat-menu-item routerLink="/history">
+						<mdiIcon name="history"></mdiIcon>
+						<span>{{"L10N_HISTORY"|translate}}</span>
+					</button>
+				</nav>
+			</mat-menu>
+		</mat-toolbar>
+		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	</div>
+</header>
 <div class="container">
 	<div class="container-header"></div>
 	<div class="container-content">
-		<router-outlet></router-outlet>
+		<main>
+			<router-outlet></router-outlet>
+		</main>
 	</div>
 </div>

@@ -10,12 +10,10 @@ class AppModule extends AbstractModule {
 	static get annotations() {
 		return this.getAnnotations({
 			imports: [
-				CommonModule,
-				GlobalModule,
 				ng.platformBrowser.BrowserModule,
 				ng.platformBrowser.animations.BrowserAnimationsModule,
-				// import HttpClientModule after BrowserModule
-				ng.common.http.HttpClientModule,
+				CommonModule,
+				GlobalModule,
 				ng.router.RouterModule.forRoot([
 					{ path: "", redirectTo: "home", pathMatch: "full" },
 					{ path: "home", loadChildren: this.getLazyModule("HomeModule") },

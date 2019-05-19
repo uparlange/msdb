@@ -9,15 +9,26 @@
 <div class="default-spacer"></div>
 <mat-card *ngIf="model.data.mame.build != null">
 	<mat-card-title>
-		{{'L10N_VERSION'|translate}} <a routerLink="/result" [queryParams]="{type:'version',value:model.data.mame.version}">{{model.data.mame.version}}</a>
-		({{model.data.mame.gameCount}} {{'L10N_GAMES'|translate}})
+		<a routerLink="/result"
+			[queryParams]="{type:'version',value:model.data.mame.version}">{{'L10N_VERSION'|translate}}
+			{{model.data.mame.version}}</a>
 	</mat-card-title>
 	<mat-card-content>
 		<ul>
-			<li>Parent : {{model.data.mame.parentCount}}</li>
-			<li>Clone : {{model.data.mame.cloneCount}}</li>
-			<li>Bios : {{model.data.mame.biosCount}}</li>
-			<li>Device : {{model.data.mame.deviceCount}}</li>
+			<li>Machines : {{model.data.mame.machineCount}}</li>
+			<ul>
+				<li>Parent : {{model.data.mame.parentCount}}</li>
+				<li>Clones : {{model.data.mame.cloneCount}}</li>
+
+			</ul>
+			<li>Bios : <a routerLink="/result"
+					[queryParams]="{type:'bios',value:'all'}">{{model.data.mame.biosCount}}</a></li>
+			<li>Devices : <a routerLink="/result"
+					[queryParams]="{type:'device',value:'all'}">{{model.data.mame.deviceCount}}</a></li>
+			<li>Mechanicals : <a routerLink="/result"
+					[queryParams]="{type:'mechanical',value:'all'}">{{model.data.mame.mechanicalCount}}</a></li>
+			<li>MESS : <a routerLink="/result"
+					[queryParams]="{type:'mess',value:'all'}">{{model.data.mame.messCount}}</a></li>
 		</ul>
 	</mat-card-content>
 </mat-card>
@@ -28,8 +39,10 @@
 	</mat-card-title>
 	<mat-card-content>
 		<ol>
-			<li><a routerLink="/search/{{model.data.searchLastType}}">{{'L10N_FIND_GAME'|translate}}</a></li>
-			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a></li>
+			<li><a routerLink="/search/{{model.data.searchLastType}}">{{'L10N_FIND_GAME'|translate}}</a>
+			</li>
+			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a>
+			</li>
 			<li><a target="_blank" href="http://www.planetemu.net/roms/mame-roms">{{'L10N_DOWNLOAD_GAME'|translate}}</a></li>
 			<li>{{'L10N_HAVE_FUN'|translate}}</li>
 		</ol>
@@ -42,8 +55,10 @@
 	</mat-card-title>
 	<mat-card-content>
 		<ul>
-			<li><a target="_blank" href="http://www.mame.net/">MAME Multiple Arcade Machine Emulator</a></li>
-			<li><a target="_blank" href="http://www.progettosnaps.net/">MAME progetto-SNAPS</a></li>
+			<li><a target="_blank" href="http://www.mame.net/">MAME Multiple Arcade Machine Emulator</a>
+			</li>
+			<li><a target="_blank" href="http://www.progettosnaps.net/">MAME progetto-SNAPS</a>
+			</li>
 			<li><a target="_blank" href="http://www.progettoemma.net/">Progetto EMMA</a></li>
 			<li><a target="_blank" href="http://www.mameworld.info/">MAMEWorld</a></li>
 			<li><a target="_blank" href="http://www.planetemu.net/">Planet Emulation</a></li>

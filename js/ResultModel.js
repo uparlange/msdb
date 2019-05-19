@@ -9,27 +9,12 @@ class ResultModel extends AbstractModel {
 	}
 	constructor(AbstractClassHelper, MsdbService) {
 		super(AbstractClassHelper, MsdbService);
-		this.SYSTEM_DEVICE = "System / Device";
-		this.SYSTEM_BIOS = "System / BIOS";
+		this.FILTER_MESS = "mess";
+		this.FILTER_CLONE = "clone";
+		this.FILTER_BIOS = "bios";
+		this.FILTER_DEVICE = "device";
 	}
 	onInit() {
-		switch (this.params.value) {
-			case this.SYSTEM_DEVICE:
-				this.data.showBios = false;
-				this.data.showDevice = true;
-				this.data.showClone = false;
-				break;
-			case this.SYSTEM_BIOS:
-				this.data.showBios = true;
-				this.data.showDevice = false;
-				this.data.showClone = false;
-				break;
-			default:
-				this.data.showBios = false;
-				this.data.showDevice = false;
-				this.data.showClone = true;
-				break;
-		}
 		this._getTitle().subscribe((title) => {
 			this.data.title = title;
 			this.getHistory().add({ label: title, url: this.getRouter().getUrl(), icon: "magnify" });
@@ -37,8 +22,11 @@ class ResultModel extends AbstractModel {
 	}
 	onRefresh(callback) {
 		this.data.list.data = [];
+		this._setFilterText("");
+		this._setFilterList([]);
 		this.getServices().search(this.params.type, this.params.value).subscribe((data) => {
 			this.data.source = data || [];
+			this._initFilters();
 			this._filterList();
 			callback();
 		});
@@ -55,8 +43,23 @@ class ResultModel extends AbstractModel {
 	pageChanged(event) {
 		this.data.pageIndex = event.pageIndex;
 	}
-	checkBoxChanged() {
-		this._filterList();
+	applyFilter(value) {
+		this._setFilterText(value);
+	}
+	clearFilter() {
+		this._setFilterText("");
+	}
+	filterChange() {
+		setTimeout(() => {
+			this._filterList();
+		}, 0);
+	}
+	_setFilterText(value) {
+		this.data.filter.text = value;
+		this.data.list.filter = value;
+	}
+	_setFilterList(value) {
+		this.data.filter.list = value;
 	}
 	_getTitle() {
 		const eventEmitter = new ng.core.EventEmitter();
@@ -70,25 +73,50 @@ class ResultModel extends AbstractModel {
 	_getSearchLabel(type) {
 		return (type) ? `L10N_SEARCH_BY_${type.toUpperCase()}` : "";
 	}
+	_initFilters() {
+		this.data.filter.messDisabled = this.data.source.findIndex(game => game.ismess) === -1;
+		this.data.filter.cloneDisabled = this.data.source.findIndex(game => game.cloneof != null) === -1;
+		this.data.filter.biosDisabled = this.data.source.findIndex(game => game.isbios == "yes") === -1;
+		this.data.filter.deviceDisabled = this.data.source.findIndex(game => game.isdevice == "yes") === -1;
+		const filterList = [];
+		if (!this.data.filter.messDisabled) {
+			filterList.push(this.FILTER_MESS);
+		}
+		if (!this.data.filter.cloneDisabled) {
+			filterList.push(this.FILTER_CLONE);
+		}
+		if (!this.data.filter.biosDisabled && (this.params.value == "System / BIOS" || this.params.type == "bios")) {
+			filterList.push(this.FILTER_BIOS);
+		}
+		if (!this.data.filter.deviceDisabled && (this.params.value == "System / Device" || this.params.type == "device")) {
+			filterList.push(this.FILTER_DEVICE);
+		}
+		this._setFilterList(filterList);
+	}
 	_filterList() {
 		this.data.list.data = this.data.source.filter((game) => {
-			return (
-				(game.category !== this.SYSTEM_DEVICE && game.category !== this.SYSTEM_BIOS && game.cloneof == null) ||
-				(game.cloneof != null && this.data.showClone) ||
-				(game.category === this.SYSTEM_DEVICE && this.data.showDevice) ||
-				(game.category === this.SYSTEM_BIOS && this.data.showBios)
-			)
+			return !(
+				(game.ismess && !this.data.filter.list.includes(this.FILTER_MESS)) ||
+				(game.cloneof != null && !this.data.filter.list.includes(this.FILTER_CLONE)) ||
+				(game.isbios == "yes" && !this.data.filter.list.includes(this.FILTER_BIOS)) ||
+				(game.isdevice == "yes" && !this.data.filter.list.includes(this.FILTER_DEVICE))
+			);
 		});
 	}
 	_getInitData() {
 		return {
-			source: null,
+			source: [],
 			list: new ng.material.MatTableDataSource(),
 			displayedColumns: ["icon", "description"],
 			pageIndex: 0,
-			showBios: false,
-			showDevice: false,
-			showClone: false,
+			filter: {
+				messDisabled: true,
+				cloneDisabled: true,
+				biosDisabled: true,
+				deviceDisabled: true,
+				list: [],
+				text: ""
+			},
 			title: ""
 		};
 	}

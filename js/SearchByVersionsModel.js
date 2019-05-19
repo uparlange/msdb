@@ -48,7 +48,7 @@ class SearchByVersionsModel extends AbstractModel {
 		return version.toLowerCase();
 	}
 	changeLogAvailable(value) {
-		return (value.indexOf("u") === -1 && value.indexOf("b") === -1);
+		return (value.indexOf("u") === -1);
 	}
 	_setFilterValue(value) {
 		this.data.filterValue = value;

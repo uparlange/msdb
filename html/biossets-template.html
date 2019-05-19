@@ -6,7 +6,7 @@
 </h1>
 <mat-dialog-content>
 	<mat-list>
-		<mat-list-item *ngFor="let biosset of model.data.game.biossets; trackBy:model.trackByName">
+		<mat-list-item *ngFor="let biosset of model.data.game.biossets; trackBy:model.trackByName" [class]="biosset.default == 'yes' ? 'biosset-default' : null">
 			{{biosset.name}}
 			<span class="sep">:</span>
 			{{biosset.description}}
