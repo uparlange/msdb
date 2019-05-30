@@ -48,6 +48,16 @@ table
 	margin-top:20px;
 }
 
+.mat-menu-item .mdi 
+{
+    margin-right: 16px;
+}
+
+.mat-chip
+{
+	background-color:#0079C2 !important;
+}
+
 .mat-card
 {
 	margin:0px;
@@ -179,9 +189,4 @@ table
 .no-data
 {
 	text-align: center;
-}
-
-.mat-menu-item .mdi 
-{
-    margin-right: 16px;
 }

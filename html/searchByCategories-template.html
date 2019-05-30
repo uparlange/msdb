@@ -1,11 +1,11 @@
 <mat-tree [treeControl]="model.data.treeControl" [dataSource]="model.data.dataSource" [trackBy]="model.trackByData">
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <mat-tree-node role="treeitem" *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
         <button mat-icon-button disabled></button>
         <a routerLink="/result" [queryParams]="{type:'category', value:node.data}">
             {{node.label}}
         </a>
     </mat-tree-node>
-    <mat-tree-node *matTreeNodeDef="let node; when: model.hasChild" matTreeNodePadding matTreeNodeToggle>
+    <mat-tree-node role="treeitem" *matTreeNodeDef="let node; when: model.hasChild" matTreeNodePadding matTreeNodeToggle>
         <button mat-icon-button [attr.aria-label]="'toggle ' + node.label">
             <ng-template [ngIf]="model.data.treeControl.isExpanded(node)" [ngIfElse]="canExpand">
                 <mdiIcon name="chevron-down"></mdiIcon>

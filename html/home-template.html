@@ -15,12 +15,13 @@
 	</mat-card-title>
 	<mat-card-content>
 		<ul>
-			<li>Machines : {{model.data.mame.machineCount}}</li>
-			<ul>
-				<li>Parent : {{model.data.mame.parentCount}}</li>
-				<li>Clones : {{model.data.mame.cloneCount}}</li>
-
-			</ul>
+			<li>
+				Machines : {{model.data.mame.machineCount}}
+				<ul>
+					<li>Parent : {{model.data.mame.parentCount}}</li>
+					<li>Clones : {{model.data.mame.cloneCount}}</li>
+				</ul>
+			</li>
 			<li>Bios : <a routerLink="/result"
 					[queryParams]="{type:'bios',value:'all'}">{{model.data.mame.biosCount}}</a></li>
 			<li>Devices : <a routerLink="/result"
@@ -43,7 +44,8 @@
 			</li>
 			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a>
 			</li>
-			<li><a target="_blank" href="http://www.planetemu.net/roms/mame-roms">{{'L10N_DOWNLOAD_GAME'|translate}}</a></li>
+			<li><a target="_blank" href="http://www.planetemu.net/roms/mame-roms">{{'L10N_DOWNLOAD_GAME'|translate}}</a>
+			</li>
 			<li>{{'L10N_HAVE_FUN'|translate}}</li>
 		</ol>
 	</mat-card-content>
