@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://msdb.lapli.fr/sitemap.xml

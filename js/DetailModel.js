@@ -36,8 +36,8 @@ class DetailModel extends AbstractModel {
 					}
 				});
 				this.data.images = images;
-				const title = `${this.data.game.description} - ${this.data.game.name}`;
-				this._setTitle(title);
+				this.setTitle(`${this.data.game.description}`);
+				this.setKeywords(`${this.data.game.name}, ${this.data.game.description}`);
 				this.getServices().search("clones", this.params.name).subscribe((data) => {
 					this.data.clones = data;
 					callback();

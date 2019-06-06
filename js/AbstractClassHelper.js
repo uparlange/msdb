@@ -5,15 +5,18 @@ import AppUtils from "./AppUtils.js";
 
 class AbstractClassHelper extends AbstractClass {
 	static get parameters() {
-		return AppUtils.getParameters(Shell, WindowRef, ng.platformBrowser.Title, ng.common.http.HttpClient, ng.router.ActivatedRoute)
+		return AppUtils.getParameters(Shell, WindowRef, ng.platformBrowser.Title, ng.common.http.HttpClient, ng.router.ActivatedRoute,
+			ng.platformBrowser.Meta)
 	}
-	constructor(Shell, WindowRef, Title, HttpClient, ActivatedRoute) {
+	constructor(Shell, WindowRef, Title, HttpClient, ActivatedRoute,
+		Meta) {
 		super();
 		this._title = Title;
 		this._shell = Shell;
 		this._httpClient = HttpClient;
 		this._activatedRoute = ActivatedRoute;
 		this._windowRef = WindowRef;
+		this._meta = Meta;
 		// TODO right place ?
 		this._shell.init();
 	}
@@ -58,6 +61,9 @@ class AbstractClassHelper extends AbstractClass {
 	}
 	getWindowRef() {
 		return this._windowRef;
+	}
+	getMeta() {
+		return this._meta;
 	}
 }
 

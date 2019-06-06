@@ -4,7 +4,7 @@
 		<div class="default-spacer"></div>
 		<mat-divider [inset]="true"></mat-divider>
 		<div class="default-spacer"></div>
-		<mat-button-toggle-group multiple [(value)]="model.data.filter.list" (change)="model.filterChange($event)">
+		<mat-button-toggle-group multiple [value]="model.data.filter.list" (change)="model.filterChange($event)">
 			<mat-button-toggle [disabled]="model.data.filter.messDisabled" value="mess">MESS</mat-button-toggle>
 			<mat-button-toggle [disabled]="model.data.filter.cloneDisabled" value="clone">Clone</mat-button-toggle>
 			<mat-button-toggle [disabled]="model.data.filter.biosDisabled" value="bios">Bios</mat-button-toggle>
@@ -20,7 +20,7 @@
 </mat-card>
 <div class="default-spacer"></div>
 <mat-form-field>
-	<input #filterTextInput [ngModel]="model.data.filter.text" matInput
+	<input [disabled]="model.data.source.length == 0" #filterTextInput [ngModel]="model.data.filter.text" matInput
 		(keyup)="model.applyFilter($event.target.value)" [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
 <button *ngIf="model.data.filter.text.length > 0" (click)="model.clearFilter();filterTextInput.focus();" type="button"

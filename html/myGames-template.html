@@ -5,7 +5,7 @@
 </mat-card>
 <div class="default-spacer"></div>
 <mat-form-field>
-	<input #filterValueInput [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)"
+	<input #filterValueInput [disabled]="model.data.list.data.length == 0" [ngModel]="model.data.filterValue" matInput (keyup)="model.applyFilter($event.target.value)"
 	 [autocomplete]="game-description" [placeholder]="'L10N_FILTER'|translate">
 </mat-form-field>
 <button *ngIf="model.data.filterValue.length > 0" (click)="model.clearFilter();filterValueInput.focus();" type="button"

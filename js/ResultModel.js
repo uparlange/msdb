@@ -15,6 +15,8 @@ class ResultModel extends AbstractModel {
 		this.FILTER_DEVICE = "device";
 	}
 	onInit() {
+		this._setFilterText("");
+		this._setFilterList([]);
 		this._getTitle().subscribe((title) => {
 			this.data.title = title;
 			this.getHistory().add({ label: title, url: this.getRouter().getUrl(), icon: "magnify" });
@@ -22,8 +24,6 @@ class ResultModel extends AbstractModel {
 	}
 	onRefresh(callback) {
 		this.data.list.data = [];
-		this._setFilterText("");
-		this._setFilterList([]);
 		this.getServices().search(this.params.type, this.params.value).subscribe((data) => {
 			this.data.source = data || [];
 			this._initFilters();
@@ -49,10 +49,9 @@ class ResultModel extends AbstractModel {
 	clearFilter() {
 		this._setFilterText("");
 	}
-	filterChange() {
-		setTimeout(() => {
-			this._filterList();
-		}, 0);
+	filterChange(event) {
+		this.data.filter.list = event.value;
+		this._filterList();
 	}
 	_setFilterText(value) {
 		this.data.filter.text = value;

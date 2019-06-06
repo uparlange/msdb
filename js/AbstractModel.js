@@ -19,7 +19,8 @@ class AbstractModel extends AbstractClass {
 				});
 			}
 		});
-		this._setTitle();
+		this.setTitle(null);
+		this.setKeywords(null);
 		this.getRouter().restoreScrollPosition();
 		const newParams = Object.assign({ online: this._helper.getConnection().online }, params);
 		let paramsChanged = false;
@@ -83,6 +84,23 @@ class AbstractModel extends AbstractClass {
 	getFrequencyLabel(value) {
 		return this._getUnitLabel(value, ["Hz", "kHz", "MHz", "GHz"], 1000);
 	}
+	setTitle(value) {
+		let title = "Mame Smart Database";
+		if (typeof value === "string") {
+			title += ` - ${value}`;
+		}
+		this._helper.getTitle().setTitle(title);
+	}
+	setKeywords(value) {
+		let content = "mame, mess, arcade, emulation, database, base de donnée, game, jeu";
+		if (typeof value === "string") {
+			content += `, ${value}`;
+		}
+		this._helper.getMeta().updateTag({
+			content: content,
+			name: "keywords"
+		});
+	}
 	_getUnitLabel(value, steps, stepMultiplier) {
 		let step = null;
 		steps.forEach((item, index) => {
@@ -116,13 +134,6 @@ class AbstractModel extends AbstractClass {
 		else {
 			this.getLogger().warn("onDestroy?");
 		}
-	}
-	_setTitle(value) {
-		let title = "Mame Smart Database";
-		if (typeof value === "string") {
-			title += ` - ${value}`;
-		}
-		this._helper.getTitle().setTitle(title);
 	}
 }
 
