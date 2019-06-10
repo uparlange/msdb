@@ -3,7 +3,7 @@ import AbstractClassHelper from "./AbstractClassHelper.js";
 import MsdbService from "./MsdbService.js";
 import AppUtils from "./AppUtils.js";
 
-class SearchByYearsModel extends AbstractModel {
+class SearchByRatingsModel extends AbstractModel {
 	static get parameters() {
 		return AppUtils.getParameters(AbstractClassHelper, MsdbService);
 	}
@@ -27,4 +27,4 @@ class SearchByYearsModel extends AbstractModel {
 	}
 }
 
-export default SearchByYearsModel;
+export default SearchByRatingsModel;

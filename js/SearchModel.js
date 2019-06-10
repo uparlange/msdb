@@ -43,8 +43,9 @@ class SearchModel extends AbstractModel {
 				{ index: 2, key: "L10N_SEARCH_BY_CATEGORY", type: "categories", icon: "folder-outline" },
 				{ index: 3, key: "L10N_SEARCH_BY_SERIES", type: "series", icon: "format-list-bulleted" },
 				{ index: 4, key: "L10N_SEARCH_BY_YEAR", type: "years", icon: "calendar" },
-				{ index: 5, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers", icon: "domain" },
-				{ index: 6, key: "L10N_SEARCH_BY_VERSION", type: "versions", icon: "plus-one" }
+				{ index: 5, key: "L10N_SEARCH_BY_LANGUAGE", type: "languages", icon: "flag-outline" },
+				{ index: 6, key: "L10N_SEARCH_BY_VERSION", type: "versions", icon: "plus-one" },
+				{ index: 7, key: "L10N_SEARCH_BY_MANUFACTURER", type: "manufacturers", icon: "domain" }
 			],
 			getTabs() {
 				return this._tabs;

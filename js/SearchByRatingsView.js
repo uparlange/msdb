@@ -3,7 +3,7 @@ import AbstractClassHelper from "./AbstractClassHelper.js";
 import SearchByRatingsModel from "./SearchByRatingsModel.js";
 import AppUtils from "./AppUtils.js";
 
-class SearchByYearsView extends AbstractView {
+class SearchByRatingsView extends AbstractView {
 	static get annotations() {
 		return this.getAnnotations({ selector: "searchByRatings" });
 	}
@@ -15,4 +15,4 @@ class SearchByYearsView extends AbstractView {
 	}
 }
 
-export default SearchByYearsView;
+export default SearchByRatingsView;

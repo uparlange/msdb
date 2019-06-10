@@ -62,6 +62,7 @@
 	"L10N_SEARCH_BY_DEVICE": "Device",
 	"L10N_SEARCH_BY_MECHANICAL" : "Mechanical",
 	"L10N_SEARCH_BY_MESS" : "MESS",
+	"L10N_SEARCH_BY_LANGUAGE" : "Langue",
 	"L10N_NO_MATCHES_FOUND": "Aucun résultat trouvé",
 	"L10N_BACK": "Précédent",
 	"L10N_REFERENCES": "Références",

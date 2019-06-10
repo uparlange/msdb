@@ -19,7 +19,8 @@ class SearchModule extends AbstractModule {
 							{ path: "series", loadChildren: this.getLazyModule("SearchBySeriesModule") },
 							{ path: "years", loadChildren: this.getLazyModule("SearchByYearsModule") },
 							{ path: "versions", loadChildren: this.getLazyModule("SearchByVersionsModule") },
-							{ path: "ratings", loadChildren: this.getLazyModule("SearchByRatingsModule") }
+							{ path: "ratings", loadChildren: this.getLazyModule("SearchByRatingsModule") },
+							{ path: "languages", loadChildren: this.getLazyModule("SearchByLanguagesModule") }
 						]
 					}
 				])

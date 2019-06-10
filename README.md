@@ -18,7 +18,7 @@ This application has been developped using
 * Unzip content in "C:\Program Files\nwjs"
 
 ### 2. Download application
-* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-4.7.6.nw
+* Latest : https://github.com/uparlange/msdb/raw/master/release/msdb-4.7.7.nw
 
 ### 3. Launch application
 * Double click on the application (.nw file)

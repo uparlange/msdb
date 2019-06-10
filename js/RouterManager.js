@@ -29,6 +29,9 @@ class RouterManager extends AbstractManager {
 					this.saveCurrentViewScrollPosition();
 				}
 			} else if (e instanceof ng.router.NavigationEnd) {
+				// update google analytics
+				this._updateGoogleAnalytics(e.urlAfterRedirects);
+				// save current view
 				this._saveLastView(e.urlAfterRedirects);
 			}
 		});
@@ -79,6 +82,13 @@ class RouterManager extends AbstractManager {
 				subtree: true
 			};
 			this._mutationObserver.observe(document.querySelector("body"), config);
+		}
+	}
+	_updateGoogleAnalytics(url) {
+		try {
+			gtag("config", "GA_MEASUREMENT_ID", { "page_path": url });
+		} catch (e) {
+			this.getLogger().error("Unable to update page (" + url + ") to Google Analytics");
 		}
 	}
 	_saveLastView(url) {

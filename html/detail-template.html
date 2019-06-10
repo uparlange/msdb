@@ -59,6 +59,11 @@
 		<span class="sep">:</span>
 		<a routerLink="/result" [queryParams]="{type:'category',value:model.data.game.category}">{{model.data.game.category}}</a>
 	</mat-list-item>
+	<mat-list-item *ngIf="model.data.game.language != null">
+		{{'L10N_LANGUAGE'|translate}}
+		<span class="sep">:</span>
+		<a routerLink="/result" [queryParams]="{type:'language',value:model.data.game.language}">{{model.data.game.language}}</a>
+	</mat-list-item>
 	<mat-list-item *ngIf="model.data.game.driver != null && model.data.game.driver.status != null">
 		{{'L10N_STATUS'|translate}}
 		<span class="sep">:</span>

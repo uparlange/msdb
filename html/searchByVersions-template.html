@@ -16,7 +16,7 @@
     </ng-container>
     <ng-container matColumnDef="addcount">
         <td mat-cell *matCellDef="let element">
-            <mat-chip-list>
+            <mat-chip-list selectable="false">
                 <mat-chip color="accent" selected>+{{element.data}}</mat-chip>
             </mat-chip-list>
         </td>

@@ -40,7 +40,18 @@
 	</mat-card-title>
 	<mat-card-content>
 		<ol>
-			<li><a routerLink="/search/{{model.data.searchLastType}}">{{'L10N_FIND_GAME'|translate}}</a>
+			<li>
+				{{'L10N_FIND_GAME'|translate}}
+				<ul>
+					<li><a routerLink="/search/description">{{'L10N_SEARCH_BY_DESCRIPTION'|translate}}</a></li>
+					<li><a routerLink="/search/ratings">{{'L10N_SEARCH_BY_RATING'|translate}}</a></li>
+					<li><a routerLink="/search/categories">{{'L10N_SEARCH_BY_CATEGORY'|translate}}</a></li>
+					<li><a routerLink="/search/series">{{'L10N_SEARCH_BY_SERIES'|translate}}</a></li>
+					<li><a routerLink="/search/years">{{'L10N_SEARCH_BY_YEAR'|translate}}</a></li>
+					<li><a routerLink="/search/languages">{{'L10N_SEARCH_BY_LANGUAGE'|translate}}</a></li>
+					<li><a routerLink="/search/versions">{{'L10N_SEARCH_BY_VERSION'|translate}}</a></li>
+					<li><a routerLink="/search/manufacturers">{{'L10N_SEARCH_BY_MANUFACTURER'|translate}}</a></li>
+				</ul>
 			</li>
 			<li><a target="_blank" href="http://mamedev.org/">{{'L10N_DOWNLOAD_EMULATOR'|translate}}</a>
 			</li>

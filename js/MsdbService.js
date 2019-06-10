@@ -50,6 +50,13 @@ class MsdbService extends AbstractService {
 		};
 		return this._callService(config);
 	}
+	getLanguages() {
+		const config = {
+			url: AppUtils.getServiceUrl("languages"),
+			useCache: true
+		};
+		return this._callService(config);
+	}
 	getSeries() {
 		const config = {
 			url: AppUtils.getServiceUrl("series"),
