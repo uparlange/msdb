@@ -1,3 +1,5 @@
+import AbstractClass from "./AbstractClass.js";
+import AppUtils from "./AppUtils.js";
 import EventManager from "./EventManager.js";
 import TranslateManager from "./TranslateManager.js";
 import SocketManager from "./SocketManager.js";
@@ -9,18 +11,17 @@ import WindowRef from "./WindowRef.js";
 import PopupManager from "./PopupManager.js";
 import HistoryManager from "./HistoryManager.js";
 import FavoritesManager from "./FavoritesManager.js";
-import AbstractClass from "./AbstractClass.js";
-import AppUtils from "./AppUtils.js";
+import AnalyticsManager from "./AnalyticsManager.js";
 
 class Shell extends AbstractClass {
     static get parameters() {
         return AppUtils.getParameters(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-            CacheManager, RouterManager, WindowRef, PopupManager, HistoryManager, 
-            FavoritesManager);
+            CacheManager, RouterManager, WindowRef, PopupManager, HistoryManager,
+            FavoritesManager, AnalyticsManager);
     }
     constructor(EventManager, TranslateManager, SocketManager, ConnectionManager, LazyManager,
-        CacheManager, RouterManager, WindowRef, PopupManager, HistoryManager, 
-        FavoritesManager) {
+        CacheManager, RouterManager, WindowRef, PopupManager, HistoryManager,
+        FavoritesManager, AnalyticsManager) {
         super();
         this._eventManager = EventManager;
         this._translateManager = TranslateManager;
@@ -33,6 +34,7 @@ class Shell extends AbstractClass {
         this._windowRef = WindowRef;
         this._historyManager = HistoryManager;
         this._favoritesManager = FavoritesManager;
+        this._analyticsManager = AnalyticsManager;
     }
     init() {
         this._eventManager.init();
@@ -50,6 +52,7 @@ class Shell extends AbstractClass {
         this._popupManager.init();
         this._historyManager.init();
         this._favoritesManager.init();
+        this._analyticsManager.init();
     }
     getEventManager() {
         return this._eventManager;
@@ -80,6 +83,9 @@ class Shell extends AbstractClass {
     }
     getFavoritesManager() {
         return this._favoritesManager;
+    }
+    getAnalyticsManager() {
+        return this._analyticsManager;
     }
 }
 

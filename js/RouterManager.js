@@ -2,19 +2,22 @@ import AbstractManager from "./AbstractManager.js";
 import CacheManager from "./CacheManager.js";
 import WindowRef from "./WindowRef.js";
 import AppUtils from "./AppUtils.js";
+import AnalyticsManager from "./AnalyticsManager.js";
 
 class RouterManager extends AbstractManager {
 	static get parameters() {
-		return AppUtils.getParameters(ng.router.Router, CacheManager, ng.core.NgZone, WindowRef);
+		return AppUtils.getParameters(ng.router.Router, CacheManager, ng.core.NgZone, WindowRef, AnalyticsManager);
 	}
-	constructor(Router, CacheManager, NgZone, WindowRef) {
+	constructor(Router, CacheManager, NgZone, WindowRef, AnalyticsManager) {
 		super();
 		this._router = Router;
 		this._cacheManager = CacheManager;
 		this._ngZone = NgZone;
 		this._windowRef = WindowRef;
+		this._analyticsManager = AnalyticsManager;
 		this._mutationObserver = null;
 		this._routerEventsSubscriber = null;
+
 	}
 	init() {
 		super.init();
@@ -30,7 +33,7 @@ class RouterManager extends AbstractManager {
 				}
 			} else if (e instanceof ng.router.NavigationEnd) {
 				// update google analytics
-				this._updateGoogleAnalytics(e.urlAfterRedirects);
+				this._analyticsManager.setCurrentPage(e.urlAfterRedirects);
 				// save current view
 				this._saveLastView(e.urlAfterRedirects);
 			}
@@ -82,13 +85,6 @@ class RouterManager extends AbstractManager {
 				subtree: true
 			};
 			this._mutationObserver.observe(document.querySelector("body"), config);
-		}
-	}
-	_updateGoogleAnalytics(url) {
-		try {
-			gtag("config", "GA_MEASUREMENT_ID", { "page_path": url });
-		} catch (e) {
-			this.getLogger().error("Unable to update page (" + url + ") to Google Analytics");
 		}
 	}
 	_saveLastView(url) {

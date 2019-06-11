@@ -1,3 +1,4 @@
+import AbstractModule from "./AbstractModule.js";
 import EventManager from "./EventManager.js";
 import TranslateManager from "./TranslateManager.js";
 import MsdbService from "./MsdbService.js";
@@ -12,7 +13,7 @@ import AbstractClassHelper from "./AbstractClassHelper.js";
 import PopupManager from "./PopupManager.js";
 import HistoryManager from "./HistoryManager.js";
 import FavoritesManager from "./FavoritesManager.js";
-import AbstractModule from "./AbstractModule.js";
+import AnalyticsManager from "./AnalyticsManager.js";
 
 class GlobalModule extends AbstractModule {
     static get annotations() {
@@ -31,7 +32,8 @@ class GlobalModule extends AbstractModule {
                 AbstractClassHelper,
                 PopupManager,
                 FavoritesManager,
-                HistoryManager
+                HistoryManager,
+                AnalyticsManager
             ]
         });
     }
