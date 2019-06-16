@@ -5,11 +5,14 @@ class AbstractClass {
 		return undefined;
 	}
 	constructor() {
-		this._logger = LogUtils.getLogger(this.constructor.name);
+		this._logger = LogUtils.getLogger(this.getClassName());
 		this.getLogger().debug("constructor");
 	}
 	getLogger() {
 		return this._logger;
+	}
+	getClassName() {
+		return this.constructor.name;
 	}
 }
 

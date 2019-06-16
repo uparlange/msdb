@@ -17,8 +17,6 @@ class AbstractClassHelper extends AbstractClass {
 		this._activatedRoute = ActivatedRoute;
 		this._windowRef = WindowRef;
 		this._meta = Meta;
-		// TODO right place ?
-		this._shell.init();
 	}
 	getEventBus() {
 		return this._shell.getEventManager();

@@ -18,7 +18,8 @@ const mergeStream = require('merge-stream');
 const imagemin = require('gulp-imagemin');
 const change = require('gulp-change');
 const zip = require('gulp-zip');
-const swPrecache = require('sw-precache');
+const workboxBuild = require('workbox-build');
+const log = require('fancy-log');
 
 // -------------------------------------------------
 // VARIABLES
@@ -79,21 +80,17 @@ gulp.task('generate-manifest', (callback) => {
 });
 
 gulp.task('generate-swa', (callback) => {
-    const baseDir = './dist';
-    const fileName = 'swa.js';
-    const dynamicUrlToDependencies = {
-        '/': 'index.html'
-    };
-    swPrecache.write(baseDir + '/' + fileName, {
-        staticFileGlobs: [
-            baseDir + '/**/*'
+    return workboxBuild.generateSW({
+        globDirectory: './dist',
+        globIgnores: [],
+        globPatterns: [
+            '**\/*',
         ],
-        dynamicUrlToDependencies: dynamicUrlToDependencies,
-        ignoreUrlParametersMatching: [/./],
-        stripPrefix: baseDir,
-    }, function () {
-        gulp.src(baseDir + '/' + fileName).pipe(uglify()).pipe(gulp.dest(baseDir + '/'));
-        callback();
+        ignoreURLParametersMatching: [/./],
+        offlineGoogleAnalytics: true,
+        swDest: 'dist/swa.js',
+    }).then((result) => {
+        log('workbox-build: count=' + result.count + ', size=' + result.size);
     });
 });
 

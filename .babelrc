@@ -9,7 +9,8 @@
 		[
 			"minify",
 			{
-				"builtIns": false
+				"builtIns": false,
+				"keepFnName": true
 			}
 		]
 	],

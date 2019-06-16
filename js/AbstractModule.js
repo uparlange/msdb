@@ -9,7 +9,7 @@ class AbstractModule extends AbstractClass {
 	}
 	static getLazyModule(moduleName) {
 		return function () {
-			return AppUtils.import(`/js/${moduleName}.js`);
+			return AppUtils.loadModule(`/js/${moduleName}.js`);
 		};
 	}
 	constructor() {

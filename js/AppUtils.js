@@ -47,7 +47,18 @@ export default {
 	getHttpRequestTimeOut: function () {
 		return 10000;
 	},
-	import: function (modulePath) {
+	loadScript: function (params) {
+		const head = document.getElementsByTagName("head")[0];
+		var script = document.createElement("script");
+		if (params.src) {
+			script.src = params.src;
+		}
+		if (params.async) {
+			script.async = params.async;
+		}
+		head.appendChild(script);
+	},
+	loadModule: function (modulePath) {
 		const eventEmitter = new ng.core.EventEmitter();
 		/*
 		if (this._supportDynamicImport()) {

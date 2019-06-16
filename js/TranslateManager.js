@@ -1,23 +1,26 @@
 import AbstractManager from "./AbstractManager.js";
 import AppUtils from "./AppUtils.js";
+import WindowRef from "./WindowRef.js";
 
 class TranslateManager extends AbstractManager {
 	static get parameters() {
-		return AppUtils.getParameters(ng.common.http.HttpClient);
+		return AppUtils.getParameters(ng.common.http.HttpClient, WindowRef);
 	}
-	constructor(Http) {
+	constructor(Http, WindowRef) {
 		super();
 		this._http = Http;
+		this._windowRef = WindowRef;
 		this._properties = {};
-		this._propertyFilePattern = null;
+		this._propertyFilePattern = "/data/{locale}.json";
 		this._loading = false;
 		this._pendingRequests = [];
 		this._currentLang = null;
 	}
-	init(params) {
+	init() {
 		super.init();
-		this._propertyFilePattern = params.propertyFilePattern;
-		this.setLanguage(params.language);
+		const navigatorLang = this._windowRef.nativeWindow.navigator.language.split("-")[0];
+		const defaultLang = /(fr|en)/gi.test(navigatorLang) ? navigatorLang : "en";
+		this.setLanguage(defaultLang);
 	}
 	setLanguage(lang) {
 		if (this._currentLang !== lang) {

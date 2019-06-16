@@ -2,6 +2,7 @@ import AppUtils from "./AppUtils.js";
 import AbstractView from "./AbstractView.js";
 import AbstractClassHelper from "./AbstractClassHelper.js";
 import AppModel from "./AppModel.js";
+import Shell from "./Shell.js";
 
 class AppView extends AbstractView {
 	static get annotations() {
@@ -13,14 +14,16 @@ class AppView extends AbstractView {
 		});
 	}
 	static get parameters() {
-		return AppUtils.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar);
+		return AppUtils.getParameters(AbstractClassHelper, AppModel, ng.core.ViewContainerRef, ng.material.MatSnackBar, Shell);
 	}
-	constructor(AbstractClassHelper, AppModel, ViewContainerRef, MatSnackBar) {
+	constructor(AbstractClassHelper, AppModel, ViewContainerRef, MatSnackBar, Shell) {
 		super(AbstractClassHelper, AppModel);
 		this._viewContainerRef = ViewContainerRef;
 		this._matSnackBar = MatSnackBar;
+		this._shell = Shell;
 	}
 	onInit() {
+		this._shell.init();
 		this._initToaster();
 		if (AppUtils.runInNw()) {
 			this._initNw();
@@ -28,7 +31,7 @@ class AppView extends AbstractView {
 	}
 	_initNw() {
 		this._initMenuBar();
-		AppUtils.import("/js/Nw.js").subscribe((module) => {
+		AppUtils.loadModule("/js/Nw.js").subscribe((module) => {
 			module.init();
 		});
 	}

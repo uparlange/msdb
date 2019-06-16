@@ -11,14 +11,19 @@ class AnalyticsManager extends AbstractManager {
 	}
 	init() {
 		super.init();
-		// TODO move index code to this manager
+		window.dataLayer = window.dataLayer || [];
+		this._gtag("js", new Date());
+		this._gtag("config", this._gaMeasurementId);
+		AppUtils.loadScript({
+			src: "https://www.googletagmanager.com/gtag/js?id=" + this._gaMeasurementId,
+			async: true
+		});
 	}
 	setCurrentPage(url) {
-		try {
-			gtag("config", this._gaMeasurementId, { "page_path": url });
-		} catch (e) {
-			this.getLogger().error("Unable to update page (" + url + ") to Google Analytics");
-		}
+		this._gtag("config", this._gaMeasurementId, { "page_path": url });
+	}
+	_gtag() {
+		window.dataLayer.push(arguments);
 	}
 }
 
