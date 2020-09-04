@@ -74,7 +74,7 @@
     "gulp-zip": "5.0.0",
     "htmlparser2": "3.10.1",
     "merge-stream": "2.0.0",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.1",
     "nodemon": "1.19.1",
     "nw": "0.39.0-sdk",
     "pump": "3.0.0",
